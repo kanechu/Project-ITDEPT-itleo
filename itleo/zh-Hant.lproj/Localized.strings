@@ -1,0 +1,110 @@
+/* 
+  Localized.strings
+  itleo
+
+  Created by itdept on 14-10-7.
+  Copyright (c) 2014年 itdept. All rights reserved.
+*/
+//login UI
+"app_name"=" IT CRM \nSYSTEM";
+"lbl_login"="登錄";
+"lbl_username"="用戶名";
+"lbl_pwd"="密碼";
+"lbl_system"="系統";
+"lbl_history"="記錄";
+"lbl_show_pwd"="顯示密碼";
+"lbl_logout"="登出";
+"empty_username_prompt"="請輸入用戶名！";
+"empty_pass_prompt"="請輸入密碼！";
+"empty_sys_prompt"="請輸入系統名稱！";
+"no_history_prompt"="沒有您輸入的記錄！";
+"login_prompt"="正在驗證，請稍等!";
+"login_success_prompt"="登錄成功!";
+"login_failed_prompt"="登錄失敗，請檢查密碼和用戶名是否匹配！";
+"lbl_prompt_history"="沒有您輸入的記錄!";
+//main home
+"lbl_cancel"="取消";
+"lbl_home"="主頁";
+//select UI
+"select_tilte"="請選取信息";
+
+//epod main home
+"lbl_epod_title"="EPOD";
+"lbl_vehicle_no"="車牌號碼";
+"ibtn_lookup"="查找";
+"ibtn_sign_photo"="簽收及拍照";
+"ibtn_check_record"="查看記錄";
+"lbl_transfer"="自動傳送資料";
+"no_history_data"="沒有您輸入的車牌號記錄!";
+"vehicle_empty"="抱歉，車牌號不能為空!";
+"show_unUpload_msg"="你未上傳的記錄有";
+//epod detail
+"lbl_epod_set_title"="EPOD 信息";
+"lbl_order_no"="配載單號";
+"lbl_check_order"="查看配載單訊息";
+"lbl_status"="配載單狀態:";
+"lbl_start"="開始";
+"lbl_arrive"="到達";
+"lbl_complete"="完成";
+"lbl_other"="其他";
+"lbl_desc"="說明";
+"lbl_image_num"="圖片數目";
+"ibtn_image_mang"="管理圖片";
+"ibtn_upload"="上傳";
+"order_empty_prompt"="抱歉，配載單號不能為空!";
+
+//order info
+"lbl_info_title"="配載單資訊";
+"lbl_cus"="客              戶:";
+"lbl_pick_cus"="取  貨  客  户:";
+"lbl_pick_addr"="取  貨  地  址:";
+"lbl_dely_cus"="送  貨  客  户:";
+"lbl_dely_addr"="送  貨  地  址:";
+"lbl_dely_app_date"="預約送貨日期:";
+"lbl_dely_app_time"="預約送貨時間:";
+"lbl_goods"="貨              物:";
+"lbl_pkg"="件              數:";
+"lbl_kgs"="重              量:";
+"lbl_cbm"="體              積:";
+"lbl_ok"="確定";
+//manage images
+"lbl_pictures"="圖片:";
+"ibtn_delete_all"="全部刪除";
+"ibtn_photo"="拍照";
+"ibtn_sign"="簽收";
+"ibtn_choose"="選取";
+"delete_image"="你確定刪除這張圖片？";
+"delete_all_image"="你確定刪除所有的圖片嗎？";
+//action sheet
+"lbl_magnigy"="圖片放大";
+"lbl_delete_img"="刪除圖片";
+"lbl_text_remark"="增加文字註釋";
+"lbl_draw_remark"="增加手繪註釋";
+"lbl_reset"="重置上載狀態";
+
+//sign UI
+"lbl_backout"="撤銷";
+"lbl_recover"="恢復";
+"lbl_empty"="清空";
+"lbl_brush"="筆觸粗細";
+
+//record UI
+"lbl_record"="記錄";
+"lbl_select"="全選";
+"lbl_result"="結果";
+"lbl_date"="日期";
+"lbl_back"="返回";
+"lbl_status_show"="狀態";
+"lbl_delete"="刪除";
+"delete_prompt"="請選取您要刪除的紀錄！";
+"will_delete_prompt"="您確定刪除選取的記錄？";
+
+//result
+"lbl_order_error"="配載單號無效";
+"lbl_Vehicle_error"="車牌號無效";
+"lbl_success"="上傳成功";
+"lbl_Network_error"="網絡異常";
+"msg_network_fail"="無法連接至網路，請聯絡網路管理員！";
+"upload_prompt"="上傳中，請稍等！";
+"upload_success"="上傳成功！";
+"upload_fail"="上傳失敗,請檢查您要上傳的數據是否正確！";
