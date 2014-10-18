@@ -340,6 +340,7 @@
                     }else{
                         [db fn_update_epod_after_uploaded:unique_id is_uploaded:@"2" date:error_date result:error_reason user_code:auth.user_code system:auth.system  images:resp_upd_images];
                         [SVProgressHUD dismissWithError:MY_LocalizedString(@"upload_fail", nil) afterDelay:2.0];
+                        [self fn_post_notification];
                     }
                 }
             }];
@@ -396,8 +397,12 @@
         }
         upload_ms.error_date=[self fn_get_current_date];
         [db fn_save_ePod_data:upload_ms image_ms:alist_image_ms];
+        [self fn_post_notification];
         return NO;
     }
 }
-
+#pragma mark -post notification
+-(void)fn_post_notification{
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"upload_fail" object:nil];
+}
 @end

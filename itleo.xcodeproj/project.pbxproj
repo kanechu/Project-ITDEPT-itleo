@@ -1290,6 +1290,7 @@
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(BUILT_PRODUCTS_DIR)/../../Headers";
 				INFOPLIST_FILE = "itleo/itleo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1313,6 +1314,7 @@
 				);
 				"HEADER_SEARCH_PATHS[arch=*]" = "$(BUILT_PRODUCTS_DIR)/../../Headers";
 				INFOPLIST_FILE = "itleo/itleo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -40,13 +40,13 @@
    
     [self fn_set_control_pro];
     [self fn_custom_gesture];
-    NSLog(@"%hhd",_is_switch.on);
+    [self fn_add_notificaiton];
+    [self fn_show_unUpload_Msg_nums];
     if (_is_switch.on) {
         [self fn_open_new_thread];
         _flag_isOpened_GCD=1;
     }
-    [self fn_show_unUpload_Msg_nums];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_success" object:nil];
+    
 	// Do any additional setup after loading the view.
 }
 - (void)viewWillAppear:(BOOL)animated{
@@ -77,10 +77,17 @@
     _itf_bus_no.delegate=self;
     
     _ilb_transfer.text=MY_LocalizedString(@"lbl_transfer", nil);
+    
     [_is_switch addTarget:self action:@selector(fn_isAuto_transfer_data) forControlEvents:UIControlEventValueChanged];
     
     
 }
+#pragma mark -addObserver notificaiton
+-(void)fn_add_notificaiton{
+     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_success" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_fail" object:nil];
+}
+
 #pragma mark -Jump will execute method
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier]isEqualToString:@"segue_detail_epod"]) {
