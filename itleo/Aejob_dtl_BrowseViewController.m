@@ -15,6 +15,7 @@
 #import "Cell_aejob_dtl_browse.h"
 #import "Cal_lineHeight.h"
 #import "CreateFootView.h"
+#import "CheckNetWork.h"
 @interface Aejob_dtl_BrowseViewController ()
 
 @property(nonatomic,strong)NSMutableArray *alist_aejob_dtl;
@@ -80,7 +81,10 @@
     NSMutableArray *arr=[db fn_get_all_RespAppConfig_data];
     if ([arr count]!=0) {
         NSString *base_url=[[arr objectAtIndex:0]valueForKey:@"web_addr"];
-        [self fn_get_aejob_dtl_browse_data:base_url];
+        CheckNetWork *obj=[[CheckNetWork alloc]init];
+        if ([obj fn_isPopUp_alert]==NO) {
+            [self fn_get_aejob_dtl_browse_data:base_url];
+        }
     }
 }
 -(void)fn_get_aejob_dtl_browse_data:(NSString*)base_url{

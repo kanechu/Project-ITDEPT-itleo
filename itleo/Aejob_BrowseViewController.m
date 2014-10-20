@@ -17,6 +17,7 @@
 #import "Aejob_dtl_BrowseViewController.h"
 #import "Aejob_AdvanceSearchViewController.h"
 #import "CreateFootView.h"
+#import "CheckNetWork.h"
 static NSMutableArray *alist_groupAndnum;
 static NSMutableArray *alist_filtered_data;
 @interface Aejob_BrowseViewController ()
@@ -79,7 +80,10 @@ static NSMutableArray *alist_filtered_data;
     NSMutableArray *arr=[db fn_get_all_RespAppConfig_data];
     if ([arr count]!=0) {
         NSString *base_url=[[arr objectAtIndex:0]valueForKey:@"web_addr"];
-        [self fn_get_aejob_browse_data:base_url searchForm:alist_searchform];
+        CheckNetWork *obj=[[CheckNetWork alloc]init];
+        if ([obj fn_isPopUp_alert]==NO) {
+            [self fn_get_aejob_browse_data:base_url searchForm:alist_searchform];
+        }
     }
 }
 - (IBAction)fn_advance_search_aejob:(id)sender {
@@ -89,7 +93,10 @@ static NSMutableArray *alist_filtered_data;
         NSMutableArray *arr=[db fn_get_all_RespAppConfig_data];
         if ([arr count]!=0) {
             NSString *base_url=[[arr objectAtIndex:0]valueForKey:@"web_addr"];
-            [self fn_get_aejob_browse_data:base_url searchForm:arr_result];
+            CheckNetWork *obj=[[CheckNetWork alloc]init];
+            if ([obj fn_isPopUp_alert]==NO) {
+                [self fn_get_aejob_browse_data:base_url searchForm:arr_result];
+            }
         }
     };
     [self presentViewController:VC animated:YES completion:^(){}];
