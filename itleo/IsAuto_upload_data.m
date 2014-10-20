@@ -8,22 +8,17 @@
 
 #import "IsAuto_upload_data.h"
 #import "DB_ePod.h"
-#import "Reachability/Reachability.h"
 #import "Web_update_epod.h"
 #import "UpdateFormContract.h"
 #import "Epod_upd_milestone_image_contract.h"
 #import "Resp_upd_image_result.h"
 #import "RespEpod_updmilestone.h"
+#import "CheckNetWork.h"
 @implementation IsAuto_upload_data
--(BOOL)fn_check_isNetworking{
-    if (([Reachability reachabilityForInternetConnection].currentReachabilityStatus!=NotReachable)||([Reachability reachabilityForLocalWiFi].currentReachabilityStatus!=NotReachable)) {
-        return YES;
-    }else{
-        return NO;
-    }
-}
+
 -(void)fn_Automatically_upload_data{
-    if ([self fn_check_isNetworking]) {
+    CheckNetWork *netWork_obj=[[CheckNetWork alloc]init];
+    if ([netWork_obj fn_check_isNetworking]) {
         DB_ePod *db=[[DB_ePod alloc]init];
         NSMutableArray *arr_result=[db fn_select_unUpload_ePod_data:@"0"];
         NSMutableArray *arr_group=[db fn_select_unUpload_ePod_data_amount:@"0"];

@@ -82,6 +82,9 @@
             
                 } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                     RKLogError(@"Operation failed with error: %@", error);
+                    if (_callBack) {
+                        _callBack(nil);
+                    }
                     [SVProgressHUD dismiss];
                 }];
     
@@ -155,7 +158,7 @@
                     
                 } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                     RKLogError(@"Operation failed with error: %@", error);
-                    [SVProgressHUD dismissWithError:@"Sorry,failed!"];
+                    [SVProgressHUD dismiss];
                 }];
 }
 

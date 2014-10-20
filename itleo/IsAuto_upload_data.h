@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface IsAuto_upload_data : NSObject
--(BOOL)fn_check_isNetworking;
+
 -(void)fn_Automatically_upload_data;
+
 @end

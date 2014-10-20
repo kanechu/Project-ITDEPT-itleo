@@ -7,12 +7,26 @@
 //
 
 #import "AppDelegate.h"
-
+#import "Reachability.h"
 @implementation AppDelegate
+
+-(void)fn_reachabilityChanged:(NSNotification*)note{
+    Reachability *curReach=[note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NetworkStatus status=[curReach currentReachabilityStatus];
+    if (status==NotReachable) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"ITLEO" message:MY_LocalizedString(@"msg_network_fail", nil) delegate:nil cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
+        [alert show];
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    //監測網絡情況
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    hostReach=[Reachability reachabilityWithHostName:@"https://www.apple.com"];
+    [hostReach startNotifier];
     return YES;
 }
 							
