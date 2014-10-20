@@ -20,8 +20,7 @@
 "empty_sys_prompt"="Sorry,the system name can not be empty!";
 "no_history_prompt"="No Historical Data!";
 "login_prompt"="Verifying,please wait!";
-"login_success_prompt"="Successful landing!";
-"login_failed_prompt"="Login failed,please check the password and user name match!";
+"login_failed_prompt"="Login failed,please check the user name,password and the system name correctly!";
 "lbl_prompt_history"="No Historical Data!";
 //main home
 "lbl_cancel"="Cancel";
@@ -66,6 +65,8 @@
 "lbl_kgs"="KGS:";
 "lbl_cbm"="CBM:";
 "lbl_ok"="OK";
+"no_order_alert"="No Order Information!";
+"load_order_alert"="Loading,please wait!";
 //manage images
 "lbl_pictures"="Pictures:";
 "ibtn_delete_all"="Delete All";
@@ -97,12 +98,13 @@
 "lbl_delete"="Delete";
 "delete_prompt"="Please select you want to delete the record!";
 "will_delete_prompt"="Are you sure to delete selected records?";
+"no_record_alert"="No Records!";
 //result
 "lbl_order_error"="Order Number Error";
 "lbl_Vehicle_error"="Vehicle Number Error";
 "lbl_success"="Uploaded successfully";
 "lbl_Network_error"="Network Anomaly";
-"msg_network_fail"="The network connection is not available now. Please contact the network administrator.";
+"msg_network_fail"="Unable to connect to the network, you must connect Wi-Fi network or mobile data network to access ITLEO.";
 "upload_prompt"="Uploading,please wait!";
 "upload_success"="Uploaded successfully!";
 "upload_fail"="Upload failed, please check whether you want to upload the data correctly";

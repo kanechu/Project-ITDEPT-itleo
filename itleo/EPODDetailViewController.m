@@ -12,13 +12,14 @@
 #import "Cell_status_list.h"
 #import "DB_ePod.h"
 #import "Conversion_helper.h"
-#import "IsAuto_upload_data.h"
+#import "CheckNetWork.h"
 #import "Truck_order_data.h"
 #import "Truck_order_image_data.h"
 #import "DB_LoginInfo.h"
 #import "RespEpod_updmilestone.h"
 #import "Epod_upd_milestone_image_contract.h"
 #import "Order_InfoViewController.h"
+
 @interface EPODDetailViewController ()
 //存储显示的配置单状态
 @property(nonatomic,strong) NSMutableArray *arr_status;
@@ -287,8 +288,8 @@
         
         DB_ePod *db=[[DB_ePod alloc]init];
         [db fn_save_ePod_data:upload_ms image_ms:alist_image_ms];
-        [SVProgressHUD showWithStatus:MY_LocalizedString(@"upload_prompt", nil)];
         if ([self fn_check_network]) {
+            [SVProgressHUD showWithStatus:MY_LocalizedString(@"upload_prompt", nil)];
             UpdateFormContract *updateform=[[UpdateFormContract alloc]init];
             
             if ([alist_image_ms count]==0) {
@@ -381,11 +382,8 @@
  *  @return bool值
  */
 -(BOOL)fn_check_network{
-    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    if ([obj fn_check_isNetworking]) {
-        return YES;
-    }else{
-        [SVProgressHUD dismissWithError:MY_LocalizedString(@"msg_network_fail", nil) afterDelay:2.0f];
+    CheckNetWork *obj=[[CheckNetWork alloc]init];
+    if ([obj fn_isPopUp_alert]) {
         DB_ePod *db=[[DB_ePod alloc]init];
         Truck_order_data *upload_ms=[self fn_set_upload_data];
         upload_ms.result=@"ianomaly";
@@ -399,6 +397,9 @@
         [db fn_save_ePod_data:upload_ms image_ms:alist_image_ms];
         [self fn_post_notification];
         return NO;
+        
+    }else{
+        return YES;
     }
 }
 #pragma mark -post notification

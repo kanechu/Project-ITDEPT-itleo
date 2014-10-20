@@ -19,8 +19,7 @@
 "empty_sys_prompt"="请输入系统名称";
 "no_history_prompt"="没有您输入的记录！";
 "login_prompt"="正在验证，请稍等！";
-"login_success_prompt"="登录成功";
-"login_failed_prompt"="登入失败，请检查密码和用户名是否匹配！";
+"login_failed_prompt"="登入失败，请检查用户名、密码和系统名是否正确！";
 "lbl_prompt_history"="沒有您输入的记录!";
 //main home
 "lbl_cancel"="取消";
@@ -65,6 +64,8 @@
 "lbl_kgs"="重              量:";
 "lbl_cbm"="体              积:";
 "lbl_ok"="确定";
+"no_order_alert"="没有配载单信息！";
+"load_order_alert"="加载中,请等候！";
 //manage images
 "lbl_pictures"="图片:";
 "ibtn_delete_all"="全部删除";
@@ -96,12 +97,13 @@
 "lbl_delete"="刪除";
 "delete_prompt"="请选取您要删除的记录！";
 "will_delete_prompt"="您确定刪除选取的记录？";
+"no_record_alert"="没有记录！";
 //result
 "lbl_order_error"="配载单号无效";
 "lbl_Vehicle_error"="车牌号无效";
 "lbl_success"="上传成功";
 "lbl_Network_error"="网络异常";
-"msg_network_fail"="无法连接至网络，请联络网络管理员!";
+"msg_network_fail"="无法连接网络，您必须连接Wi-Fi网路或行动数据网路才能取用ITLEO！";
 "upload_prompt"="上传中，请稍等！";
 "upload_success"="上传成功！";
 "upload_fail"="上传失败, 请检查您要上传的数据是否正确！";

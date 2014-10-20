@@ -16,6 +16,7 @@
 #import "MZFormSheetController.h"
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
+#import "CheckNetWork.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 @interface LEOLoginViewController ()
@@ -207,6 +208,7 @@ static NSString  *is_language=@"";//标识语言类型
         if ([arr_resp_result count]!=0) {
             web_addr=[[arr_resp_result objectAtIndex:0]valueForKey:@"web_addr"];
             sys_name=[[arr_resp_result objectAtIndex:0]valueForKey:@"sys_name"];
+            
         }
         [self fn_get_login_RespData:web_addr sys_name:sys_name];
     };
@@ -214,52 +216,55 @@ static NSString  *is_language=@"";//标识语言类型
 }
 #pragma mark 验证该用户名是否存在客户的数据库中
 - (void)fn_get_login_RespData:(NSString*)web_addr sys_name:(NSString*)sys_name{
-    RequestContract *req_form=[[RequestContract alloc]init];
-    AuthContract *auth=[[AuthContract alloc]init];
-    auth.user_code=_itf_usercode.text;
-    auth.password=_itf_password.text;
-    auth.system=sys_name;
-    auth.version=@"1.0";
-    req_form.Auth=auth;
-    Web_base *web_base=[[Web_base alloc]init];
-    web_base.il_url=STR_LOGIN_URL;
-    web_base.iresp_class=[RespLogin class];
-    web_base.ilist_resp_mapping=[NSArray arrayWithPropertiesOfObject:[RespLogin class]];
-    web_base.callBack=^(NSMutableArray *arr_resp_result){
-        NSString *user_logo=@"";
-        NSString *pass=@"";
-        if ( [arr_resp_result count]!=0) {
-            user_logo=[[arr_resp_result objectAtIndex:0]valueForKey:@"user_logo"];
-            pass=[[arr_resp_result objectAtIndex:0]valueForKey:@"pass"];
-        }
-        if ([pass isEqualToString:@"true"]) {
-            [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"login_success_prompt", nil)];
-            NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-            [userDefaults setInteger:1 forKey:@"isLogin"];
-            [userDefaults synchronize];
-            DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
-            [db fn_save_LoginInfo_data:_itf_usercode.text password:_itf_password.text system:sys_name user_logo:user_logo lang_code:lang_code];
-            DB_single_field *db_sys=[[DB_single_field alloc]init];
-            [db_sys fn_save_data:@"com_sys_code" table_field:@"sys_code" field_value:_itf_system.text];
-           
-            [self dismissViewControllerAnimated:YES completion:^(){}];
-             if (_refresh) {
-                _refresh();
+    if (web_addr!=nil&&sys_name!=nil) {
+        RequestContract *req_form=[[RequestContract alloc]init];
+        AuthContract *auth=[[AuthContract alloc]init];
+        auth.user_code=_itf_usercode.text;
+        auth.password=_itf_password.text;
+        auth.system=sys_name;
+        auth.version=@"1.0";
+        req_form.Auth=auth;
+        Web_base *web_base=[[Web_base alloc]init];
+        web_base.il_url=STR_LOGIN_URL;
+        web_base.iresp_class=[RespLogin class];
+        web_base.ilist_resp_mapping=[NSArray arrayWithPropertiesOfObject:[RespLogin class]];
+        web_base.callBack=^(NSMutableArray *arr_resp_result){
+            NSString *user_logo=@"";
+            NSString *pass=@"";
+            if ( [arr_resp_result count]!=0) {
+                user_logo=[[arr_resp_result objectAtIndex:0]valueForKey:@"user_logo"];
+                pass=[[arr_resp_result objectAtIndex:0]valueForKey:@"pass"];
             }
-        }else{
-            [SVProgressHUD dismissWithError:MY_LocalizedString(@"login_failed_prompt", nil)];
-        }
-        
-    };
-    [web_base fn_get_data:req_form base_url:web_addr ];
+            if ([pass isEqualToString:@"true"]) {
+                NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+                [userDefaults setInteger:1 forKey:@"isLogin"];
+                [userDefaults synchronize];
+                DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
+                [db fn_save_LoginInfo_data:_itf_usercode.text password:_itf_password.text system:sys_name user_logo:user_logo lang_code:lang_code];
+                DB_single_field *db_sys=[[DB_single_field alloc]init];
+                [db_sys fn_save_data:@"com_sys_code" table_field:@"sys_code" field_value:_itf_system.text];
+                
+                [self dismissViewControllerAnimated:YES completion:^(){}];
+                if (_refresh) {
+                    _refresh();
+                }
+            }else{
+                [self fn_popUp_alert:MY_LocalizedString(@"login_failed_prompt", nil)];
+            }
+            [SVProgressHUD dismiss];
+        };
+        [web_base fn_get_data:req_form base_url:web_addr ];
+    }else{
+        [self fn_popUp_alert:MY_LocalizedString(@"login_failed_prompt", nil)];
+        [SVProgressHUD dismiss];
+    }
 }
 #pragma mark -Event action
 - (IBAction)fn_find_history_input_data:(id)sender {
     DB_single_field *db=[[DB_single_field alloc]init];
     NSMutableArray *alist_sys_code=[db fn_get_data:@"com_sys_code"];
     if ([alist_sys_code count]==0) {
-        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"lbl_prompt_history", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
-        [alertView show];
+        [self fn_popUp_alert:MY_LocalizedString(@"lbl_prompt_history", nil)];
     }else{
         [self fn_popup_history_listView:alist_sys_code];
     }
@@ -274,11 +279,13 @@ static NSString  *is_language=@"";//标识语言类型
     }else if ([_itf_system.text length]==0){
         str_prompt=MY_LocalizedString(@"empty_sys_prompt", nil);
     }else{
-        [self fn_get_app_config_RespData];
+        CheckNetWork *obj=[[CheckNetWork alloc]init];
+        if ([obj fn_isPopUp_alert]==NO) {
+            [self fn_get_app_config_RespData];
+        }
     }
     if ([str_prompt length]!=0) {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_prompt delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
-        [alert show];
+        [self fn_popUp_alert:str_prompt];
     }
 }
 - (IBAction)fn_isShowPassword:(id)sender {
@@ -288,6 +295,11 @@ static NSString  *is_language=@"";//标识语言类型
     }else{
         _itf_password.secureTextEntry=YES;
     }
+}
+#pragma mark -Pop-up alert
+-(void)fn_popUp_alert:(NSString*)str_alert{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
+    [alert show];
 }
 #pragma mark UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField{

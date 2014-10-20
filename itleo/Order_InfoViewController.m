@@ -12,14 +12,18 @@
 #import "Resp_order_info.h"
 #import "Conversion_helper.h"
 #import "Cal_lineHeight.h"
+#import "CheckNetWork.h"
+#import "CreateFootView.h"
 @interface Order_InfoViewController ()
 @property (nonatomic, strong)NSMutableArray *arr_order_info;
 @property (nonatomic, strong)NSMutableArray *arr_prompt;
 @property (nonatomic, strong)Cal_lineHeight *cal_obj;
+
 @end
 
 @implementation Order_InfoViewController
 @synthesize cal_obj;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,7 +38,6 @@
     [super viewDidLoad];
     self.tableview.delegate=self;
     self.tableview.dataSource=self;
-    
     _ilb_order_title.text=MY_LocalizedString(@"lbl_info_title", nil);
     [_ibtn_back setTitle:MY_LocalizedString(@"lbl_ok", nil) forState:UIControlStateNormal];
     
@@ -49,30 +52,38 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)fn_get_order_info{
-    [SVProgressHUD show];
-    DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
-    AuthContract *auth=[db fn_get_RequestAuth];
-    SearchFormContract *searchform1=[[SearchFormContract alloc]init];
-    searchform1.os_column=@"car_no";
-    searchform1.os_value=_car_no;
-    SearchFormContract *searchform2=[[SearchFormContract alloc]init];
-    searchform2.os_column=@"driver_code";
-    searchform2.os_value=auth.user_code;
-    SearchFormContract *searchform3=[[SearchFormContract alloc]init];
-    searchform3.os_column=@"order_no";
-    searchform3.os_value=_order_no;
-    NSMutableArray *arr_searchform1=[[NSMutableArray alloc]initWithObjects:searchform1,searchform2,searchform3, nil];
-    Web_update_epod *web_epod=[[Web_update_epod alloc]init];
-    [web_epod fn_get_order_info:arr_searchform1 back_result:^(NSMutableArray* arr_result){
-        [self fn_set_arr_order_info:arr_result];
-        [self.tableview reloadData];
-        [SVProgressHUD dismiss];
-    }];
+    CheckNetWork *obj=[[CheckNetWork alloc]init];
+    if ([obj fn_check_isNetworking]) {
+        [SVProgressHUD showWithStatus:MY_LocalizedString(@"load_order_alert", nil)];
+        DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
+        AuthContract *auth=[db fn_get_RequestAuth];
+        SearchFormContract *searchform1=[[SearchFormContract alloc]init];
+        searchform1.os_column=@"car_no";
+        searchform1.os_value=_car_no;
+        SearchFormContract *searchform2=[[SearchFormContract alloc]init];
+        searchform2.os_column=@"driver_code";
+        searchform2.os_value=auth.user_code;
+        SearchFormContract *searchform3=[[SearchFormContract alloc]init];
+        searchform3.os_column=@"order_no";
+        searchform3.os_value=_order_no;
+        NSMutableArray *arr_searchform1=[[NSMutableArray alloc]initWithObjects:searchform1,searchform2,searchform3, nil];
+        Web_update_epod *web_epod=[[Web_update_epod alloc]init];
+        [web_epod fn_get_order_info:arr_searchform1 back_result:^(NSMutableArray* arr_result){
+            if ([arr_result count]!=0) {
+                [self fn_set_arr_order_info:arr_result];
+                [self.tableview reloadData];
+            }else{
+                [self fn_show_alert:MY_LocalizedString(@"no_order_alert", nil)];
+            }
+            [SVProgressHUD dismiss];
+        }];
+    }else{
+        [self fn_show_alert:MY_LocalizedString(@"msg_network_fail", nil)];
+    }
 }
 -(void)fn_set_arr_order_info:(NSMutableArray*)arr_result{
     _arr_order_info=[NSMutableArray array];
     if ([arr_result count]!=0) {
-        // _arr_prompt=[NSMutableArray arrayWithObjects:@"客        户:",@"取货客户:",@"取货地址:",@"送货客户:",@"送货地址:",@"预 约送货日       期:",@"预 约送货时       间:",@"货        物:",@"件        数:",@"重        量:",@"体        积:", nil];
         _arr_prompt=[NSMutableArray arrayWithObjects:MY_LocalizedString(@"lbl_cus", nil),MY_LocalizedString(@"lbl_pick_cus", nil),MY_LocalizedString(@"lbl_pick_addr", nil),MY_LocalizedString(@"lbl_dely_cus", nil),MY_LocalizedString(@"lbl_dely_addr", nil),MY_LocalizedString(@"lbl_dely_app_date", nil),MY_LocalizedString(@"lbl_dely_app_time", nil),MY_LocalizedString(@"lbl_goods", nil),MY_LocalizedString(@"lbl_pkg", nil),MY_LocalizedString(@"lbl_kgs", nil),MY_LocalizedString(@"lbl_cbm", nil), nil];
         
         Resp_order_info *order_info=[arr_result objectAtIndex:0];
@@ -144,6 +155,11 @@
     }else{
         return 44;
     }
+}
+
+-(void)fn_show_alert:(NSString*)str_alert{
+    UIView *bg_view=[CreateFootView fn_create_footView:str_alert];
+    [self.tableview setTableFooterView:bg_view];
 }
 
 

@@ -12,7 +12,7 @@
 #import "Checkbox.h"
 #import "Conversion_helper.h"
 #import "EPODDetailViewController.h"
-
+#import "CreateFootView.h"
 @interface EPODRecordViewController ()
 //存储全部记录数据
 @property(nonatomic,strong)NSMutableArray *alist_epod;
@@ -46,7 +46,9 @@
    
 	// Do any additional setup after loading the view.
 }
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [self.tableview setTableFooterView:nil];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -59,6 +61,9 @@
     flag_isAll=0;
     DB_ePod *db=[[DB_ePod alloc]init];
     alist_epod=[db fn_select_all_ePod_data];
+    if ([alist_epod count]==0) {
+        [self fn_show_alert];
+    }
 }
 #pragma mark -set style
 - (void)fn_set_control_pro{
@@ -152,6 +157,9 @@
             [self.idic_delete removeAllObjects];
         }
         [[NSNotificationCenter defaultCenter]postNotificationName:@"delete_success" object:nil];
+    }
+    if ([alist_epod count]==0) {
+        [self fn_show_alert];
     }
 }
 
@@ -272,5 +280,9 @@
         }
 	}
 }
-
+#pragma mark -NO Record Alert
+-(void)fn_show_alert{
+    UIView *bg_view=[CreateFootView fn_create_footView:MY_LocalizedString(@"no_record_alert", nil)];
+    [self.tableview setTableFooterView:bg_view];
+}
 @end

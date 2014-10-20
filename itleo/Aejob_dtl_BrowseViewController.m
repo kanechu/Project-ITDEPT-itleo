@@ -14,6 +14,7 @@
 #import "DB_RespAppConfig.h"
 #import "Cell_aejob_dtl_browse.h"
 #import "Cal_lineHeight.h"
+#import "CreateFootView.h"
 @interface Aejob_dtl_BrowseViewController ()
 
 @property(nonatomic,strong)NSMutableArray *alist_aejob_dtl;
@@ -83,7 +84,7 @@
     }
 }
 -(void)fn_get_aejob_dtl_browse_data:(NSString*)base_url{
-    [SVProgressHUD showWithStatus:@"Loading......"];
+    [SVProgressHUD showWithStatus:@"Loading,please wait!"];
     RequestContract *req_form=[[RequestContract alloc]init];
     DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db fn_get_RequestAuth];
@@ -98,10 +99,9 @@
     web_base.iresp_class=[RespAejob_dtl_browse class];
     web_base.callBack=^(NSMutableArray* arr_resp_result){
         if ([arr_resp_result count]==0) {
-            [SVProgressHUD dismissWithSuccess:@"No HAWB details data!"];
-        }else{
-            [SVProgressHUD dismissWithSuccess:@"Loaded successfully!"];
+            [self fn_show_alert];
         }
+        [SVProgressHUD dismiss];
         DB_RespAejob_dtl_browse *db=[[DB_RespAejob_dtl_browse alloc]init];
         [db fn_save_aejob_dtl_browse_data:arr_resp_result];
         
@@ -109,6 +109,11 @@
         [self.tableview reloadData];
     };
     [web_base fn_get_data:req_form base_url:base_url];
+}
+#pragma mark -no data alert
+-(void)fn_show_alert{
+    UIView *bg_view=[CreateFootView fn_create_footView:@"No HAWB details data!"];
+    [self.tableview setTableFooterView:bg_view];
 }
 
 #pragma mark UITableViewDataSource

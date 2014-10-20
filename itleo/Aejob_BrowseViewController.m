@@ -16,6 +16,7 @@
 #import "SKSTableViewCell.h"
 #import "Aejob_dtl_BrowseViewController.h"
 #import "Aejob_AdvanceSearchViewController.h"
+#import "CreateFootView.h"
 static NSMutableArray *alist_groupAndnum;
 static NSMutableArray *alist_filtered_data;
 @interface Aejob_BrowseViewController ()
@@ -95,7 +96,7 @@ static NSMutableArray *alist_filtered_data;
 }
 #pragma mark 获取Aejob_browse数据
 -(void)fn_get_aejob_browse_data:(NSString*)base_url searchForm:(NSArray*)alist_searchForm{
-    [SVProgressHUD showWithStatus:@"Loading......"];
+    [SVProgressHUD showWithStatus:@"Loading,please wait!"];
     RequestContract *req_form=[[RequestContract alloc]init];
     DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db fn_get_RequestAuth];
@@ -107,10 +108,9 @@ static NSMutableArray *alist_filtered_data;
     web_base.iresp_class=[RespAejob_browse class];
     web_base.callBack=^(NSMutableArray* arr_resp_result){
         if ([arr_resp_result count]==0) {
-            [SVProgressHUD dismissWithSuccess:@"No Load plan data!"];
-        }else{
-            [SVProgressHUD dismissWithSuccess:@"Loaded successfully!"];
+            [self fn_show_alert];
         }
+        [SVProgressHUD dismiss];
         [self fn_refresh_skstableview:arr_resp_result];
     };
     [web_base fn_get_data:req_form base_url:base_url];
@@ -137,6 +137,12 @@ static NSMutableArray *alist_filtered_data;
     }
     self.skstableView.expandableCells=nil;
     [self.skstableView reloadData];
+}
+#pragma mark -No Data Alert
+-(void)fn_show_alert{
+    UIView *view=[CreateFootView fn_create_footView:@"No Load plan data!"];
+    [self.skstableView setTableFooterView:view];
+    
 }
 
 
