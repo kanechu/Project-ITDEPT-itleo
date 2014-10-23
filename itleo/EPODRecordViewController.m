@@ -63,6 +63,7 @@
     alist_epod=[db fn_select_all_ePod_data];
     if ([alist_epod count]==0) {
         [self fn_show_alert];
+        [self.tableview setScrollEnabled:NO];
     }
 }
 #pragma mark -set style
@@ -160,6 +161,7 @@
     }
     if ([alist_epod count]==0) {
         [self fn_show_alert];
+        [self.tableview setScrollEnabled:NO];
     }
 }
 

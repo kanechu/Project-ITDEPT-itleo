@@ -25,7 +25,7 @@
     // Override point for customization after application launch.
     //監測網絡情況
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    hostReach=[Reachability reachabilityWithHostName:@"https://www.apple.com"];
+    hostReach=[Reachability reachabilityForInternetConnection];
     [hostReach startNotifier];
     return YES;
 }

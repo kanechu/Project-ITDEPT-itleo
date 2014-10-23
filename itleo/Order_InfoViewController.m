@@ -79,6 +79,7 @@
         }];
     }else{
         [self fn_show_alert:MY_LocalizedString(@"msg_network_fail", nil)];
+        self.tableview.scrollEnabled=NO;
     }
 }
 -(void)fn_set_arr_order_info:(NSMutableArray*)arr_result{
