@@ -84,6 +84,9 @@
         CheckNetWork *obj=[[CheckNetWork alloc]init];
         if ([obj fn_isPopUp_alert]==NO) {
             [self fn_get_aejob_dtl_browse_data:base_url];
+            [self.tableview setScrollEnabled:YES];
+        }else{
+            [self.tableview setScrollEnabled:NO];
         }
     }
 }
@@ -104,6 +107,9 @@
     web_base.callBack=^(NSMutableArray* arr_resp_result){
         if ([arr_resp_result count]==0) {
             [self fn_show_alert];
+            [self.tableview setScrollEnabled:NO];
+        }else{
+            [self.tableview setScrollEnabled:YES];
         }
         [SVProgressHUD dismiss];
         DB_RespAejob_dtl_browse *db=[[DB_RespAejob_dtl_browse alloc]init];

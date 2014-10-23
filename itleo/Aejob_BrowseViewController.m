@@ -83,6 +83,9 @@ static NSMutableArray *alist_filtered_data;
         CheckNetWork *obj=[[CheckNetWork alloc]init];
         if ([obj fn_isPopUp_alert]==NO) {
             [self fn_get_aejob_browse_data:base_url searchForm:alist_searchform];
+            [self.skstableView setScrollEnabled:NO];
+        }else{
+            [self.skstableView setScrollEnabled:NO];
         }
     }
 }
@@ -116,6 +119,9 @@ static NSMutableArray *alist_filtered_data;
     web_base.callBack=^(NSMutableArray* arr_resp_result){
         if ([arr_resp_result count]==0) {
             [self fn_show_alert];
+            [self.skstableView setScrollEnabled:NO];
+        }else{
+            [self.skstableView setScrollEnabled:YES];
         }
         [SVProgressHUD dismiss];
         [self fn_refresh_skstableview:arr_resp_result];
