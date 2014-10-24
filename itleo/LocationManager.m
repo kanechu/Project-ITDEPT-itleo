@@ -52,14 +52,14 @@
     }
     
 }
-- (void)fn_start{
+- (void)fn_startUpdating{
     self.locationManager=[[CLLocationManager alloc]init];
     //设置CLLocationManager实例委托
     self.locationManager.delegate=self;
     //要求定位的精确度
     self.locationManager.desiredAccuracy=kCLLocationAccuracyBest;
     //设置距离筛选器distanceFilter，下面表示设备至少移动1000米，才通知委托更新
-    //self.locationManager.distanceFilter=1000.0f;
+   // self.locationManager.distanceFilter=1000.0f;
     //或者没有筛选器的默认设置：
     self.locationManager.distanceFilter=kCLDistanceFilterNone;
     self.locationManager.pausesLocationUpdatesAutomatically=YES;
@@ -75,9 +75,9 @@
     NSString *str_longitude=[NSString stringWithFormat:@"%f",self.currentLocation.coordinate.longitude];
     DB_Location *db=[[DB_Location alloc]init];
     [db fn_save_loaction_data:str_longitude latitude:str_latitude];
-    [self.locationManager stopUpdatingLocation];
-    [self.locationManager stopUpdatingLocation];
 
 }
-
+- (void)fn_stopUpdating{
+    [self.locationManager stopUpdatingLocation];
+}
 @end

@@ -207,4 +207,19 @@
     }];
     return isDeleted;
 }
+-(BOOL)fn_delete_all_epod_data{
+    __block BOOL isDeleted=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            NSString *sql=[NSString stringWithFormat:@"delete from truck_order_image"];
+            isDeleted=[db executeUpdate:sql];
+            
+            NSString *sql_truck=[NSString stringWithFormat:@"delete from truck_order"];
+            isDeleted=[db executeUpdate:sql_truck,_user_code,_system];
+            
+            [db close];
+        }
+    }];
+    return isDeleted;
+}
 @end

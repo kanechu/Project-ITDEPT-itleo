@@ -27,4 +27,7 @@
 -(BOOL)fn_update_epod_after_uploaded:(NSString*)unique_id is_uploaded:(NSString*)is_uploaded date:(NSString*)date result:(NSString*)result user_code:(NSString*)user_code system:(NSString*)system images:(NSSet*)alist_images_result;
 
 -(BOOL)fn_delete_epod_data:(int)unique_id;
+
+-(BOOL)fn_delete_all_epod_data;
+
 @end

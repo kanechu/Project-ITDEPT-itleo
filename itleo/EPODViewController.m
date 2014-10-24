@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
+    [[LocationManager fn_shareManager]fn_startUpdating];
     [self fn_set_control_pro];
     [self fn_custom_gesture];
     [self fn_add_notificaiton];
@@ -48,9 +48,6 @@
     }
     
 	// Do any additional setup after loading the view.
-}
-- (void)viewWillAppear:(BOOL)animated{
-    [[LocationManager fn_shareManager]fn_start];
 }
 
 - (void)didReceiveMemoryWarning

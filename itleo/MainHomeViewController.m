@@ -14,7 +14,7 @@
 #import "DB_single_field.h"
 #import "DB_RespAppConfig.h"
 #import "DB_Location.h"
-
+#import "DB_ePod.h"
 @interface MainHomeViewController ()
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
@@ -102,6 +102,9 @@
     return lang_code;
 }
 - (IBAction)fn_logout_itleo:(id)sender {
+    //logout的时候，清除epod所有相关的信息
+    DB_ePod *db_epod=[[DB_ePod alloc]init];
+    [db_epod fn_delete_all_epod_data];
     DB_single_field *db=[[DB_single_field alloc]init];
     [db fn_delete_all_data:@"vehicle_no"];
     DB_Location *db_location=[[DB_Location alloc]init];

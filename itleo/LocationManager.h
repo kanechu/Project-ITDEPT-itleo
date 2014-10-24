@@ -14,6 +14,7 @@
 - (BOOL)fn_isLocationServiceOn;
 - (BOOL)fn_isCurrentAppLocatonServiceOn;
 - (BOOL)fn_isLocationServiceDetermined;
-- (void)fn_start;
+- (void)fn_startUpdating;
+- (void)fn_stopUpdating;
 - (CLLocation*)getCurrentLoaction;
 @end
