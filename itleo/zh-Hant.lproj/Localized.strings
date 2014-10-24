@@ -33,6 +33,7 @@
 "ibtn_lookup"="查找";
 "ibtn_sign_photo"="簽收及拍照";
 "ibtn_check_record"="查看記錄";
+"ibtn_settings"="設置";
 "lbl_transfer"="自動傳送資料";
 "no_history_data"="沒有您輸入的車牌號記錄!";
 "vehicle_empty"="抱歉，車牌號不能為空!";

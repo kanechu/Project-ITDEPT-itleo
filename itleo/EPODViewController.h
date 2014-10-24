@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_receive;
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_checkRecord;
+@property (weak, nonatomic) IBOutlet Custom_Button *ibtn_settings;
 
 @property (weak, nonatomic) IBOutlet UILabel *ilb_transfer;
 @property (weak, nonatomic) IBOutlet UISwitch *is_switch;
@@ -23,5 +24,6 @@
 
 - (IBAction)fn_fignature_photograph:(id)sender;
 - (IBAction)fn_check_record:(id)sender;
+- (IBAction)fn_manually_settings:(id)sender;
 
 @end

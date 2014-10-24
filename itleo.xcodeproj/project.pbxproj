@@ -126,6 +126,7 @@
 		B2C3BAE819BAE215008B9A83 /* EPODViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAE719BAE215008B9A83 /* EPODViewController.m */; };
 		B2C3BAEE19BAEEA9008B9A83 /* Custom_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAED19BAEEA9008B9A83 /* Custom_Button.m */; };
 		B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAF019BB003F008B9A83 /* EPODDetailViewController.m */; };
+		B2C4722419FA45010099199D /* EPODSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C4722319FA45010099199D /* EPODSettingsViewController.m */; };
 		B2CD8010199DFEDA00E6DCB7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */; };
 		B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207119DFA3A50005253C /* Resp_order_info.m */; };
 		B2D8207819DFAD6D0005253C /* Order_InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */; };
@@ -400,6 +401,8 @@
 		B2C3BAED19BAEEA9008B9A83 /* Custom_Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Custom_Button.m; sourceTree = "<group>"; };
 		B2C3BAEF19BB003F008B9A83 /* EPODDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPODDetailViewController.h; sourceTree = "<group>"; };
 		B2C3BAF019BB003F008B9A83 /* EPODDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODDetailViewController.m; sourceTree = "<group>"; };
+		B2C4722219FA45010099199D /* EPODSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPODSettingsViewController.h; sourceTree = "<group>"; };
+		B2C4722319FA45010099199D /* EPODSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODSettingsViewController.m; sourceTree = "<group>"; };
 		B2CD800D199DFEDA00E6DCB7 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B2D8207019DFA3A50005253C /* Resp_order_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_order_info.h; sourceTree = "<group>"; };
@@ -682,6 +685,8 @@
 				B2A328CD19D4F91800DB8F9B /* AddRemarkViewController.m */,
 				B2E391C819C8137A00612FDD /* EPODRecordViewController.h */,
 				B2E391C919C8137A00612FDD /* EPODRecordViewController.m */,
+				B2C4722219FA45010099199D /* EPODSettingsViewController.h */,
+				B2C4722319FA45010099199D /* EPODSettingsViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1117,6 +1122,7 @@
 				B2A328D919D5653A00DB8F9B /* Truck_order_data.m in Sources */,
 				B276C1001995DB5F00075515 /* RespAppConfig.m in Sources */,
 				B27D466F19D0227B00B998BC /* DB_single_field.m in Sources */,
+				B2C4722419FA45010099199D /* EPODSettingsViewController.m in Sources */,
 				B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */,
 				B272EA6C19AEDDA400256276 /* NSInvocation+Copy.m in Sources */,
 				B27D467319D02EC300B998BC /* PopViewManager.m in Sources */,

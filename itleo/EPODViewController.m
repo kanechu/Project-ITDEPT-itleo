@@ -68,6 +68,9 @@
     _ibtn_receive.left_icon=[UIImage imageNamed:@"ibtn_add"];
     [_ibtn_receive setTitle:MY_LocalizedString(@"ibtn_sign_photo", nil) forState:UIControlStateNormal];
     
+    _ibtn_settings.left_icon=[UIImage imageNamed:@"ic_settings"];
+    [_ibtn_settings setTitle:MY_LocalizedString(@"ibtn_settings", nil) forState:UIControlStateNormal];
+    
     _itf_bus_no.layer.borderColor=[UIColor lightGrayColor].CGColor;
     _itf_bus_no.layer.borderWidth=1;
     _itf_bus_no.layer.cornerRadius=4;
@@ -142,6 +145,10 @@
 
 - (IBAction)fn_check_record:(id)sender {
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"delete_success" object:nil];
+}
+
+- (IBAction)fn_manually_settings:(id)sender {
+    
 }
 
 -(void)fn_isAuto_transfer_data{

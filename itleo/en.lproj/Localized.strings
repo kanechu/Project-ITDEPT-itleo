@@ -33,6 +33,7 @@
 "ibtn_lookup"="LookUp";
 "ibtn_sign_photo"="Sign and Photograph";
 "ibtn_check_record"="Check the record";
+"ibtn_settings"="Settings";
 "lbl_transfer"="Automatic transfer";
 "no_history_data"="No Historical Vehicle_no Data!";
 "vehicle_empty"="Sorry,Vehicle Number can not be empty!";
