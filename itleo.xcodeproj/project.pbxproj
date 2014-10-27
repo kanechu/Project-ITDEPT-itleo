@@ -55,6 +55,7 @@
 		B272EA8C19AF16BF00256276 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B272EA8319AF169600256276 /* libRestKit.a */; };
 		B2750D6C199B18B3008ADCA1 /* Cell_advance_search.m in Sources */ = {isa = PBXBuildFile; fileRef = B2750D6B199B18B2008ADCA1 /* Cell_advance_search.m */; };
 		B2750D74199B203C008ADCA1 /* KeyboardNoticeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2750D73199B203C008ADCA1 /* KeyboardNoticeManager.m */; };
+		B27518CD19FE1C99000A4630 /* RangeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B27518CC19FE1C99000A4630 /* RangeSelectViewController.m */; };
 		B276BBA71995B66800075515 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B276BBA61995B66800075515 /* Foundation.framework */; };
 		B276BBA91995B66800075515 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B276BBA81995B66800075515 /* CoreGraphics.framework */; };
 		B276BBAB1995B66800075515 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B276BBAA1995B66800075515 /* UIKit.framework */; };
@@ -126,7 +127,7 @@
 		B2C3BAE819BAE215008B9A83 /* EPODViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAE719BAE215008B9A83 /* EPODViewController.m */; };
 		B2C3BAEE19BAEEA9008B9A83 /* Custom_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAED19BAEEA9008B9A83 /* Custom_Button.m */; };
 		B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAF019BB003F008B9A83 /* EPODDetailViewController.m */; };
-		B2C4722419FA45010099199D /* EPODSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C4722319FA45010099199D /* EPODSettingsViewController.m */; };
+		B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C4722919FA65B70099199D /* EPODSettingsViewController.m */; };
 		B2CD8010199DFEDA00E6DCB7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */; };
 		B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207119DFA3A50005253C /* Resp_order_info.m */; };
 		B2D8207819DFAD6D0005253C /* Order_InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */; };
@@ -272,6 +273,8 @@
 		B2750D6B199B18B2008ADCA1 /* Cell_advance_search.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_advance_search.m; sourceTree = "<group>"; };
 		B2750D72199B203C008ADCA1 /* KeyboardNoticeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardNoticeManager.h; sourceTree = "<group>"; };
 		B2750D73199B203C008ADCA1 /* KeyboardNoticeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardNoticeManager.m; sourceTree = "<group>"; };
+		B27518CB19FE1C99000A4630 /* RangeSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RangeSelectViewController.h; sourceTree = "<group>"; };
+		B27518CC19FE1C99000A4630 /* RangeSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeSelectViewController.m; sourceTree = "<group>"; };
 		B276BBA31995B66800075515 /* itleo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = itleo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B276BBA61995B66800075515 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B276BBA81995B66800075515 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -401,8 +404,8 @@
 		B2C3BAED19BAEEA9008B9A83 /* Custom_Button.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Custom_Button.m; sourceTree = "<group>"; };
 		B2C3BAEF19BB003F008B9A83 /* EPODDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPODDetailViewController.h; sourceTree = "<group>"; };
 		B2C3BAF019BB003F008B9A83 /* EPODDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODDetailViewController.m; sourceTree = "<group>"; };
-		B2C4722219FA45010099199D /* EPODSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPODSettingsViewController.h; sourceTree = "<group>"; };
-		B2C4722319FA45010099199D /* EPODSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODSettingsViewController.m; sourceTree = "<group>"; };
+		B2C4722819FA65B70099199D /* EPODSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPODSettingsViewController.h; sourceTree = "<group>"; };
+		B2C4722919FA65B70099199D /* EPODSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODSettingsViewController.m; sourceTree = "<group>"; };
 		B2CD800D199DFEDA00E6DCB7 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B2D8207019DFA3A50005253C /* Resp_order_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_order_info.h; sourceTree = "<group>"; };
@@ -685,8 +688,10 @@
 				B2A328CD19D4F91800DB8F9B /* AddRemarkViewController.m */,
 				B2E391C819C8137A00612FDD /* EPODRecordViewController.h */,
 				B2E391C919C8137A00612FDD /* EPODRecordViewController.m */,
-				B2C4722219FA45010099199D /* EPODSettingsViewController.h */,
-				B2C4722319FA45010099199D /* EPODSettingsViewController.m */,
+				B2C4722819FA65B70099199D /* EPODSettingsViewController.h */,
+				B2C4722919FA65B70099199D /* EPODSettingsViewController.m */,
+				B27518CB19FE1C99000A4630 /* RangeSelectViewController.h */,
+				B27518CC19FE1C99000A4630 /* RangeSelectViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1114,6 +1119,7 @@
 				B2A7480F19BEFD57006C96D1 /* DrawSignView.m in Sources */,
 				B276C0DD1995C9DD00075515 /* NSArray.m in Sources */,
 				B2CD8010199DFEDA00E6DCB7 /* SVProgressHUD.m in Sources */,
+				B27518CD19FE1C99000A4630 /* RangeSelectViewController.m in Sources */,
 				B260062619B9C92B00393EA7 /* UIColor+HexString.m in Sources */,
 				B272EA6919AEDDA400256276 /* MZFormSheetController.m in Sources */,
 				B2033462199897FE007FCE63 /* Cell_menu_item.m in Sources */,
@@ -1122,7 +1128,7 @@
 				B2A328D919D5653A00DB8F9B /* Truck_order_data.m in Sources */,
 				B276C1001995DB5F00075515 /* RespAppConfig.m in Sources */,
 				B27D466F19D0227B00B998BC /* DB_single_field.m in Sources */,
-				B2C4722419FA45010099199D /* EPODSettingsViewController.m in Sources */,
+				B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */,
 				B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */,
 				B272EA6C19AEDDA400256276 /* NSInvocation+Copy.m in Sources */,
 				B27D467319D02EC300B998BC /* PopViewManager.m in Sources */,

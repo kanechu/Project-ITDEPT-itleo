@@ -42,12 +42,7 @@
     [self fn_custom_gesture];
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
-    if (_is_switch.on) {
-        [self fn_open_new_thread];
-        _flag_isOpened_GCD=1;
-    }
-    
-	// Do any additional setup after loading the view.
+   	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,12 +70,6 @@
     _itf_bus_no.layer.borderWidth=1;
     _itf_bus_no.layer.cornerRadius=4;
     _itf_bus_no.delegate=self;
-    
-    _ilb_transfer.text=MY_LocalizedString(@"lbl_transfer", nil);
-    
-    [_is_switch addTarget:self action:@selector(fn_isAuto_transfer_data) forControlEvents:UIControlEventValueChanged];
-    
-    
 }
 #pragma mark -addObserver notificaiton
 -(void)fn_add_notificaiton{
@@ -137,7 +126,7 @@
 - (IBAction)fn_fignature_photograph:(id)sender {
     if ([_itf_bus_no.text length]!=0) {
         [self performSegueWithIdentifier:@"segue_detail_epod" sender:self];
-    [self fn_save_vehicle_no];
+        [self fn_save_vehicle_no];
     }else{
         [self fn_Pop_up_alertView:MY_LocalizedString(@"vehicle_empty", nil)];
     }
@@ -151,31 +140,6 @@
     
 }
 
--(void)fn_isAuto_transfer_data{
-    if (_is_switch.on) {
-        //开启定时器
-        [my_timer setFireDate:[NSDate distantPast]];
-        if (_flag_isOpened_GCD!=1) {
-            [self fn_open_new_thread];
-        }
-    }else{
-        //关闭定时器
-        [my_timer setFireDate:[NSDate distantFuture]];
-    }
-}
--(void)fn_open_new_thread{
-    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    dispatch_queue_t my_Queue= dispatch_queue_create("uploading", NULL);
-    dispatch_async(my_Queue, ^{
-        my_timer=[NSTimer scheduledTimerWithTimeInterval:10.0f target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
-        //定时器要加入runloop中才能执行
-        [[NSRunLoop currentRunLoop]run];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-        });
-    });
-    
-}
 -(void)fn_Pop_up_alertView:(NSString*)str_prompt{
     UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:str_prompt delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
     [alertview show];

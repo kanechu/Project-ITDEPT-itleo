@@ -34,7 +34,6 @@
 "ibtn_sign_photo"="簽收及拍照";
 "ibtn_check_record"="查看記錄";
 "ibtn_settings"="設置";
-"lbl_transfer"="自動傳送資料";
 "no_history_data"="沒有您輸入的車牌號記錄!";
 "vehicle_empty"="抱歉，車牌號不能為空!";
 "show_unUpload_msg"="你未上傳的記錄有";
@@ -111,3 +110,28 @@
 "upload_prompt"="上傳中，請稍等！";
 "upload_success"="上傳成功！";
 "upload_fail"="上傳失敗,請檢查您要上傳的數據是否正確！";
+//settings
+"lbl_date_range"="記錄搜索日期範圍";
+"lbl_interval"="自動傳輸數據間隔";
+"lbl_transfer_records"="自動傳輸記錄";
+"lbl_transfer_GPS"="自動傳輸GPS";
+"lbl_record_GPS"="記錄GPS座標";
+"lbl_dateRange_title"="日期範圍";
+"lbl_interval_title"="時間間隔";
+
+//day range
+"lbl_day"="1 天";
+"lbl_2days"="2 天";
+"lbl_3days"="3 天";
+"lbl_7days"="7 天";
+"lbl_15days"="15 天";
+"lbl_30days"="30 天";
+"lbl_all"="所有";
+//interval
+"lbl_seconds"="30 秒";
+"lbl_minute"="1 分鐘";
+"lbl_2minutes"="2 分鐘";
+"lbl_3minutes"="3 分鐘";
+"lbl_10minutes"="10 分鐘";
+"lbl_30minutes"="30 分鐘";
+"lbl_hour"="1 小時";

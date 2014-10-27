@@ -33,7 +33,6 @@
 "ibtn_sign_photo"="签收及拍照";
 "ibtn_check_record"="查看记录";
 "ibtn_settings"="设置";
-"lbl_transfer"="自动传送资料";
 "no_history_data"="没有您输入的车牌号记录!";
 "vehicle_empty"="抱歉，车牌号不能为空!";
 "show_unUpload_msg"="你未上传的记录有";
@@ -108,3 +107,27 @@
 "upload_prompt"="上传中，请稍等！";
 "upload_success"="上传成功！";
 "upload_fail"="上传失败, 请检查您要上传的数据是否正确！";
+//settings
+"lbl_date_range"="记录搜索日期范围";
+"lbl_interval"="自动传输数据间隔";
+"lbl_transfer_records"="自动传输记录";
+"lbl_transfer_GPS"="自动传输GPS";
+"lbl_record_GPS"="记录GPS坐标";
+"lbl_dateRange_title"="日期范围";
+"lbl_interval_title"="时间间隔";
+//day range
+"lbl_day"="1 天";
+"lbl_2days"="2 天";
+"lbl_3days"="3 天";
+"lbl_7days"="7 天";
+"lbl_15days"="15 天";
+"lbl_30days"="30 天";
+"lbl_all"="所有";
+//interval
+"lbl_seconds"="30 秒";
+"lbl_minute"="1 分钟";
+"lbl_2minutes"="2 分钟";
+"lbl_3minutes"="3 分钟";
+"lbl_10minutes"="10 分钟";
+"lbl_30minutes"="30 分钟";
+"lbl_hour"="1 小时";
