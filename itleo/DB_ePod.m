@@ -92,11 +92,11 @@
     }];
     return alist_result;
 }
--(NSMutableArray*)fn_select_all_ePod_data{
+-(NSMutableArray*)fn_select_all_ePod_data:(NSString*)millisecond{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb_result=[db executeQuery:@"select * from truck_order  where user_code=? and system_name=?",_user_code,_system];
+            FMResultSet *lfmdb_result=[db executeQuery:@"select * from truck_order  where user_code=? and system_name=? and (upload_date>? or error_date>?)",_user_code,_system,millisecond,millisecond];
             while ([lfmdb_result next]) {
                 [alist_result addObject:[lfmdb_result resultDictionary]];
             };

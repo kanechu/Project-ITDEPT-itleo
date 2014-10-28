@@ -60,7 +60,15 @@
     idic_delete=[[NSMutableDictionary alloc]initWithCapacity:10];
     flag_isAll=0;
     DB_ePod *db=[[DB_ePod alloc]init];
-    alist_epod=[db fn_select_all_ePod_data];
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSString *date_key=[userDefaults objectForKey:@"date_range"];
+    if ([date_key length]==0) {
+        date_key=@"lbl_day";
+    }
+    NSString *str_days=MY_LocalizedString(date_key, nil);
+    NSInteger days=[[Conversion_helper fn_cut_space:str_days]integerValue];
+    NSString *date_ago=[Conversion_helper fn_millisecondFrom_days_ago:days];
+    alist_epod=[db fn_select_all_ePod_data:date_ago];
     if ([alist_epod count]==0) {
         [self fn_show_alert];
         [self.tableview setScrollEnabled:NO];
