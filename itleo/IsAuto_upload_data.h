@@ -12,4 +12,6 @@
 
 -(void)fn_Automatically_upload_data;
 
+-(void)fn_Auto_upload_GPS;
+
 @end

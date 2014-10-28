@@ -92,6 +92,9 @@
 		B27B5F5219C98271000736B3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B27B5F5119C98271000736B3 /* Reachability.m */; };
 		B27D466F19D0227B00B998BC /* DB_single_field.m in Sources */ = {isa = PBXBuildFile; fileRef = B27D466E19D0227B00B998BC /* DB_single_field.m */; };
 		B27D467319D02EC300B998BC /* PopViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B27D467219D02EC300B998BC /* PopViewManager.m */; };
+		B28222A019FF282C0000FC2B /* UploadGPSContract.m in Sources */ = {isa = PBXBuildFile; fileRef = B282229F19FF282C0000FC2B /* UploadGPSContract.m */; };
+		B28222A619FF292A0000FC2B /* UpdateFormContract_GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = B28222A519FF292A0000FC2B /* UpdateFormContract_GPS.m */; };
+		B28222A919FF39F00000FC2B /* Resp_upd_GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = B28222A819FF39F00000FC2B /* Resp_upd_GPS.m */; };
 		B2829A3319D2B5D80054205E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2829A3219D2B5D70054205E /* CoreLocation.framework */; };
 		B2829A3919D2B6840054205E /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2829A3819D2B6840054205E /* LocationManager.m */; };
 		B2829A3C19D2BEEC0054205E /* DB_Location.m in Sources */ = {isa = PBXBuildFile; fileRef = B2829A3B19D2BEEC0054205E /* DB_Location.m */; };
@@ -331,6 +334,12 @@
 		B27D466E19D0227B00B998BC /* DB_single_field.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_single_field.m; sourceTree = "<group>"; };
 		B27D467119D02EC300B998BC /* PopViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopViewManager.h; sourceTree = "<group>"; };
 		B27D467219D02EC300B998BC /* PopViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopViewManager.m; sourceTree = "<group>"; };
+		B282229E19FF282C0000FC2B /* UploadGPSContract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadGPSContract.h; sourceTree = "<group>"; };
+		B282229F19FF282C0000FC2B /* UploadGPSContract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadGPSContract.m; sourceTree = "<group>"; };
+		B28222A419FF292A0000FC2B /* UpdateFormContract_GPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateFormContract_GPS.h; sourceTree = "<group>"; };
+		B28222A519FF292A0000FC2B /* UpdateFormContract_GPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateFormContract_GPS.m; sourceTree = "<group>"; };
+		B28222A719FF39F00000FC2B /* Resp_upd_GPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_upd_GPS.h; sourceTree = "<group>"; };
+		B28222A819FF39F00000FC2B /* Resp_upd_GPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_upd_GPS.m; sourceTree = "<group>"; };
 		B2829A3219D2B5D70054205E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B2829A3719D2B6840054205E /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		B2829A3819D2B6840054205E /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
@@ -751,10 +760,14 @@
 				B276C0DF1995CA3A00075515 /* AuthContract.m */,
 				B276C0E01995CA3A00075515 /* RequestContract.h */,
 				B276C0E11995CA3A00075515 /* RequestContract.m */,
+				B282229E19FF282C0000FC2B /* UploadGPSContract.h */,
+				B282229F19FF282C0000FC2B /* UploadGPSContract.m */,
 				B2A3404019DA409F0051F78B /* UploadContract.h */,
 				B2A3404119DA409F0051F78B /* UploadContract.m */,
 				B276C0E21995CA3A00075515 /* SearchFormContract.h */,
 				B276C0E31995CA3A00075515 /* SearchFormContract.m */,
+				B28222A419FF292A0000FC2B /* UpdateFormContract_GPS.h */,
+				B28222A519FF292A0000FC2B /* UpdateFormContract_GPS.m */,
 				B2A3403919DA3B1E0051F78B /* UpdateFormContract.h */,
 				B2A3403A19DA3B1E0051F78B /* UpdateFormContract.m */,
 				B2A3403C19DA3CD50051F78B /* Epod_upd_milestone_image_contract.h */,
@@ -773,6 +786,8 @@
 				B2A3404A19DA4E440051F78B /* Resp_upd_image_result.m */,
 				B2D8207019DFA3A50005253C /* Resp_order_info.h */,
 				B2D8207119DFA3A50005253C /* Resp_order_info.m */,
+				B28222A719FF39F00000FC2B /* Resp_upd_GPS.h */,
+				B28222A819FF39F00000FC2B /* Resp_upd_GPS.m */,
 				B2033466199898B1007FCE63 /* Menu_home.h */,
 				B2033467199898B1007FCE63 /* Menu_home.m */,
 			);
@@ -1097,6 +1112,7 @@
 				B260061D19B9C92B00393EA7 /* ChartNew.min.js in Sources */,
 				B2C3BAE819BAE215008B9A83 /* EPODViewController.m in Sources */,
 				B2C28E9F199C47B100F4D0BF /* DetailView.m in Sources */,
+				B28222A919FF39F00000FC2B /* Resp_upd_GPS.m in Sources */,
 				B276BBDD1995B6A500075515 /* MainHomeViewController.m in Sources */,
 				B260062319B9C92B00393EA7 /* TWRDataSet+Strings.m in Sources */,
 				B2281ABD19961045001A73B0 /* DB_RespAejob_dtl_browse.m in Sources */,
@@ -1142,6 +1158,7 @@
 				B260060819B9B9B800393EA7 /* ChartViewController.m in Sources */,
 				B2750D74199B203C008ADCA1 /* KeyboardNoticeManager.m in Sources */,
 				B2281AC01996106B001A73B0 /* DB_RespAejob_browse.m in Sources */,
+				B28222A019FF282C0000FC2B /* UploadGPSContract.m in Sources */,
 				B2AE8D9D19C6B9C400B5B2E6 /* image_magnify_shrink.m in Sources */,
 				B2829A3919D2B6840054205E /* LocationManager.m in Sources */,
 				B270C625199A02C70089664C /* Aejob_dtl_BrowseViewController.m in Sources */,
@@ -1153,6 +1170,7 @@
 				B260062119B9C92B00393EA7 /* TWRChartView.m in Sources */,
 				B2E391CA19C8137A00612FDD /* EPODRecordViewController.m in Sources */,
 				B270C60F1999A70C0089664C /* SKSTableView.m in Sources */,
+				B28222A619FF292A0000FC2B /* UpdateFormContract_GPS.m in Sources */,
 				B270C61F199A024E0089664C /* Aejob_AdvanceSearchViewController.m in Sources */,
 				B2D8207819DFAD6D0005253C /* Order_InfoViewController.m in Sources */,
 				B276BBE01995B6B800075515 /* LEOLoginViewController.m in Sources */,

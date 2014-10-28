@@ -9,7 +9,7 @@
 #import "Web_base.h"
 #import <RestKit/RestKit.h>
 #import "Epod_upd_milestone_image_contract.h"
-
+#import "UpdateFormContract_GPS.h"
 @implementation Web_base
 
 @synthesize il_url;
@@ -161,6 +161,64 @@
                     [SVProgressHUD dismiss];
                 }];
 }
-
+- (void) fn_uploaded_GPS:(UploadGPSContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
+    //Auth
+    RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
+    NSArray *arr_auth=[NSArray arrayWithPropertiesOfObject:auth];
+    [lo_authMapping addAttributeMappingsFromArray:arr_auth];
+    //upload GPS form
+    RKObjectMapping *lo_updateMapping = [RKObjectMapping requestMapping];
+    NSMutableArray *arr_updateform=[[NSArray arrayWithPropertiesOfObject:[UpdateFormContract_GPS class]]mutableCopy];
+    [lo_updateMapping addAttributeMappingsFromArray:arr_updateform];
+    
+    RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];
+    
+    RKRelationshipMapping *searchRelationship = [RKRelationshipMapping
+                                                 relationshipMappingFromKeyPath:@"UpdateForm"
+                                                 toKeyPath:@"UpdateForm"
+                                                 withMapping:lo_updateMapping];
+    
+    
+    RKRelationshipMapping *authRelationship = [RKRelationshipMapping
+                                               relationshipMappingFromKeyPath:@"Auth"
+                                               toKeyPath:@"Auth"
+                                               withMapping:lo_authMapping];
+    
+    [lo_reqMapping addPropertyMapping:authRelationship];
+    [lo_reqMapping addPropertyMapping:searchRelationship];
+    
+    NSString* path = il_url;
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
+                                                                                   objectClass:[UploadGPSContract class]
+                                                                                   rootKeyPath:nil method:RKRequestMethodPOST];
+    
+    RKObjectMapping* lo_response_mapping = [RKObjectMapping mappingForClass:[iresp_class class]];
+    [lo_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
+                                                                                            method:RKRequestMethodPOST
+                                                                                       pathPattern:nil
+                                                                                           keyPath:nil
+                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:base_url]];
+    [manager addRequestDescriptor:requestDescriptor];
+    [manager addResponseDescriptor:responseDescriptor];
+    manager.requestSerializationMIMEType = RKMIMETypeJSON;
+    [manager setAcceptHeaderWithMIMEType:RKMIMETypeJSON];
+    
+    [manager postObject:ao_form path:path parameters:nil
+                success:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
+                    
+                    ilist_resp_result = [NSMutableArray arrayWithArray:result.array];
+                    if (_callBack) {
+                        _callBack(ilist_resp_result);
+                    }
+                    
+                } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+                    RKLogError(@"Operation failed with error: %@", error);
+                    [SVProgressHUD dismiss];
+                }];
+}
 
 @end

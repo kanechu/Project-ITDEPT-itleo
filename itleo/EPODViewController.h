@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Custom_Button.h"
 @interface EPODViewController : UIViewController<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *ilb_vehicle_no;
 
+@property (weak, nonatomic) IBOutlet UILabel *ilb_vehicle_no;
 @property (weak, nonatomic) IBOutlet UITextField *itf_bus_no;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_lookUp;
 

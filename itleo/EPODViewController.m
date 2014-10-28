@@ -15,6 +15,7 @@
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "LocationManager.h"
+#import "IsAuto_upload_data.h"
 @interface EPODViewController ()
 
 @property(nonatomic,strong)NSTimer *my_timer;
@@ -42,6 +43,7 @@
     [self fn_custom_gesture];
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
+    
    	// Do any additional setup after loading the view.
 }
 
@@ -124,6 +126,8 @@
     }
 }
 - (IBAction)fn_fignature_photograph:(id)sender {
+    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
+    [obj fn_Auto_upload_GPS];
     if ([_itf_bus_no.text length]!=0) {
         [self performSegueWithIdentifier:@"segue_detail_epod" sender:self];
         [self fn_save_vehicle_no];

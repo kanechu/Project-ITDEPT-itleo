@@ -74,7 +74,8 @@
     NSString *str_latitude=[NSString stringWithFormat:@"%f",self.currentLocation.coordinate.latitude];
     NSString *str_longitude=[NSString stringWithFormat:@"%f",self.currentLocation.coordinate.longitude];
     DB_Location *db=[[DB_Location alloc]init];
-    [db fn_save_loaction_data:str_longitude latitude:str_latitude];
+
+    [db fn_save_loaction_data:str_longitude latitude:str_latitude car_no:@"abc123"];
 
 }
 - (void)fn_stopUpdating{

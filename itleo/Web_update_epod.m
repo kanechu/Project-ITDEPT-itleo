@@ -13,6 +13,8 @@
 #import "RespEpod_updmilestone.h"
 #import "Resp_upd_image_result.h"
 #import "Resp_order_info.h"
+#import "Resp_upd_GPS.h"
+#import "UploadGPSContract.h"
 @implementation Web_update_epod
 @synthesize base_url;
 -(id)init{
@@ -65,5 +67,19 @@
     };
     [web_base fn_get_data:req_form base_url:base_url];
 }
-
+- (void)fn_upload_epod_GPS:(NSMutableArray*)updateform Auth:(AuthContract*)auth back_result:(callBack_result)call_back{
+    UploadGPSContract *upload=[[UploadGPSContract alloc]init];
+    upload.UpdateForm=[NSSet setWithArray:updateform];
+    upload.Auth=auth;
+    Web_base *web_obj=[[Web_base alloc]init];
+    web_obj.il_url=STR_UPD_GPS_URL;
+    web_obj.ilist_resp_mapping=[NSArray arrayWithPropertiesOfObject:[Resp_upd_GPS class]];
+    web_obj.iresp_class=[Resp_upd_GPS class];
+    web_obj.callBack=^(NSMutableArray* arr_resp_result){
+        if (call_back) {
+            call_back(arr_resp_result);
+        }
+    };
+    [web_obj fn_uploaded_GPS:upload Auth:auth base_url:base_url];
+}
 @end

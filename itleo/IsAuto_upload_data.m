@@ -8,11 +8,14 @@
 
 #import "IsAuto_upload_data.h"
 #import "DB_ePod.h"
+#import "DB_Location.h"
+#import "DB_LoginInfo.h"
 #import "Web_update_epod.h"
 #import "UpdateFormContract.h"
 #import "Epod_upd_milestone_image_contract.h"
 #import "Resp_upd_image_result.h"
 #import "RespEpod_updmilestone.h"
+#import "Resp_upd_GPS.h"
 #import "CheckNetWork.h"
 @implementation IsAuto_upload_data
 
@@ -79,5 +82,34 @@
             
         }
     }
+}
+
+-(void)fn_Auto_upload_GPS{
+     CheckNetWork *netWork_obj=[[CheckNetWork alloc]init];
+    if ([netWork_obj fn_check_isNetworking]) {
+        DB_Location *db_location=[[DB_Location alloc]init];
+        NSMutableArray *alist_gps=[db_location fn_get_location_data:@"0"];
+        DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
+        AuthContract *auth=[db_login fn_get_RequestAuth];
+        NSMutableArray *arr_form=[[NSMutableArray alloc]init];
+        for (NSMutableDictionary *idic in alist_gps) {
+            UpdateFormContract_GPS *updateform=[[UpdateFormContract_GPS alloc]init];
+            updateform.unique_id=[idic valueForKey:@"id_t"];
+            updateform.car_no=[idic valueForKey:@"car_no"];
+            updateform.longitude=[[idic valueForKey:@"longitude"]floatValue];
+            updateform.latitude=[[idic valueForKey:@"latitude"]floatValue];
+            updateform.log_date=[idic valueForKey:@"log_date"];
+            [arr_form addObject:updateform];
+        }
+        Web_update_epod *upd_obj=[[Web_update_epod alloc]init];
+        [upd_obj fn_upload_epod_GPS:arr_form Auth:auth back_result:^(NSMutableArray *alist_result){
+            for (Resp_upd_GPS *resp_obj in alist_result) {
+                if ([resp_obj.status isEqualToString:@"true"]) {
+                    [db_location fn_update_isUploaded_status:resp_obj.unique_id isUploaded:@"1"];
+                }
+            }
+        }];
+    }
+
 }
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RequestContract.h"
 #import "UploadContract.h"
+#import "UploadGPSContract.h"
 typedef void (^callBack_resp_result)(NSMutableArray* arr);
 @interface Web_base : NSObject
 
@@ -26,4 +27,6 @@ typedef void (^callBack_resp_result)(NSMutableArray* arr);
 
 //Uploading Data
 - (void) fn_uploaded_data:(UploadContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url;
+
+- (void) fn_uploaded_GPS:(UploadGPSContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url;
 @end
