@@ -21,10 +21,8 @@
 
 - (void) fn_get_data:(RequestContract*)ao_form base_url:(NSString*)base_url{
     
-    
     RKObjectMapping *lo_searchMapping = [RKObjectMapping requestMapping];
     [lo_searchMapping addAttributeMappingsFromArray:@[@"os_column",@"os_value",@"os_dyn_1"]];
-    
     
     RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
     [lo_authMapping addAttributeMappingsFromDictionary:@{ @"user_code": @"user_code",
@@ -50,7 +48,6 @@
     [lo_reqMapping addPropertyMapping:authRelationship];
     [lo_reqMapping addPropertyMapping:searchRelationship];
     
-    NSString* path = il_url;
     RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
                                                                                    objectClass:[RequestContract class]
                                                                                    rootKeyPath:nil method:RKRequestMethodPOST];
@@ -64,30 +61,7 @@
                                                                                        pathPattern:nil
                                                                                            keyPath:nil
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    
-    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:base_url]];
-    [manager addRequestDescriptor:requestDescriptor];
-    [manager addResponseDescriptor:responseDescriptor];
-    manager.requestSerializationMIMEType = RKMIMETypeJSON;
-    [manager setAcceptHeaderWithMIMEType:RKMIMETypeJSON];
-    
-    [manager postObject:ao_form path:path parameters:nil
-                success:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
-                    
-                    ilist_resp_result = [NSMutableArray arrayWithArray:result.array];
-                    if (_callBack) {
-                        _callBack(ilist_resp_result);
-                    }
-                  
-            
-                } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                    RKLogError(@"Operation failed with error: %@", error);
-                    if (_callBack) {
-                        _callBack(nil);
-                    }
-                    [SVProgressHUD dismiss];
-                }];
-    
+    [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
 }
 
 - (void) fn_uploaded_data:(UploadContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
@@ -104,7 +78,6 @@
     RKObjectMapping *lo_upd_imageMapping=[RKObjectMapping requestMapping];
     [lo_upd_imageMapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Epod_upd_milestone_image_contract class]]];
    
-    
     RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];
     
     RKRelationshipMapping *searchRelationship = [RKRelationshipMapping
@@ -123,7 +96,6 @@
     [lo_reqMapping addPropertyMapping:authRelationship];
     [lo_reqMapping addPropertyMapping:searchRelationship];
     
-    NSString* path = il_url;
     RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
                                                                                    objectClass:[UploadContract class]
                                                                                    rootKeyPath:nil method:RKRequestMethodPOST];
@@ -141,25 +113,7 @@
                                                                                        pathPattern:nil
                                                                                            keyPath:nil
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    
-    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:base_url]];
-    [manager addRequestDescriptor:requestDescriptor];
-    [manager addResponseDescriptor:responseDescriptor];
-    manager.requestSerializationMIMEType = RKMIMETypeJSON;
-    [manager setAcceptHeaderWithMIMEType:RKMIMETypeJSON];
-    
-    [manager postObject:ao_form path:path parameters:nil
-                success:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
-                    
-                    ilist_resp_result = [NSMutableArray arrayWithArray:result.array];
-                    if (_callBack) {
-                        _callBack(ilist_resp_result);
-                    }
-                    
-                } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                    RKLogError(@"Operation failed with error: %@", error);
-                    [SVProgressHUD dismiss];
-                }];
+    [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
 }
 - (void) fn_uploaded_GPS:(UploadGPSContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
     //Auth
@@ -187,7 +141,6 @@
     [lo_reqMapping addPropertyMapping:authRelationship];
     [lo_reqMapping addPropertyMapping:searchRelationship];
     
-    NSString* path = il_url;
     RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
                                                                                    objectClass:[UploadGPSContract class]
                                                                                    rootKeyPath:nil method:RKRequestMethodPOST];
@@ -200,13 +153,15 @@
                                                                                        pathPattern:nil
                                                                                            keyPath:nil
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    
-    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:base_url]];
+    [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
+}
+-(void)fn_RK_ObjectManager:(RKRequestDescriptor*)requestDescriptor :(RKResponseDescriptor*)responseDescriptor ao_form:(id)ao_form base_url:(NSString*)url{
+    NSString* path = il_url;
+    RKObjectManager *manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:url]];
     [manager addRequestDescriptor:requestDescriptor];
     [manager addResponseDescriptor:responseDescriptor];
     manager.requestSerializationMIMEType = RKMIMETypeJSON;
     [manager setAcceptHeaderWithMIMEType:RKMIMETypeJSON];
-    
     [manager postObject:ao_form path:path parameters:nil
                 success:^(RKObjectRequestOperation *operation, RKMappingResult *result) {
                     
@@ -215,8 +170,12 @@
                         _callBack(ilist_resp_result);
                     }
                     
+                    
                 } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                     RKLogError(@"Operation failed with error: %@", error);
+                    if (_callBack) {
+                        _callBack(nil);
+                    }
                     [SVProgressHUD dismiss];
                 }];
 }
