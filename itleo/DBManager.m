@@ -73,7 +73,7 @@ static int DB_VERSION = 1;
         NSString *ls_sql_vehicle_no = @"CREATE TABLE IF NOT EXISTS vehicle_no( unique_id INTEGER PRIMARY KEY,vehicle_no TEXT NOT NULL DEFAULT '')";
         NSString *ls_sql_truck_order= @"CREATE TABLE IF NOT EXISTS truck_order( unique_id INTEGER PRIMARY KEY,user_code TEXT NOT NULL DEFAULT '',password TEXT NOT NULL DEFAULT '',system_name TEXT NOT NULL DEFAULT '',version TEXT NOT NULL DEFAULT '',order_no TEXT NOT NULL DEFAULT '',vehicle_no TEXT NOT NULL DEFAULT '',status TEXT NOT NULL DEFAULT '',is_uploaded TEXT NOT NULL DEFAULT '',result TEXT NOT NULL DEFAULT '',upload_date TEXT NOT NULL DEFAULT '',error_date TEXT NOT NULL DEFAULT '')";
         NSString *ls_sql_truck_order_image= @"CREATE TABLE IF NOT EXISTS truck_order_image( img_unique_id INTEGER PRIMARY KEY,image TEXT NOT NULL DEFAULT'',image_remark TEXT NOT NULL DEFAULT'',image_isUploaded TEXT NOT NULL DEFAULT'',error_reason TEXT NOT NULL DEFAULT'',img_error_date TEXT NOT NULL DEFAULT'',correlation_id INTEGER,FOREIGN KEY (correlation_id) REFERENCES truck_order(unique_id))";
-        NSString *ls_sql_location=@"CREATE TABLE IF NOT EXISTS location( id_t INTEGER PRIMARY KEY,longitude TEXT NOT NULL DEFAULT'',latitude TEXT NOT NULL DEFAULT'')";
+        NSString *ls_sql_location=@"CREATE TABLE IF NOT EXISTS location( id_t INTEGER PRIMARY KEY,car_no TEXT NOT NULL DEFAULT'',longitude TEXT NOT NULL DEFAULT'',latitude TEXT NOT NULL DEFAULT'',log_date TEXT NOT NULL DEFAULT'',is_uploaded TEXT NOT NULL DEFAULT '')";
         [database executeUpdate:ls_sql_RespAppConfig];
         [database executeUpdate:ls_sql_loginInfo];
         [database executeUpdate:ls_sql_aejob_browse];

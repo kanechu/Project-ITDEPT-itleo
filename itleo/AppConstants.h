@@ -16,4 +16,5 @@ extern NSString* const STR_AEJOB_BROWSE_URL;
 extern NSString* const STR_AEJOB_DTL_BROWSE_URL;
 extern NSString* const STR_EPOD_UPLOAD_URL;
 extern NSString* const STR_EPOD_ORDER_INFO_URL;
+extern NSString* const STR_UPD_GPS_URL;
 @end
