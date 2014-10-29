@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+typedef void (^callBack)(NSString *longitude,NSString *latitude);
 @interface LocationManager : NSObject
+
+@property(nonatomic,strong)callBack call_value;
 
 +(LocationManager*)fn_shareManager;
 - (BOOL)fn_isLocationServiceOn;

@@ -67,8 +67,12 @@
     }
     NSString *str_days=MY_LocalizedString(date_key, nil);
     NSInteger days=[[Conversion_helper fn_cut_space:str_days]integerValue];
-    NSString *date_ago=[Conversion_helper fn_millisecondFrom_days_ago:days];
-    alist_epod=[db fn_select_all_ePod_data:date_ago];
+    if (days==0) {
+        alist_epod=[db fn_select_all_ePod_data];
+    }else{
+        NSString *date_ago=[Conversion_helper fn_millisecondFrom_days_ago:days];
+        alist_epod=[db fn_select_ePod_data:date_ago];
+    }
     if ([alist_epod count]==0) {
         [self fn_show_alert];
         [self.tableview setScrollEnabled:NO];

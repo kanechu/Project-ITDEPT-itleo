@@ -22,8 +22,8 @@
 -(NSMutableArray*)fn_select_unUpload_ePod_data:(NSString*)is_uploaded;
 -(NSMutableArray*)fn_select_unUpload_record:(NSString*)is_uploaded;
 -(NSMutableArray*)fn_select_unUpload_ePod_data_amount:(NSString*)is_uploaded;
--(NSMutableArray*)fn_select_all_ePod_data:(NSString*)millisecond;
-
+-(NSMutableArray*)fn_select_ePod_data:(NSString*)millisecond;
+-(NSMutableArray*)fn_select_all_ePod_data;
 -(BOOL)fn_update_epod_after_uploaded:(NSString*)unique_id is_uploaded:(NSString*)is_uploaded date:(NSString*)date result:(NSString*)result user_code:(NSString*)user_code system:(NSString*)system images:(NSSet*)alist_images_result;
 
 -(BOOL)fn_delete_epod_data:(int)unique_id;

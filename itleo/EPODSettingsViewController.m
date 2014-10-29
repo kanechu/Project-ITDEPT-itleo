@@ -11,9 +11,7 @@
 
 @interface EPODSettingsViewController ()
 @property (strong,nonatomic)NSMutableArray *alist_variate;
-@property (assign,nonatomic)NSInteger flag_transfer_record;
-@property (assign,nonatomic)NSInteger flag_transfer_GPS;
-@property (assign,nonatomic)NSInteger flag_record_GPS;
+
 @property (assign,nonatomic)NSInteger flag_range_type;
 @property (copy, nonatomic)NSString *str_date_range;
 @property (copy, nonatomic)NSString *str_interval_range;
@@ -33,8 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self fn_set_control_pro];
     [self fn_assignment_flag];
+    [self fn_set_control_pro];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,9 +43,6 @@
 }
 -(void)fn_assignment_flag{
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-    _flag_transfer_record= [userDefaults integerForKey:@"transfer_record"];
-    _flag_transfer_GPS=[userDefaults integerForKey:@"transfer_GPS"];
-    _flag_record_GPS=[userDefaults integerForKey:@"record_GPS"];
     NSString *date_key=[userDefaults objectForKey:@"date_range"];
     if ([date_key length]!=0) {
         _ilb_date_range.text=MY_LocalizedString(date_key, nil);
@@ -80,10 +76,23 @@
     [_ibtn_back setTitle:MY_LocalizedString(@"lbl_back", nil) forState:UIControlStateNormal];
     [_ibtn_back addTarget:self action:@selector(fn_back_previous_page:)  forControlEvents:UIControlEventTouchUpInside];
     
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_transfer_record= [userDefaults integerForKey:@"transfer_record"];
+    NSInteger _flag_transfer_GPS=[userDefaults integerForKey:@"transfer_GPS"];
+    NSInteger _flag_record_GPS=[userDefaults integerForKey:@"record_GPS"];
     [_is_switch addTarget:self action:@selector(fn_isAuto_transfer_data) forControlEvents:UIControlEventValueChanged];
+    if (_flag_transfer_record==0) {
+        _is_switch.on=NO;
+    }
    
     [_is_switch1 addTarget:self action:@selector(fn_isAuto_transfer_GPS) forControlEvents:UIControlEventValueChanged];
+    if (_flag_transfer_GPS==0) {
+        _is_switch1.on=NO;
+    }
     [_is_switch2 addTarget:self action:@selector(fn_isRecord_GPS) forControlEvents:UIControlEventValueChanged];
+    if (_flag_record_GPS==0) {
+        _is_switch2.on=NO;
+    }
     self.navigationItem.backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:MY_LocalizedString(@"ibtn_settings", nil)
                                                                            style:UIBarButtonItemStylePlain
                                                                           target:nil
@@ -103,25 +112,29 @@
         flag_result=@"0";
     }
     [self fn_define_userDefaults:flag_result key:@"transfer_record"];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"transfer_record" object:flag_result];
     
 }
 -(void)fn_isAuto_transfer_GPS{
     NSString* flag_result;
-    if (_is_switch.on) {
+    if (_is_switch1.on) {
         flag_result=@"1";
     }else{
         flag_result=@"0";
     }
     [self fn_define_userDefaults:flag_result key:@"transfer_GPS"];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"transfer_GPS" object:flag_result];
 }
 -(void)fn_isRecord_GPS{
     NSString *flag_result;
-    if (_is_switch.on) {
+    if (_is_switch2.on) {
         flag_result=@"1";
     }else{
         flag_result=@"0";
     }
     [self fn_define_userDefaults:flag_result key:@"record_GPS"];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"record_GPS" object:flag_result];
+
 }
 
 -(void)fn_define_userDefaults:(NSString*)result key:(NSString*)key{

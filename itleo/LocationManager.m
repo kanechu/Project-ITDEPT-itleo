@@ -7,7 +7,7 @@
 //
 
 #import "LocationManager.h"
-#import "DB_Location.h"
+
 @interface LocationManager()<CLLocationManagerDelegate>
 @property(nonatomic,retain)CLLocationManager *locationManager;
 @property(nonatomic,strong)CLLocation *currentLocation;
@@ -73,10 +73,9 @@
     self.currentLocation=[locations lastObject];
     NSString *str_latitude=[NSString stringWithFormat:@"%f",self.currentLocation.coordinate.latitude];
     NSString *str_longitude=[NSString stringWithFormat:@"%f",self.currentLocation.coordinate.longitude];
-    DB_Location *db=[[DB_Location alloc]init];
-
-    [db fn_save_loaction_data:str_longitude latitude:str_latitude car_no:@"abc123"];
-
+    if (_call_value) {
+        _call_value(str_longitude,str_latitude);
+    }
 }
 - (void)fn_stopUpdating{
     [self.locationManager stopUpdatingLocation];

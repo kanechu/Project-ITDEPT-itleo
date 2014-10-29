@@ -11,6 +11,7 @@
 #import "EPODRecordViewController.h"
 #import "DB_ePod.h"
 #import "DB_single_field.h"
+#import "DB_Location.h"
 #import "IsAuto_upload_data.h"
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
@@ -18,14 +19,14 @@
 #import "IsAuto_upload_data.h"
 @interface EPODViewController ()
 
-@property(nonatomic,strong)NSTimer *my_timer;
-@property(nonatomic,assign)NSInteger flag_isOpened_GCD;
-
+@property(nonatomic,strong)NSTimer *record_timer;
+@property(nonatomic,strong)NSTimer *GPS_timer;
+@property(nonatomic,strong)NSTimer *record_GPS_timer;
 @end
 
 @implementation EPODViewController
-@synthesize my_timer;
-
+@synthesize record_timer;
+@synthesize GPS_timer;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,12 +39,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[LocationManager fn_shareManager]fn_startUpdating];
     [self fn_set_control_pro];
     [self fn_custom_gesture];
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
-    
+    [self fn_isStart_open_thread];
    	// Do any additional setup after loading the view.
 }
 
@@ -73,10 +73,28 @@
     _itf_bus_no.layer.cornerRadius=4;
     _itf_bus_no.delegate=self;
 }
+-(void)fn_isStart_open_thread{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_transfer_record= [userDefault integerForKey:@"transfer_record"];
+    if (_flag_transfer_record==1) {
+        [self fn_open_upload_records_thread];
+    }
+     NSInteger _flag_transfer_GPS= [userDefault integerForKey:@"transfer_GPS"];
+    if (_flag_transfer_GPS==1) {
+        [self fn_open_upload_GPS_thread];
+    }
+    NSInteger _flag_record_GPS=[userDefault integerForKey:@"record_GPS"];
+    if (_flag_record_GPS==1) {
+        [self fn_open_record_GPS_thread];
+    }
+}
 #pragma mark -addObserver notificaiton
 -(void)fn_add_notificaiton{
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_success" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_fail" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:@"transfer_record" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transmission_GPS) name:@"transfer_GPS" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isRecord_GPS_coordinates) name:@"record_GPS" object:nil];
 }
 
 #pragma mark -Jump will execute method
@@ -164,5 +182,114 @@
     DB_single_field *db=[[DB_single_field alloc]init];
     [db fn_save_data:@"vehicle_no" table_field:@"vehicle_no" field_value:_itf_bus_no.text];
 }
+#pragma mark -open a thread
+-(void)fn_isAuto_transfer_record{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_transfer_record= [userDefault integerForKey:@"transfer_record"];
+    if (_flag_transfer_record==1) {
+        //开启定时器
+        [record_timer setFireDate:[NSDate distantPast]];
+        [self fn_open_upload_records_thread];
+    }else{
+        //关闭定时器
+        [record_timer setFireDate:[NSDate distantFuture]];
+    }
 
+}
+-(void)fn_isAuto_transmission_GPS{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_transfer_GPS= [userDefault integerForKey:@"transfer_GPS"];
+    if (_flag_transfer_GPS==1) {
+        //开启定时器
+        [GPS_timer setFireDate:[NSDate distantPast]];
+        [self fn_open_upload_GPS_thread];
+    }else{
+        //关闭定时器
+        [GPS_timer setFireDate:[NSDate distantFuture]];
+    }
+}
+-(void)fn_isRecord_GPS_coordinates{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_record_GPS= [userDefault integerForKey:@"record_GPS"];
+    if (_flag_record_GPS==1) {
+        [self fn_open_upload_GPS_thread];
+        //开启定时器
+        [_record_GPS_timer setFireDate:[NSDate distantPast]];
+    }else{
+        //关闭定时器
+        [_record_GPS_timer setFireDate:[NSDate distantFuture]];
+    }
+}
+
+-(void)fn_open_upload_records_thread{
+    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSString *key=[userDefault objectForKey:@"interval_range"];
+    CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
+    dispatch_queue_t my_Queue= dispatch_queue_create("uploading", NULL);
+    dispatch_async(my_Queue, ^{
+        record_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
+        //定时器要加入runloop中才能执行
+        [[NSRunLoop currentRunLoop]run];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    });
+    
+}
+-(void)fn_open_upload_GPS_thread{
+    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSString *key=[userDefault objectForKey:@"interval_range"];
+    CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
+    dispatch_queue_t my_Queue= dispatch_queue_create("uploading_GPS", NULL);
+    dispatch_async(my_Queue, ^{
+        GPS_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
+        //定时器要加入runloop中才能执行
+        [[NSRunLoop currentRunLoop]run];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    });
+}
+-(void)fn_open_record_GPS_thread{
+    dispatch_queue_t my_Queue= dispatch_queue_create("record_GPS", NULL);
+    dispatch_async(my_Queue, ^{
+        _record_GPS_timer=[NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(fn_record_GPS_coordinates) userInfo:nil repeats:YES];
+        //定时器要加入runloop中才能执行
+        [[NSRunLoop currentRunLoop]run];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    });
+}
+-(void)fn_record_GPS_coordinates{
+   __block LocationManager *location_obj=[LocationManager fn_shareManager];
+    [location_obj fn_startUpdating];
+    location_obj.call_value=^(NSString *longitude,NSString *latitude){
+        DB_Location *db=[[DB_Location alloc]init];
+        [db fn_save_loaction_data:longitude latitude:latitude car_no:_itf_bus_no.text];
+    };
+    [location_obj fn_stopUpdating];
+}
+
+-(CGFloat)fn_Auto_Sync_timeInterval:(NSString*)key{
+    CGFloat interval=0.0f;
+    if ([key isEqualToString:@"lbl_seconds"]) {
+        interval=30.0f;
+    }else if ([key isEqualToString:@"lbl_minute"]){
+        interval=60.0f;
+    }else if ([key isEqualToString:@"lbl_2minutes"]){
+        interval=2*60.0f;
+    }else if ([key isEqualToString:@"lbl_3minutes"]){
+        interval=3*60.0f;
+    }else if ([key isEqualToString:@"lbl_10minutes"]){
+        interval=10*60.0f;
+    }else if ([key isEqualToString:@"lbl_30minutes"]){
+        interval=30*60.0f;
+    }else if ([key isEqualToString:@"lbl_hour"]){
+        interval=60*60.0f;
+    }
+    return interval;
+}
 @end
