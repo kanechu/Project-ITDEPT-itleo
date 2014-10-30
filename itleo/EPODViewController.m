@@ -95,6 +95,7 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:@"transfer_record" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transmission_GPS) name:@"transfer_GPS" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isRecord_GPS_coordinates) name:@"record_GPS" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_change_interval) name:@"interval_change" object:nil];
 }
 
 #pragma mark -Jump will execute method
@@ -223,33 +224,29 @@
 
 -(void)fn_open_upload_records_thread{
     IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSString *key=[userDefault objectForKey:@"interval_range"];
-    CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
-    dispatch_queue_t my_Queue= dispatch_queue_create("uploading", NULL);
-    dispatch_async(my_Queue, ^{
-        record_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
-        //定时器要加入runloop中才能执行
-        [[NSRunLoop currentRunLoop]run];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
+    CGFloat timeInerval=[self fn_get_timeInterval];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dispatch_queue_t my_Queue= dispatch_queue_create("uploading", NULL);
+        dispatch_async(my_Queue, ^{
+            record_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
+            //定时器要加入runloop中才能执行
+            [[NSRunLoop currentRunLoop]run];
         });
     });
-    
 }
 -(void)fn_open_upload_GPS_thread{
     IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSString *key=[userDefault objectForKey:@"interval_range"];
-    CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
-    dispatch_queue_t my_Queue= dispatch_queue_create("uploading_GPS", NULL);
-    dispatch_async(my_Queue, ^{
-        GPS_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
-        //定时器要加入runloop中才能执行
-        [[NSRunLoop currentRunLoop]run];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
+    CGFloat timeInerval=[self fn_get_timeInterval];
+    static dispatch_once_t onceToken1;
+    dispatch_once(&onceToken1, ^{
+        dispatch_queue_t my_Queue= dispatch_queue_create("uploading_GPS", NULL);
+        dispatch_async(my_Queue, ^{
+            GPS_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
+            //定时器要加入runloop中才能执行
+            [[NSRunLoop currentRunLoop]run];
         });
+        
     });
 }
 -(void)fn_open_record_GPS_thread{
@@ -271,6 +268,21 @@
         [db fn_save_loaction_data:longitude latitude:latitude car_no:_itf_bus_no.text];
     };
     [location_obj fn_stopUpdating];
+}
+-(void)fn_change_interval{
+    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
+    CGFloat timeInterval=[self fn_get_timeInterval];
+    [record_timer invalidate];
+    record_timer=[NSTimer scheduledTimerWithTimeInterval:timeInterval target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
+    [GPS_timer invalidate];
+    GPS_timer=[NSTimer scheduledTimerWithTimeInterval:timeInterval target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
+}
+#pragma mark -get upload time interval
+-(CGFloat)fn_get_timeInterval{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSString *key=[userDefault objectForKey:@"interval_range"];
+    CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
+    return timeInerval;
 }
 
 -(CGFloat)fn_Auto_Sync_timeInterval:(NSString*)key{

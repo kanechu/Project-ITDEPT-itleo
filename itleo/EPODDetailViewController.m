@@ -81,7 +81,7 @@
     self.title=MY_LocalizedString(@"lbl_epod_set_title", nil);
     
     _ilb_order_no.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_order_no", nil)];
-    
+    [_itf_order_no becomeFirstResponder];
     _itf_order_no.layer.cornerRadius=4;
     _itf_order_no.layer.borderColor=[UIColor lightGrayColor].CGColor;
     _itf_order_no.layer.borderWidth=1;
