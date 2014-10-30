@@ -6,7 +6,7 @@
   Copyright (c) 2014年 itdept. All rights reserved.
 */
 //login UI
-"app_name"=" IT CRM \nSYSTEM";
+"app_name"=" IT   LEO \nSYSTEM";
 "lbl_login"="登录";
 "lbl_username"="用户名";
 "lbl_pwd"="密码";
