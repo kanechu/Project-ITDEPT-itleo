@@ -17,6 +17,7 @@
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "CheckNetWork.h"
+#import "Web_get_sypara.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 @interface LEOLoginViewController ()
@@ -243,7 +244,11 @@ static NSString  *is_language=@"";//标识语言类型
                 [db fn_save_LoginInfo_data:_itf_usercode.text password:_itf_password.text system:sys_name user_logo:user_logo lang_code:lang_code];
                 DB_single_field *db_sys=[[DB_single_field alloc]init];
                 [db_sys fn_save_data:@"com_sys_code" table_field:@"sys_code" field_value:_itf_system.text];
-                
+                /**
+                 *  登录成功后，请求sypara
+                 */
+                Web_get_sypara *web_obj=[[Web_get_sypara alloc]init];
+                [web_obj fn_get_sypara_data];
                 [self dismissViewControllerAnimated:YES completion:^(){}];
                 if (_refresh) {
                     _refresh();

@@ -18,6 +18,8 @@
 
 @property(nonatomic, copy) NSString *version;
 
+@property(nonatomic, copy) NSString *encrypted;
+
 @property(nonatomic, copy) NSString *com_sys_code;
 
 @property(nonatomic, copy) NSString *app_code;

@@ -29,6 +29,7 @@
                                                           @"password": @"password",
                                                           @"system": @"system" ,
                                                           @"version": @"version",
+                                                          @"encrypted":@"encrypted",
                                                           @"com_sys_code":@"com_sys_code",
                                                           @"app_code":@"app_code"}];
     

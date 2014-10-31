@@ -8,7 +8,7 @@
 
 #import "EPODSettingsViewController.h"
 #import "RangeSelectViewController.h"
-
+#import "Web_get_sypara.h"
 @interface EPODSettingsViewController ()
 @property (strong,nonatomic)NSMutableArray *alist_variate;
 
@@ -33,6 +33,7 @@
     [super viewDidLoad];
     [self fn_assignment_flag];
     [self fn_set_control_pro];
+    [self fn_isUsed_GPS_function];
     
 }
 
@@ -99,6 +100,14 @@
                                                                           action:nil];
     [self.navigationItem setHidesBackButton:YES];
     
+}
+-(void)fn_isUsed_GPS_function{
+    Web_get_sypara *web_obj=[[Web_get_sypara alloc]init];
+    NSInteger flag_GPS=[web_obj fn_isShow_GPS_function];
+    if (flag_GPS==0) {
+        _is_switch1.enabled=NO;
+        _is_switch2.enabled=NO;
+    }
 }
 #pragma mark -event action
 -(void)fn_back_previous_page:(id)sender{

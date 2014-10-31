@@ -121,6 +121,9 @@
 		B2AE8D9D19C6B9C400B5B2E6 /* image_magnify_shrink.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE8D9C19C6B9C400B5B2E6 /* image_magnify_shrink.m */; };
 		B2AFFA3919C2945700BC26BB /* Cell_status_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AFFA3819C2945700BC26BB /* Cell_status_list.m */; };
 		B2AFFA8619C2FC7100BC26BB /* DB_ePod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AFFA8519C2FC7100BC26BB /* DB_ePod.m */; };
+		B2B136B21A032779001317C8 /* Resp_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136B11A032779001317C8 /* Resp_sypara.m */; };
+		B2B136B91A032A2E001317C8 /* DB_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136B81A032A2E001317C8 /* DB_sypara.m */; };
+		B2B136BC1A032AA3001317C8 /* Web_get_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */; };
 		B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */; };
 		B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B5C12F19E3D6420040F585 /* Localized.strings */; };
 		B2BDD57119D8ED4C00FEEA08 /* Truck_order_image_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDD57019D8ED4C00FEEA08 /* Truck_order_image_data.m */; };
@@ -390,6 +393,12 @@
 		B2AFFA3819C2945700BC26BB /* Cell_status_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_status_list.m; sourceTree = "<group>"; };
 		B2AFFA8419C2FC7100BC26BB /* DB_ePod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_ePod.h; sourceTree = "<group>"; };
 		B2AFFA8519C2FC7100BC26BB /* DB_ePod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_ePod.m; sourceTree = "<group>"; };
+		B2B136B01A032779001317C8 /* Resp_sypara.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_sypara.h; sourceTree = "<group>"; };
+		B2B136B11A032779001317C8 /* Resp_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_sypara.m; sourceTree = "<group>"; };
+		B2B136B71A032A2E001317C8 /* DB_sypara.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_sypara.h; sourceTree = "<group>"; };
+		B2B136B81A032A2E001317C8 /* DB_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_sypara.m; sourceTree = "<group>"; };
+		B2B136BA1A032AA3001317C8 /* Web_get_sypara.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_sypara.h; sourceTree = "<group>"; };
+		B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_get_sypara.m; sourceTree = "<group>"; };
 		B2B5C12119E3D2430040F585 /* MY_LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MY_LocalizedString.h; sourceTree = "<group>"; };
 		B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MY_LocalizedString.m; sourceTree = "<group>"; };
 		B2B5C12719E3D5280040F585 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -738,6 +747,8 @@
 				B2AFFA8519C2FC7100BC26BB /* DB_ePod.m */,
 				B2829A3A19D2BEEC0054205E /* DB_Location.h */,
 				B2829A3B19D2BEEC0054205E /* DB_Location.m */,
+				B2B136B71A032A2E001317C8 /* DB_sypara.h */,
+				B2B136B81A032A2E001317C8 /* DB_sypara.m */,
 			);
 			name = DataAccess;
 			sourceTree = "<group>";
@@ -788,6 +799,8 @@
 				B2D8207119DFA3A50005253C /* Resp_order_info.m */,
 				B28222A719FF39F00000FC2B /* Resp_upd_GPS.h */,
 				B28222A819FF39F00000FC2B /* Resp_upd_GPS.m */,
+				B2B136B01A032779001317C8 /* Resp_sypara.h */,
+				B2B136B11A032779001317C8 /* Resp_sypara.m */,
 				B2033466199898B1007FCE63 /* Menu_home.h */,
 				B2033467199898B1007FCE63 /* Menu_home.m */,
 			);
@@ -853,6 +866,8 @@
 			children = (
 				B276C0E81995CC1800075515 /* Web_base.h */,
 				B276C0E91995CC1800075515 /* Web_base.m */,
+				B2B136BA1A032AA3001317C8 /* Web_get_sypara.h */,
+				B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */,
 			);
 			name = WebRequest;
 			sourceTree = "<group>";
@@ -1099,6 +1114,7 @@
 				B2033468199898B1007FCE63 /* Menu_home.m in Sources */,
 				B2A328CE19D4F91800DB8F9B /* AddRemarkViewController.m in Sources */,
 				B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */,
+				B2B136BC1A032AA3001317C8 /* Web_get_sypara.m in Sources */,
 				B2750D6C199B18B3008ADCA1 /* Cell_advance_search.m in Sources */,
 				B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */,
 				B2281AA11995F4D5001A73B0 /* RespLogin.m in Sources */,
@@ -1117,9 +1133,11 @@
 				B260062319B9C92B00393EA7 /* TWRDataSet+Strings.m in Sources */,
 				B2281ABD19961045001A73B0 /* DB_RespAejob_dtl_browse.m in Sources */,
 				B2C28EA5199C693500F4D0BF /* Cell_aejob_dtl_browse.m in Sources */,
+				B2B136B21A032779001317C8 /* Resp_sypara.m in Sources */,
 				B2A7481119BEFD57006C96D1 /* PopSignUtil.m in Sources */,
 				B2281A9E1995F16E001A73B0 /* RespAejob_dtl_browse.m in Sources */,
 				B2A3404219DA409F0051F78B /* UploadContract.m in Sources */,
+				B2B136B91A032A2E001317C8 /* DB_sypara.m in Sources */,
 				B272EA6619AEDDA400256276 /* MZAppearance.m in Sources */,
 				B276C0E41995CA3A00075515 /* AuthContract.m in Sources */,
 				B260062219B9C92B00393EA7 /* TWRCircularChart.m in Sources */,

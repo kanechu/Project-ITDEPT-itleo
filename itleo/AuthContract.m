@@ -18,6 +18,8 @@
 
 @synthesize version;
 
+@synthesize encrypted;
+
 @synthesize com_sys_code;
 
 @synthesize app_code;

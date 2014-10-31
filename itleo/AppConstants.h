@@ -12,6 +12,7 @@
 extern NSString* const STR_BASE_URL;
 extern NSString* const STR_APP_CONFIG_URL;
 extern NSString* const STR_LOGIN_URL;
+extern NSString* const STR_SYPARA_URL;
 extern NSString* const STR_AEJOB_BROWSE_URL;
 extern NSString* const STR_AEJOB_DTL_BROWSE_URL;
 extern NSString* const STR_EPOD_UPLOAD_URL;
