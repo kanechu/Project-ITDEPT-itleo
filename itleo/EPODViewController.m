@@ -272,10 +272,6 @@
 -(void)fn_change_interval{
     IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
     CGFloat timeInterval=[self fn_get_timeInterval];
-    [record_timer invalidate];
-    record_timer=[NSTimer scheduledTimerWithTimeInterval:timeInterval target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
-    [GPS_timer invalidate];
-    GPS_timer=[NSTimer scheduledTimerWithTimeInterval:timeInterval target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
 }
 #pragma mark -get upload time interval
 -(CGFloat)fn_get_timeInterval{
