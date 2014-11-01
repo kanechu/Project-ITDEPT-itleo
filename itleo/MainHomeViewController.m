@@ -15,6 +15,7 @@
 #import "DB_RespAppConfig.h"
 #import "DB_Location.h"
 #import "DB_ePod.h"
+#import "DB_sypara.h"
 @interface MainHomeViewController ()
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
@@ -113,6 +114,11 @@
     [db_logininfo fn_delete_LoginInfo_data];
     DB_RespAppConfig *db_config=[[DB_RespAppConfig alloc]init];
     [db_config fn_delete_all_RespAppConfig_data];
+    /**
+     *  清除存储的sypara
+     */
+    DB_sypara *db_sypara=[[DB_sypara alloc]init];
+    [db_sypara fn_delete_all_sypara_data];
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
     VC.refresh=^(){
         [self viewDidLoad];

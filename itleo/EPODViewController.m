@@ -267,7 +267,7 @@
         DB_Location *db=[[DB_Location alloc]init];
         [db fn_save_loaction_data:longitude latitude:latitude car_no:_itf_bus_no.text];
     };
-    [location_obj fn_stopUpdating];
+    
 }
 -(void)fn_change_interval{
     IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];

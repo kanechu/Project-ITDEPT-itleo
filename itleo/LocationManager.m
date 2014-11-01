@@ -75,6 +75,7 @@
     NSString *str_longitude=[NSString stringWithFormat:@"%f",self.currentLocation.coordinate.longitude];
     if (_call_value) {
         _call_value(str_longitude,str_latitude);
+        [self fn_stopUpdating];
     }
 }
 - (void)fn_stopUpdating{
