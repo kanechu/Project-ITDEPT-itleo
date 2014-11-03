@@ -12,6 +12,7 @@
 #import "DB_sypara.h"
 #import "DB_RespAppConfig.h"
 #import "DB_LoginInfo.h"
+#import "Conversion_helper.h"
 @implementation Web_get_sypara
 
 -(void)fn_get_sypara_data{
@@ -45,7 +46,7 @@
     DB_sypara *db_sypara=[[DB_sypara alloc]init];
     NSMutableArray *alist_sypara=[db_sypara fn_get_sypara_data];
     for (NSMutableDictionary *dic in alist_sypara) {
-        NSString *para_code=[self fn_cut_space:[dic valueForKey:@"para_code"]];
+        NSString *para_code=[Conversion_helper fn_cut_whitespace:[dic valueForKey:@"para_code"]];
         NSString *data1=[dic valueForKey:@"data1"];
         if ([para_code isEqualToString:@"ANDRDRECGPS"] && [data1 isEqualToString:@"1"]) {
             flag=1;
@@ -53,15 +54,4 @@
     }
     return flag;
 }
-
--(NSString*)fn_cut_space:(NSString*)str{
-    NSString *subStr=str;
-    if ([str rangeOfString:@" "].length>0) {
-        NSRange range=[str rangeOfString:@" "];
-        subStr=[str substringToIndex:range.location];
-    }
-    return subStr;
-}
-
-
 @end

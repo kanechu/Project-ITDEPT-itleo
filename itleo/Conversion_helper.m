@@ -38,7 +38,12 @@
     NSDate *date=[NSDate dateWithTimeIntervalSinceNow:-(24*60*60*num)];
     return [self fn_millisecondFromDate:date];
 }
-+(NSString*)fn_cut_space:(NSString*)str{
+//把前后的空格都去掉
++(NSString*)fn_cut_whitespace:(NSString*)str{
+    NSString *subStr=[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return subStr;
+}
++(NSString*)fn_cut_pre_string:(NSString*)str{
     NSString *subStr=str;
     if ([str rangeOfString:@" "].length>0) {
         NSRange range=[str rangeOfString:@" "];

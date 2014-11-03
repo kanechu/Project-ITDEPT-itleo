@@ -15,5 +15,6 @@
 +(NSDate*)fn_dateFromUnixTimestamp:(NSString*)millisecond;
 +(NSString*)fn_millisecondFromDate:(NSDate*)date;
 +(NSString*)fn_millisecondFrom_days_ago:(NSInteger)num;
-+(NSString*)fn_cut_space:(NSString*)str;
++(NSString*)fn_cut_whitespace:(NSString*)str;
++(NSString*)fn_cut_pre_string:(NSString*)str;
 @end

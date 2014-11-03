@@ -66,7 +66,7 @@
         date_key=@"lbl_day";
     }
     NSString *str_days=MY_LocalizedString(date_key, nil);
-    NSInteger days=[[Conversion_helper fn_cut_space:str_days]integerValue];
+    NSInteger days=[[Conversion_helper fn_cut_pre_string:str_days]integerValue];
     if (days==0) {
         alist_epod=[db fn_select_all_ePod_data];
     }else{
