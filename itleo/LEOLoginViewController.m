@@ -18,6 +18,7 @@
 #import "PopViewManager.h"
 #import "CheckNetWork.h"
 #import "Web_get_sypara.h"
+#import "Web_get_permit.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 @interface LEOLoginViewController ()
@@ -249,6 +250,11 @@ static NSString  *is_language=@"";//标识语言类型
                  */
                 Web_get_sypara *web_obj=[[Web_get_sypara alloc]init];
                 [web_obj fn_get_sypara_data];
+                /**
+                 *  登录成功后，请求permit
+                 */
+                Web_get_permit *web_permit_obj=[[Web_get_permit alloc]init];
+                [web_permit_obj fn_get_permit_data:web_addr];
                 [self dismissViewControllerAnimated:YES completion:^(){}];
                 if (_refresh) {
                     _refresh();

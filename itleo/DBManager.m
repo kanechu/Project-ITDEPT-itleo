@@ -75,7 +75,8 @@ static int DB_VERSION = 1;
         NSString *ls_sql_truck_order_image= @"CREATE TABLE IF NOT EXISTS truck_order_image( img_unique_id INTEGER PRIMARY KEY,image TEXT NOT NULL DEFAULT'',image_remark TEXT NOT NULL DEFAULT'',image_isUploaded TEXT NOT NULL DEFAULT'',error_reason TEXT NOT NULL DEFAULT'',img_error_date TEXT NOT NULL DEFAULT'',correlation_id INTEGER,FOREIGN KEY (correlation_id) REFERENCES truck_order(unique_id))";
         NSString *ls_sql_location=@"CREATE TABLE IF NOT EXISTS location( id_t INTEGER PRIMARY KEY,car_no TEXT NOT NULL DEFAULT'',longitude TEXT NOT NULL DEFAULT'',latitude TEXT NOT NULL DEFAULT'',log_date TEXT NOT NULL DEFAULT'',is_uploaded TEXT NOT NULL DEFAULT '')";
         NSString *ls_sql_sypara=@"CREATE TABLE IF NOT EXISTS sypara( id INTEGER PRIMARY KEY,unique_id TEXT NOT NULL DEFAULT '',para_code TEXT NOT NULL DEFAULT '',company_code TEXT NOT NULL DEFAULT '',data1 TEXT NOT NULL DEFAULT '',data2 TEXT NOT NULL DEFAULT '',data3 TEXT NOT NULL DEFAULT '',data4 TEXT NOT NULL DEFAULT '',data5 TEXT NOT NULL DEFAULT '',para_desc TEXT NOT NULL DEFAULT '',rec_crt_user TEXT NOT NULL DEFAULT '',rec_upd_user TEXT NOT NULL DEFAULT '',rec_crt_date TEXT NOT NULL DEFAULT '',rec_upd_date TEXT NOT NULL DEFAULT '',db_id TEXT NOT NULL DEFAULT '',is_ct TEXT NOT NULL DEFAULT '',crt_user TEXT NOT NULL DEFAULT '',req_user TEXT NOT NULL DEFAULT '',rmk TEXT NOT NULL DEFAULT '')";
-        
+        NSString *ls_sql_permit= @"CREATE TABLE IF NOT EXISTS permit( unique_id INTEGER PRIMARY KEY,module_unique_id TEXT NOT NULL DEFAULT '',module_code TEXT NOT NULL DEFAULT '',module_desc TEXT NOT NULL DEFAULT '',module_desc_lang1 TEXT NOT NULL DEFAULT '',module_desc_lang2 TEXT NOT NULL DEFAULT '',f_exec TEXT NOT NULL DEFAULT '')";
+
         [database executeUpdate:ls_sql_RespAppConfig];
         [database executeUpdate:ls_sql_loginInfo];
         [database executeUpdate:ls_sql_aejob_browse];
@@ -86,6 +87,7 @@ static int DB_VERSION = 1;
         [database executeUpdate:ls_sql_truck_order_image];
         [database executeUpdate:ls_sql_location];
         [database executeUpdate:ls_sql_sypara];
+        [database executeUpdate:ls_sql_permit];
         [database close];
         return  lb_Success;
     }

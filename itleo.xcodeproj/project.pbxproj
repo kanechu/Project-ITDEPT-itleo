@@ -124,6 +124,9 @@
 		B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAF019BB003F008B9A83 /* EPODDetailViewController.m */; };
 		B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C4722919FA65B70099199D /* EPODSettingsViewController.m */; };
 		B2CD8010199DFEDA00E6DCB7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */; };
+		B2CF14901A0768B00042DD64 /* Resp_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF148F1A0768B00042DD64 /* Resp_permit.m */; };
+		B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14951A076BC20042DD64 /* Web_get_permit.m */; };
+		B2CF14991A077D880042DD64 /* DB_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14981A077D880042DD64 /* DB_permit.m */; };
 		B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207119DFA3A50005253C /* Resp_order_info.m */; };
 		B2D8207819DFAD6D0005253C /* Order_InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */; };
 		B2E391CA19C8137A00612FDD /* EPODRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E391C919C8137A00612FDD /* EPODRecordViewController.m */; };
@@ -396,6 +399,12 @@
 		B2C4722919FA65B70099199D /* EPODSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODSettingsViewController.m; sourceTree = "<group>"; };
 		B2CD800D199DFEDA00E6DCB7 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		B2CF148E1A0768B00042DD64 /* Resp_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_permit.h; sourceTree = "<group>"; };
+		B2CF148F1A0768B00042DD64 /* Resp_permit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_permit.m; sourceTree = "<group>"; };
+		B2CF14941A076BC20042DD64 /* Web_get_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_permit.h; sourceTree = "<group>"; };
+		B2CF14951A076BC20042DD64 /* Web_get_permit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_get_permit.m; sourceTree = "<group>"; };
+		B2CF14971A077D880042DD64 /* DB_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_permit.h; sourceTree = "<group>"; };
+		B2CF14981A077D880042DD64 /* DB_permit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_permit.m; sourceTree = "<group>"; };
 		B2D8207019DFA3A50005253C /* Resp_order_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_order_info.h; sourceTree = "<group>"; };
 		B2D8207119DFA3A50005253C /* Resp_order_info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_order_info.m; sourceTree = "<group>"; };
 		B2D8207619DFAD6D0005253C /* Order_InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order_InfoViewController.h; sourceTree = "<group>"; };
@@ -693,6 +702,8 @@
 				B2829A3B19D2BEEC0054205E /* DB_Location.m */,
 				B2B136B71A032A2E001317C8 /* DB_sypara.h */,
 				B2B136B81A032A2E001317C8 /* DB_sypara.m */,
+				B2CF14971A077D880042DD64 /* DB_permit.h */,
+				B2CF14981A077D880042DD64 /* DB_permit.m */,
 			);
 			name = DataAccess;
 			sourceTree = "<group>";
@@ -745,6 +756,8 @@
 				B28222A819FF39F00000FC2B /* Resp_upd_GPS.m */,
 				B2B136B01A032779001317C8 /* Resp_sypara.h */,
 				B2B136B11A032779001317C8 /* Resp_sypara.m */,
+				B2CF148E1A0768B00042DD64 /* Resp_permit.h */,
+				B2CF148F1A0768B00042DD64 /* Resp_permit.m */,
 				B2033466199898B1007FCE63 /* Menu_home.h */,
 				B2033467199898B1007FCE63 /* Menu_home.m */,
 			);
@@ -811,6 +824,8 @@
 				B276C0E91995CC1800075515 /* Web_base.m */,
 				B2B136BA1A032AA3001317C8 /* Web_get_sypara.h */,
 				B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */,
+				B2CF14941A076BC20042DD64 /* Web_get_permit.h */,
+				B2CF14951A076BC20042DD64 /* Web_get_permit.m */,
 			);
 			name = WebRequest;
 			sourceTree = "<group>";
@@ -1038,9 +1053,11 @@
 				B27B5F4E19C9810E000736B3 /* IsAuto_upload_data.m in Sources */,
 				B272EA6D19AEDDA400256276 /* UIImage+Additional.m in Sources */,
 				B276C0E51995CA3A00075515 /* RequestContract.m in Sources */,
+				B2CF14991A077D880042DD64 /* DB_permit.m in Sources */,
 				B203346B19989F31007FCE63 /* Aejob_BrowseViewController.m in Sources */,
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
 				B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */,
+				B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */,
 				B255BA0D19B01441004BBF0F /* Custom_textField.m in Sources */,
 				B2281ABA19960B78001A73B0 /* DB_LoginInfo.m in Sources */,
 				B272EA6E19AEDDA400256276 /* UIViewController+TargetViewController.m in Sources */,
@@ -1126,6 +1143,7 @@
 				B276BBE01995B6B800075515 /* LEOLoginViewController.m in Sources */,
 				B2AFFA3919C2945700BC26BB /* Cell_status_list.m in Sources */,
 				B27B5F5219C98271000736B3 /* Reachability.m in Sources */,
+				B2CF14901A0768B00042DD64 /* Resp_permit.m in Sources */,
 				B2281AAD19960311001A73B0 /* FMDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
