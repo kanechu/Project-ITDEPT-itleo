@@ -57,5 +57,15 @@
     }];
     return isDeleted;
 }
-
+-(BOOL)fn_delete_data:(NSString*)table_name unique:(NSString*)unique_id{
+    __block BOOL isDeleted=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            NSString *delete_sql=[NSString stringWithFormat:@"delete from %@ where unique_id like %@",table_name,unique_id];
+            isDeleted=[db executeUpdate:delete_sql];
+            [db close];
+        }
+    }];
+    return isDeleted;
+}
 @end

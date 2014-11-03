@@ -103,6 +103,32 @@
     return lang_code;
 }
 - (IBAction)fn_logout_itleo:(id)sender {
+    DB_ePod *db_epod=[[DB_ePod alloc]init];
+    DB_Location *db_location=[[DB_Location alloc]init];
+    NSInteger epod_count=[[db_epod fn_select_unUpload_truck_order_data:@"0" isUploade2:@"2"] count];
+    NSInteger location_count=[[db_location fn_get_location_data:@"0"] count];
+    if (epod_count!=0 || location_count!=0) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:MY_LocalizedString(@"lbl_cancel", nil), nil];
+        [alert show];
+    }else{
+        [self fn_clear_the_cache];
+    }
+    
+    
+}
+
+- (IBAction)fn_click_menu:(id)sender {
+    UIButton *ibtn=(UIButton*)sender;
+    menu_item=[alist_menu objectAtIndex:ibtn.tag];
+    [self performSegueWithIdentifier:menu_item.is_segue sender:self];
+}
+#pragma mark -UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==[alertView cancelButtonIndex]) {
+        [self fn_clear_the_cache];
+    }
+}
+-(void)fn_clear_the_cache{
     //logout的时候，清除epod所有相关的信息
     DB_ePod *db_epod=[[DB_ePod alloc]init];
     [db_epod fn_delete_all_epod_data];
@@ -129,11 +155,6 @@
     [userDefaults synchronize];
 }
 
-- (IBAction)fn_click_menu:(id)sender {
-    UIButton *ibtn=(UIButton*)sender;
-    menu_item=[alist_menu objectAtIndex:ibtn.tag];
-    [self performSegueWithIdentifier:menu_item.is_segue sender:self];
-}
 #pragma mark UICollectionView Datasource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return [alist_menu count];

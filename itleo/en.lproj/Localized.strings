@@ -25,6 +25,7 @@
 //main home
 "lbl_cancel"="Cancel";
 "lbl_home"="Home";
+"logout_alert"="There the data is not uploaded, if forced to quit, will clear the cache data.";
 //select UI
 "select_tilte"="Please Select";
 //epod main home

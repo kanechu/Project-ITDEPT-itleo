@@ -24,6 +24,7 @@
 //main home
 "lbl_cancel"="取消";
 "lbl_home"="主頁";
+"logout_alert"="還有數據未上傳，如果強行退出，將清除緩存數據。";
 //select UI
 "select_tilte"="請選取信息";
 

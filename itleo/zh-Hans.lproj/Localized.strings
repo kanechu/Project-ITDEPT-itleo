@@ -24,6 +24,7 @@
 //main home
 "lbl_cancel"="取消";
 "lbl_home"="主页";
+"logout_alert"="还有数据未上传，如果强行退出，将清除缓存数据。";
 //select UI
 "select_tilte"="请选取信息";
 //epod main home

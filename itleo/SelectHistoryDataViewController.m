@@ -8,6 +8,7 @@
 
 #import "SelectHistoryDataViewController.h"
 #import "MZFormSheetController.h"
+#import "DB_single_field.h"
 @interface SelectHistoryDataViewController ()
 
 @end
@@ -74,8 +75,31 @@
     }
     [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formsheet){}];
 }
-
+//Override to support conditional editing of the table view
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    //Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle==UITableViewCellEditingStyleDelete) {
+        [self fn_delete_data_in_DB:[alist_sys_code objectAtIndex:indexPath.row]];
+        [alist_sys_code removeObjectAtIndex:indexPath.row];
+        //Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+-(void)fn_delete_data_in_DB:(NSMutableDictionary*)dic{
+    DB_single_field *db=[[DB_single_field alloc]init];
+    NSString *unique_id=[dic valueForKeyPath:@"unique_id"];
+    if ([_field_name isEqualToString:@"vehicle_no"]) {
+        [db fn_delete_data:@"vehicle_no" unique:unique_id];
+        
+    }else if ([_field_name isEqualToString:@"sys_code"]){
+        [db fn_delete_data:@"com_sys_code" unique:unique_id];
+    }
+}
 - (IBAction)fn_cancel_select_data:(id)sender {
     [self mz_dismissFormSheetControllerAnimated:YES completionHandler:^(MZFormSheetController *formsheet){}];
 }
+
 @end

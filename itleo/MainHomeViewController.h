@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Custom_BtnGraphicMixed.h"
-@interface MainHomeViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface MainHomeViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *icollectionView;
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_home_logo;
 
