@@ -105,7 +105,7 @@
 - (IBAction)fn_logout_itleo:(id)sender {
     DB_ePod *db_epod=[[DB_ePod alloc]init];
     DB_Location *db_location=[[DB_Location alloc]init];
-    NSInteger epod_count=[[db_epod fn_select_unUpload_truck_order_data:@"0" isUploade2:@"2"] count];
+    NSInteger epod_count=[[db_epod fn_select_all_ePod_data] count];
     NSInteger location_count=[[db_location fn_get_location_data:@"0"] count];
     if (epod_count!=0 || location_count!=0) {
         UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:MY_LocalizedString(@"lbl_cancel", nil), nil];

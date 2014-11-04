@@ -340,7 +340,6 @@
                         [db fn_update_epod_after_uploaded:unique_id is_uploaded:@"1" date:upload_date result:@"isuccess" user_code:auth.user_code system:auth.system  images:resp_upd_images];
                         
                         [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"upload_success", nil)];
-                        [self.navigationController popViewControllerAnimated:YES];
                     }else{
                         [db fn_update_epod_after_uploaded:unique_id is_uploaded:@"2" date:error_date result:error_reason user_code:auth.user_code system:auth.system  images:resp_upd_images];
                         [SVProgressHUD dismissWithError:MY_LocalizedString(@"upload_fail", nil) afterDelay:2.0];

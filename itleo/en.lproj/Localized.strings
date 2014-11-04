@@ -25,7 +25,7 @@
 //main home
 "lbl_cancel"="Cancel";
 "lbl_home"="Home";
-"logout_alert"="There the data is not uploaded, if forced to quit, will clear the cache data.";
+"logout_alert"="If you log out, will remove the existing record. Are you forced to quit?";
 //select UI
 "select_tilte"="Please Select";
 //epod main home
