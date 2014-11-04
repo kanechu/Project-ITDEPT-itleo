@@ -250,14 +250,15 @@
     });
 }
 -(void)fn_open_record_GPS_thread{
-    dispatch_queue_t my_Queue= dispatch_queue_create("record_GPS", NULL);
-    dispatch_async(my_Queue, ^{
-        _record_GPS_timer=[NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(fn_record_GPS_coordinates) userInfo:nil repeats:YES];
-        //定时器要加入runloop中才能执行
-        [[NSRunLoop currentRunLoop]run];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dispatch_queue_t my_Queue= dispatch_queue_create("record_GPS", NULL);
+        dispatch_async(my_Queue, ^{
+            _record_GPS_timer=[NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(fn_record_GPS_coordinates) userInfo:nil repeats:YES];
+            //定时器要加入runloop中才能执行
+            [[NSRunLoop currentRunLoop]run];
         });
+        
     });
 }
 -(void)fn_record_GPS_coordinates{
@@ -270,8 +271,7 @@
     
 }
 -(void)fn_change_interval{
-    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    CGFloat timeInterval=[self fn_get_timeInterval];
+    
 }
 #pragma mark -get upload time interval
 -(CGFloat)fn_get_timeInterval{
