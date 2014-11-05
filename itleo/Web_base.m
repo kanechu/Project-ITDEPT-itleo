@@ -31,7 +31,7 @@
                                                           @"version": @"version",
                                                           @"encrypted":@"encrypted",
                                                           @"com_sys_code":@"com_sys_code",
-                                                          @"app_code":@"app_code"}];
+                                                          @"app_code":@"app_code",@"company_code":@"company_code"}];
     
     RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];
     

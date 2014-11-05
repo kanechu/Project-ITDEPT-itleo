@@ -26,4 +26,6 @@
 
 @synthesize lang_code;
 
+@synthesize company_code;
+
 @end

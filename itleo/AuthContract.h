@@ -26,4 +26,6 @@
 
 @property(nonatomic, copy) NSString *lang_code;
 
+@property(nonatomic, copy) NSString *company_code;
+
 @end

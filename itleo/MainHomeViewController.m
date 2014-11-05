@@ -10,12 +10,14 @@
 #import "LEOLoginViewController.h"
 #import "Menu_home.h"
 #import "Cell_menu_item.h"
+#import "Web_get_permit.h"
 #import "DB_LoginInfo.h"
 #import "DB_single_field.h"
 #import "DB_RespAppConfig.h"
 #import "DB_Location.h"
 #import "DB_ePod.h"
 #import "DB_sypara.h"
+#import "DB_permit.h"
 @interface MainHomeViewController ()
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
@@ -56,9 +58,21 @@
 #pragma mark creat menu item
 -(void) fn_create_menu{
     alist_menu=[[NSMutableArray alloc]init];
-    [alist_menu addObject:[Menu_home fn_create_item:@"Air Load Plan" image:@"ic_airloadplan" segue:@"segue_aejob_browse"]];
+    Web_get_permit *web_obj=[[Web_get_permit alloc]init];
+    NSMutableArray *alist_fuction=[web_obj fn_get_function_module];
+    for (NSMutableDictionary *dic in alist_fuction) {
+        NSString *module_code=[dic valueForKey:@"module_code"];
+        NSString *f_exec=[dic valueForKey:@"f_exec"];
+        if ([module_code isEqualToString:@"EPOD"] && [f_exec isEqualToString:@"1"]) {
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"ic_itdept_logo" segue:@"segue_epod"]];
+        }
+        if ([module_code isEqualToString:@"AIR_LOAD_PLAN"]&& [f_exec isEqualToString:@"1"]) {
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_air_Load_Plan", nil) image:@"ic_airloadplan" segue:@"segue_aejob_browse"]];
+        }
+    }
+    
     [alist_menu addObject:[Menu_home fn_create_item:@"Chart" image:@"ic_itdept_logo" segue:@"segue_chart"]];
-    [alist_menu addObject:[Menu_home fn_create_item:@"EPOD" image:@"ic_itdept_logo" segue:@"segue_epod"]];
+    
     self.icollectionView.delegate=self;
     self.icollectionView.dataSource=self;
     [self.icollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell_menu"];
@@ -145,6 +159,11 @@
      */
     DB_sypara *db_sypara=[[DB_sypara alloc]init];
     [db_sypara fn_delete_all_sypara_data];
+    /**
+     *  清楚permit
+     */
+    DB_permit *db_permit=[[DB_permit alloc]init];
+    [db_permit fn_delete_all_permit_data];
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
     VC.refresh=^(){
         [self viewDidLoad];

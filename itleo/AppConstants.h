@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
+#define COMPANY_CODE @"ITNEW"
+#define APP_CODE @"ITLEO"
 @interface AppConstants : NSObject
 
 extern NSString* const STR_BASE_URL;

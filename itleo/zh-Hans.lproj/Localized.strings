@@ -25,6 +25,8 @@
 "lbl_cancel"="取消";
 "lbl_home"="主页";
 "logout_alert"="如果退出登录，将删除存在的记录。您是否强行退出？";
+"module_eop"="EPOD";
+"module_air_Load_Plan"="Air Load Plan";
 //select UI
 "select_tilte"="请选取信息";
 //epod main home
