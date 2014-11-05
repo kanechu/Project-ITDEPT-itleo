@@ -10,7 +10,7 @@
 #import "QRadioButton.h"
 #import "Custom_Button.h"
 #import "Custom_BtnGraphicMixed.h"
-@interface EPODDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,QRadioButtonDelegate,UITextFieldDelegate>
+@interface EPODDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,QRadioButtonDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (copy, nonatomic) NSString *vehicle_no;
 

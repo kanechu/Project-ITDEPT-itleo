@@ -37,7 +37,7 @@
 "ibtn_settings"="Settings";
 "no_history_data"="No Historical Vehicle_no Data!";
 "vehicle_empty"="Sorry,Vehicle Number can not be empty!";
-"show_unUpload_msg"="You did not upload records";
+"show_unUpload_msg"="You did not upload successfully records";
 //epod detail
 "lbl_epod_set_title"="EPOD Info";
 "lbl_order_no"="Order Number";
@@ -52,6 +52,8 @@
 "ibtn_image_mang"="Manage";
 "ibtn_upload"="Upload";
 "order_empty_prompt"="Sorry,Order Number can not be empty!";
+"timeOut_alert"="Network request timed out,upload the data failed! Retry?";
+"ibtn_retry"="Retry";
 //order info
 "lbl_info_title"="Order Information";
 "lbl_cus"="Customer:";

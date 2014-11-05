@@ -233,7 +233,7 @@
 
 - (IBAction)fn_check_info:(id)sender {
     if ([_itf_order_no.text length]==0) {
-        [self fn_Pop_up_alertView];
+        [self fn_Pop_up_alertView:MY_LocalizedString(@"order_empty_prompt", nil)];
     }else{
         Order_InfoViewController *VC=(Order_InfoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Order_InfoViewController"];
         VC.car_no=_vehicle_no;
@@ -244,14 +244,14 @@
 
 - (IBAction)fn_manage_picture:(id)sender {
     if ([_itf_order_no.text length]==0) {
-        [self fn_Pop_up_alertView];
+        [self fn_Pop_up_alertView:MY_LocalizedString(@"order_empty_prompt", nil)];
     }else{
         [self performSegueWithIdentifier:@"segue_manage" sender:self];
     }
     
 }
--(void)fn_Pop_up_alertView{
-    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"order_empty_prompt", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
+-(void)fn_Pop_up_alertView:(NSString*)str_alert{
+    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:self cancelButtonTitle:nil otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
     [alertview show];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -280,6 +280,12 @@
         [arr_images_ms addObject:uploaded_image_ms];
     }
     alist_image_ms=arr_images_ms;
+}
+#pragma mark -UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==alertView.cancelButtonIndex) {
+        [self fn_uploading_epod:nil];
+    }
 }
 
 #pragma mark -uploading data
@@ -328,6 +334,11 @@
             AuthContract *auth=[db_loginInfo fn_get_RequestAuth];
             Web_update_epod *upload_obj=[[Web_update_epod alloc]init];
             [upload_obj fn_upload_epod_data:updateform Auth:auth back_result:^(NSMutableArray* arr_result){
+                if (arr_result==nil) {
+                    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"timeOut_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"ibtn_retry", nil) otherButtonTitles:MY_LocalizedString(@"lbl_cancel", nil), nil];
+                    [alertview show];
+                }
+                
                 if ([arr_result count]!=0) {
                     RespEpod_updmilestone *respEpod=[arr_result objectAtIndex:0];
                     NSSet *resp_upd_images=respEpod.Epod_upd_milestone_image_Result;
@@ -339,10 +350,13 @@
                     if ([is_upload_sucess isEqualToString:@"true"]) {
                         [db fn_update_epod_after_uploaded:unique_id is_uploaded:@"1" date:upload_date result:@"isuccess" user_code:auth.user_code system:auth.system  images:resp_upd_images];
                         
-                        [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"upload_success", nil)];
+                        [SVProgressHUD dismiss];
+                        [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_success", nil)];
                     }else{
                         [db fn_update_epod_after_uploaded:unique_id is_uploaded:@"2" date:error_date result:error_reason user_code:auth.user_code system:auth.system  images:resp_upd_images];
-                        [SVProgressHUD dismissWithError:MY_LocalizedString(@"upload_fail", nil) afterDelay:2.0];
+                        
+                        [SVProgressHUD dismiss];
+                        [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_fail", nil) ];
                         [self fn_post_notification];
                     }
                 }
@@ -350,7 +364,7 @@
         }
     }else{
         
-        [self fn_Pop_up_alertView];
+        [self fn_Pop_up_alertView:MY_LocalizedString(@"order_empty_prompt", nil)];
     }
     
 }

@@ -37,7 +37,7 @@
 "ibtn_settings"="設置";
 "no_history_data"="沒有您輸入的車牌號記錄!";
 "vehicle_empty"="抱歉，車牌號不能為空!";
-"show_unUpload_msg"="你未上傳的記錄有";
+"show_unUpload_msg"="你未上傳成功的記錄有";
 //epod detail
 "lbl_epod_set_title"="EPOD 信息";
 "lbl_order_no"="配載單號";
@@ -52,7 +52,8 @@
 "ibtn_image_mang"="管理圖片";
 "ibtn_upload"="上傳";
 "order_empty_prompt"="抱歉，配載單號不能為空!";
-
+"timeOut_alert"="網絡請求超時，上傳數據失敗！是否重試？";
+"ibtn_retry"="重試";
 //order info
 "lbl_info_title"="配載單資訊";
 "lbl_cus"="客              戶:";
