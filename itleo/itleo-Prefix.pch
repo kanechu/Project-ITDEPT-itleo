@@ -26,4 +26,5 @@
     #import "Custom_Color.h"
     #import "KeyboardNoticeManager.h"
     #import "MY_LocalizedString.h"
+    #import "AllDefines.h"
 #endif

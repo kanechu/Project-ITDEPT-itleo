@@ -11,6 +11,21 @@
 		B2033468199898B1007FCE63 /* Menu_home.m in Sources */ = {isa = PBXBuildFile; fileRef = B2033467199898B1007FCE63 /* Menu_home.m */; };
 		B203346B19989F31007FCE63 /* Aejob_BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B203346A19989F31007FCE63 /* Aejob_BrowseViewController.m */; };
 		B20334721998B7AC007FCE63 /* Custom_Color.m in Sources */ = {isa = PBXBuildFile; fileRef = B20334711998B7AC007FCE63 /* Custom_Color.m */; };
+		B21B71121A0B1D1A007DB5E3 /* BarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70F21A0B1D1A007DB5E3 /* BarChart.m */; };
+		B21B71131A0B1D1A007DB5E3 /* BarChartB.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70F41A0B1D1A007DB5E3 /* BarChartB.m */; };
+		B21B71141A0B1D1A007DB5E3 /* BarsSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70F61A0B1D1A007DB5E3 /* BarsSegment.m */; };
+		B21B71151A0B1D1A007DB5E3 /* XaxisValue_Bars.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70F81A0B1D1A007DB5E3 /* XaxisValue_Bars.m */; };
+		B21B71161A0B1D1A007DB5E3 /* LineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70FC1A0B1D1A007DB5E3 /* LineChart.m */; };
+		B21B71171A0B1D1A007DB5E3 /* LineChartExp.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70FE1A0B1D1A007DB5E3 /* LineChartExp.m */; };
+		B21B71181A0B1D1A007DB5E3 /* LinePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B71001A0B1D1A007DB5E3 /* LinePoint.m */; };
+		B21B71191A0B1D1A007DB5E3 /* PointInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B71021A0B1D1A007DB5E3 /* PointInfo.m */; };
+		B21B711A1A0B1D1A007DB5E3 /* XaxisValues.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B71041A0B1D1A007DB5E3 /* XaxisValues.m */; };
+		B21B711B1A0B1D1A007DB5E3 /* YaxisValues.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B71061A0B1D1A007DB5E3 /* YaxisValues.m */; };
+		B21B711C1A0B1D1A007DB5E3 /* ColorSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B71091A0B1D1A007DB5E3 /* ColorSelector.m */; };
+		B21B711D1A0B1D1A007DB5E3 /* PieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B710B1A0B1D1A007DB5E3 /* PieChart.m */; };
+		B21B711E1A0B1D1A007DB5E3 /* PieSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B710D1A0B1D1A007DB5E3 /* PieSegment.m */; };
+		B21B711F1A0B1D1A007DB5E3 /* PieSegmentLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B710F1A0B1D1A007DB5E3 /* PieSegmentLayer.m */; };
+		B21B71201A0B1D1A007DB5E3 /* SegmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B71111A0B1D1A007DB5E3 /* SegmentInfo.m */; };
 		B2281A981995EF94001A73B0 /* RespAejob_browse.m in Sources */ = {isa = PBXBuildFile; fileRef = B2281A971995EF94001A73B0 /* RespAejob_browse.m */; };
 		B2281A9E1995F16E001A73B0 /* RespAejob_dtl_browse.m in Sources */ = {isa = PBXBuildFile; fileRef = B2281A9D1995F16E001A73B0 /* RespAejob_dtl_browse.m */; };
 		B2281AA11995F4D5001A73B0 /* RespLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = B2281AA01995F4D5001A73B0 /* RespLogin.m */; };
@@ -187,6 +202,37 @@
 		B203346A19989F31007FCE63 /* Aejob_BrowseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aejob_BrowseViewController.m; sourceTree = "<group>"; };
 		B20334701998B7AC007FCE63 /* Custom_Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Custom_Color.h; sourceTree = "<group>"; };
 		B20334711998B7AC007FCE63 /* Custom_Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Custom_Color.m; sourceTree = "<group>"; };
+		B21B70F11A0B1D1A007DB5E3 /* BarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarChart.h; sourceTree = "<group>"; };
+		B21B70F21A0B1D1A007DB5E3 /* BarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarChart.m; sourceTree = "<group>"; };
+		B21B70F31A0B1D1A007DB5E3 /* BarChartB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarChartB.h; sourceTree = "<group>"; };
+		B21B70F41A0B1D1A007DB5E3 /* BarChartB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarChartB.m; sourceTree = "<group>"; };
+		B21B70F51A0B1D1A007DB5E3 /* BarsSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarsSegment.h; sourceTree = "<group>"; };
+		B21B70F61A0B1D1A007DB5E3 /* BarsSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarsSegment.m; sourceTree = "<group>"; };
+		B21B70F71A0B1D1A007DB5E3 /* XaxisValue_Bars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XaxisValue_Bars.h; sourceTree = "<group>"; };
+		B21B70F81A0B1D1A007DB5E3 /* XaxisValue_Bars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XaxisValue_Bars.m; sourceTree = "<group>"; };
+		B21B70FA1A0B1D1A007DB5E3 /* AllDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllDefines.h; sourceTree = "<group>"; };
+		B21B70FB1A0B1D1A007DB5E3 /* LineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChart.h; sourceTree = "<group>"; };
+		B21B70FC1A0B1D1A007DB5E3 /* LineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChart.m; sourceTree = "<group>"; };
+		B21B70FD1A0B1D1A007DB5E3 /* LineChartExp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineChartExp.h; sourceTree = "<group>"; };
+		B21B70FE1A0B1D1A007DB5E3 /* LineChartExp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineChartExp.m; sourceTree = "<group>"; };
+		B21B70FF1A0B1D1A007DB5E3 /* LinePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinePoint.h; sourceTree = "<group>"; };
+		B21B71001A0B1D1A007DB5E3 /* LinePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinePoint.m; sourceTree = "<group>"; };
+		B21B71011A0B1D1A007DB5E3 /* PointInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointInfo.h; sourceTree = "<group>"; };
+		B21B71021A0B1D1A007DB5E3 /* PointInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PointInfo.m; sourceTree = "<group>"; };
+		B21B71031A0B1D1A007DB5E3 /* XaxisValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XaxisValues.h; sourceTree = "<group>"; };
+		B21B71041A0B1D1A007DB5E3 /* XaxisValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XaxisValues.m; sourceTree = "<group>"; };
+		B21B71051A0B1D1A007DB5E3 /* YaxisValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YaxisValues.h; sourceTree = "<group>"; };
+		B21B71061A0B1D1A007DB5E3 /* YaxisValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YaxisValues.m; sourceTree = "<group>"; };
+		B21B71081A0B1D1A007DB5E3 /* ColorSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSelector.h; sourceTree = "<group>"; };
+		B21B71091A0B1D1A007DB5E3 /* ColorSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSelector.m; sourceTree = "<group>"; };
+		B21B710A1A0B1D1A007DB5E3 /* PieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChart.h; sourceTree = "<group>"; };
+		B21B710B1A0B1D1A007DB5E3 /* PieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChart.m; sourceTree = "<group>"; };
+		B21B710C1A0B1D1A007DB5E3 /* PieSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieSegment.h; sourceTree = "<group>"; };
+		B21B710D1A0B1D1A007DB5E3 /* PieSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieSegment.m; sourceTree = "<group>"; };
+		B21B710E1A0B1D1A007DB5E3 /* PieSegmentLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieSegmentLayer.h; sourceTree = "<group>"; };
+		B21B710F1A0B1D1A007DB5E3 /* PieSegmentLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieSegmentLayer.m; sourceTree = "<group>"; };
+		B21B71101A0B1D1A007DB5E3 /* SegmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SegmentInfo.h; sourceTree = "<group>"; };
+		B21B71111A0B1D1A007DB5E3 /* SegmentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentInfo.m; sourceTree = "<group>"; };
 		B2281A961995EF94001A73B0 /* RespAejob_browse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespAejob_browse.h; sourceTree = "<group>"; };
 		B2281A971995EF94001A73B0 /* RespAejob_browse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespAejob_browse.m; sourceTree = "<group>"; };
 		B2281A9C1995F16E001A73B0 /* RespAejob_dtl_browse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespAejob_dtl_browse.h; sourceTree = "<group>"; };
@@ -449,6 +495,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B21B70EF1A0B1D1A007DB5E3 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				B21B70F01A0B1D1A007DB5E3 /* Bar Chart */,
+				B21B70F91A0B1D1A007DB5E3 /* Line Chart */,
+				B21B71071A0B1D1A007DB5E3 /* pie chart */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		B21B70F01A0B1D1A007DB5E3 /* Bar Chart */ = {
+			isa = PBXGroup;
+			children = (
+				B21B70F11A0B1D1A007DB5E3 /* BarChart.h */,
+				B21B70F21A0B1D1A007DB5E3 /* BarChart.m */,
+				B21B70F31A0B1D1A007DB5E3 /* BarChartB.h */,
+				B21B70F41A0B1D1A007DB5E3 /* BarChartB.m */,
+				B21B70F51A0B1D1A007DB5E3 /* BarsSegment.h */,
+				B21B70F61A0B1D1A007DB5E3 /* BarsSegment.m */,
+				B21B70F71A0B1D1A007DB5E3 /* XaxisValue_Bars.h */,
+				B21B70F81A0B1D1A007DB5E3 /* XaxisValue_Bars.m */,
+			);
+			path = "Bar Chart";
+			sourceTree = "<group>";
+		};
+		B21B70F91A0B1D1A007DB5E3 /* Line Chart */ = {
+			isa = PBXGroup;
+			children = (
+				B21B70FA1A0B1D1A007DB5E3 /* AllDefines.h */,
+				B21B70FB1A0B1D1A007DB5E3 /* LineChart.h */,
+				B21B70FC1A0B1D1A007DB5E3 /* LineChart.m */,
+				B21B70FD1A0B1D1A007DB5E3 /* LineChartExp.h */,
+				B21B70FE1A0B1D1A007DB5E3 /* LineChartExp.m */,
+				B21B70FF1A0B1D1A007DB5E3 /* LinePoint.h */,
+				B21B71001A0B1D1A007DB5E3 /* LinePoint.m */,
+				B21B71011A0B1D1A007DB5E3 /* PointInfo.h */,
+				B21B71021A0B1D1A007DB5E3 /* PointInfo.m */,
+				B21B71031A0B1D1A007DB5E3 /* XaxisValues.h */,
+				B21B71041A0B1D1A007DB5E3 /* XaxisValues.m */,
+				B21B71051A0B1D1A007DB5E3 /* YaxisValues.h */,
+				B21B71061A0B1D1A007DB5E3 /* YaxisValues.m */,
+			);
+			path = "Line Chart";
+			sourceTree = "<group>";
+		};
+		B21B71071A0B1D1A007DB5E3 /* pie chart */ = {
+			isa = PBXGroup;
+			children = (
+				B21B71081A0B1D1A007DB5E3 /* ColorSelector.h */,
+				B21B71091A0B1D1A007DB5E3 /* ColorSelector.m */,
+				B21B710A1A0B1D1A007DB5E3 /* PieChart.h */,
+				B21B710B1A0B1D1A007DB5E3 /* PieChart.m */,
+				B21B710C1A0B1D1A007DB5E3 /* PieSegment.h */,
+				B21B710D1A0B1D1A007DB5E3 /* PieSegment.m */,
+				B21B710E1A0B1D1A007DB5E3 /* PieSegmentLayer.h */,
+				B21B710F1A0B1D1A007DB5E3 /* PieSegmentLayer.m */,
+				B21B71101A0B1D1A007DB5E3 /* SegmentInfo.h */,
+				B21B71111A0B1D1A007DB5E3 /* SegmentInfo.m */,
+			);
+			path = "pie chart";
+			sourceTree = "<group>";
+		};
 		B2281AA219960311001A73B0 /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
@@ -767,6 +875,7 @@
 		B276BBE71995B7D400075515 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				B21B70EF1A0B1D1A007DB5E3 /* Chart */,
 				B27B5F4F19C98271000736B3 /* Reachability */,
 				B2A7480819BEFD57006C96D1 /* Signature */,
 				B272EA5319AEDDA400256276 /* MZFormSheet */,
@@ -1043,9 +1152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B21B71181A0B1D1A007DB5E3 /* LinePoint.m in Sources */,
 				B272EA6719AEDDA400256276 /* MZFormSheetBackgroundWindow.m in Sources */,
 				B29690C219C1A52900976E7E /* Cell_show_picture.m in Sources */,
 				B29690BB19C18CCC00976E7E /* ManageImageViewController.m in Sources */,
+				B21B71201A0B1D1A007DB5E3 /* SegmentInfo.m in Sources */,
+				B21B711A1A0B1D1A007DB5E3 /* XaxisValues.m in Sources */,
+				B21B71151A0B1D1A007DB5E3 /* XaxisValue_Bars.m in Sources */,
 				B27B5F4A19C97300000736B3 /* Web_update_epod.m in Sources */,
 				B29C35D519CC0741004C5387 /* Checkbox.m in Sources */,
 				B2281AB41996036C001A73B0 /* DBManager.m in Sources */,
@@ -1053,6 +1166,8 @@
 				B27B5F4E19C9810E000736B3 /* IsAuto_upload_data.m in Sources */,
 				B272EA6D19AEDDA400256276 /* UIImage+Additional.m in Sources */,
 				B276C0E51995CA3A00075515 /* RequestContract.m in Sources */,
+				B21B711E1A0B1D1A007DB5E3 /* PieSegment.m in Sources */,
+				B21B71141A0B1D1A007DB5E3 /* BarsSegment.m in Sources */,
 				B2CF14991A077D880042DD64 /* DB_permit.m in Sources */,
 				B203346B19989F31007FCE63 /* Aejob_BrowseViewController.m in Sources */,
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
@@ -1066,8 +1181,10 @@
 				B272EA6A19AEDDA400256276 /* MZFormSheetSegue.m in Sources */,
 				B2A3404819DA4CA30051F78B /* RespEpod_updmilestone.m in Sources */,
 				B2C3BAEE19BAEEA9008B9A83 /* Custom_Button.m in Sources */,
+				B21B71131A0B1D1A007DB5E3 /* BarChartB.m in Sources */,
 				B2829A3C19D2BEEC0054205E /* DB_Location.m in Sources */,
 				B2033468199898B1007FCE63 /* Menu_home.m in Sources */,
+				B21B71171A0B1D1A007DB5E3 /* LineChartExp.m in Sources */,
 				B2A328CE19D4F91800DB8F9B /* AddRemarkViewController.m in Sources */,
 				B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */,
 				B2B136BC1A032AA3001317C8 /* Web_get_sypara.m in Sources */,
@@ -1075,6 +1192,7 @@
 				B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */,
 				B2281AA11995F4D5001A73B0 /* RespLogin.m in Sources */,
 				B2A3403B19DA3B1E0051F78B /* UpdateFormContract.m in Sources */,
+				B21B711B1A0B1D1A007DB5E3 /* YaxisValues.m in Sources */,
 				B27B5F4319C924F0000736B3 /* Conversion_helper.m in Sources */,
 				B272EA7119AEDF4400256276 /* SelectHistoryDataViewController.m in Sources */,
 				B270C6141999B3990089664C /* Cell_aejob_browse.m in Sources */,
@@ -1086,12 +1204,14 @@
 				B28222A919FF39F00000FC2B /* Resp_upd_GPS.m in Sources */,
 				B276BBDD1995B6A500075515 /* MainHomeViewController.m in Sources */,
 				B2281ABD19961045001A73B0 /* DB_RespAejob_dtl_browse.m in Sources */,
+				B21B71191A0B1D1A007DB5E3 /* PointInfo.m in Sources */,
 				B2C28EA5199C693500F4D0BF /* Cell_aejob_dtl_browse.m in Sources */,
 				B2B136B21A032779001317C8 /* Resp_sypara.m in Sources */,
 				B2A7481119BEFD57006C96D1 /* PopSignUtil.m in Sources */,
 				B2281A9E1995F16E001A73B0 /* RespAejob_dtl_browse.m in Sources */,
 				B2A3404219DA409F0051F78B /* UploadContract.m in Sources */,
 				B2B136B91A032A2E001317C8 /* DB_sypara.m in Sources */,
+				B21B71161A0B1D1A007DB5E3 /* LineChart.m in Sources */,
 				B272EA6619AEDDA400256276 /* MZAppearance.m in Sources */,
 				B276C0E41995CA3A00075515 /* AuthContract.m in Sources */,
 				B29E579119E28A9E00E2CAE9 /* DatabaseQueue.m in Sources */,
@@ -1111,9 +1231,12 @@
 				B276BBB71995B66800075515 /* AppDelegate.m in Sources */,
 				B2C28EAB199C8F3E00F4D0BF /* Cal_lineHeight.m in Sources */,
 				B2A328D919D5653A00DB8F9B /* Truck_order_data.m in Sources */,
+				B21B711D1A0B1D1A007DB5E3 /* PieChart.m in Sources */,
 				B276C1001995DB5F00075515 /* RespAppConfig.m in Sources */,
+				B21B711C1A0B1D1A007DB5E3 /* ColorSelector.m in Sources */,
 				B27D466F19D0227B00B998BC /* DB_single_field.m in Sources */,
 				B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */,
+				B21B71121A0B1D1A007DB5E3 /* BarChart.m in Sources */,
 				B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */,
 				B272EA6C19AEDDA400256276 /* NSInvocation+Copy.m in Sources */,
 				B27D467319D02EC300B998BC /* PopViewManager.m in Sources */,
@@ -1132,6 +1255,7 @@
 				B2829A3919D2B6840054205E /* LocationManager.m in Sources */,
 				B270C625199A02C70089664C /* Aejob_dtl_BrowseViewController.m in Sources */,
 				B276BBB31995B66800075515 /* main.m in Sources */,
+				B21B711F1A0B1D1A007DB5E3 /* PieSegmentLayer.m in Sources */,
 				B272EA6B19AEDDA400256276 /* MZTransition.m in Sources */,
 				B2BDD57119D8ED4C00FEEA08 /* Truck_order_image_data.m in Sources */,
 				B2AFFA8619C2FC7100BC26BB /* DB_ePod.m in Sources */,
