@@ -129,10 +129,10 @@
 "lbl_30days"="30 天";
 "lbl_all"="所有";
 //interval
-"lbl_seconds"="30 秒";
 "lbl_minute"="1 分钟";
 "lbl_2minutes"="2 分钟";
 "lbl_3minutes"="3 分钟";
+"lbl_5minutes"="5 分钟";
 "lbl_10minutes"="10 分钟";
 "lbl_30minutes"="30 分钟";
 "lbl_hour"="1 小时";

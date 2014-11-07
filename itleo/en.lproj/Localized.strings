@@ -130,10 +130,10 @@
 "lbl_30days"="30 Days";
 "lbl_all"="All";
 //interval
-"lbl_seconds"="30 Seconds";
 "lbl_minute"="1 Minute";
 "lbl_2minutes"="2 Minute";
 "lbl_3minutes"="3 Minute";
+"lbl_5minutes"="5 Minute";
 "lbl_10minutes"="10 Minute";
 "lbl_30minutes"="30 Minute";
 "lbl_hour"="1 Hour";
