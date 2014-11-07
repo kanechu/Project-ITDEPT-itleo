@@ -46,7 +46,7 @@
         alist_range_data=[[NSMutableArray alloc]initWithObjects:@"lbl_day",@"lbl_2days",@"lbl_3days",@"lbl_7days",@"lbl_15days",@"lbl_30days",@"lbl_all",nil];
         self.title=MY_LocalizedString(@"lbl_dateRange_title", nil);
     }else if(_flag_range_type==1){
-        alist_range_data=[[NSMutableArray alloc]initWithObjects:@"lbl_seconds",@"lbl_minute",@"lbl_2minutes",@"lbl_3minutes",@"lbl_10minutes",@"lbl_30minutes",@"lbl_hour",nil];
+        alist_range_data=[[NSMutableArray alloc]initWithObjects:@"lbl_minute",@"lbl_2minutes",@"lbl_3minutes",@"lbl_5minutes",@"lbl_10minutes",@"lbl_30minutes",@"lbl_hour",nil];
         self.title=MY_LocalizedString(@"lbl_interval_title", nil);
     }
 }

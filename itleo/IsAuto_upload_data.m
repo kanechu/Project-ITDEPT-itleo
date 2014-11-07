@@ -17,9 +17,26 @@
 #import "RespEpod_updmilestone.h"
 #import "Resp_upd_GPS.h"
 #import "CheckNetWork.h"
+static NSDate *flag_record_date=nil;
+static NSDate *flag_GPS_date=nil;
 @implementation IsAuto_upload_data
 
 -(void)fn_Automatically_upload_data{
+    NSDate *current_day=[NSDate date];
+    if (flag_record_date==nil) {
+        flag_record_date=current_day;
+    }else{
+        NSTimeInterval time_interval=[current_day timeIntervalSinceDate:flag_record_date];
+        time_interval=(NSInteger)time_interval+1;
+        if (time_interval<[self fn_get_timeInterval]) {
+            /**
+             *  用于计算是否已经相隔用户设置的时间，如果不是返回
+             */
+            return;
+        }else{
+            flag_record_date=current_day;
+        }
+    }
     CheckNetWork *netWork_obj=[[CheckNetWork alloc]init];
     if ([netWork_obj fn_check_isNetworking]) {
         DB_ePod *db=[[DB_ePod alloc]init];
@@ -85,7 +102,23 @@
 }
 
 -(void)fn_Auto_upload_GPS{
-     CheckNetWork *netWork_obj=[[CheckNetWork alloc]init];
+    NSDate *current_day=[NSDate date];
+    if (flag_GPS_date==nil) {
+        flag_GPS_date=current_day;
+    }else{
+        NSTimeInterval time_interval=[current_day timeIntervalSinceDate:flag_GPS_date];
+        time_interval=(NSInteger)time_interval+1;
+        if (time_interval<[self fn_get_timeInterval]) {
+            /**
+             *  用于计算是否已经相隔用户设置的时间，如果不是返回
+             */
+            return;
+        }else{
+            flag_GPS_date=current_day;
+        }
+    }
+    
+    CheckNetWork *netWork_obj=[[CheckNetWork alloc]init];
     if ([netWork_obj fn_check_isNetworking]) {
         DB_Location *db_location=[[DB_Location alloc]init];
         NSMutableArray *alist_gps=[db_location fn_get_location_data:@"0"];
@@ -101,15 +134,46 @@
             updateform.log_date=[idic valueForKey:@"log_date"];
             [arr_form addObject:updateform];
         }
-        Web_update_epod *upd_obj=[[Web_update_epod alloc]init];
-        [upd_obj fn_upload_epod_GPS:arr_form Auth:auth back_result:^(NSMutableArray *alist_result){
-            for (Resp_upd_GPS *resp_obj in alist_result) {
-                if ([resp_obj.status isEqualToString:@"true"]) {
-                    [db_location fn_update_isUploaded_status:resp_obj.unique_id isUploaded:@"1"];
+        if ([arr_form count]!=0) {
+            Web_update_epod *upd_obj=[[Web_update_epod alloc]init];
+            [upd_obj fn_upload_epod_GPS:arr_form Auth:auth back_result:^(NSMutableArray *alist_result){
+                for (Resp_upd_GPS *resp_obj in alist_result) {
+                    if ([resp_obj.status isEqualToString:@"true"]) {
+                        [db_location fn_update_isUploaded_status:resp_obj.unique_id isUploaded:@"1"];
+                    }
                 }
-            }
-        }];
+            }];
+            
+        }
     }
 
 }
+#pragma mark -get upload time interval
+-(CGFloat)fn_get_timeInterval{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSString *key=[userDefault objectForKey:@"interval_range"];
+    CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
+    return timeInerval;
+}
+
+-(CGFloat)fn_Auto_Sync_timeInterval:(NSString*)key{
+    CGFloat interval=0.0f;
+   if ([key isEqualToString:@"lbl_minute"]){
+        interval=60.0f;
+    }else if ([key isEqualToString:@"lbl_2minutes"]){
+        interval=2*60.0f;
+    }else if ([key isEqualToString:@"lbl_3minutes"]){
+        interval=3*60.0f;
+    }else if ([key isEqualToString:@"lbl_5minutes"]){
+        interval=5*60.0f;
+    }else if ([key isEqualToString:@"lbl_10minutes"]){
+        interval=10*60.0f;
+    }else if ([key isEqualToString:@"lbl_30minutes"]){
+        interval=30*60.0f;
+    }else if ([key isEqualToString:@"lbl_hour"]){
+        interval=60*60.0f;
+    }
+    return interval;
+}
+
 @end

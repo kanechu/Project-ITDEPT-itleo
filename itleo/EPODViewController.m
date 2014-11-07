@@ -17,11 +17,15 @@
 #import "PopViewManager.h"
 #import "LocationManager.h"
 #import "IsAuto_upload_data.h"
+
+#define  TIMEINTERVAL 60.0f
+
 @interface EPODViewController ()
 
 @property(nonatomic,strong)NSTimer *record_timer;
 @property(nonatomic,strong)NSTimer *GPS_timer;
 @property(nonatomic,strong)NSTimer *record_GPS_timer;
+
 @end
 
 @implementation EPODViewController
@@ -74,6 +78,7 @@
     _itf_bus_no.delegate=self;
 }
 -(void)fn_isStart_open_thread{
+    
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
     NSInteger _flag_transfer_record= [userDefault integerForKey:@"transfer_record"];
     if (_flag_transfer_record==1) {
@@ -95,7 +100,6 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:@"transfer_record" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transmission_GPS) name:@"transfer_GPS" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isRecord_GPS_coordinates) name:@"record_GPS" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_change_interval) name:@"interval_change" object:nil];
 }
 
 #pragma mark -Jump will execute method
@@ -224,42 +228,31 @@
 
 -(void)fn_open_upload_records_thread{
     IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    CGFloat timeInerval=[self fn_get_timeInterval];
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dispatch_queue_t my_Queue= dispatch_queue_create("uploading", NULL);
-        dispatch_async(my_Queue, ^{
-            record_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
-            //定时器要加入runloop中才能执行
-            [[NSRunLoop currentRunLoop]run];
-        });
+    //获取全局的并发队列
+    dispatch_queue_t my_Queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(my_Queue, ^{
+        record_timer=[NSTimer scheduledTimerWithTimeInterval:TIMEINTERVAL target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
+        //定时器要加入runloop中才能执行
+        [[NSRunLoop currentRunLoop]run];
     });
 }
 -(void)fn_open_upload_GPS_thread{
     IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    CGFloat timeInerval=[self fn_get_timeInterval];
-    static dispatch_once_t onceToken1;
-    dispatch_once(&onceToken1, ^{
-        dispatch_queue_t my_Queue= dispatch_queue_create("uploading_GPS", NULL);
-        dispatch_async(my_Queue, ^{
-            GPS_timer=[NSTimer scheduledTimerWithTimeInterval:timeInerval target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
-            //定时器要加入runloop中才能执行
-            [[NSRunLoop currentRunLoop]run];
-        });
-        
+    dispatch_queue_t my_Queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(my_Queue, ^{
+        GPS_timer=[NSTimer scheduledTimerWithTimeInterval:TIMEINTERVAL target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
+        //定时器要加入runloop中才能执行
+        [[NSRunLoop currentRunLoop]run];
     });
 }
 -(void)fn_open_record_GPS_thread{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        dispatch_queue_t my_Queue= dispatch_queue_create("record_GPS", NULL);
-        dispatch_async(my_Queue, ^{
-            _record_GPS_timer=[NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(fn_record_GPS_coordinates) userInfo:nil repeats:YES];
-            //定时器要加入runloop中才能执行
-            [[NSRunLoop currentRunLoop]run];
-        });
-        
+    dispatch_queue_t my_Queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(my_Queue, ^{
+        _record_GPS_timer=[NSTimer scheduledTimerWithTimeInterval:20.0f target:self selector:@selector(fn_record_GPS_coordinates) userInfo:nil repeats:YES];
+        //定时器要加入runloop中才能执行
+        [[NSRunLoop currentRunLoop]run];
     });
+    
 }
 -(void)fn_record_GPS_coordinates{
    __block LocationManager *location_obj=[LocationManager fn_shareManager];
@@ -270,34 +263,5 @@
     };
     
 }
--(void)fn_change_interval{
-    
-}
-#pragma mark -get upload time interval
--(CGFloat)fn_get_timeInterval{
-    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSString *key=[userDefault objectForKey:@"interval_range"];
-    CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
-    return timeInerval;
-}
 
--(CGFloat)fn_Auto_Sync_timeInterval:(NSString*)key{
-    CGFloat interval=0.0f;
-    if ([key isEqualToString:@"lbl_seconds"]) {
-        interval=30.0f;
-    }else if ([key isEqualToString:@"lbl_minute"]){
-        interval=60.0f;
-    }else if ([key isEqualToString:@"lbl_2minutes"]){
-        interval=2*60.0f;
-    }else if ([key isEqualToString:@"lbl_3minutes"]){
-        interval=3*60.0f;
-    }else if ([key isEqualToString:@"lbl_10minutes"]){
-        interval=10*60.0f;
-    }else if ([key isEqualToString:@"lbl_30minutes"]){
-        interval=30*60.0f;
-    }else if ([key isEqualToString:@"lbl_hour"]){
-        interval=60*60.0f;
-    }
-    return interval;
-}
 @end

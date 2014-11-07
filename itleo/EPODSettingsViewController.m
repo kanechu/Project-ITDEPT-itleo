@@ -204,7 +204,6 @@
         _ilb_interval.text=MY_LocalizedString(key_obj, nil);
         [self fn_define_userDefaults:key_obj key:@"interval_range"];
         _str_interval_range=key_obj;
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"interval_change" object:nil];
     }
 }
 #pragma mark - push must action method
