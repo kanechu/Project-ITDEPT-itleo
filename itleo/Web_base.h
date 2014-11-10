@@ -25,8 +25,11 @@ typedef void (^callBack_resp_result)(NSMutableArray* arr);
 //NetWorking Request
 - (void) fn_get_data:(RequestContract*)ao_form base_url:(NSString*)base_url;
 
+- (void) fn_get_chart_data:(RequestContract *)ao_form Auth:(AuthContract*)auth base_url:(NSString *)base_url;
+
 //Uploading Data
 - (void) fn_uploaded_data:(UploadContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url;
 
 - (void) fn_uploaded_GPS:(UploadGPSContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url;
+
 @end

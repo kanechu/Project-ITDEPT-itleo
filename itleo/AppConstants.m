@@ -22,7 +22,7 @@ NSString* const STR_PERMIT_URL=@"api/Users/permit";
 NSString* const STR_EPOD_UPLOAD_URL=@"api/epod/updmilestone2";
 NSString* const STR_EPOD_ORDER_INFO_URL=@"api/Epod/get_order_info";
 NSString* const STR_UPD_GPS_URL=@"api/epod/upd_gps";
-
+NSString* const STR_GET_CHART_URL=@"api/System/get_chart";
 #else
 NSString* const STR_BASE_URL = @"http://223.255.167.158/";
 #endif
