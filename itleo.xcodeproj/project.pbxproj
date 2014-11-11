@@ -144,6 +144,12 @@
 		B2CF14991A077D880042DD64 /* DB_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14981A077D880042DD64 /* DB_permit.m */; };
 		B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207119DFA3A50005253C /* Resp_order_info.m */; };
 		B2D8207819DFAD6D0005253C /* Order_InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */; };
+		B2DE9AA61A106B3500259EB5 /* Timer_bg_upload_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AA51A106B3500259EB5 /* Timer_bg_upload_data.m */; };
+		B2DE9AAC1A10ABF800259EB5 /* Resp_get_chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AAB1A10ABF800259EB5 /* Resp_get_chart.m */; };
+		B2DE9AAF1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AAE1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m */; };
+		B2DE9AB21A10AE7700259EB5 /* Resp_DashboardDtlResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AB11A10AE7700259EB5 /* Resp_DashboardDtlResult.m */; };
+		B2DE9AB51A10B03C00259EB5 /* Resp_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AB41A10B03C00259EB5 /* Resp_data.m */; };
+		B2DE9AB81A10B5E700259EB5 /* Web_get_chart_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AB71A10B5E700259EB5 /* Web_get_chart_data.m */; };
 		B2E391CA19C8137A00612FDD /* EPODRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E391C919C8137A00612FDD /* EPODRecordViewController.m */; };
 		B2E391D019C81AEB00612FDD /* Cell_epod_record.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E391CF19C81AEB00612FDD /* Cell_epod_record.m */; };
 /* End PBXBuildFile section */
@@ -455,6 +461,18 @@
 		B2D8207119DFA3A50005253C /* Resp_order_info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_order_info.m; sourceTree = "<group>"; };
 		B2D8207619DFAD6D0005253C /* Order_InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order_InfoViewController.h; sourceTree = "<group>"; };
 		B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order_InfoViewController.m; sourceTree = "<group>"; };
+		B2DE9AA41A106B3500259EB5 /* Timer_bg_upload_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer_bg_upload_data.h; sourceTree = "<group>"; };
+		B2DE9AA51A106B3500259EB5 /* Timer_bg_upload_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer_bg_upload_data.m; sourceTree = "<group>"; };
+		B2DE9AAA1A10ABF800259EB5 /* Resp_get_chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_get_chart.h; sourceTree = "<group>"; };
+		B2DE9AAB1A10ABF800259EB5 /* Resp_get_chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_get_chart.m; sourceTree = "<group>"; };
+		B2DE9AAD1A10ACCB00259EB5 /* Resp_DashboardGrpResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_DashboardGrpResult.h; sourceTree = "<group>"; };
+		B2DE9AAE1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_DashboardGrpResult.m; sourceTree = "<group>"; };
+		B2DE9AB01A10AE7700259EB5 /* Resp_DashboardDtlResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_DashboardDtlResult.h; sourceTree = "<group>"; };
+		B2DE9AB11A10AE7700259EB5 /* Resp_DashboardDtlResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_DashboardDtlResult.m; sourceTree = "<group>"; };
+		B2DE9AB31A10B03C00259EB5 /* Resp_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_data.h; sourceTree = "<group>"; };
+		B2DE9AB41A10B03C00259EB5 /* Resp_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_data.m; sourceTree = "<group>"; };
+		B2DE9AB61A10B5E700259EB5 /* Web_get_chart_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_chart_data.h; sourceTree = "<group>"; };
+		B2DE9AB71A10B5E700259EB5 /* Web_get_chart_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_get_chart_data.m; sourceTree = "<group>"; };
 		B2E391C819C8137A00612FDD /* EPODRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPODRecordViewController.h; sourceTree = "<group>"; };
 		B2E391C919C8137A00612FDD /* EPODRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODRecordViewController.m; sourceTree = "<group>"; };
 		B2E391CE19C81AEB00612FDD /* Cell_epod_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_epod_record.h; sourceTree = "<group>"; };
@@ -640,6 +658,8 @@
 				B2C28EAA199C8F3E00F4D0BF /* Cal_lineHeight.m */,
 				B27B5F4119C924F0000736B3 /* Conversion_helper.h */,
 				B27B5F4219C924F0000736B3 /* Conversion_helper.m */,
+				B2DE9AA41A106B3500259EB5 /* Timer_bg_upload_data.h */,
+				B2DE9AA51A106B3500259EB5 /* Timer_bg_upload_data.m */,
 				B28F677319F4F36C0045963B /* CreateFootView.h */,
 				B28F677419F4F36C0045963B /* CreateFootView.m */,
 			);
@@ -868,6 +888,14 @@
 				B2CF148F1A0768B00042DD64 /* Resp_permit.m */,
 				B2033466199898B1007FCE63 /* Menu_home.h */,
 				B2033467199898B1007FCE63 /* Menu_home.m */,
+				B2DE9AAA1A10ABF800259EB5 /* Resp_get_chart.h */,
+				B2DE9AAB1A10ABF800259EB5 /* Resp_get_chart.m */,
+				B2DE9AAD1A10ACCB00259EB5 /* Resp_DashboardGrpResult.h */,
+				B2DE9AAE1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m */,
+				B2DE9AB01A10AE7700259EB5 /* Resp_DashboardDtlResult.h */,
+				B2DE9AB11A10AE7700259EB5 /* Resp_DashboardDtlResult.m */,
+				B2DE9AB31A10B03C00259EB5 /* Resp_data.h */,
+				B2DE9AB41A10B03C00259EB5 /* Resp_data.m */,
 			);
 			name = DTOs;
 			sourceTree = "<group>";
@@ -935,6 +963,8 @@
 				B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */,
 				B2CF14941A076BC20042DD64 /* Web_get_permit.h */,
 				B2CF14951A076BC20042DD64 /* Web_get_permit.m */,
+				B2DE9AB61A10B5E700259EB5 /* Web_get_chart_data.h */,
+				B2DE9AB71A10B5E700259EB5 /* Web_get_chart_data.m */,
 			);
 			name = WebRequest;
 			sourceTree = "<group>";
@@ -1170,6 +1200,7 @@
 				B21B71141A0B1D1A007DB5E3 /* BarsSegment.m in Sources */,
 				B2CF14991A077D880042DD64 /* DB_permit.m in Sources */,
 				B203346B19989F31007FCE63 /* Aejob_BrowseViewController.m in Sources */,
+				B2DE9AB21A10AE7700259EB5 /* Resp_DashboardDtlResult.m in Sources */,
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
 				B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */,
 				B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */,
@@ -1178,10 +1209,12 @@
 				B272EA6E19AEDDA400256276 /* UIViewController+TargetViewController.m in Sources */,
 				B2281A981995EF94001A73B0 /* RespAejob_browse.m in Sources */,
 				B28A9CB219D125C800F5C9A7 /* Cell_ShowRecords.m in Sources */,
+				B2DE9AB81A10B5E700259EB5 /* Web_get_chart_data.m in Sources */,
 				B272EA6A19AEDDA400256276 /* MZFormSheetSegue.m in Sources */,
 				B2A3404819DA4CA30051F78B /* RespEpod_updmilestone.m in Sources */,
 				B2C3BAEE19BAEEA9008B9A83 /* Custom_Button.m in Sources */,
 				B21B71131A0B1D1A007DB5E3 /* BarChartB.m in Sources */,
+				B2DE9AAC1A10ABF800259EB5 /* Resp_get_chart.m in Sources */,
 				B2829A3C19D2BEEC0054205E /* DB_Location.m in Sources */,
 				B2033468199898B1007FCE63 /* Menu_home.m in Sources */,
 				B21B71171A0B1D1A007DB5E3 /* LineChartExp.m in Sources */,
@@ -1219,6 +1252,7 @@
 				B270C6101999A70C0089664C /* SKSTableViewCell.m in Sources */,
 				B276C0E61995CA3A00075515 /* SearchFormContract.m in Sources */,
 				B2E391D019C81AEB00612FDD /* Cell_epod_record.m in Sources */,
+				B2DE9AA61A106B3500259EB5 /* Timer_bg_upload_data.m in Sources */,
 				B2A9A0C719985E1800737D08 /* Custom_BtnGraphicMixed.m in Sources */,
 				B2281AB019960311001A73B0 /* FMDatabaseQueue.m in Sources */,
 				B2281AB7199604E0001A73B0 /* DB_RespAppConfig.m in Sources */,
@@ -1235,10 +1269,12 @@
 				B276C1001995DB5F00075515 /* RespAppConfig.m in Sources */,
 				B21B711C1A0B1D1A007DB5E3 /* ColorSelector.m in Sources */,
 				B27D466F19D0227B00B998BC /* DB_single_field.m in Sources */,
+				B2DE9AAF1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m in Sources */,
 				B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */,
 				B21B71121A0B1D1A007DB5E3 /* BarChart.m in Sources */,
 				B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */,
 				B272EA6C19AEDDA400256276 /* NSInvocation+Copy.m in Sources */,
+				B2DE9AB51A10B03C00259EB5 /* Resp_data.m in Sources */,
 				B27D467319D02EC300B998BC /* PopViewManager.m in Sources */,
 				B20334721998B7AC007FCE63 /* Custom_Color.m in Sources */,
 				B276C0DC1995C9DD00075515 /* NSDictionary.m in Sources */,

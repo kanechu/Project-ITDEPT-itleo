@@ -11,6 +11,7 @@
 #import "Menu_home.h"
 #import "Cell_menu_item.h"
 #import "Web_get_permit.h"
+#import "Timer_bg_upload_data.h"
 #import "DB_LoginInfo.h"
 #import "DB_single_field.h"
 #import "DB_RespAppConfig.h"
@@ -164,14 +165,22 @@
      */
     DB_permit *db_permit=[[DB_permit alloc]init];
     [db_permit fn_delete_all_permit_data];
+    //获取定时器
+    NSTimer *GPS_timer=[[Timer_bg_upload_data fn_shareInstance]fn_get_GPS_timer];
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
     VC.refresh=^(){
         [self viewDidLoad];
+        //开启定时器
+        [GPS_timer setFireDate:[NSDate distantPast]];
     };
     [self presentViewController:VC animated:YES completion:^(){}];
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:0 forKey:@"isLogin"];
     [userDefaults synchronize];
+    
+     //关闭定时器
+    [GPS_timer setFireDate:[NSDate distantFuture]];
+
 }
 
 #pragma mark UICollectionView Datasource

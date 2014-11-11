@@ -12,25 +12,20 @@
 #import "DB_ePod.h"
 #import "DB_single_field.h"
 #import "DB_Location.h"
-#import "IsAuto_upload_data.h"
+#import "Timer_bg_upload_data.h"
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "LocationManager.h"
 #import "IsAuto_upload_data.h"
 
-#define  TIMEINTERVAL 60.0f
-
 @interface EPODViewController ()
 
-@property(nonatomic,strong)NSTimer *record_timer;
-@property(nonatomic,strong)NSTimer *GPS_timer;
 @property(nonatomic,strong)NSTimer *record_GPS_timer;
 
 @end
 
 @implementation EPODViewController
-@synthesize record_timer;
-@synthesize GPS_timer;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -82,11 +77,11 @@
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
     NSInteger _flag_transfer_record= [userDefault integerForKey:@"transfer_record"];
     if (_flag_transfer_record==1) {
-        [self fn_open_upload_records_thread];
+        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_records_thread];
     }
      NSInteger _flag_transfer_GPS= [userDefault integerForKey:@"transfer_GPS"];
     if (_flag_transfer_GPS==1) {
-        [self fn_open_upload_GPS_thread];
+        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_GPS_thread];
     }
     NSInteger _flag_record_GPS=[userDefault integerForKey:@"record_GPS"];
     if (_flag_record_GPS==1) {
@@ -191,59 +186,43 @@
 -(void)fn_isAuto_transfer_record{
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
     NSInteger _flag_transfer_record= [userDefault integerForKey:@"transfer_record"];
+    NSTimer *record_timer=[[Timer_bg_upload_data fn_shareInstance]fn_get_record_timer];
     if (_flag_transfer_record==1) {
         //开启定时器
         [record_timer setFireDate:[NSDate distantPast]];
-        [self fn_open_upload_records_thread];
+        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_records_thread];
     }else{
         //关闭定时器
         [record_timer setFireDate:[NSDate distantFuture]];
     }
 
 }
+
 -(void)fn_isAuto_transmission_GPS{
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
     NSInteger _flag_transfer_GPS= [userDefault integerForKey:@"transfer_GPS"];
+    NSTimer *GPS_timer=[[Timer_bg_upload_data fn_shareInstance]fn_get_GPS_timer];
     if (_flag_transfer_GPS==1) {
         //开启定时器
         [GPS_timer setFireDate:[NSDate distantPast]];
-        [self fn_open_upload_GPS_thread];
+        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_GPS_thread];
     }else{
         //关闭定时器
         [GPS_timer setFireDate:[NSDate distantFuture]];
     }
 }
+
 -(void)fn_isRecord_GPS_coordinates{
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
     NSInteger _flag_record_GPS= [userDefault integerForKey:@"record_GPS"];
     if (_flag_record_GPS==1) {
-        [self fn_open_upload_GPS_thread];
         //开启定时器
         [_record_GPS_timer setFireDate:[NSDate distantPast]];
+        [self fn_open_record_GPS_thread];
     }else{
         //关闭定时器
         [_record_GPS_timer setFireDate:[NSDate distantFuture]];
     }
-}
-
--(void)fn_open_upload_records_thread{
-    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    //获取全局的并发队列
-    dispatch_queue_t my_Queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(my_Queue, ^{
-        record_timer=[NSTimer scheduledTimerWithTimeInterval:TIMEINTERVAL target:obj selector:@selector(fn_Automatically_upload_data) userInfo:nil repeats:YES];
-        //定时器要加入runloop中才能执行
-        [[NSRunLoop currentRunLoop]run];
-    });
-}
--(void)fn_open_upload_GPS_thread{
-    IsAuto_upload_data *obj=[[IsAuto_upload_data alloc]init];
-    dispatch_queue_t my_Queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(my_Queue, ^{
-        GPS_timer=[NSTimer scheduledTimerWithTimeInterval:TIMEINTERVAL target:obj selector:@selector(fn_Auto_upload_GPS) userInfo:nil repeats:YES];
-        //定时器要加入runloop中才能执行
-        [[NSRunLoop currentRunLoop]run];
-    });
 }
 -(void)fn_open_record_GPS_thread{
     dispatch_queue_t my_Queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -254,6 +233,7 @@
     });
     
 }
+
 -(void)fn_record_GPS_coordinates{
    __block LocationManager *location_obj=[LocationManager fn_shareManager];
     [location_obj fn_startUpdating];
