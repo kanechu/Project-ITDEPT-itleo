@@ -9,6 +9,7 @@
 #import "Web_get_chart_data.h"
 #import "Web_base.h"
 #import "DB_LoginInfo.h"
+#import "DB_Chart.h"
 
 @implementation Web_get_chart_data
 
@@ -28,7 +29,9 @@
     Web_base *web_obj=[[Web_base alloc]init];
     web_obj.il_url=STR_GET_CHART_URL;
     web_obj.callBack=^(NSMutableArray *arr_resp_result){
-        NSLog(@"%@",arr_resp_result);
+        DB_Chart *db=[[DB_Chart alloc]init];
+        [db fn_delete_all_chart_data];
+        [db fn_save_chart_data:arr_resp_result];
     };
     [web_obj fn_get_chart_data:request_form Auth:auth base_url:base_url];
 }

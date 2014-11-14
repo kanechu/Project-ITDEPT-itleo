@@ -76,7 +76,10 @@ static int DB_VERSION = 1;
         NSString *ls_sql_location=@"CREATE TABLE IF NOT EXISTS location( id_t INTEGER PRIMARY KEY,car_no TEXT NOT NULL DEFAULT'',longitude TEXT NOT NULL DEFAULT'',latitude TEXT NOT NULL DEFAULT'',log_date TEXT NOT NULL DEFAULT'',is_uploaded TEXT NOT NULL DEFAULT '')";
         NSString *ls_sql_sypara=@"CREATE TABLE IF NOT EXISTS sypara( id INTEGER PRIMARY KEY,unique_id TEXT NOT NULL DEFAULT '',para_code TEXT NOT NULL DEFAULT '',company_code TEXT NOT NULL DEFAULT '',data1 TEXT NOT NULL DEFAULT '',data2 TEXT NOT NULL DEFAULT '',data3 TEXT NOT NULL DEFAULT '',data4 TEXT NOT NULL DEFAULT '',data5 TEXT NOT NULL DEFAULT '',para_desc TEXT NOT NULL DEFAULT '',rec_crt_user TEXT NOT NULL DEFAULT '',rec_upd_user TEXT NOT NULL DEFAULT '',rec_crt_date TEXT NOT NULL DEFAULT '',rec_upd_date TEXT NOT NULL DEFAULT '',db_id TEXT NOT NULL DEFAULT '',is_ct TEXT NOT NULL DEFAULT '',crt_user TEXT NOT NULL DEFAULT '',req_user TEXT NOT NULL DEFAULT '',rmk TEXT NOT NULL DEFAULT '')";
         NSString *ls_sql_permit= @"CREATE TABLE IF NOT EXISTS permit( unique_id INTEGER PRIMARY KEY,module_unique_id TEXT NOT NULL DEFAULT '',module_code TEXT NOT NULL DEFAULT '',module_desc TEXT NOT NULL DEFAULT '',module_desc_lang1 TEXT NOT NULL DEFAULT '',module_desc_lang2 TEXT NOT NULL DEFAULT '',f_exec TEXT NOT NULL DEFAULT '')";
-
+        
+        NSString *ls_sql_DashboardGrpDResult=@"CREATE TABLE IF NOT EXISTS DashboardGrpDResult( id INTEGER PRIMARY KEY,unique_id TEXT NOT NULL DEFAULT'',grp_code TEXT NOT NULL DEFAULT'',grp_desc TEXT NOT NULL DEFAULT'',grp_title_en TEXT NOT NULL DEFAULT'',grp_title_cn TEXT NOT NULL DEFAULT '',grp_title_big5 TEXT NOT NULL DEFAULT'',rec_crt_usr TEXT NOT NULL DEFAULT'',rec_upd_usr TEXT NOT NULL DEFAULT'',rec_crt_date TEXT NOT NULL DEFAULT '',rec_upd_date TEXT NOT NULL DEFAULT '')";
+        NSString *ls_sql_DashboardDtlResult=@"CREATE TABLE IF NOT EXISTS DashboardDtlResult( id INTEGER PRIMARY KEY,unique_id TEXT NOT NULL DEFAULT '',chart_seq TEXT NOT NULL DEFAULT '',dhb_group_id TEXT NOT NULL DEFAULT '',chart_title_en TEXT NOT NULL DEFAULT '',chart_title_cn TEXT NOT NULL DEFAULT '',chart_title_big5 TEXT NOT NULL DEFAULT '',chart_desc TEXT NOT NULL DEFAULT '',chart_type TEXT NOT NULL DEFAULT '',x_title_en TEXT NOT NULL DEFAULT '',x_title_cn TEXT NOT NULL DEFAULT '',x_title_big5 TEXT NOT NULL DEFAULT '',y_title_en TEXT NOT NULL DEFAULT '',y_title_cn TEXT NOT NULL DEFAULT '',y_title_big5 TEXT NOT NULL DEFAULT '',rec_crt_usr TEXT NOT NULL DEFAULT '',rec_upd_usr TEXT NOT NULL DEFAULT '',rec_crt_date TEXT NOT NULL DEFAULT '',rec_upd_date TEXT NOT NULL DEFAULT '')";
+        NSString *ls_sql_data= @"CREATE TABLE IF NOT EXISTS data( unique_id INTEGER PRIMARY KEY,serie TEXT NOT NULL DEFAULT '',x TEXT NOT NULL DEFAULT '',y TEXT NOT NULL DEFAULT '',correlation_id INTEGER,FOREIGN KEY (correlation_id) REFERENCES DashboardDtlResult(unique_id))";
         [database executeUpdate:ls_sql_RespAppConfig];
         [database executeUpdate:ls_sql_loginInfo];
         [database executeUpdate:ls_sql_aejob_browse];
@@ -88,6 +91,10 @@ static int DB_VERSION = 1;
         [database executeUpdate:ls_sql_location];
         [database executeUpdate:ls_sql_sypara];
         [database executeUpdate:ls_sql_permit];
+        
+        [database executeUpdate:ls_sql_DashboardGrpDResult];
+        [database executeUpdate:ls_sql_DashboardDtlResult];
+        [database executeUpdate:ls_sql_data];
         [database close];
         return  lb_Success;
     }
