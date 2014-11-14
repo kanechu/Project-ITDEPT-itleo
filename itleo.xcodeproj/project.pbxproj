@@ -105,6 +105,10 @@
 		B28A9CB219D125C800F5C9A7 /* Cell_ShowRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = B28A9CB119D125C800F5C9A7 /* Cell_ShowRecords.m */; };
 		B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = B28F676E19F4B7180045963B /* CheckNetWork.m */; };
 		B28F677519F4F36C0045963B /* CreateFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28F677419F4F36C0045963B /* CreateFootView.m */; };
+		B29204C01A15E82100D133A9 /* ChartView_frame.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29204BF1A15E82100D133A9 /* ChartView_frame.xib */; };
+		B29204C31A15E83000D133A9 /* ChartView_frame.m in Sources */ = {isa = PBXBuildFile; fileRef = B29204C21A15E83000D133A9 /* ChartView_frame.m */; };
+		B29204C51A15E9F000D133A9 /* LegendItem_view.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29204C41A15E9EF00D133A9 /* LegendItem_view.xib */; };
+		B29204C81A15EA1100D133A9 /* LegendItem_view.m in Sources */ = {isa = PBXBuildFile; fileRef = B29204C71A15EA1100D133A9 /* LegendItem_view.m */; };
 		B294DFFE1A1202D600483212 /* DB_Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B294DFFD1A1202D600483212 /* DB_Chart.m */; };
 		B29690BB19C18CCC00976E7E /* ManageImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B29690BA19C18CCC00976E7E /* ManageImageViewController.m */; };
 		B29690C219C1A52900976E7E /* Cell_show_picture.m in Sources */ = {isa = PBXBuildFile; fileRef = B29690C119C1A52900976E7E /* Cell_show_picture.m */; };
@@ -384,6 +388,12 @@
 		B28F676E19F4B7180045963B /* CheckNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetWork.m; sourceTree = "<group>"; };
 		B28F677319F4F36C0045963B /* CreateFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFootView.h; sourceTree = "<group>"; };
 		B28F677419F4F36C0045963B /* CreateFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateFootView.m; sourceTree = "<group>"; };
+		B29204BF1A15E82100D133A9 /* ChartView_frame.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChartView_frame.xib; sourceTree = "<group>"; };
+		B29204C11A15E83000D133A9 /* ChartView_frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartView_frame.h; sourceTree = "<group>"; };
+		B29204C21A15E83000D133A9 /* ChartView_frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartView_frame.m; sourceTree = "<group>"; };
+		B29204C41A15E9EF00D133A9 /* LegendItem_view.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LegendItem_view.xib; sourceTree = "<group>"; };
+		B29204C61A15EA1100D133A9 /* LegendItem_view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LegendItem_view.h; sourceTree = "<group>"; };
+		B29204C71A15EA1100D133A9 /* LegendItem_view.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LegendItem_view.m; sourceTree = "<group>"; };
 		B294DFFC1A1202D600483212 /* DB_Chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_Chart.h; sourceTree = "<group>"; };
 		B294DFFD1A1202D600483212 /* DB_Chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_Chart.m; sourceTree = "<group>"; };
 		B29690B919C18CCC00976E7E /* ManageImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageImageViewController.h; sourceTree = "<group>"; };
@@ -1053,6 +1063,12 @@
 				B255BA0C19B01441004BBF0F /* Custom_textField.m */,
 				B2C3BAEC19BAEEA9008B9A83 /* Custom_Button.h */,
 				B2C3BAED19BAEEA9008B9A83 /* Custom_Button.m */,
+				B29204BF1A15E82100D133A9 /* ChartView_frame.xib */,
+				B29204C11A15E83000D133A9 /* ChartView_frame.h */,
+				B29204C21A15E83000D133A9 /* ChartView_frame.m */,
+				B29204C41A15E9EF00D133A9 /* LegendItem_view.xib */,
+				B29204C61A15EA1100D133A9 /* LegendItem_view.h */,
+				B29204C71A15EA1100D133A9 /* LegendItem_view.m */,
 			);
 			name = "Custom control";
 			sourceTree = "<group>";
@@ -1190,10 +1206,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B29204C51A15E9F000D133A9 /* LegendItem_view.xib in Resources */,
 				B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */,
 				B2A9A0C11998517B00737D08 /* Images.xcassets in Resources */,
 				B276BBB11995B66800075515 /* InfoPlist.strings in Resources */,
 				B276BBBA1995B66800075515 /* Main.storyboard in Resources */,
+				B29204C01A15E82100D133A9 /* ChartView_frame.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,6 +1252,7 @@
 				B2CDE4BD1A130A210091B523 /* DtlChartViewController.m in Sources */,
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
 				B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */,
+				B29204C31A15E83000D133A9 /* ChartView_frame.m in Sources */,
 				B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */,
 				B255BA0D19B01441004BBF0F /* Custom_textField.m in Sources */,
 				B2281ABA19960B78001A73B0 /* DB_LoginInfo.m in Sources */,
@@ -1303,6 +1322,7 @@
 				B276C1001995DB5F00075515 /* RespAppConfig.m in Sources */,
 				B21B711C1A0B1D1A007DB5E3 /* ColorSelector.m in Sources */,
 				B27D466F19D0227B00B998BC /* DB_single_field.m in Sources */,
+				B29204C81A15EA1100D133A9 /* LegendItem_view.m in Sources */,
 				B2CDE4C71A1319C80091B523 /* DashboardGrp3ViewController.m in Sources */,
 				B2DE9AAF1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m in Sources */,
 				B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */,

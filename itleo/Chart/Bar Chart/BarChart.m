@@ -27,13 +27,13 @@
     BarChartB *bar = [[BarChartB alloc]initWithFrame:CGRectMake(YAXIS_BAR_WIDTH, 0, self.bounds.size.width, self.bounds.size.height-XAXIS_BAR_HEIGHT) withOptions:_values withTitles:_groupOrBarTitles barColor:_colorArray];
     bar.backgroundColor = [UIColor clearColor];
     [self addSubview:bar];
-    
+    /*
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 3.0);
     //外框线的颜色
     CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
     CGContextAddRect(context, rect);
-    CGContextStrokePath(context);
+    CGContextStrokePath(context);*/
 }
 
 

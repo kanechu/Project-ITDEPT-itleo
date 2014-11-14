@@ -216,6 +216,7 @@
 
 -(void)drawBackgroundLines
 {
+    lowerlimit=0;//线跟bar的lowerlimit一致
     float delta = scaleY*((upperlimit-lowerlimit)/NUMBER_OF_YAXIS_VALUES);
     float valueX = 0;
     int count = 0;
