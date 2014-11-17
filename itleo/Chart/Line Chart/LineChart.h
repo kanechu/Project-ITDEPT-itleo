@@ -13,5 +13,6 @@
     
 }
 @property (nonatomic,strong) NSArray *xaxisValues;
+@property (nonatomic,strong) NSArray *colorArray;
 - (id)initWithFrame:(CGRect)frame withArray:(NSArray*)optionsArray;
 @end

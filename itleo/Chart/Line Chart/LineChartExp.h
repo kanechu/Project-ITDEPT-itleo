@@ -14,4 +14,5 @@
 @interface LineChartExp : UIScrollView
 @property (nonatomic,strong) NSArray *options;
 @property (nonatomic,strong) NSArray *xAxisValues;
+@property (nonatomic,strong) NSArray *colorArray;
 @end

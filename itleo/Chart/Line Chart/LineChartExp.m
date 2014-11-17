@@ -25,14 +25,15 @@
 {
     LineChart *line = [[LineChart alloc]initWithFrame:CGRectMake(YAXIS_BAR_WIDTH, 0, self.bounds.size.width, self.bounds.size.height-XAXIS_BAR_HEIGHT) withArray:_options];
     line.xaxisValues = _xAxisValues;
+    line.colorArray=_colorArray;
     line.backgroundColor = [UIColor clearColor];
     [self addSubview:line];
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
+   /* CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 3.0);
     CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
     CGContextAddRect(context, rect);
-    CGContextStrokePath(context);
+    CGContextStrokePath(context);*/
 }
 
 @end

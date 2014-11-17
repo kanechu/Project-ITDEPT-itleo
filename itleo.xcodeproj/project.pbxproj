@@ -112,6 +112,7 @@
 		B294DFFE1A1202D600483212 /* DB_Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B294DFFD1A1202D600483212 /* DB_Chart.m */; };
 		B29690BB19C18CCC00976E7E /* ManageImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B29690BA19C18CCC00976E7E /* ManageImageViewController.m */; };
 		B29690C219C1A52900976E7E /* Cell_show_picture.m in Sources */ = {isa = PBXBuildFile; fileRef = B29690C119C1A52900976E7E /* Cell_show_picture.m */; };
+		B29BF0FE1A19CB46005E6A75 /* ChartData_handler.m in Sources */ = {isa = PBXBuildFile; fileRef = B29BF0FD1A19CB46005E6A75 /* ChartData_handler.m */; };
 		B29C35D519CC0741004C5387 /* Checkbox.m in Sources */ = {isa = PBXBuildFile; fileRef = B29C35D419CC0741004C5387 /* Checkbox.m */; };
 		B29E579119E28A9E00E2CAE9 /* DatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B29E579019E28A9E00E2CAE9 /* DatabaseQueue.m */; };
 		B2A328CE19D4F91800DB8F9B /* AddRemarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A328CD19D4F91800DB8F9B /* AddRemarkViewController.m */; };
@@ -400,6 +401,8 @@
 		B29690BA19C18CCC00976E7E /* ManageImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageImageViewController.m; sourceTree = "<group>"; };
 		B29690C019C1A52900976E7E /* Cell_show_picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_show_picture.h; sourceTree = "<group>"; };
 		B29690C119C1A52900976E7E /* Cell_show_picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_show_picture.m; sourceTree = "<group>"; };
+		B29BF0FC1A19CB46005E6A75 /* ChartData_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartData_handler.h; sourceTree = "<group>"; };
+		B29BF0FD1A19CB46005E6A75 /* ChartData_handler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartData_handler.m; sourceTree = "<group>"; };
 		B29C35D319CC0741004C5387 /* Checkbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checkbox.h; sourceTree = "<group>"; };
 		B29C35D419CC0741004C5387 /* Checkbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Checkbox.m; sourceTree = "<group>"; };
 		B29E578F19E28A9E00E2CAE9 /* DatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseQueue.h; sourceTree = "<group>"; };
@@ -683,6 +686,8 @@
 				B2C28EAA199C8F3E00F4D0BF /* Cal_lineHeight.m */,
 				B27B5F4119C924F0000736B3 /* Conversion_helper.h */,
 				B27B5F4219C924F0000736B3 /* Conversion_helper.m */,
+				B29BF0FC1A19CB46005E6A75 /* ChartData_handler.h */,
+				B29BF0FD1A19CB46005E6A75 /* ChartData_handler.m */,
 				B2DE9AA41A106B3500259EB5 /* Timer_bg_upload_data.h */,
 				B2DE9AA51A106B3500259EB5 /* Timer_bg_upload_data.m */,
 				B28F677319F4F36C0045963B /* CreateFootView.h */,
@@ -1250,6 +1255,7 @@
 				B203346B19989F31007FCE63 /* Aejob_BrowseViewController.m in Sources */,
 				B2DE9AB21A10AE7700259EB5 /* Resp_DashboardDtlResult.m in Sources */,
 				B2CDE4BD1A130A210091B523 /* DtlChartViewController.m in Sources */,
+				B29BF0FE1A19CB46005E6A75 /* ChartData_handler.m in Sources */,
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
 				B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */,
 				B29204C31A15E83000D133A9 /* ChartView_frame.m in Sources */,

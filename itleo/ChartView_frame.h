@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChartView_frame : UIView
+@interface ChartView_frame : UIView<UITableViewDataSource,UITableViewDelegate>
 
 @property (copy,nonatomic)NSString *chart_type;//图表类型
 @property (strong,nonatomic)NSArray *alist_values;//图表值

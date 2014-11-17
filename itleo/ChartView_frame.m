@@ -53,6 +53,14 @@
     if ([self.chart_type isEqualToString:@"PIE"]) {
         [self fn_create_pieChart];
     }
+    
+    if ([self.chart_type isEqualToString:@"LINE"]) {
+        [self fn_create_lineChart];
+        [self fn_add_legend_item];
+    }
+    if ([self.chart_type isEqualToString:@"GRID"]) {
+        [self fn_create_GRID_Chart];
+    }
 }
 
 #pragma mark -add legend item
@@ -78,22 +86,55 @@
     [_pieChart_view setTitleValues:alist_values];
     [_pieChart_view setSideValue_Bar:kSideValueBar_Show];
     [_pieChart_view setSegment_Selection:kSegmentSelection_Off];
-    _pieChart_view.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height);
+    _pieChart_view.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height-50);
     [self.iv_chart addSubview:_pieChart_view];
 }
 -(void)fn_create_barChart{
     BarChart  *_barChart_view=[[BarChart alloc]init];
     _barChart_view.backgroundColor=[UIColor clearColor];
     [_barChart_view setColorArray:alist_colors];
-    [_barChart_view setValues:alist_values];
+    [_barChart_view setValues:alist_options];
     
-    [_barChart_view setGroupOrBarTitles:alist_options];
+    [_barChart_view setGroupOrBarTitles:alist_values];
     _barChart_view.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height);
     [self.iv_chart addSubview:_barChart_view];
     
 }
 -(void)fn_create_lineChart{
+    LineChartExp *lineChart=[[LineChartExp alloc]init];
+    lineChart.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height);
+    [lineChart setOptions:alist_options];
+    [lineChart setXAxisValues:alist_values];
+    [lineChart setColorArray:alist_colors];
+    lineChart.backgroundColor=[UIColor clearColor];
+    [self.iv_chart addSubview:lineChart];
+}
+-(void)fn_create_GRID_Chart{
+    UITableView *gridChart=[[UITableView alloc]init];
+    gridChart.backgroundColor=[UIColor clearColor];
+    gridChart.delegate=self;
+    gridChart.dataSource=self;
+    gridChart.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height);
+    [self.iv_chart addSubview:gridChart];
+}
+#pragma mark -UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.alist_options count];
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIndentifer = @"GRID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifer];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1
+                                      reuseIdentifier:cellIndentifer];
+    }
     
+    cell.textLabel.text=[NSString stringWithFormat:@"%@",[self.alist_values objectAtIndex:indexPath.row]];
+    cell.detailTextLabel.text=[NSString stringWithFormat:@"%@",[self.alist_options objectAtIndex:indexPath.row]];
+    return cell;
 }
 
 /*

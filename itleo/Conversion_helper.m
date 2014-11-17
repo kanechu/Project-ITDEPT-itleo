@@ -51,4 +51,25 @@
     }
     return subStr;
 }
+/**
+ *  给数组排序
+ *
+ *  @param alist_source 要排序的数组
+ *  @param sortBy_name  根据关键字排序
+ *
+ *  @return 返回排序后的数组
+ */
++(NSMutableArray*)fn_sort_the_array:(NSMutableArray*)alist_source  key:(NSString*)sortBy_name{
+    //如果需要降序，那么将ascending由YES改为NO
+    NSSortDescriptor *sortDes=[NSSortDescriptor sortDescriptorWithKey:sortBy_name ascending:YES];
+    NSArray *sortDescriptors=[NSArray arrayWithObject:sortDes];
+    NSMutableArray *sortedArray=[[alist_source sortedArrayUsingDescriptors:sortDescriptors]mutableCopy];
+    //重新排序后，返回
+    return sortedArray;
+}
+#pragma mark 对数组进行过滤
++(NSArray*)fn_filtered_criteriaData:(NSString*)value arr:(NSMutableArray*)alist_will_filter{
+    NSArray *filtered=[alist_will_filter filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(serie==%@)",value]];
+    return filtered;
+}
 @end

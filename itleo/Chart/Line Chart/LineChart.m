@@ -135,7 +135,11 @@
 
     for (int j = 0; j<options.count; j++)
     {
-        UIColor *strokeColor = [self colorForLine];
+        /**
+         *  设置线的颜色
+         */
+       // UIColor *strokeColor = [self colorForLine];
+        UIColor *strokeColor =[_colorArray objectAtIndex:j];
         [strokeColor setStroke];
         
         dPoints = [self drawablePoints:lowerlimit andHigh:upperlimit withOptions:options[j]];
