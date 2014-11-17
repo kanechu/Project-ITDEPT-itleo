@@ -19,7 +19,8 @@
 -(NSMutableArray*)fn_get_DashboardDtlResult:(NSString*)group_id;
 
 -(NSMutableArray*)fn_get_data:(NSString*)unique_id;
-
+-(NSMutableArray*)fn_get_xValues_data:(NSString*)unique_id;
+-(NSMutableArray*)fn_get_groupNameAndNum:(NSString*)unique_id;
 -(BOOL)fn_delete_all_chart_data;
 
 @end

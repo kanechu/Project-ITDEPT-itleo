@@ -7,7 +7,8 @@
 //
 
 #import "DtlChartViewController.h"
-
+#import "ChartView_frame.h"
+#define FULLSCREEN [[UIScreen mainScreen]bounds]
 @interface DtlChartViewController ()
 
 @end
@@ -26,6 +27,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    ChartView_frame *chartView=[ChartView_frame fn_shareInstance];
+    chartView.frame=CGRectMake(FULLSCREEN.origin.x, 64, FULLSCREEN.size.width, FULLSCREEN.size.height-64);
+    chartView.alist_options=_alist_options;
+    chartView.alist_values=_alist_values;
+    chartView.alist_colors=_alist_colors;
+    chartView.alist_remarks=_alist_remarks;
+    chartView.chart_type=_chart_type;
+    chartView.ilb_chartTitle.text=_chartTitle;
+    [self.view addSubview:chartView];
     // Do any additional setup after loading the view.
 }
 

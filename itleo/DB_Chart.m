@@ -88,7 +88,7 @@
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb=[db executeQuery:@"select * from data where correlation_id like ?",unique_id];
+            FMResultSet *lfmdb=[db executeQuery:@"select * from data where correlation_id like ? order by x",unique_id];
             while ([lfmdb next]) {
                 [alist_result addObject:[lfmdb resultDictionary]];
             }
@@ -97,6 +97,35 @@
     }];
     return alist_result;
 }
+-(NSMutableArray*)fn_get_xValues_data:(NSString*)unique_id{
+    unique_id=[Conversion_helper fn_cut_whitespace:unique_id];
+    __block NSMutableArray *alist_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            FMResultSet *lfmdb=[db executeQuery:@"select distinct x from data where correlation_id like ? order by x",unique_id];
+            while ([lfmdb next]) {
+                [alist_result addObject:[lfmdb stringForColumn:@"x"]];
+            }
+            [db close];
+        }
+    }];
+    return alist_result;
+}
+-(NSMutableArray*)fn_get_groupNameAndNum:(NSString*)unique_id{
+    unique_id=[Conversion_helper fn_cut_whitespace:unique_id];
+    __block NSMutableArray *alist_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            FMResultSet *lfmdb=[db executeQuery:@"select serie,COUNT(serie) from data where correlation_id like ? group by serie",unique_id];
+            while ([lfmdb next]) {
+                [alist_result addObject:[lfmdb resultDictionary]];
+            }
+            [db close];
+        }
+    }];
+    return alist_result;
+}
+
 -(BOOL)fn_delete_all_chart_data{
     __block BOOL isDeleted=NO;
     [queue inDataBase:^(FMDatabase *db){

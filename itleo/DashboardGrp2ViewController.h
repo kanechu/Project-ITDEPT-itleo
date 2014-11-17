@@ -11,5 +11,7 @@
 @interface DashboardGrp2ViewController : UIViewController
 
 @property(nonatomic,copy)NSString *unique_id;
+@property(nonatomic,copy)NSString *language;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *iscrollView;
 @end

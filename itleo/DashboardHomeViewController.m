@@ -10,12 +10,13 @@
 #import "DashboardGrp1ViewController.h"
 #import "DashboardGrp2ViewController.h"
 #import "DashboardGrp3ViewController.h"
+#import "Conversion_helper.h"
 #import "DB_Chart.h"
+#import "DB_LoginInfo.h"
 @interface DashboardHomeViewController ()
 
 @property (nonatomic, strong) UIViewController *currentViewController;
 @property (nonatomic, strong) NSMutableArray *alist_GrpResult;
-@property (nonatomic, copy) NSString *group_id;
 
 @end
 
@@ -23,7 +24,6 @@
 @synthesize segment;
 @synthesize currentViewController;
 @synthesize containerView;
-@synthesize group_id;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self fn_get_GrpResult_data];
+    [self fn_set_segmentControl_title];
     
     //  for adjust segment widths based on their content widths
     [self.segment setApportionsSegmentWidthsByContent:YES];
@@ -54,36 +54,46 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)fn_get_GrpResult_data{
+-(void)fn_set_segmentControl_title{
     DB_Chart *db_chart=[[DB_Chart alloc]init];
     _alist_GrpResult=[db_chart fn_get_DashboardGrpDResult_data];
+    //根据unique_id给数组升序排序
+    _alist_GrpResult=[Conversion_helper fn_sort_the_array:_alist_GrpResult key:@"unique_id"];
+    NSString *lang_code=[self fn_get_language_type];
+    NSInteger i=0;
+    for (NSMutableDictionary *dic in _alist_GrpResult) {
+        NSString *grp_title=@"";
+        if ([lang_code isEqualToString:@"EN"]) {
+            grp_title=[dic valueForKey:@"grp_title_en"];
+        }
+        if ([lang_code isEqualToString:@"CN"]) {
+            grp_title=[dic valueForKey:@"grp_title_cn"];
+        }
+        [segment setTitle:grp_title forSegmentAtIndex:i];
+        i++;
+    }
      
 }
--(void)fn_set_group_id:(NSInteger)index{
-    NSString *grp_code_value=@"";
-    switch (index) {
-        case 0:
-            grp_code_value=@"SHIPMENT_SUMMARY";
-            break;
-        case 1:
-            grp_code_value=@"TESTGRP2";
-            break;
-        case 2:
-            grp_code_value=@"TESTGRP3";
-            break;
-            
-        default:
-            break;
+-(NSString*)fn_get_language_type{
+    DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
+    NSMutableArray *arr=[db fn_get_all_LoginInfoData];
+    NSString *lang_code=@"";
+    if ([arr count]!=0) {
+        lang_code=[[arr objectAtIndex:0]valueForKey:@"lang_code"];
     }
-    for (NSMutableDictionary *dic in _alist_GrpResult) {
-        NSString *grp_code=[dic valueForKey:@"grp_code"];
-        if ([grp_code isEqualToString:grp_code_value]) {
-            group_id=[dic valueForKey:@"unique_id"];
-        }
-    }
+    return lang_code;
 }
+-(NSString*)fn_get_group_id:(NSInteger)index{
+    NSString *group_id=@"";
+    if (index<[_alist_GrpResult count]) {
+        NSMutableDictionary *dic=[_alist_GrpResult objectAtIndex:index];
+        group_id=[dic valueForKey:@"unique_id"];
+    }
+    return group_id;
+}
+#pragma mark -get relate ViewController
 - (UIViewController *)fn_viewControllerForSegmentIndex:(NSInteger)index {
-    [self fn_set_group_id:index];
+    NSString *group_id=[self fn_get_group_id:index];
     DashboardGrp1ViewController *grp1VC;
     DashboardGrp2ViewController *grp2VC;
     DashboardGrp3ViewController *grp3VC;
@@ -91,16 +101,19 @@
         case 0:
             grp1VC = [self.storyboard instantiateViewControllerWithIdentifier:@"DashboardGrp1ViewController"];
             grp1VC.unique_id=group_id;
+            grp1VC.language=[self fn_get_language_type];
             return grp1VC;
             break;
         case 1:
             grp2VC = [self.storyboard instantiateViewControllerWithIdentifier:@"DashboardGrp2ViewController"];
             grp2VC.unique_id=group_id;
+            grp2VC.language=[self fn_get_language_type];
             return grp2VC;
             break;
         case 2:
             grp3VC = [self.storyboard instantiateViewControllerWithIdentifier:@"DashboardGrp3ViewController"];
             grp3VC.unique_id=group_id;
+            grp3VC.language=[self fn_get_language_type];
             return grp3VC;
             break;
     }

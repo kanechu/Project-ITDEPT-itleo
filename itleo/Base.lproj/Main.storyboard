@@ -474,9 +474,15 @@
                     <view key="view" contentMode="scaleToFill" id="aHe-eo-Bx2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="1" green="0.2139028285" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="wPT-va-QdN">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </scrollView>
+                        </subviews>
                     </view>
                     <connections>
+                        <outlet property="iscrollView" destination="wPT-va-QdN" id="4UK-Re-Ict"/>
                         <segue destination="uZF-pO-cKy" kind="push" identifier="grp2_dtl" id="Kvh-m1-MzX"/>
                     </connections>
                 </viewController>
@@ -1263,9 +1269,15 @@
                     <view key="view" contentMode="scaleToFill" id="Kz6-Sx-Xmk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.38823529410000002" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qpf-mg-i7N">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </scrollView>
+                        </subviews>
                     </view>
                     <connections>
+                        <outlet property="iscrollView" destination="qpf-mg-i7N" id="rRg-rg-WEA"/>
                         <segue destination="uZF-pO-cKy" kind="push" identifier="grp3_dtl" id="W2b-0w-phS"/>
                     </connections>
                 </viewController>
@@ -1958,6 +1970,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hfW-68-GPY"/>
+        <segue reference="W2b-0w-phS"/>
     </inferredMetricsTieBreakers>
 </document>

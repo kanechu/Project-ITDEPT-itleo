@@ -10,8 +10,6 @@
 
 @interface DashboardHomeViewController : UIViewController
 
-@property (copy, nonatomic) NSString *language;
-
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
