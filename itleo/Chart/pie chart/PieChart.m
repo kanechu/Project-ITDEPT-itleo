@@ -90,8 +90,12 @@
     
     for (int i = 0; i<options.count; i++)
     {
-        UIColor *currentColor = [self colorForSegment];
-        
+        UIColor *currentColor =nil;
+        if (_segmentColors.count==options.count) {
+            currentColor=[_segmentColors objectAtIndex:i];
+        }else{
+            currentColor = [self colorForSegment];
+        }
         float value = ([options[i]floatValue]/total)*100;
         CGFloat angle = (angleSize/100)*value;
         

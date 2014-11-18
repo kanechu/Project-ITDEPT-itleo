@@ -30,7 +30,7 @@
             float x = valueX;
             float y = self.bounds.size.height-20;
             
-            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 15, 16)];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 30, 16)];
             label.font = [UIFont systemFontOfSize:6];
             label.center = CGPointMake(x, label.frame.origin.y);
             
@@ -40,7 +40,7 @@
                 label.text = @"";
             
             label.backgroundColor = [UIColor clearColor];
-            
+            //label旋转45°
             label.transform = CGAffineTransformMakeRotation(-M_PI_4);
             
             NSValue *value = _titlesPositions[count];
@@ -60,7 +60,7 @@
             float x = valueX;
             float y = self.bounds.size.height-20;
             
-            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 15, 16)];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(x, y, 30, 16)];
             label.font = [UIFont systemFontOfSize:6];
             label.center = CGPointMake(x, label.frame.origin.y);
             

@@ -75,9 +75,11 @@
         if ([_chart_type isEqualToString:@"PIE"] || [_chart_type isEqualToString:@"GRID"]) {
             chartView.alist_values=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataSerieValues];
             chartView.alist_options=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataYoptions];
+            chartView.alist_colors=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataColors];
         }else{
             chartView.alist_values=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataXvalues];
             chartView.alist_options=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataYoptions];
+             chartView.alist_colors=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataColors];
         }
         chartView.alist_remarks=[ChartData_handler fn_get_arr_value:unique_id type:3];
         chartView.frame=CGRectMake(CHART_SPACE, i*HEIGHT, WIDTH, HEIGHT);

@@ -11,7 +11,8 @@ typedef enum {
     kChartDataXvalues,
     kChartDataSerieValues,
     kChartDataYoptions,
-    kChartDataRemarks
+    kChartDataRemarks,
+    kChartDataColors
 }KChartDataType;
 
 @interface ChartData_handler : NSObject

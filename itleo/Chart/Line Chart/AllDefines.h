@@ -13,7 +13,7 @@
 #define XAXIS_BAR_HEIGHT 30 //x轴标识与bar之间的距离
 #define YAXIS_BAR_WIDTH 30 //y轴标识与bar之间的距离
 
-#define NUMBER_OF_YAXIS_VALUES 10 //背景线的数目
+#define NUMBER_OF_YAXIS_VALUES 5 //背景线的数目
 
 #define BAR_WIDTH 20 //bar的宽度
 

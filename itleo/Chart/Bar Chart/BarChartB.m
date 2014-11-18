@@ -142,7 +142,7 @@
     
     for (int j = 0; j<options.count; j++)
     {
-        UIColor *colorR = [self colorForLine];
+        //UIColor *colorR = [self colorForLine];
         dPoints = [self drawablePoints:lowerlimit andHigh:upperlimit withOptions:options[j]];
         
         for (int i = 0; i<dPoints.count; i++)
@@ -156,7 +156,7 @@
             segment.delegate = self;
             
             if (options.count == 1)
-                segment.color = colorR;
+                segment.color = colorArray[j];
             else
                 segment.color = colorArray[i];
             

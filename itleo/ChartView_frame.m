@@ -80,16 +80,20 @@
 }
 #pragma mark -create chart
 -(void)fn_create_pieChart{
+    //移除iv_chart上的所有子视图
+    [self.iv_chart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     PieChart *_pieChart_view=[[PieChart alloc]init];
     
     [_pieChart_view setOptions:alist_options];
     [_pieChart_view setTitleValues:alist_values];
+    [_pieChart_view setSegmentColors:alist_colors];
     [_pieChart_view setSideValue_Bar:kSideValueBar_Show];
     [_pieChart_view setSegment_Selection:kSegmentSelection_Off];
     _pieChart_view.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height-50);
     [self.iv_chart addSubview:_pieChart_view];
 }
 -(void)fn_create_barChart{
+    [self.iv_chart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     BarChart  *_barChart_view=[[BarChart alloc]init];
     _barChart_view.backgroundColor=[UIColor clearColor];
     [_barChart_view setColorArray:alist_colors];
@@ -101,6 +105,7 @@
     
 }
 -(void)fn_create_lineChart{
+    [self.iv_chart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     LineChartExp *lineChart=[[LineChartExp alloc]init];
     lineChart.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height);
     [lineChart setOptions:alist_options];
@@ -110,6 +115,7 @@
     [self.iv_chart addSubview:lineChart];
 }
 -(void)fn_create_GRID_Chart{
+    [self.iv_chart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     UITableView *gridChart=[[UITableView alloc]init];
     gridChart.backgroundColor=[UIColor clearColor];
     gridChart.delegate=self;

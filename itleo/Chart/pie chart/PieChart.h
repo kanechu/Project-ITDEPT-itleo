@@ -11,6 +11,7 @@
 @interface PieChart : UIView
 @property (nonatomic,strong) NSArray *options;
 @property (nonatomic,strong) NSArray *titleValues;
+@property (nonatomic,strong) NSArray *segmentColors;
 @property (nonatomic) SideValueBar sideValue_Bar;
 @property (nonatomic) SegmentSelection segment_Selection;
 @end
