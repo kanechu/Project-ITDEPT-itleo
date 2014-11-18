@@ -70,11 +70,11 @@
         chartView.chart_type=_chart_type;
         chartView.ilb_chartTitle.text=chart_title;
         if ([_chart_type isEqualToString:@"PIE"] || [_chart_type isEqualToString:@"GRID"]) {
-            chartView.alist_values=[ChartData_handler fn_get_chartData_value:unique_id type:1];
-            chartView.alist_options=[ChartData_handler fn_get_chartData_value:unique_id type:2];
+            chartView.alist_values=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataSerieValues];
+            chartView.alist_options=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataYoptions];
         }else{
-            chartView.alist_values=[ChartData_handler fn_get_arr_value:unique_id type:2];
-            chartView.alist_options=[ChartData_handler fn_get_arr_value:unique_id type:1];
+            chartView.alist_values=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataXvalues];
+            chartView.alist_options=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataYoptions];
         }
         chartView.alist_remarks=[ChartData_handler fn_get_arr_value:unique_id type:3];
         chartView.frame=CGRectMake(CHART_SPACE, i*HEIGHT, WIDTH, HEIGHT);

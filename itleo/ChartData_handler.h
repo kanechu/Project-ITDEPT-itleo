@@ -7,11 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef enum {
+    kChartDataXvalues,
+    kChartDataSerieValues,
+    kChartDataYoptions,
+    kChartDataRemarks
+}KChartDataType;
 
 @interface ChartData_handler : NSObject
 
-+(NSMutableArray*)fn_get_arr_value:(NSString*)unique_id type:(NSInteger)flag_arr_type;
++(NSMutableArray*)fn_get_arr_value:(NSString*)unique_id type:(KChartDataType)arr_type;
 
-+(NSMutableArray*)fn_get_chartData_value:(NSString*)unique_id type:(NSInteger)flag_arr_type;
++(NSMutableArray*)fn_get_chartData_value:(NSString*)unique_id type:(KChartDataType)arr_type;
 
 @end

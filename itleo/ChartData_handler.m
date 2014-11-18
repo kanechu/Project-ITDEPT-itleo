@@ -15,12 +15,11 @@
  *  获取柱状图、折线图表相关数据
  *
  *  @param unique_id     用于获取图表数据
- *  @param flag_arr_type 为1获取y坐标数据
- 为2 获取x坐标数据  为3 获取附注数据
+ *  @param arr_type 获取y坐标数据,获取x坐标数据,获取附注数据
  *
  *  @return 把数据保存于数组中并返回
  */
-+(NSMutableArray*)fn_get_arr_value:(NSString*)unique_id type:(NSInteger)flag_arr_type{
++(NSMutableArray*)fn_get_arr_value:(NSString*)unique_id type:(KChartDataType)arr_type{
     unique_id=[Conversion_helper fn_cut_whitespace:unique_id];
    DB_Chart *db_chart=[[DB_Chart alloc]init];
     //存储返回的数据
@@ -40,7 +39,7 @@
         [alist_remarks addObject:value];
     }
     for (NSArray *arr_filter in alist_filter) {
-        if (flag_arr_type==1) {
+        if (arr_type==kChartDataYoptions) {
             NSMutableArray *arr_result_data=[NSMutableArray array];
             for (NSMutableDictionary *dic in arr_filter) {
                 NSString *y=[dic valueForKey:@"y"];
@@ -50,10 +49,10 @@
             
         }
     }
-    if (flag_arr_type==2) {
+    if (arr_type==kChartDataXvalues) {
         alist_results=[db_chart fn_get_xValues_data:unique_id];
     }
-    if (flag_arr_type==3) {
+    if (arr_type==kChartDataRemarks) {
         return alist_remarks;
     }else{
         return alist_results;
@@ -63,12 +62,11 @@
  *  获取饼状图、网格图表相关数据
  *
  *  @param unique_id     用于获取图表数据
- *  @param flag_arr_type 为1获取serie数据
- 为2 获取分割数据
+ *  @param arr_type 获取serie数据,获取分割数据
  *
  *  @return 把数据保存于数组中并返回
  */
-+(NSMutableArray*)fn_get_chartData_value:(NSString*)unique_id type:(NSInteger)flag_arr_type{
++(NSMutableArray*)fn_get_chartData_value:(NSString*)unique_id type:(KChartDataType)arr_type{
     DB_Chart *db_chart=[[DB_Chart alloc]init];
     //存储返回的数据
     NSMutableArray *alist_results=[[NSMutableArray alloc]initWithCapacity:1];
@@ -77,10 +75,10 @@
     for (NSMutableDictionary *dic in alist_data) {
         NSString *serie=[dic valueForKey:@"serie"];
         NSString *y=[dic valueForKey:@"y"];
-        if (flag_arr_type==1) {
+        if (arr_type==kChartDataSerieValues) {
             [alist_results addObject:serie];
         }
-        if (flag_arr_type==2) {
+        if (arr_type==kChartDataYoptions) {
             [alist_results addObject:y];
         }
     }
