@@ -72,4 +72,14 @@
     NSArray *filtered=[alist_will_filter filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(serie==%@)",value]];
     return filtered;
 }
+#pragma mark -UIView转Image
++(UIImage*)fn_imageWithView:(UIView*)view{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, [[UIScreen mainScreen]scale]);
+    //UIGraphicsBeginImageContext(view.bounds.size)相对比较模糊
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 @end

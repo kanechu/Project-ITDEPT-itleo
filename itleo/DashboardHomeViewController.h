@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChartData_handler.m"
 
-@interface DashboardHomeViewController : UIViewController
+@interface DashboardHomeViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
 - (IBAction)fn_segment_valueChange:(id)sender;
+
 
 @end

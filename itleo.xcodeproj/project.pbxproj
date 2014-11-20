@@ -112,7 +112,6 @@
 		B294DFFE1A1202D600483212 /* DB_Chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B294DFFD1A1202D600483212 /* DB_Chart.m */; };
 		B29690BB19C18CCC00976E7E /* ManageImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B29690BA19C18CCC00976E7E /* ManageImageViewController.m */; };
 		B29690C219C1A52900976E7E /* Cell_show_picture.m in Sources */ = {isa = PBXBuildFile; fileRef = B29690C119C1A52900976E7E /* Cell_show_picture.m */; };
-		B29BF0FE1A19CB46005E6A75 /* ChartData_handler.m in Sources */ = {isa = PBXBuildFile; fileRef = B29BF0FD1A19CB46005E6A75 /* ChartData_handler.m */; };
 		B29C35D519CC0741004C5387 /* Checkbox.m in Sources */ = {isa = PBXBuildFile; fileRef = B29C35D419CC0741004C5387 /* Checkbox.m */; };
 		B29E579119E28A9E00E2CAE9 /* DatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B29E579019E28A9E00E2CAE9 /* DatabaseQueue.m */; };
 		B2A328CE19D4F91800DB8F9B /* AddRemarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A328CD19D4F91800DB8F9B /* AddRemarkViewController.m */; };
@@ -136,6 +135,7 @@
 		B2B136BC1A032AA3001317C8 /* Web_get_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */; };
 		B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */; };
 		B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B5C12F19E3D6420040F585 /* Localized.strings */; };
+		B2B8678B1A1D7A69002E2F48 /* Cell_summary_chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8678A1A1D7A69002E2F48 /* Cell_summary_chart.m */; };
 		B2BDD57119D8ED4C00FEEA08 /* Truck_order_image_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDD57019D8ED4C00FEEA08 /* Truck_order_image_data.m */; };
 		B2C28E9F199C47B100F4D0BF /* DetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C28E9E199C47B100F4D0BF /* DetailView.m */; };
 		B2C28EA5199C693500F4D0BF /* Cell_aejob_dtl_browse.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C28EA4199C693500F4D0BF /* Cell_aejob_dtl_browse.m */; };
@@ -146,9 +146,6 @@
 		B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C4722919FA65B70099199D /* EPODSettingsViewController.m */; };
 		B2CD8010199DFEDA00E6DCB7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */; };
 		B2CDE4BD1A130A210091B523 /* DtlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CDE4BC1A130A210091B523 /* DtlChartViewController.m */; };
-		B2CDE4C11A13199E0091B523 /* DashboardGrp1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CDE4C01A13199E0091B523 /* DashboardGrp1ViewController.m */; };
-		B2CDE4C41A1319B50091B523 /* DashboardGrp2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CDE4C31A1319B50091B523 /* DashboardGrp2ViewController.m */; };
-		B2CDE4C71A1319C80091B523 /* DashboardGrp3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CDE4C61A1319C80091B523 /* DashboardGrp3ViewController.m */; };
 		B2CF14901A0768B00042DD64 /* Resp_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF148F1A0768B00042DD64 /* Resp_permit.m */; };
 		B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14951A076BC20042DD64 /* Web_get_permit.m */; };
 		B2CF14991A077D880042DD64 /* DB_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14981A077D880042DD64 /* DB_permit.m */; };
@@ -453,6 +450,8 @@
 		B2B5C13019E3D65E0040F585 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localized.strings; sourceTree = "<group>"; };
 		B2B5C13119E3D6600040F585 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localized.strings"; sourceTree = "<group>"; };
 		B2B5C13219E3D6610040F585 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localized.strings"; sourceTree = "<group>"; };
+		B2B867891A1D7A69002E2F48 /* Cell_summary_chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_summary_chart.h; sourceTree = "<group>"; };
+		B2B8678A1A1D7A69002E2F48 /* Cell_summary_chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_summary_chart.m; sourceTree = "<group>"; };
 		B2BDD56F19D8ED4C00FEEA08 /* Truck_order_image_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Truck_order_image_data.h; sourceTree = "<group>"; };
 		B2BDD57019D8ED4C00FEEA08 /* Truck_order_image_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Truck_order_image_data.m; sourceTree = "<group>"; };
 		B2C28E9D199C47B100F4D0BF /* DetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailView.h; sourceTree = "<group>"; };
@@ -473,12 +472,6 @@
 		B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B2CDE4BB1A130A210091B523 /* DtlChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DtlChartViewController.h; sourceTree = "<group>"; };
 		B2CDE4BC1A130A210091B523 /* DtlChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DtlChartViewController.m; sourceTree = "<group>"; };
-		B2CDE4BF1A13199E0091B523 /* DashboardGrp1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardGrp1ViewController.h; sourceTree = "<group>"; };
-		B2CDE4C01A13199E0091B523 /* DashboardGrp1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardGrp1ViewController.m; sourceTree = "<group>"; };
-		B2CDE4C21A1319B50091B523 /* DashboardGrp2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardGrp2ViewController.h; sourceTree = "<group>"; };
-		B2CDE4C31A1319B50091B523 /* DashboardGrp2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardGrp2ViewController.m; sourceTree = "<group>"; };
-		B2CDE4C51A1319C80091B523 /* DashboardGrp3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DashboardGrp3ViewController.h; sourceTree = "<group>"; };
-		B2CDE4C61A1319C80091B523 /* DashboardGrp3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashboardGrp3ViewController.m; sourceTree = "<group>"; };
 		B2CF148E1A0768B00042DD64 /* Resp_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_permit.h; sourceTree = "<group>"; };
 		B2CF148F1A0768B00042DD64 /* Resp_permit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_permit.m; sourceTree = "<group>"; };
 		B2CF14941A076BC20042DD64 /* Web_get_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_permit.h; sourceTree = "<group>"; };
@@ -805,12 +798,6 @@
 				B270C624199A02C70089664C /* Aejob_dtl_BrowseViewController.m */,
 				B260060619B9B9B800393EA7 /* DashboardHomeViewController.h */,
 				B260060719B9B9B800393EA7 /* DashboardHomeViewController.m */,
-				B2CDE4BF1A13199E0091B523 /* DashboardGrp1ViewController.h */,
-				B2CDE4C01A13199E0091B523 /* DashboardGrp1ViewController.m */,
-				B2CDE4C21A1319B50091B523 /* DashboardGrp2ViewController.h */,
-				B2CDE4C31A1319B50091B523 /* DashboardGrp2ViewController.m */,
-				B2CDE4C51A1319C80091B523 /* DashboardGrp3ViewController.h */,
-				B2CDE4C61A1319C80091B523 /* DashboardGrp3ViewController.m */,
 				B2CDE4BB1A130A210091B523 /* DtlChartViewController.h */,
 				B2CDE4BC1A130A210091B523 /* DtlChartViewController.m */,
 				B2C3BAE619BAE215008B9A83 /* EPODViewController.h */,
@@ -970,6 +957,8 @@
 				B2033461199897FE007FCE63 /* Cell_menu_item.m */,
 				B29690C019C1A52900976E7E /* Cell_show_picture.h */,
 				B29690C119C1A52900976E7E /* Cell_show_picture.m */,
+				B2B867891A1D7A69002E2F48 /* Cell_summary_chart.h */,
+				B2B8678A1A1D7A69002E2F48 /* Cell_summary_chart.m */,
 				B270C6121999B3990089664C /* Cell_aejob_browse.h */,
 				B270C6131999B3990089664C /* Cell_aejob_browse.m */,
 				B2750D6A199B18B2008ADCA1 /* Cell_advance_search.h */,
@@ -1255,7 +1244,6 @@
 				B203346B19989F31007FCE63 /* Aejob_BrowseViewController.m in Sources */,
 				B2DE9AB21A10AE7700259EB5 /* Resp_DashboardDtlResult.m in Sources */,
 				B2CDE4BD1A130A210091B523 /* DtlChartViewController.m in Sources */,
-				B29BF0FE1A19CB46005E6A75 /* ChartData_handler.m in Sources */,
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
 				B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */,
 				B29204C31A15E83000D133A9 /* ChartView_frame.m in Sources */,
@@ -1270,7 +1258,6 @@
 				B2A3404819DA4CA30051F78B /* RespEpod_updmilestone.m in Sources */,
 				B2C3BAEE19BAEEA9008B9A83 /* Custom_Button.m in Sources */,
 				B21B71131A0B1D1A007DB5E3 /* BarChartB.m in Sources */,
-				B2CDE4C11A13199E0091B523 /* DashboardGrp1ViewController.m in Sources */,
 				B2DE9AAC1A10ABF800259EB5 /* Resp_get_chart.m in Sources */,
 				B2829A3C19D2BEEC0054205E /* DB_Location.m in Sources */,
 				B2033468199898B1007FCE63 /* Menu_home.m in Sources */,
@@ -1303,7 +1290,6 @@
 				B2B136B91A032A2E001317C8 /* DB_sypara.m in Sources */,
 				B21B71161A0B1D1A007DB5E3 /* LineChart.m in Sources */,
 				B272EA6619AEDDA400256276 /* MZAppearance.m in Sources */,
-				B2CDE4C41A1319B50091B523 /* DashboardGrp2ViewController.m in Sources */,
 				B276C0E41995CA3A00075515 /* AuthContract.m in Sources */,
 				B29E579119E28A9E00E2CAE9 /* DatabaseQueue.m in Sources */,
 				B2A7481019BEFD57006C96D1 /* MyView.m in Sources */,
@@ -1329,7 +1315,6 @@
 				B21B711C1A0B1D1A007DB5E3 /* ColorSelector.m in Sources */,
 				B27D466F19D0227B00B998BC /* DB_single_field.m in Sources */,
 				B29204C81A15EA1100D133A9 /* LegendItem_view.m in Sources */,
-				B2CDE4C71A1319C80091B523 /* DashboardGrp3ViewController.m in Sources */,
 				B2DE9AAF1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m in Sources */,
 				B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */,
 				B21B71121A0B1D1A007DB5E3 /* BarChart.m in Sources */,
@@ -1340,6 +1325,7 @@
 				B20334721998B7AC007FCE63 /* Custom_Color.m in Sources */,
 				B276C0DC1995C9DD00075515 /* NSDictionary.m in Sources */,
 				B2281AB119960311001A73B0 /* FMResultSet.m in Sources */,
+				B2B8678B1A1D7A69002E2F48 /* Cell_summary_chart.m in Sources */,
 				B2A747B319BE9795006C96D1 /* QRadioButton.m in Sources */,
 				B2281AAF19960311001A73B0 /* FMDatabasePool.m in Sources */,
 				B276C0EA1995CC1800075515 /* Web_base.m in Sources */,

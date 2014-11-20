@@ -67,6 +67,9 @@
 -(void)fn_add_legend_item{
     for (int i=0; i<[alist_remarks count]; i++) {
         LegendItem_view *legendView=[LegendItem_view fn_shareInstance];
+        if ([_chart_type isEqualToString:@"LINE"]) {
+            legendView.ilb_color.frame=CGRectMake(legendView.ilb_color.frame.origin.x, legendView.ilb_color.frame.origin.y+5, legendView.ilb_color.frame.size.width, 2);
+        }
         legendView.ilb_color.backgroundColor=[alist_colors objectAtIndex:i];
         legendView.ilb_remark.text=[alist_remarks objectAtIndex:i];
         if (i%2==0) {

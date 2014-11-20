@@ -19,4 +19,5 @@
 +(NSString*)fn_cut_pre_string:(NSString*)str;
 +(NSMutableArray*)fn_sort_the_array:(NSMutableArray*)alist_source  key:(NSString*)sortBy_name;
 +(NSArray*)fn_filtered_criteriaData:(NSString*)value arr:(NSMutableArray*)alist_will_filter;
++(UIImage*)fn_imageWithView:(UIView*)view;
 @end

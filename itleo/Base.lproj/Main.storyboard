@@ -435,60 +435,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView contentMode="scaleToFill" id="yVv-g9-fX4">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="bQQ-a0-R9Q">
+                                <rect key="frame" x="0.0" y="64" width="320" height="29"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                <segments>
+                                    <segment title="line"/>
+                                    <segment title="bar"/>
+                                    <segment title="pie"/>
+                                </segments>
+                                <connections>
+                                    <action selector="fn_segment_valueChange:" destination="X6A-kN-jCf" eventType="valueChanged" id="B4m-Xc-v6v"/>
+                                </connections>
+                            </segmentedControl>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="ImP-W0-1Y8">
+                                <rect key="frame" x="0.0" y="94" width="320" height="474"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </containerView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YOe-LE-B9U">
+                                    <size key="itemSize" width="96" height="86"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="Cell_summary_chart" reuseIdentifier="Cell_summary_chart1" id="DaS-V6-xx8" customClass="Cell_summary_chart">
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="86"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="96" height="86"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="WXP-NZ-Rho">
+                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="86"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="img_summary_chart" destination="WXP-NZ-Rho" id="TF8-sv-HmL"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="xwp-Qh-5J0">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" id="bQQ-a0-R9Q">
-                            <rect key="frame" x="20" y="8" width="280" height="29"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <segments>
-                                <segment title="line"/>
-                                <segment title="bar"/>
-                                <segment title="pie"/>
-                            </segments>
-                            <connections>
-                                <action selector="fn_segment_valueChange:" destination="X6A-kN-jCf" eventType="valueChanged" id="B4m-Xc-v6v"/>
-                            </connections>
-                        </segmentedControl>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="containerView" destination="yVv-g9-fX4" id="mnV-aH-17x"/>
+                        <outlet property="collectionview" destination="ImP-W0-1Y8" id="cfL-QN-MKY"/>
                         <outlet property="segment" destination="bQQ-a0-R9Q" id="WYX-ZM-4GP"/>
+                        <segue destination="uZF-pO-cKy" kind="push" identifier="segue_dtl" id="2ym-X5-pgK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7mF-eO-uUP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-599" y="1345"/>
-        </scene>
-        <!--Dashboard Grp2 View Controller-->
-        <scene sceneID="s8G-wE-IKr">
-            <objects>
-                <viewController storyboardIdentifier="DashboardGrp2ViewController" id="YXY-Ip-b1T" customClass="DashboardGrp2ViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aHe-eo-Bx2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="wPT-va-QdN">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </scrollView>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="iscrollView" destination="wPT-va-QdN" id="4UK-Re-Ict"/>
-                        <segue destination="uZF-pO-cKy" kind="push" identifier="grp2_dtl" id="Kvh-m1-MzX"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dO2-Kq-wBq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-210" y="1199"/>
+            <point key="canvasLocation" x="-583" y="845"/>
         </scene>
         <!--Dtl Chart View Controller-->
         <scene sceneID="JpH-ar-LhJ">
@@ -503,30 +509,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywA-jA-8Ta" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="430" y="1175"/>
-        </scene>
-        <!--Dashboard Grp1 View Controller-->
-        <scene sceneID="E1M-LE-DH8">
-            <objects>
-                <viewController storyboardIdentifier="DashboardGrp1ViewController" id="ohs-oN-lWp" customClass="DashboardGrp1ViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Tkh-t7-aEw">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="Anl-sv-H8I">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </scrollView>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="iscrollView" destination="Anl-sv-H8I" id="WY6-dg-iTY"/>
-                        <segue destination="uZF-pO-cKy" kind="push" identifier="grp1_dtl" id="hfW-68-GPY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mtr-zQ-Zxv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-221" y="489"/>
+            <point key="canvasLocation" x="19" y="845"/>
         </scene>
         <!--Order Info View Controller-->
         <scene sceneID="eTk-tU-1U7">
@@ -606,7 +589,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dz9-gf-3VI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1025" y="1531"/>
+            <point key="canvasLocation" x="509" y="1203"/>
         </scene>
         <!--Add Remark View Controller-->
         <scene sceneID="a0F-mC-YhK">
@@ -669,7 +652,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pu5-ub-BH1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1073" y="2315"/>
+            <point key="canvasLocation" x="745" y="2031"/>
         </scene>
         <!--Manage Image View Controller-->
         <scene sceneID="g3I-a8-CKT">
@@ -804,7 +787,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SDt-EG-MrQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="673" y="2067"/>
+            <point key="canvasLocation" x="1185" y="1619"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Tad-J3-TbA">
@@ -910,7 +893,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgW-i9-bzm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-563" y="2679"/>
+            <point key="canvasLocation" x="-607" y="2207"/>
         </scene>
         <!--Record View Controller-->
         <scene sceneID="oZb-Sc-0vb">
@@ -1038,7 +1021,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1dp-S3-ha0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="191" y="2805"/>
+            <point key="canvasLocation" x="19" y="2325"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="qNF-Za-3Up">
@@ -1222,7 +1205,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cf8-7s-rTi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="199" y="3468"/>
+            <point key="canvasLocation" x="19" y="3056"/>
         </scene>
         <!--Range Select View Controller-->
         <scene sceneID="riI-xt-KUK">
@@ -1260,30 +1243,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zk3-RK-9CQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="646" y="3468"/>
-        </scene>
-        <!--Dashboard Grp3 View Controller-->
-        <scene sceneID="I8d-Au-w7h">
-            <objects>
-                <viewController storyboardIdentifier="DashboardGrp3ViewController" id="u26-t4-b2J" customClass="DashboardGrp3ViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Kz6-Sx-Xmk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="qpf-mg-i7N">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </scrollView>
-                        </subviews>
-                    </view>
-                    <connections>
-                        <outlet property="iscrollView" destination="qpf-mg-i7N" id="rRg-rg-WEA"/>
-                        <segue destination="uZF-pO-cKy" kind="push" identifier="grp3_dtl" id="W2b-0w-phS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5bH-Ny-PTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-194" y="1927"/>
+            <point key="canvasLocation" x="482" y="3068"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="czc-Fi-Lg9">
@@ -1434,7 +1394,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9TU-JQ-eLq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="199" y="2091"/>
+            <point key="canvasLocation" x="19" y="1611"/>
         </scene>
         <!--Aejob dtl Browse View Controller - Loadplan Detail-->
         <scene sceneID="nrQ-UW-eM4">
@@ -1702,7 +1662,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rLb-MB-i5v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="127" y="61"/>
+            <point key="canvasLocation" x="19" y="78"/>
         </scene>
         <!--Select History Data View Controller-->
         <scene sceneID="1n5-or-nzc">
@@ -1969,7 +1929,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="W2b-0w-phS"/>
-    </inferredMetricsTieBreakers>
 </document>
