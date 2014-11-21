@@ -20,6 +20,7 @@
     auth.app_code=APP_CODE;
     auth.system=@"ITNEW";
     request_form.Auth=auth;
+#warning neet fix
     base_url=@"http://192.168.1.17/kie_web_api/";//这里也先写死，日后记住改过来
     
     SearchFormContract *searchform=[[SearchFormContract alloc]init];
@@ -32,6 +33,9 @@
         DB_Chart *db=[[DB_Chart alloc]init];
         [db fn_delete_all_chart_data];
         [db fn_save_chart_data:arr_resp_result];
+        if (_callBack) {
+            _callBack();
+        }
     };
     [web_obj fn_get_chart_data:request_form Auth:auth base_url:base_url];
 }

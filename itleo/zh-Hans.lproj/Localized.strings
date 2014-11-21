@@ -136,3 +136,11 @@
 "lbl_10minutes"="10 分钟";
 "lbl_30minutes"="30 分钟";
 "lbl_hour"="1 小时";
+//summary charts
+"lbl_refresh"="刷新";
+"lbl_set"="设置";
+"lbl_refresh_title"="刷新图表";
+"lbl_refresh_alert"="您确定要刷新所有的图表吗？";
+"lbl_refreshing"="正在刷新，请稍后！";
+"lbl_refresh_success"="刷新成功！";
+"lbl_set_title"="设置每行显示图表数";

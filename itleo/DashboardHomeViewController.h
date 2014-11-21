@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ChartData_handler.m"
 
-@interface DashboardHomeViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface DashboardHomeViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
 

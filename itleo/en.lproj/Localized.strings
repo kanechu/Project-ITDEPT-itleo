@@ -137,3 +137,11 @@
 "lbl_10minutes"="10 Minute";
 "lbl_30minutes"="30 Minute";
 "lbl_hour"="1 Hour";
+//summary charts
+"lbl_refresh"="Refresh";
+"lbl_set"="Setting";
+"lbl_refresh_title"="Refresh Chart";
+"lbl_refresh_alert"="Are you sure you want to refresh all the charts?";
+"lbl_refreshing"="Refreshing, please wait!";
+"lbl_refresh_success"="Refresh success!";
+"lbl_set_title"="Each line shows the number of set chart";
