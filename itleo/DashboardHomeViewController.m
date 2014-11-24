@@ -181,16 +181,14 @@
         ChartView_frame *chartView=[ChartView_frame fn_shareInstance];
         chartView.chart_type=_chart_type;
         chartView.ilb_chartTitle.text=chart_title;
-        if ([_chart_type isEqualToString:@"PIE"] || [_chart_type isEqualToString:@"GRID"]) {
-            chartView.alist_values=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataSerieValues];
-            chartView.alist_options=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataYoptions];
-            chartView.alist_colors=[ChartData_handler fn_get_chartData_value:unique_id type:kChartDataColors];
+        if ([_chart_type isEqualToString:@"PIE"]|| [_chart_type isEqualToString:@"GRID"]) {
+            chartView.alist_values=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataSerieValues chart_type:_chart_type];
         }else{
-            chartView.alist_values=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataXvalues];
-            chartView.alist_options=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataYoptions];
-            chartView.alist_colors=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataColors];
+            chartView.alist_values=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataXvalues chart_type:_chart_type];
         }
-        chartView.alist_remarks=[ChartData_handler fn_get_arr_value:unique_id type:kChartDataRemarks];
+        chartView.alist_options=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataYoptions chart_type:_chart_type];
+        chartView.alist_colors=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataColors chart_type:_chart_type];
+        chartView.alist_remarks=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataRemarks chart_type:_chart_type];
         chartView.frame=CGRectMake(0, 0, 320, 480);
         i++;
         [alist_chartView addObject:chartView];

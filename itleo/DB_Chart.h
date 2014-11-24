@@ -20,6 +20,25 @@
 
 -(NSMutableArray*)fn_get_data:(NSString*)unique_id;
 -(NSMutableArray*)fn_get_xValues_data:(NSString*)unique_id;
+/**
+ *  获取x/serie的唯一值
+ *
+ *  @param field     x或serie
+ *  @param unique_id 根据ID获取指定图数据
+ *
+ *  @return 返回存储x/serie唯一值的数组
+ */
+-(NSMutableArray*)fn_get_distinct_Values:(NSString*) field unique_id:(NSString*)unique_id;
+/**
+ *  根据x,serie获取y值
+ *
+ *  @param unique_id 根据ID获取指定图数据
+ *  @param x         x坐标值
+ *  @param serie     serie
+ *
+ *  @return 返回存储y值的数组。
+ */
+-(NSMutableArray*)fn_get_yValues:(NSString*)unique_id x:(NSString*)x serie:(NSString*)serie;
 -(NSMutableArray*)fn_get_groupNameAndNum:(NSString*)unique_id;
 -(BOOL)fn_delete_all_chart_data;
 

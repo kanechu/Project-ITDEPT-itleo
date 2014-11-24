@@ -16,9 +16,15 @@ typedef enum {
 }KChartDataType;
 
 @interface ChartData_handler : NSObject
-
-+(NSMutableArray*)fn_get_arr_value:(NSString*)unique_id type:(KChartDataType)arr_type;
-
-+(NSMutableArray*)fn_get_chartData_value:(NSString*)unique_id type:(KChartDataType)arr_type;
+/**
+ *  获取图表所需的数据
+ *
+ *  @param unique_id  图表类型的唯一值，根据此值获取该图表数据
+ *  @param arr_type   获取图表的x/y坐标等值
+ *  @param chart_type 图表的类型
+ *
+ *  @return 相关值存储与数组中并返回
+ */
++(NSMutableArray*)fn_gets_the_chart_Data:(NSString *)unique_id arr_type:(KChartDataType)arr_type chart_type:(NSString*)chart_type;
 
 @end

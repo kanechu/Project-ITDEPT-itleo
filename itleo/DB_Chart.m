@@ -102,7 +102,7 @@
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb=[db executeQuery:@"select distinct x from data where correlation_id like ? order by x",unique_id];
+            FMResultSet *lfmdb=[db executeQuery:@"select distinct x from data where correlation_id like ? order by x desc",unique_id];
             while ([lfmdb next]) {
                 [alist_result addObject:[lfmdb stringForColumn:@"x"]];
             }
@@ -111,6 +111,36 @@
     }];
     return alist_result;
 }
+-(NSMutableArray*)fn_get_distinct_Values:(NSString*) field unique_id:(NSString*)unique_id{
+    unique_id=[Conversion_helper fn_cut_whitespace:unique_id];    
+    __block NSMutableArray *alist_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            NSString *str_sql=[NSString stringWithFormat:@"select distinct %@ from data where correlation_id like ? order by x desc",field];
+            FMResultSet *lfmdb=[db executeQuery:str_sql,unique_id];
+            while ([lfmdb next]) {
+                [alist_result addObject:[lfmdb stringForColumn:[NSString stringWithFormat:@"%@",field]]];
+            }
+            [db close];
+        }
+    }];
+    return alist_result;
+}
+-(NSMutableArray*)fn_get_yValues:(NSString*)unique_id x:(NSString*)x serie:(NSString*)serie{
+    unique_id=[Conversion_helper fn_cut_whitespace:unique_id];
+    __block NSMutableArray *alist_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            FMResultSet *lfmdb=[db executeQuery:@"select y from data where correlation_id like ? and x like ? and serie like ?",unique_id,x,serie];
+            while ([lfmdb next]) {
+                [alist_result addObject:[lfmdb stringForColumn:@"y"]];
+            }
+            [db close];
+        }
+    }];
+    return alist_result;
+}
+
 -(NSMutableArray*)fn_get_groupNameAndNum:(NSString*)unique_id{
     unique_id=[Conversion_helper fn_cut_whitespace:unique_id];
     __block NSMutableArray *alist_result=[NSMutableArray array];
