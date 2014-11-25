@@ -15,9 +15,9 @@
 
 #define NUMBER_OF_YAXIS_VALUES 5 //背景线的数目
 
-#define BAR_WIDTH 20 //bar的宽度
+#define BAR_WIDTH 15 //bar的宽度
 
-#define SPACE_BETWEEN_BARS 25
+#define SPACE_BETWEEN_BARS 18
 #define SPACE_BETWEEN_BARGROUPS 20 //组之间的距离
 
 typedef enum : NSUInteger

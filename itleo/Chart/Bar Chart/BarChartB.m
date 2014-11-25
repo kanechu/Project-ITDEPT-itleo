@@ -78,8 +78,20 @@
     }
     
     colorArray = temp;*/
-    
-    float expectedWidth = SPACE_BETWEEN_BARS*completeArray.count+(options.count*SPACE_BETWEEN_BARGROUPS);
+    //滑动的内容宽度，背景线的长度
+    float expectedWidth=0;
+    if (options.count==0) {
+        expectedWidth = SPACE_BETWEEN_BARS*completeArray.count+(options.count*SPACE_BETWEEN_BARGROUPS);
+    }else{
+        NSMutableArray *copy_completeArray=[NSMutableArray arrayWithArray:completeArray];
+        for (NSString *str_content in completeArray) {
+            if ([str_content isEqualToString:@"0"]) {
+                [copy_completeArray removeObject:str_content];
+            }
+        }
+        expectedWidth = (SPACE_BETWEEN_BARS+10)*copy_completeArray.count+(options.count*SPACE_BETWEEN_BARGROUPS);
+    }
+
     [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, expectedWidth, self.frame.size.height)];
     
     
@@ -123,7 +135,10 @@
         float num = [str floatValue];
         NSString *point = [NSString stringWithFormat:@"%0.2f,%0.2f",xValue,num*scaleY];
         [array addObject:point];
-        xValue+=SPACE_BETWEEN_XAXIS_VALUES;
+        //高度为0时，不画bar
+        if (num!=0) {
+            xValue+=SPACE_BETWEEN_XAXIS_VALUES;
+        }
     }
     
     return array;
@@ -172,7 +187,15 @@
             
             
             tag++;
-            xVal+=SPACE_BETWEEN_BARS;
+            //bar的距离,分组跟不分组的情况
+            if (options.count==1) {
+                xVal+=SPACE_BETWEEN_BARS+10;
+            }else{
+                if ([points[1] isEqualToString:@"0.00"]==NO) {
+                    xVal+=SPACE_BETWEEN_BARS;
+                }
+            }
+            
         }
         
         if (options.count > 1)
