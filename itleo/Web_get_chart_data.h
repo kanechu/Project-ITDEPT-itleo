@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 typedef void(^call_back)(void);
+typedef enum : NSUInteger {
+    kRequestAll,
+    kRequestOne,
+} RequestType;
 @interface Web_get_chart_data : NSObject
 
 @property(nonatomic,strong)call_back callBack;
 
-- (void) fn_get_chart_data:(NSString*)base_url;
+- (void) fn_get_chart_data:(NSString*)base_url uid:(NSString*)unique_id type:(RequestType)requestType;
 
 @end
 

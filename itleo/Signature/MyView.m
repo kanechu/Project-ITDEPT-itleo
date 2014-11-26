@@ -146,8 +146,8 @@ static NSMutableArray *colors;
 }
 //在touchend时，将已经绘制的线条的颜色，宽度，线条线路保存到数组里
 -(void)addLA{
-    NSNumber *wid=[[NSNumber alloc]initWithInt:widthCount];
-    NSNumber *num=[[NSNumber alloc]initWithInt:colorCount];
+    NSNumber *wid=[NSNumber numberWithInt: widthCount];
+    NSNumber *num=[NSNumber numberWithInt: colorCount];
     [colorArray addObject:num];
     [WidthArray addObject:wid];
     NSArray *array=[NSArray arrayWithArray:pointArray];

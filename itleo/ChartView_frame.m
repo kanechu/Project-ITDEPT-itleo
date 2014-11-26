@@ -55,7 +55,9 @@
     }
     
     if ([self.chart_type isEqualToString:@"LINE"]) {
-        [self fn_create_lineChart];
+        if ([alist_options count]!=0) {
+            [self fn_create_lineChart];
+        }
         [self fn_add_legend_item];
     }
     if ([self.chart_type isEqualToString:@"GRID"]) {

@@ -18,12 +18,18 @@
 #import "DB_LoginInfo.h"
 #import "Web_get_chart_data.h"
 #define FIXSPACE 15
+typedef NS_ENUM(NSUInteger, AlertType) {
+    kRefresh_ALL,
+    kRefresh_one,
+};
 @interface DashboardHomeViewController ()
 
 @property (nonatomic, strong) NSMutableArray *alist_GrpResult;
 @property (nonatomic, strong) NSMutableArray *alist_DtlResult;
 @property (nonatomic, strong) NSMutableArray *alist_chartView;
 @property (nonatomic, assign) NSInteger flag_select_item;
+
+@property (nonatomic, assign) AlertType alertType;
 
 @end
 
@@ -75,6 +81,7 @@
 -(void)fn_refresh_chartView{
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"lbl_refresh_title", nil) message:MY_LocalizedString(@"lbl_refresh_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_ok",nil), nil];
     [alert show];
+    _alertType=kRefresh_ALL;
 }
 
 -(void)fn_setting_chart_summary_type{
@@ -98,17 +105,29 @@
 #pragma mark -UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==1) {
-        [SVProgressHUD showWithStatus:MY_LocalizedString(@"lbl_refreshing", nil)];
         Web_get_chart_data *web_obj=[[Web_get_chart_data alloc]init];
-        [web_obj fn_get_chart_data:nil];
-        web_obj.callBack=^(){
-            [self fn_set_segmentControl_title];
-            [self fn_get_DtlResult_data:[self fn_get_group_id:segment.selectedSegmentIndex]];
-            [self fn_create_chartView];
-            [self.collectionview reloadData];
-            [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_refresh_success", nil) afterDelay:2.0f];
-        };
-        
+        [SVProgressHUD showWithStatus:MY_LocalizedString(@"lbl_refreshing", nil)];
+        if (_alertType==kRefresh_ALL) {
+            [web_obj fn_get_chart_data:nil uid:nil type:kRequestAll];
+            web_obj.callBack=^(){
+                [self fn_set_segmentControl_title];
+                [self fn_get_DtlResult_data:[self fn_get_group_id:segment.selectedSegmentIndex]];
+                [self fn_create_chartView];
+                [self.collectionview reloadData];
+                [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_refresh_success", nil) afterDelay:2.0f];
+            };
+        }
+        if (_alertType==kRefresh_one) {
+            NSMutableDictionary *dic=[alist_DtlResult objectAtIndex:_flag_select_item];
+            NSString *uid=[dic valueForKey:@"unique_id"];
+            [web_obj fn_get_chart_data:nil uid:uid type:kRequestOne];
+            web_obj.callBack=^(){
+                [self fn_get_DtlResult_data:[self fn_get_group_id:segment.selectedSegmentIndex]];
+                [self fn_create_chartView];
+                [self.collectionview reloadData];
+                [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_refresh_success", nil) afterDelay:2.0f];
+            };
+        }
     }
 }
 
@@ -129,6 +148,9 @@
         }
         if ([lang_code isEqualToString:@"CN"]) {
             grp_title=[dic valueForKey:@"grp_title_cn"];
+        }
+        if ([lang_code isEqualToString:@"TCN"]) {
+            grp_title=[dic valueForKey:@"grp_title_big5"];
         }
         [segment setTitle:grp_title forSegmentAtIndex:i];
         i++;
@@ -159,7 +181,8 @@
     alist_DtlResult=[Conversion_helper fn_sort_the_array:alist_DtlResult key:@"unique_id"];
 }
 - (IBAction)fn_segment_valueChange:(id)sender {
-    [self fn_get_DtlResult_data:[self fn_get_group_id:segment.selectedSegmentIndex]];
+    NSString *str_group_id=[self fn_get_group_id:segment.selectedSegmentIndex];
+    [self fn_get_DtlResult_data:str_group_id];
     [self fn_create_chartView];
     [self.collectionview reloadData];
 }
@@ -177,6 +200,9 @@
         }
         if ([_language isEqualToString:@"CN"]) {
             chart_title=[dic valueForKey:@"chart_title_cn"];
+        }
+        if ([_language isEqualToString:@"TCN"]) {
+            chart_title=[dic valueForKey:@"chart_title_big5"];
         }
         ChartView_frame *chartView=[ChartView_frame fn_shareInstance];
         chartView.chart_type=_chart_type;
@@ -212,8 +238,13 @@
 }
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     Cell_summary_chart *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell_summary_chart1" forIndexPath:indexPath];
+   
     UIImage *img_chart=(UIImage*)[Conversion_helper fn_imageWithView:[alist_chartView objectAtIndex:indexPath.item]];
     cell.img_summary_chart.image=img_chart;
+    img_chart=nil;
+    cell.img_summary_chart.tag=indexPath.item;
+    UILongPressGestureRecognizer *longGestureRecognizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(fn_update_chart_data:)];
+    [cell addGestureRecognizer:longGestureRecognizer];
     return cell;
 }
 #pragma mark -UICollectionViewDelegate
@@ -258,5 +289,14 @@
     
     // Pass the selected object to the new view controller.
 }
-
+-(void)fn_update_chart_data:(UILongPressGestureRecognizer*)gestureRecognizer{
+    _alertType=kRefresh_one;
+    Cell_summary_chart *cell=(Cell_summary_chart*)[gestureRecognizer view];
+    _flag_select_item=cell.img_summary_chart.tag;
+    if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"是否更新该图表？" message:MY_LocalizedString(@"lbl_refresh_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_ok",nil), nil];
+        [alert show];
+    }
+    
+}
 @end

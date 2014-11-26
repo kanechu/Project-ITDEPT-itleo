@@ -152,8 +152,8 @@
     int tag = 1;
     int xVal = 0;
     
-    CGPoint one;
-    CGPoint two;
+    CGPoint one=CGPointZero;
+    CGPoint two=CGPointZero;
     
     for (int j = 0; j<options.count; j++)
     {

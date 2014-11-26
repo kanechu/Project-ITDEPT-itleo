@@ -40,6 +40,7 @@
  */
 -(NSMutableArray*)fn_get_yValues:(NSString*)unique_id x:(NSString*)x serie:(NSString*)serie;
 -(NSMutableArray*)fn_get_groupNameAndNum:(NSString*)unique_id;
+-(BOOL)fn_update_chart_data:(NSMutableArray*)alist_result uid:(NSString*)unique_id;
 -(BOOL)fn_delete_all_chart_data;
 
 @end

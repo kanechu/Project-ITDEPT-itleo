@@ -155,7 +155,49 @@
     }];
     return alist_result;
 }
-
+-(BOOL)fn_update_chart_data:(NSMutableArray*)alist_result uid:(NSString*)unique_id{
+    __block BOOL isUpdated=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            for (Resp_get_chart *resp_Chart in alist_result) {
+                NSSet *alist_Dtl=resp_Chart.DashboardDtlResult;
+                for (Resp_DashboardDtlResult* resp_Dtl in alist_Dtl) {
+                    NSSet *alist_data=resp_Dtl.data;
+                    NSString *uid=resp_Dtl.unique_id;
+                    NSMutableDictionary *dic_dtl=[[NSDictionary dictionaryWithPropertiesOfObject:resp_Dtl]mutableCopy];
+                    [dic_dtl removeObjectForKey:@"data"];
+                    NSString *upd_sql=[self fn_get_update_sql:dic_dtl uid:unique_id];
+                    isUpdated=[db executeUpdate:upd_sql withParameterDictionary:dic_dtl];
+                    if ([alist_data count]!=0) {
+                        isUpdated=[db executeUpdate:@"delete from data where correlation_id=?",uid];
+                        for (Resp_data *resp_data in alist_data) {
+                            NSMutableDictionary *dic_data=[[NSMutableDictionary dictionaryWithPropertiesOfObject:resp_data]mutableCopy];
+                            [dic_data setObject:uid forKey:@"correlation_id"];
+                            isUpdated=[db executeUpdate:@"insert into data(serie,x,y,correlation_id)values(:serie,:x,:y,:correlation_id)" withParameterDictionary:dic_data];
+                        }
+                    }
+                }
+            }
+        }
+    }];
+    return isUpdated;
+}
+-(NSString*)fn_get_update_sql:(NSMutableDictionary*)dic uid:(NSString*)unique_id{
+    NSString *sql=@"";
+    NSInteger flag=0;
+    //遍历字典所有的key
+    NSEnumerator *enumerator=[dic keyEnumerator];
+    for (NSString *key in enumerator) {
+        if (flag==0) {
+            sql=[NSString stringWithFormat:@"update DashboardDtlResult set %@=:%@",key,key];
+        }else{
+            sql=[sql stringByAppendingFormat:@",%@=:%@",key,key];
+        }
+        flag=1;
+    }
+    sql=[sql stringByAppendingFormat:@" where unique_id=%@",unique_id];
+    return sql;
+}
 -(BOOL)fn_delete_all_chart_data{
     __block BOOL isDeleted=NO;
     [queue inDataBase:^(FMDatabase *db){
