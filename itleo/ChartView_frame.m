@@ -11,11 +11,12 @@
 #import "PieChart.h"
 #import "BarChart.h"
 #import "LineChartExp.h"
+#import "Cal_lineHeight.h"
 
 #define LEGEND_HEIGHT 21
 #define LEGEND_WIDTH 145
 #define LEGEND_SPACE 10
-
+#define LEGEND_BIG_WIDTH 300
 @implementation ChartView_frame
 @synthesize alist_colors;
 @synthesize alist_remarks;
@@ -67,18 +68,50 @@
 
 #pragma mark -add legend item
 -(void)fn_add_legend_item{
+    CGRect lastRect=CGRectZero;
+    NSInteger flag_row=0;//标识单行或多行 0多行 1单行
     for (int i=0; i<[alist_remarks count]; i++) {
         LegendItem_view *legendView=[LegendItem_view fn_shareInstance];
-        if ([_chart_type isEqualToString:@"LINE"]) {
-            legendView.ilb_color.frame=CGRectMake(legendView.ilb_color.frame.origin.x, legendView.ilb_color.frame.origin.y+5, legendView.ilb_color.frame.size.width, 2);
-        }
         legendView.ilb_color.backgroundColor=[alist_colors objectAtIndex:i];
         legendView.ilb_remark.text=[alist_remarks objectAtIndex:i];
-        if (i%2==0) {
-            legendView.frame=CGRectMake(LEGEND_SPACE,_iv_chart.frame.size.height+_iv_chart.frame.origin.y+(i/2)*LEGEND_HEIGHT, LEGEND_WIDTH, LEGEND_HEIGHT);
+        Cal_lineHeight *cal_obj=[[Cal_lineHeight alloc]init];
+        CGFloat real_height=0;
+        CGFloat height=[cal_obj fn_heightWithString:legendView.ilb_remark.text font:[UIFont systemFontOfSize:14] constrainedToWidth:LEGEND_WIDTH-15];
+        if (height>21) {
+            real_height=[cal_obj fn_heightWithString:legendView.ilb_remark.text font:[UIFont systemFontOfSize:14] constrainedToWidth:LEGEND_BIG_WIDTH-15];
+            real_height=real_height+5;
+            flag_row=0;
         }else{
-            legendView.frame=CGRectMake(LEGEND_SPACE+LEGEND_WIDTH, _iv_chart.frame.size.height+_iv_chart.frame.origin.y+(i/2)*LEGEND_HEIGHT, LEGEND_WIDTH, LEGEND_HEIGHT);
+            real_height=21;
+            flag_row=1;
         }
+        if (i==0&&flag_row==0) {
+            legendView.frame=CGRectMake(LEGEND_SPACE, self.iv_chart.frame.size.height+self.iv_chart.frame.origin.y,LEGEND_BIG_WIDTH, real_height);
+            
+        }else if(i==0){
+            legendView.frame=CGRectMake(10, self.iv_chart.frame.size.height+self.iv_chart.frame.origin.y,LEGEND_WIDTH, real_height);
+        }
+        
+        
+        if (lastRect.size.width>LEGEND_WIDTH &&i!=0) {
+            if (flag_row==0) {
+                legendView.frame=CGRectMake(lastRect.origin.x, lastRect.origin.y+lastRect.size.height,LEGEND_BIG_WIDTH,real_height);
+            }else{
+                legendView.frame=CGRectMake(lastRect.origin.x, lastRect.origin.y+lastRect.size.height,LEGEND_WIDTH, real_height);
+            }
+            
+        }else if(i!=0){
+            if (flag_row==0) {
+                legendView.frame=CGRectMake(LEGEND_SPACE, lastRect.origin.y+lastRect.size.height, LEGEND_BIG_WIDTH, real_height);
+            }else{
+                if (lastRect.origin.x>LEGEND_WIDTH) {
+                    legendView.frame=CGRectMake(LEGEND_SPACE, lastRect.origin.y+lastRect.size.height, LEGEND_WIDTH, real_height);
+                }else{
+                    legendView.frame=CGRectMake(LEGEND_SPACE+lastRect.size.width, lastRect.origin.y, LEGEND_WIDTH, real_height);
+                }
+            }
+        }
+        lastRect=legendView.frame;
         [self addSubview:legendView];
         
     }

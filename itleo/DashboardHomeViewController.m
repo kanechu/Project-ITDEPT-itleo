@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 @property (nonatomic, strong) NSMutableArray *alist_GrpResult;
 @property (nonatomic, strong) NSMutableArray *alist_DtlResult;
 @property (nonatomic, strong) NSMutableArray *alist_chartView;
+@property (nonatomic, strong) NSMutableArray *alist_chartImg;
+@property (nonatomic, strong) NSMutableDictionary *idic_chartViews;
 @property (nonatomic, assign) NSInteger flag_select_item;
 
 @property (nonatomic, assign) AlertType alertType;
@@ -36,8 +38,10 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 @implementation DashboardHomeViewController
 @synthesize segment;
 @synthesize alist_chartView;
+@synthesize alist_chartImg;
 @synthesize alist_GrpResult;
 @synthesize alist_DtlResult;
+@synthesize idic_chartViews;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,8 +57,10 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     [super viewDidLoad];
     [self fn_add_right_items];
     [self fn_set_segmentControl_title];
-    [self fn_get_DtlResult_data:[self fn_get_group_id:segment.selectedSegmentIndex]];
-    [self fn_create_chartView];
+    [self fn_get_all_chartViews];
+    alist_chartView=[idic_chartViews valueForKey:[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex]];
+    [self fn_get_chartImg];
+    
     [self fn_set_collectionView_pro];
   	// Do any additional setup after loading the view.
 }
@@ -111,8 +117,10 @@ typedef NS_ENUM(NSUInteger, AlertType) {
             [web_obj fn_get_chart_data:nil uid:nil type:kRequestAll];
             web_obj.callBack=^(){
                 [self fn_set_segmentControl_title];
-                [self fn_get_DtlResult_data:[self fn_get_group_id:segment.selectedSegmentIndex]];
-                [self fn_create_chartView];
+                [self fn_get_all_chartViews];
+                NSString *key=[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex];
+                alist_chartView=[idic_chartViews valueForKey:key];
+                [self fn_get_chartImg];
                 [self.collectionview reloadData];
                 [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_refresh_success", nil) afterDelay:2.0f];
             };
@@ -122,8 +130,10 @@ typedef NS_ENUM(NSUInteger, AlertType) {
             NSString *uid=[dic valueForKey:@"unique_id"];
             [web_obj fn_get_chart_data:nil uid:uid type:kRequestOne];
             web_obj.callBack=^(){
-                [self fn_get_DtlResult_data:[self fn_get_group_id:segment.selectedSegmentIndex]];
-                [self fn_create_chartView];
+                [self fn_get_all_chartViews];
+                NSString *key=[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex];
+                alist_chartView=[idic_chartViews valueForKey:key];
+                [self fn_get_chartImg];
                 [self.collectionview reloadData];
                 [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_refresh_success", nil) afterDelay:2.0f];
             };
@@ -166,6 +176,7 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     }
     return lang_code;
 }
+/*
 -(NSString*)fn_get_group_id:(NSInteger)index{
     NSString *group_id=@"";
     if (index<[alist_GrpResult count]) {
@@ -173,6 +184,32 @@ typedef NS_ENUM(NSUInteger, AlertType) {
         group_id=[dic valueForKey:@"unique_id"];
     }
     return group_id;
+}*/
+-(void)fn_get_all_chartViews{
+    idic_chartViews=[[NSMutableDictionary alloc]init];
+    NSInteger i=0;
+    for (NSMutableDictionary *dic in alist_GrpResult) {
+        NSString *unique_id=[dic valueForKey:@"unique_id"];
+        [self fn_get_DtlResult_data:unique_id];
+        NSMutableArray *arr_chartView=[self fn_create_chartView];
+        if ([arr_chartView count]!=0) {
+            [idic_chartViews setObject:arr_chartView forKey:[NSString stringWithFormat:@"%ld",(long)i]];
+        }
+        i++;
+    }
+    
+}
+-(void)fn_get_chartImg{
+    if ([alist_chartImg count]!=0) {
+        [alist_chartImg removeAllObjects];
+    }else{
+        alist_chartImg=[[NSMutableArray alloc]init];
+    }
+    for (ChartView_frame *chartView in alist_chartView) {
+        UIImage *img=[Conversion_helper fn_imageWithView:chartView];
+        [alist_chartImg addObject:img];
+        img=nil;
+    }
 }
 #pragma mark -获取对应组，图表详细数据
 -(void)fn_get_DtlResult_data:(NSString*)unique_id{
@@ -181,14 +218,14 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     alist_DtlResult=[Conversion_helper fn_sort_the_array:alist_DtlResult key:@"unique_id"];
 }
 - (IBAction)fn_segment_valueChange:(id)sender {
-    NSString *str_group_id=[self fn_get_group_id:segment.selectedSegmentIndex];
-    [self fn_get_DtlResult_data:str_group_id];
-    [self fn_create_chartView];
+    NSString *key=[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex];
+    alist_chartView=[idic_chartViews valueForKey:key];
+    [self fn_get_chartImg];
     [self.collectionview reloadData];
 }
 #pragma mark -创建该组的图表视图
--(void)fn_create_chartView{
-    alist_chartView=[[NSMutableArray alloc]initWithCapacity:1];
+-(NSMutableArray*)fn_create_chartView{
+    NSMutableArray *  arr_chartViews=[[NSMutableArray alloc]initWithCapacity:1];
     NSInteger i=0;
     NSString *_language=[self fn_get_language_type];
     for (NSMutableDictionary *dic in alist_DtlResult) {
@@ -217,8 +254,9 @@ typedef NS_ENUM(NSUInteger, AlertType) {
         chartView.alist_remarks=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataRemarks chart_type:_chart_type];
         chartView.frame=CGRectMake(0, 0, 320, 480);
         i++;
-        [alist_chartView addObject:chartView];
+        [arr_chartViews addObject:chartView];
     }
+    return arr_chartViews;
 }
 
 
@@ -231,7 +269,7 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 }
 #pragma mark -UICollectionViewDataSource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [alist_chartView count];
+    return [alist_chartImg count];
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
@@ -239,9 +277,8 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     Cell_summary_chart *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell_summary_chart1" forIndexPath:indexPath];
    
-    UIImage *img_chart=(UIImage*)[Conversion_helper fn_imageWithView:[alist_chartView objectAtIndex:indexPath.item]];
-    cell.img_summary_chart.image=img_chart;
-    img_chart=nil;
+   
+    cell.img_summary_chart.image=[alist_chartImg objectAtIndex:indexPath.item];
     cell.img_summary_chart.tag=indexPath.item;
     UILongPressGestureRecognizer *longGestureRecognizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(fn_update_chart_data:)];
     [cell addGestureRecognizer:longGestureRecognizer];
