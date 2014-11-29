@@ -83,11 +83,11 @@
 }
 #pragma mark - Table view Delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    int newRow=[indexPath row];
+    NSInteger newRow=[indexPath row];
     if (lastIndexPath==nil) {
         lastIndexPath=indexPath;
     }
-    int oldRow=[lastIndexPath row];
+    NSInteger oldRow=[lastIndexPath row];
     if (newRow!=oldRow) {
         UITableViewCell *newCell=[tableView cellForRowAtIndexPath:indexPath];
         newCell.accessoryType=UITableViewCellAccessoryCheckmark;

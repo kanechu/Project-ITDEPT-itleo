@@ -27,9 +27,9 @@ static NSMutableArray *deleWidthArray;
 //正常存储的线条宽度的数组
 static NSMutableArray *WidthArray;
 //确定颜色的值，将颜色计数的值存到数组里默认为0，即为绿色
-static int colorCount;
+static NSInteger colorCount;
 //确定宽度的值，将宽度计数的值存到数组里默认为0，即为10
-static int widthCount;
+static NSInteger widthCount;
 //保存颜色的数组
 static NSMutableArray *colors;
 - (id)init
@@ -146,8 +146,8 @@ static NSMutableArray *colors;
 }
 //在touchend时，将已经绘制的线条的颜色，宽度，线条线路保存到数组里
 -(void)addLA{
-    NSNumber *wid=[NSNumber numberWithInt: widthCount];
-    NSNumber *num=[NSNumber numberWithInt: colorCount];
+    NSNumber *wid=[NSNumber numberWithInteger: widthCount];
+    NSNumber *num=[NSNumber numberWithInteger: colorCount];
     [colorArray addObject:num];
     [WidthArray addObject:wid];
     NSArray *array=[NSArray arrayWithArray:pointArray];

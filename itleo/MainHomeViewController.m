@@ -193,7 +193,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     Cell_menu_item *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell_menu_item" forIndexPath:indexPath];
-    int  li_item=[indexPath item];
+    NSInteger  li_item=[indexPath item];
     menu_item=[alist_menu objectAtIndex:li_item];
     cell.il_title.text=menu_item.is_label;
     [cell.ibtn_image setImage:[UIImage imageNamed:menu_item.is_image] forState:UIControlStateNormal];

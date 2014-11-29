@@ -96,11 +96,11 @@
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_flag_type==1) {
-        int newRow=[indexPath row];
+        NSInteger newRow=[indexPath row];
         if (lastIndexPath==nil) {
             lastIndexPath=indexPath;
         }
-        int oldRow=[lastIndexPath row];
+        NSInteger oldRow=[lastIndexPath row];
         if (newRow!=oldRow) {
             UITableViewCell *newCell=[tableView cellForRowAtIndexPath:indexPath];
             newCell.accessoryType=UITableViewCellAccessoryCheckmark;
