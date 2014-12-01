@@ -11,6 +11,7 @@
 #import "Menu_home.h"
 #import "Cell_menu_item.h"
 #import "Web_get_permit.h"
+#import "Web_get_chart_data.h"
 #import "Timer_bg_upload_data.h"
 #import "DB_LoginInfo.h"
 #import "DB_single_field.h"
@@ -19,6 +20,7 @@
 #import "DB_ePod.h"
 #import "DB_sypara.h"
 #import "DB_permit.h"
+#import "DB_Chart.h"
 @interface MainHomeViewController ()
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
@@ -96,6 +98,7 @@
     }else{
         NSString *lang=[self fn_get_lang_code];
         [[MY_LocalizedString getshareInstance]fn_setLanguage_type:lang];
+        [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
     }
     
 }
@@ -161,10 +164,13 @@
     DB_sypara *db_sypara=[[DB_sypara alloc]init];
     [db_sypara fn_delete_all_sypara_data];
     /**
-     *  清楚permit
+     *  清除permit
      */
     DB_permit *db_permit=[[DB_permit alloc]init];
     [db_permit fn_delete_all_permit_data];
+    //清除图表数据
+    DB_Chart *db_chart=[[DB_Chart alloc]init];
+    [db_chart fn_delete_all_chart_data];
     //获取定时器
     NSTimer *GPS_timer=[[Timer_bg_upload_data fn_shareInstance]fn_get_GPS_timer];
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];

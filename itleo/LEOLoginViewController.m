@@ -19,6 +19,7 @@
 #import "CheckNetWork.h"
 #import "Web_get_sypara.h"
 #import "Web_get_permit.h"
+#import "Web_get_chart_data.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 @interface LEOLoginViewController ()
@@ -263,7 +264,12 @@ static NSString  *is_language=@"";//标识语言类型
                         [SVProgressHUD dismiss];
                     }
                 }];
-                
+                Web_get_chart_data *web_chart=[Web_get_chart_data fn_shareInstance];
+                [web_chart fn_get_chart_data:web_addr uid:nil type:kRequestAll];
+                web_chart.callBack=^(){
+                     [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
+                };
+                              
             }else{
                 [self fn_popUp_alert:MY_LocalizedString(@"login_failed_prompt", nil)];
                 [SVProgressHUD dismiss];

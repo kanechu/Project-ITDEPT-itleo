@@ -81,18 +81,21 @@
     if (arr_type==kChartDataColors) {
         
         for (NSInteger i=0; i<[alist_serie count]; i++) {
-            [alist_results addObject:[self colorForLine]];
+            [alist_results addObject:[self colorForLine:i]];
         }
     }
     return alist_results;
 }
 
-+(UIColor *)colorForLine
++(UIColor *)colorForLine:(NSInteger)i
 {
-    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+  /*  CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
     CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
-    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black*/
     
+      CGFloat hue = ((i*(11+i)) % 256 / 256.0 );  //  0.0 to 1.0
+     CGFloat saturation = ((i*(22+i))% 128 / 256.0 )+0.6 ;  //  0.5 to 1.0, away from white
+     CGFloat brightness = ( (i*(33+i)) % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1.0];
 }
 

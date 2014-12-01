@@ -26,9 +26,8 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 
 @property (nonatomic, strong) NSMutableArray *alist_GrpResult;
 @property (nonatomic, strong) NSMutableArray *alist_DtlResult;
-@property (nonatomic, strong) NSMutableArray *alist_chartView;
-@property (nonatomic, strong) NSMutableArray *alist_chartImg;
-@property (nonatomic, strong) NSMutableDictionary *idic_chartViews;
+@property (nonatomic, strong) NSMutableArray *alist_chartImgs;
+@property (nonatomic, strong) NSMutableDictionary *idic_chartImages;
 @property (nonatomic, assign) NSInteger flag_select_item;
 
 @property (nonatomic, assign) AlertType alertType;
@@ -37,12 +36,10 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 
 @implementation DashboardHomeViewController
 @synthesize segment;
-@synthesize alist_chartView;
-@synthesize alist_chartImg;
+@synthesize alist_chartImgs;
 @synthesize alist_GrpResult;
 @synthesize alist_DtlResult;
-@synthesize idic_chartViews;
-
+@synthesize idic_chartImages;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,10 +54,11 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     [super viewDidLoad];
     [self fn_add_right_items];
     [self fn_set_segmentControl_title];
-    [self fn_get_all_chartViews];
-    alist_chartView=[idic_chartViews valueForKey:[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex]];
-    [self fn_get_chartImg];
-    
+    idic_chartImages=[[Web_get_chart_data fn_shareInstance]fn_get_ChartImages];
+    if ([idic_chartImages count]!=0) {
+        alist_chartImgs=[idic_chartImages valueForKey:[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex]];
+        // [self fn_get_chartImg]
+    }
     [self fn_set_collectionView_pro];
   	// Do any additional setup after loading the view.
 }
@@ -111,16 +109,18 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 #pragma mark -UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==1) {
-        Web_get_chart_data *web_obj=[[Web_get_chart_data alloc]init];
+        Web_get_chart_data *web_obj=[Web_get_chart_data fn_shareInstance];
         [SVProgressHUD showWithStatus:MY_LocalizedString(@"lbl_refreshing", nil)];
         if (_alertType==kRefresh_ALL) {
             [web_obj fn_get_chart_data:nil uid:nil type:kRequestAll];
+            __block Web_get_chart_data *web_fix=web_obj;
             web_obj.callBack=^(){
                 [self fn_set_segmentControl_title];
-                [self fn_get_all_chartViews];
+
                 NSString *key=[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex];
-                alist_chartView=[idic_chartViews valueForKey:key];
-                [self fn_get_chartImg];
+                [web_fix fn_asyn_get_all_charts];
+                alist_chartImgs=[[web_fix fn_get_ChartImages] valueForKey:key];
+                
                 [self.collectionview reloadData];
                 [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_refresh_success", nil) afterDelay:2.0f];
             };
@@ -130,10 +130,8 @@ typedef NS_ENUM(NSUInteger, AlertType) {
             NSString *uid=[dic valueForKey:@"unique_id"];
             [web_obj fn_get_chart_data:nil uid:uid type:kRequestOne];
             web_obj.callBack=^(){
-                [self fn_get_all_chartViews];
                 NSString *key=[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex];
-                alist_chartView=[idic_chartViews valueForKey:key];
-                [self fn_get_chartImg];
+                alist_chartImgs=[idic_chartImages valueForKey:key];
                 [self.collectionview reloadData];
                 [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_refresh_success", nil) afterDelay:2.0f];
             };
@@ -149,7 +147,7 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     alist_GrpResult=[db_chart fn_get_DashboardGrpDResult_data];
     //根据unique_id给数组升序排序
     alist_GrpResult=[Conversion_helper fn_sort_the_array:alist_GrpResult key:@"unique_id"];
-    NSString *lang_code=[self fn_get_language_type];
+    NSString *lang_code=[[Web_get_chart_data fn_shareInstance]fn_get_language_type];
     NSInteger i=0;
     for (NSMutableDictionary *dic in alist_GrpResult) {
         NSString *grp_title=@"";
@@ -167,98 +165,11 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     }
      
 }
--(NSString*)fn_get_language_type{
-    DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
-    NSMutableArray *arr=[db fn_get_all_LoginInfoData];
-    NSString *lang_code=@"";
-    if ([arr count]!=0) {
-        lang_code=[[arr objectAtIndex:0]valueForKey:@"lang_code"];
-    }
-    return lang_code;
-}
-/*
--(NSString*)fn_get_group_id:(NSInteger)index{
-    NSString *group_id=@"";
-    if (index<[alist_GrpResult count]) {
-        NSMutableDictionary *dic=[alist_GrpResult objectAtIndex:index];
-        group_id=[dic valueForKey:@"unique_id"];
-    }
-    return group_id;
-}*/
--(void)fn_get_all_chartViews{
-    idic_chartViews=[[NSMutableDictionary alloc]init];
-    NSInteger i=0;
-    for (NSMutableDictionary *dic in alist_GrpResult) {
-        NSString *unique_id=[dic valueForKey:@"unique_id"];
-        [self fn_get_DtlResult_data:unique_id];
-        NSMutableArray *arr_chartView=[self fn_create_chartView];
-        if ([arr_chartView count]!=0) {
-            [idic_chartViews setObject:arr_chartView forKey:[NSString stringWithFormat:@"%ld",(long)i]];
-        }
-        i++;
-    }
-    
-}
--(void)fn_get_chartImg{
-    if ([alist_chartImg count]!=0) {
-        [alist_chartImg removeAllObjects];
-    }else{
-        alist_chartImg=[[NSMutableArray alloc]init];
-    }
-    for (ChartView_frame *chartView in alist_chartView) {
-        UIImage *img=[Conversion_helper fn_imageWithView:chartView];
-        [alist_chartImg addObject:img];
-        img=nil;
-    }
-}
-#pragma mark -获取对应组，图表详细数据
--(void)fn_get_DtlResult_data:(NSString*)unique_id{
-    DB_Chart *db_chart=[[DB_Chart alloc]init];
-    alist_DtlResult=[db_chart fn_get_DashboardDtlResult:unique_id];
-    alist_DtlResult=[Conversion_helper fn_sort_the_array:alist_DtlResult key:@"unique_id"];
-}
 - (IBAction)fn_segment_valueChange:(id)sender {
     NSString *key=[NSString stringWithFormat:@"%ld",(long)segment.selectedSegmentIndex];
-    alist_chartView=[idic_chartViews valueForKey:key];
-    [self fn_get_chartImg];
+    alist_chartImgs=[idic_chartImages valueForKey:key];
     [self.collectionview reloadData];
 }
-#pragma mark -创建该组的图表视图
--(NSMutableArray*)fn_create_chartView{
-    NSMutableArray *  arr_chartViews=[[NSMutableArray alloc]initWithCapacity:1];
-    NSInteger i=0;
-    NSString *_language=[self fn_get_language_type];
-    for (NSMutableDictionary *dic in alist_DtlResult) {
-        NSString *_chart_type=[dic valueForKey:@"chart_type"];
-        NSString *unique_id=[dic valueForKey:@"unique_id"];
-        NSString *chart_title=@"";
-        if ([_language isEqualToString:@"EN"]) {
-            chart_title=[dic valueForKey:@"chart_title_en"];
-        }
-        if ([_language isEqualToString:@"CN"]) {
-            chart_title=[dic valueForKey:@"chart_title_cn"];
-        }
-        if ([_language isEqualToString:@"TCN"]) {
-            chart_title=[dic valueForKey:@"chart_title_big5"];
-        }
-        ChartView_frame *chartView=[ChartView_frame fn_shareInstance];
-        chartView.chart_type=_chart_type;
-        chartView.ilb_chartTitle.text=chart_title;
-        if ([_chart_type isEqualToString:@"PIE"]|| [_chart_type isEqualToString:@"GRID"]) {
-            chartView.alist_values=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataSerieValues chart_type:_chart_type];
-        }else{
-            chartView.alist_values=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataXvalues chart_type:_chart_type];
-        }
-        chartView.alist_options=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataYoptions chart_type:_chart_type];
-        chartView.alist_colors=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataColors chart_type:_chart_type];
-        chartView.alist_remarks=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataRemarks chart_type:_chart_type];
-        chartView.frame=CGRectMake(0, 0, 320, 480);
-        i++;
-        [arr_chartViews addObject:chartView];
-    }
-    return arr_chartViews;
-}
-
 
 #pragma mark -set collectionView pro
 -(void)fn_set_collectionView_pro{
@@ -269,7 +180,7 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 }
 #pragma mark -UICollectionViewDataSource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return [alist_chartImg count];
+    return [alist_chartImgs count];
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
@@ -278,7 +189,7 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     Cell_summary_chart *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell_summary_chart1" forIndexPath:indexPath];
    
    
-    cell.img_summary_chart.image=[alist_chartImg objectAtIndex:indexPath.item];
+    cell.img_summary_chart.image=[alist_chartImgs objectAtIndex:indexPath.item];
     cell.img_summary_chart.tag=indexPath.item;
     UILongPressGestureRecognizer *longGestureRecognizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(fn_update_chart_data:)];
     [cell addGestureRecognizer:longGestureRecognizer];
@@ -315,15 +226,35 @@ typedef NS_ENUM(NSUInteger, AlertType) {
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
-    DtlChartViewController *dtlVC=(DtlChartViewController*)[segue destinationViewController];
-    ChartView_frame *chartView=(ChartView_frame*)[alist_chartView objectAtIndex:_flag_select_item];
-    dtlVC.alist_options=chartView.alist_options;
-    dtlVC.alist_values=chartView.alist_values;
-    dtlVC.chart_type=chartView.chart_type;
-    dtlVC.alist_colors=chartView.alist_colors;
-    dtlVC.alist_remarks=chartView.alist_remarks;
-    dtlVC.chartTitle=chartView.ilb_chartTitle.text;
+    NSMutableDictionary *dic=[alist_GrpResult objectAtIndex:segment.selectedSegmentIndex];
+    NSString *group_id=[dic valueForKey:@"unique_id"];
+    alist_DtlResult=[[Web_get_chart_data fn_shareInstance]fn_get_DtlResult_data:group_id];
+    NSMutableDictionary *dic_chartData=[alist_DtlResult objectAtIndex:_flag_select_item];
+    NSString *_chart_type=[dic_chartData valueForKey:@"chart_type"];
+    NSString *unique_id=[dic_chartData valueForKey:@"unique_id"];
+    NSString *_language=[[Web_get_chart_data fn_shareInstance]fn_get_language_type];
+    NSString *chart_title=@"";
+    if ([_language isEqualToString:@"EN"]) {
+        chart_title=[dic_chartData valueForKey:@"chart_title_en"];
+    }
+    if ([_language isEqualToString:@"CN"]) {
+        chart_title=[dic_chartData valueForKey:@"chart_title_cn"];
+    }
+    if ([_language isEqualToString:@"TCN"]) {
+        chart_title=[dic_chartData valueForKey:@"chart_title_big5"];
+    }
     
+    DtlChartViewController *dtlVC=(DtlChartViewController*)[segue destinationViewController];
+    if ([_chart_type isEqualToString:@"PIE"]|| [_chart_type isEqualToString:@"GRID"]) {
+        dtlVC.alist_values=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataSerieValues chart_type:_chart_type];
+    }else{
+        dtlVC.alist_values=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataXvalues chart_type:_chart_type];
+    }
+    dtlVC.alist_options=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataYoptions chart_type:_chart_type];
+    dtlVC.alist_colors=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataColors chart_type:_chart_type];
+    dtlVC.alist_remarks=[ChartData_handler fn_gets_the_chart_Data:unique_id arr_type:kChartDataRemarks chart_type:_chart_type];
+    dtlVC.chart_type=_chart_type;
+    dtlVC.chartTitle=chart_title;
     // Pass the selected object to the new view controller.
 }
 -(void)fn_update_chart_data:(UILongPressGestureRecognizer*)gestureRecognizer{

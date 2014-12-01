@@ -155,7 +155,7 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     Cell_show_picture *cell=[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell_show_picture" forIndexPath:indexPath];
-    int  li_item=[indexPath item];
+    NSInteger  li_item=[indexPath item];
     Truck_order_image_data *upload_image_ms=[alist_image_ms objectAtIndex:li_item];
     UIImage *image=[Conversion_helper fn_base64Str_convert_image:upload_image_ms.image];
     cell.i_image.image=image;
