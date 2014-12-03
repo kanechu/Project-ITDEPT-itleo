@@ -121,6 +121,8 @@
 		B2A3404219DA409F0051F78B /* UploadContract.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A3404119DA409F0051F78B /* UploadContract.m */; };
 		B2A3404819DA4CA30051F78B /* RespEpod_updmilestone.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A3404719DA4CA30051F78B /* RespEpod_updmilestone.m */; };
 		B2A3404B19DA4E440051F78B /* Resp_upd_image_result.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A3404A19DA4E440051F78B /* Resp_upd_image_result.m */; };
+		B2A5488D1A2C1861008334C0 /* WarehouseHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A5488C1A2C1861008334C0 /* WarehouseHomeViewController.m */; };
+		B2A548941A2C1BA2008334C0 /* Record_LoadPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A548931A2C1BA2008334C0 /* Record_LoadPlanViewController.m */; };
 		B2A747B319BE9795006C96D1 /* QRadioButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A747B219BE9795006C96D1 /* QRadioButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B2A7480F19BEFD57006C96D1 /* DrawSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7480A19BEFD57006C96D1 /* DrawSignView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B2A7481019BEFD57006C96D1 /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7480C19BEFD57006C96D1 /* MyView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -418,6 +420,10 @@
 		B2A3404719DA4CA30051F78B /* RespEpod_updmilestone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespEpod_updmilestone.m; sourceTree = "<group>"; };
 		B2A3404919DA4E440051F78B /* Resp_upd_image_result.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_upd_image_result.h; sourceTree = "<group>"; };
 		B2A3404A19DA4E440051F78B /* Resp_upd_image_result.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_upd_image_result.m; sourceTree = "<group>"; };
+		B2A5488B1A2C1861008334C0 /* WarehouseHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarehouseHomeViewController.h; sourceTree = "<group>"; };
+		B2A5488C1A2C1861008334C0 /* WarehouseHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WarehouseHomeViewController.m; sourceTree = "<group>"; };
+		B2A548921A2C1BA2008334C0 /* Record_LoadPlanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record_LoadPlanViewController.h; sourceTree = "<group>"; };
+		B2A548931A2C1BA2008334C0 /* Record_LoadPlanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record_LoadPlanViewController.m; sourceTree = "<group>"; };
 		B2A747B119BE9795006C96D1 /* QRadioButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRadioButton.h; sourceTree = "<group>"; };
 		B2A747B219BE9795006C96D1 /* QRadioButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRadioButton.m; sourceTree = "<group>"; };
 		B2A7480919BEFD57006C96D1 /* DrawSignView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawSignView.h; sourceTree = "<group>"; };
@@ -816,6 +822,10 @@
 				B2C4722919FA65B70099199D /* EPODSettingsViewController.m */,
 				B27518CB19FE1C99000A4630 /* RangeSelectViewController.h */,
 				B27518CC19FE1C99000A4630 /* RangeSelectViewController.m */,
+				B2A5488B1A2C1861008334C0 /* WarehouseHomeViewController.h */,
+				B2A5488C1A2C1861008334C0 /* WarehouseHomeViewController.m */,
+				B2A548921A2C1BA2008334C0 /* Record_LoadPlanViewController.h */,
+				B2A548931A2C1BA2008334C0 /* Record_LoadPlanViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1342,9 +1352,11 @@
 				B272EA6B19AEDDA400256276 /* MZTransition.m in Sources */,
 				B2BDD57119D8ED4C00FEEA08 /* Truck_order_image_data.m in Sources */,
 				B2AFFA8619C2FC7100BC26BB /* DB_ePod.m in Sources */,
+				B2A548941A2C1BA2008334C0 /* Record_LoadPlanViewController.m in Sources */,
 				B2E391CA19C8137A00612FDD /* EPODRecordViewController.m in Sources */,
 				B270C60F1999A70C0089664C /* SKSTableView.m in Sources */,
 				B28222A619FF292A0000FC2B /* UpdateFormContract_GPS.m in Sources */,
+				B2A5488D1A2C1861008334C0 /* WarehouseHomeViewController.m in Sources */,
 				B270C61F199A024E0089664C /* Aejob_AdvanceSearchViewController.m in Sources */,
 				B2D8207819DFAD6D0005253C /* Order_InfoViewController.m in Sources */,
 				B276BBE01995B6B800075515 /* LEOLoginViewController.m in Sources */,

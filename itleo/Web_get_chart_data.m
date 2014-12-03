@@ -114,6 +114,7 @@ static NSMutableDictionary *idic_ChartImages=nil;
         if ([arr_chartView count]!=0) {
             [idic_chartViews setObject:arr_chartView forKey:[NSString stringWithFormat:@"%ld",(long)i]];
         }
+        
         i++;
     }
     return idic_chartViews;

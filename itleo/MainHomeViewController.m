@@ -66,15 +66,18 @@
     for (NSMutableDictionary *dic in alist_fuction) {
         NSString *module_code=[dic valueForKey:@"module_code"];
         NSString *f_exec=[dic valueForKey:@"f_exec"];
-        if ([module_code isEqualToString:@"EPOD"] && [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"ic_itdept_logo" segue:@"segue_epod"]];
-        }
         if ([module_code isEqualToString:@"AIR_LOAD_PLAN"]&& [f_exec isEqualToString:@"1"]) {
             [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_air_Load_Plan", nil) image:@"ic_airloadplan" segue:@"segue_aejob_browse"]];
         }
+
+        if ([module_code isEqualToString:@"EPOD"] && [f_exec isEqualToString:@"1"]) {
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"delivery" segue:@"segue_epod"]];
+        }
+        
     }
     
-    [alist_menu addObject:[Menu_home fn_create_item:@"Chart" image:@"ic_itdept_logo" segue:@"segue_chart"]];
+    [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
+    [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_itdept_logo" segue:@"segue_warehouse"]];
     
     self.icollectionView.delegate=self;
     self.icollectionView.dataSource=self;
