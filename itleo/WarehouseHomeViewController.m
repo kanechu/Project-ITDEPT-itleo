@@ -11,7 +11,6 @@
 #import "Cell_S_O_general.h"
 #import "Cell_show_totals.h"
 #import "Cell_load_plan.h"
-#import "Cell_warehouse_header.h"
 #import "SKSTableViewCell.h"
 
 @interface WarehouseHomeViewController ()
@@ -138,17 +137,8 @@
     }
     return cell;
 }
-
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-   static NSString *cellIndentifer=@"Cell_warehouse_header";
-    Cell_warehouse_header *headerView=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
-    if (headerView==nil) {
-        [NSException raise:@"headerView == nil.." format:@"No cells with matching CellIdentifier loaded from your storyboard"];
-    }
-    return headerView;
-}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 70;
+    return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 30;
