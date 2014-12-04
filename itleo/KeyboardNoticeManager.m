@@ -63,6 +63,7 @@
 -(void)keyboardWillHide:(NSNotification *)notification {
     UITableView *tableview=(UITableView *)[self fn_getTableview];
     tableview.frame=oldTableFrame;
+    oldOffSet_Y=0;
     [tableview setContentOffset:CGPointMake(tableview.contentOffset.x, oldOffSet_Y) animated:YES];
 }
 

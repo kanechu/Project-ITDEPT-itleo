@@ -181,6 +181,15 @@ CGFloat const kDefaultCellHeight = 60.0f;
     
     return 1;
 }
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if ([_SKSTableViewDelegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
+        return [_SKSTableViewDelegate tableView:tableView viewForHeaderInSection:section];
+    }
+    return nil;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return [_SKSTableViewDelegate tableView:tableView heightForHeaderInSection:section];
+}
 
 
 #pragma mark - UITableViewDelegate

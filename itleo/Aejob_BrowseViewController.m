@@ -50,7 +50,7 @@ static NSMutableArray *alist_filtered_data;
     self.skstableView.separatorColor=[UIColor lightGrayColor];
     [self setExtraCellLineHidden];
     
-    alist_filtered_data=[[NSMutableArray alloc]init];
+   
     [self fn_create_datePick];
 	// Do any additional setup after loading the view.
 }
@@ -122,6 +122,7 @@ static NSMutableArray *alist_filtered_data;
             [self.skstableView setScrollEnabled:NO];
         }else{
             [self.skstableView setScrollEnabled:YES];
+            [self.skstableView setTableFooterView:nil];
         }
         [SVProgressHUD dismiss];
         [self fn_refresh_skstableview:arr_resp_result];
@@ -132,7 +133,7 @@ static NSMutableArray *alist_filtered_data;
 -(void)fn_refresh_skstableview:(NSMutableArray*)arr_resp_result{
     DB_RespAejob_browse *db=[[DB_RespAejob_browse alloc]init];
     [db fn_delete_aejob_browse_data];
-    [alist_filtered_data removeAllObjects];
+    alist_filtered_data=[[NSMutableArray alloc]init];
     //保存数据
     [db fn_save_aejob_browse_data:arr_resp_result];
     
@@ -160,25 +161,27 @@ static NSMutableArray *alist_filtered_data;
 
 
 #pragma mark SKSTableViewDelegate
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [alist_groupAndnum count];
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [alist_groupAndnum count];
+}
 -(NSInteger)tableView:(SKSTableView *)tableView numberOfSubRowsAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *numOfrow=[[alist_groupAndnum objectAtIndex:indexPath.section]valueForKey:@"num"];
+    NSString *numOfrow=[[alist_groupAndnum objectAtIndex:indexPath.row]valueForKey:@"num"];
     return [numOfrow integerValue];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //获取每组的字典
-    NSMutableDictionary *dic=[alist_groupAndnum objectAtIndex:indexPath.section];
+    NSMutableDictionary *dic=[alist_groupAndnum objectAtIndex:indexPath.row];
     static NSString *CellIdentifier=@"SKSTableViewCell";
     SKSTableViewCell *cell=[self.skstableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
         cell=[self.skstableView dequeueReusableCellWithIdentifier:@"SKSTableViewCell"];
     }
     cell.expandable=YES;
+    cell.accessoryView=nil;
+    
     NSString *str_flight_no=[dic valueForKey:@"flight_no"];
     cell.il_flight.text=[NSString stringWithFormat:@"%@/%@/To:%@",str_flight_no,[dic valueForKey:@"flight_date"],[dic valueForKey:@"dish_port"]];
     cell.il_carr_name.text=[dic valueForKey:@"carr_name"];
@@ -190,7 +193,7 @@ static NSMutableArray *alist_filtered_data;
 }
 -(UITableViewCell*)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath{
     //提取每行的数据
-    NSMutableDictionary *dic=alist_filtered_data[indexPath.section][indexPath.subRow-1];
+    NSMutableDictionary *dic=alist_filtered_data[indexPath.row][indexPath.subRow-1];
     NSString *uld_type=[dic valueForKey:@"uld_type"];
     NSString *uld_no=[dic valueForKey:@"uld_no"];
     NSString *no_of_hawb=[NSString stringWithFormat:@"%@HAWBs",[dic valueForKey:@"no_of_hawb"]];
@@ -216,7 +219,9 @@ static NSMutableArray *alist_filtered_data;
     cell.il_kgs.text=kgs;
     return cell;
 }
-
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
@@ -225,7 +230,7 @@ static NSMutableArray *alist_filtered_data;
 }
 -(void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"segue_aejob_dtl_browse" sender:self];
-    NSMutableDictionary *dic=alist_filtered_data[indexPath.section][indexPath.subRow-1];
+    NSMutableDictionary *dic=alist_filtered_data[indexPath.row][indexPath.subRow-1];
     _aejobVC.idic_aejob_browse=dic;
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
