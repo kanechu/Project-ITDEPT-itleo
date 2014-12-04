@@ -31,6 +31,8 @@
 #define COLOR_DARK_GREEN [UIColor colorWithRed:51/255.0 green:110.0/255.0 blue:109.0/255.0 alpha:1]
 #define COLOR_DARK_GREEN1 [UIColor colorWithRed:58/255.0 green:135.0/255.0 blue:38.0/255.0 alpha:1]
 
+#define COLOR_DARK_RED [UIColor colorWithRed:163/255.0 green:33.0/255.0 blue:13.0/255.0 alpha:1]
+
 @interface Custom_Color : NSObject
 
 @end

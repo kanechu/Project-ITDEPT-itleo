@@ -18,6 +18,7 @@
 #import "Aejob_AdvanceSearchViewController.h"
 #import "CreateFootView.h"
 #import "CheckNetWork.h"
+
 static NSMutableArray *alist_groupAndnum;
 static NSMutableArray *alist_filtered_data;
 @interface Aejob_BrowseViewController ()
@@ -49,7 +50,9 @@ static NSMutableArray *alist_filtered_data;
     self.skstableView.SKSTableViewDelegate=self;
     self.skstableView.separatorColor=[UIColor lightGrayColor];
     [self setExtraCellLineHidden];
-    
+    if ([alist_filtered_data count]==0) {
+        [self fn_show_alert];
+    }
    
     [self fn_create_datePick];
 	// Do any additional setup after loading the view.
@@ -219,8 +222,20 @@ static NSMutableArray *alist_filtered_data;
     cell.il_kgs.text=kgs;
     return cell;
 }
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    static NSString *CellIdentifier=@"tableView_headerCell";
+    SKSTableViewCell *headerView=[self.skstableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!headerView) {
+        headerView=[[SKSTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    headerView.backgroundColor=COLOR_DARK_RED;
+    headerView.textLabel.text=@"Load Plan List";
+    headerView.textLabel.textColor=[UIColor whiteColor];
+    headerView.accessoryView=nil;
+    return headerView;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0;
+    return 25;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
