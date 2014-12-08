@@ -109,6 +109,7 @@ static NSMutableArray *alist_filtered_data;
 }
 #pragma mark 获取Aejob_browse数据
 -(void)fn_get_aejob_browse_data:(NSString*)base_url searchForm:(NSArray*)alist_searchForm{
+    [self setExtraCellLineHidden];
     [SVProgressHUD showWithStatus:@"Loading,please wait!"];
     RequestContract *req_form=[[RequestContract alloc]init];
     DB_LoginInfo *db=[[DB_LoginInfo alloc]init];

@@ -12,7 +12,7 @@
 #import "Cell_show_totals.h"
 #import "Cell_load_plan.h"
 #import "SKSTableViewCell.h"
-
+#import "Web_get_exso.h"
 @interface WarehouseHomeViewController ()
 
 @property (nonatomic,strong) NSMutableArray *alist_groupAndnum;
@@ -60,6 +60,14 @@
 */
 
 - (IBAction)fn_search_S_O_NO_data:(id)sender {
+#warning -neet fix
+    [SVProgressHUD showWithStatus:@"搜索中，请等候！"];
+    Web_get_exso *web_obj=[[Web_get_exso alloc]init];
+    [web_obj fn_get_exso_data:_itf_so_no.text];
+    web_obj.callBack_exso=^(NSMutableArray *arr_resp_result){
+        NSLog(@"%@",arr_resp_result);
+        [SVProgressHUD dismiss];
+    };
 }
 
 - (IBAction)fn_add_load_plan_row:(id)sender {

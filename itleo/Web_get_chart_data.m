@@ -157,6 +157,7 @@ static NSMutableDictionary *idic_ChartImages=nil;
         chartView.frame=CGRectMake(0, 0, 320, 480);
         i++;
         [arr_chartViews addObject:chartView];
+        chartView=nil;
     }
     return arr_chartViews;
 }
