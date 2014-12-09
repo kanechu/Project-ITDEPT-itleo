@@ -147,3 +147,17 @@
 "lbl_refreshing"="Refreshing, please wait!";
 "lbl_refresh_success"="Refresh success!";
 "lbl_set_title"="Each line shows the number of set chart";
+//******CFS WareHouse Home*******
+//home
+"lbl_so_no"="S/O NO:*";
+
+//receive goods
+"ibtn_save"="Save";
+"ibtn_clear"="Clear";
+"lbl_kgs_per_pkg"="KGS per PKG:";
+"lbl_so_pkg"="PKG:";
+"lbl_so_cbm"="CBM:";
+"lbl_length"="Length(cm):";
+"lbl_width"="Width(cm):";
+"lbl_height"="Height(cm):";
+"lbl_remark"="Remark:";

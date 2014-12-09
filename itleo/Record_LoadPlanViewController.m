@@ -39,7 +39,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 {
     [super viewDidLoad];
     [self fn_set_control_pro];
-    alist_prompts=[@[@"KGS per PKG:",@"PKG:",@"CBM:",@"Length(cm):",@"Width(cm):",@"Height(cm):",@"Remark:"]mutableCopy];
+    alist_prompts=[@[MY_LocalizedString(@"lbl_kgs_per_pkg", nil),MY_LocalizedString(@"lbl_so_pkg", nil),MY_LocalizedString(@"lbl_so_cbm", nil),MY_LocalizedString(@"lbl_length", nil),MY_LocalizedString(@"lbl_width", nil),MY_LocalizedString(@"lbl_height", nil),MY_LocalizedString(@"lbl_remark", nil)]mutableCopy];
     alist_columns=[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"]mutableCopy];
     idic_load_datas=[[NSMutableDictionary alloc]init];
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
@@ -53,12 +53,20 @@ typedef NSString* (^passValue)(NSInteger tag);
     // Dispose of any resources that can be recreated.
 }
 -(void)fn_set_control_pro{
+    
 #warning -neet fix
     [_ibtn_itleo_logo setTitle:@"Load plan" forState:UIControlStateNormal];
     [_ibtn_itleo_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
+    [_ibtn_delete setTitle:MY_LocalizedString(@"lbl_delete", nil)];
+    if (_flag_isAdd==1) {
+        [_ibtn_delete setTitle:@""];
+    }
     [self fn_set_button_layer:_ibtn_save];
     [self fn_set_button_layer:_ibtn_clear];
     [self fn_set_button_layer:_ibtn_cancel];
+    [_ibtn_save setTitle:MY_LocalizedString(@"ibtn_save", nil) forState:UIControlStateNormal];
+    [_ibtn_clear setTitle:MY_LocalizedString(@"ibtn_clear", nil) forState:UIControlStateNormal];
+    [_ibtn_cancel setTitle:MY_LocalizedString(@"lbl_cancel", nil) forState:UIControlStateNormal];
 }
 -(void)fn_set_button_layer:(id)sender{
     UIButton *ibtn=(UIButton*)sender;

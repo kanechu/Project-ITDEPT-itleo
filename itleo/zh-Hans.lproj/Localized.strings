@@ -146,3 +146,17 @@
 "lbl_refreshing"="正在刷新，请稍后！";
 "lbl_refresh_success"="刷新成功！";
 "lbl_set_title"="设置每行显示图表数";
+//******CFS WareHouse Home*******
+//home
+"lbl_so_no"="客户托运单号:";
+
+//receive goods
+"ibtn_save"="保存";
+"ibtn_clear"="清除";
+"lbl_kgs_per_pkg"="每件重量:";
+"lbl_so_pkg"="件数:";
+"lbl_so_cbm"="体积:";
+"lbl_length"="长度:";
+"lbl_width"="宽度:";
+"lbl_height"="高度:";
+"lbl_remark"="备注:";

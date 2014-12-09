@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet SKSTableView *skstableview;
 
+@property (weak, nonatomic) IBOutlet UILabel *ilb_so_no;
 @property (weak, nonatomic) IBOutlet Custom_textField *itf_so_no;
 - (IBAction)fn_search_S_O_NO_data:(id)sender;
 

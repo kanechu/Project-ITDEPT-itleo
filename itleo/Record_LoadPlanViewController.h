@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "Custom_BtnGraphicMixed.h"
 @interface Record_LoadPlanViewController : UIViewController<UITextFieldDelegate>
+
+@property (assign,nonatomic)NSInteger flag_isAdd;
+
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_itleo_logo;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 

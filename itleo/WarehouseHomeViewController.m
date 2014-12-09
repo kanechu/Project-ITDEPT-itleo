@@ -34,11 +34,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _skstableview.SKSTableViewDelegate=self;
     _alist_groupAndnum=[@[@{@"name": @"General",@"num":@"1"},@{@"name": @"Booking",@"num":@"1"},@{@"name": @"Received",@"num":@"1"},@{@"name": @"Load Plan/Container",@"num":@"1"}]mutableCopy];
     
+    _skstableview.SKSTableViewDelegate=self;
      [_skstableview fn_expandall];
-    _itf_so_no.delegate=self;
+    [self fn_set_control_pro];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -46,6 +47,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)fn_set_control_pro{
+    _ilb_so_no.text=MY_LocalizedString(@"lbl_so_no", nil);
+    _itf_so_no.delegate=self;
+    _itf_so_no.returnKeyType=UIReturnKeyDone;
 }
 
 /*
@@ -72,6 +79,7 @@
 
 - (IBAction)fn_add_load_plan_row:(id)sender {
     Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
+    record_VC.flag_isAdd=1;
     [self presentViewController:record_VC animated:YES completion:nil];
 }
 #pragma mark -UITextFieldDelegate
