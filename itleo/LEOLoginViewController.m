@@ -250,7 +250,7 @@ static NSString  *is_language=@"";//标识语言类型
                  *  登录成功后，请求sypara
                  */
                 Web_get_sypara *web_obj=[[Web_get_sypara alloc]init];
-                [web_obj fn_get_sypara_data];
+                [web_obj fn_get_sypara_data:web_addr];
                 /**
                  *  登录成功后，请求permit
                  */

@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *icollectionView;
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_home_logo;
 
-@property (weak, nonatomic) IBOutlet UIButton *ibtn_logout;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_logout;
 
 - (IBAction)fn_logout_itleo:(id)sender;
 - (IBAction)fn_click_menu:(id)sender;

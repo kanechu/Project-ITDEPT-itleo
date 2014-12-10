@@ -71,31 +71,22 @@
                             <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eA2-gZ-5MR" customClass="Custom_BtnGraphicMixed">
                                 <rect key="frame" x="16" y="5" width="80" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="NpX-D4-yIc">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Zb-sW-LTa">
-                                <rect key="frame" x="233" y="5" width="71" height="33"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="LOGOUT">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="fn_logout_itleo:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dgC-av-lVR"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="NpX-D4-yIc">
+                            <connections>
+                                <action selector="fn_logout_itleo:" destination="vXZ-lx-hvc" id="AIg-Kf-IdD"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ibtn_home_logo" destination="eA2-gZ-5MR" id="yfM-MR-xvZ"/>
-                        <outlet property="ibtn_logout" destination="9Zb-sW-LTa" id="ngS-zf-Zjm"/>
+                        <outlet property="ibtn_logout" destination="NpX-D4-yIc" id="2SO-m5-dht"/>
                         <outlet property="icollectionView" destination="Pf3-O6-Mz3" id="0lA-rY-0qb"/>
                         <segue destination="nGA-zr-oig" kind="push" identifier="segue_aejob_browse" id="XM1-7L-GPY"/>
                         <segue destination="X6A-kN-jCf" kind="push" identifier="segue_chart" id="SB7-ur-kw1"/>

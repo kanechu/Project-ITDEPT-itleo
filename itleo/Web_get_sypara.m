@@ -15,7 +15,7 @@
 #import "Conversion_helper.h"
 @implementation Web_get_sypara
 
--(void)fn_get_sypara_data{
+-(void)fn_get_sypara_data:(NSString*)base_url{
     
     RequestContract *req_form = [[RequestContract alloc] init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
@@ -27,20 +27,14 @@
     web_base.iresp_class=[Resp_sypara class];
     web_base.ilist_resp_mapping =[NSArray arrayWithPropertiesOfObject:[Resp_sypara class]];
     web_base.callBack=^(NSMutableArray *alist_result){
-        [self fn_save_sypara:alist_result];
+        if ([alist_result count]!=0) {
+            DB_sypara *db_sypara=[[DB_sypara alloc]init];
+            [db_sypara fn_save_sypara_data:alist_result];
+        }
     };
-    DB_RespAppConfig *db=[[DB_RespAppConfig alloc]init];
-    NSMutableArray *arr=[db fn_get_all_RespAppConfig_data];
-    if ([arr count]!=0) {
-        NSString *base_url=[[arr objectAtIndex:0]valueForKey:@"web_addr"];    [web_base fn_get_data:req_form base_url:base_url];
-    }
+    [web_base fn_get_data:req_form base_url:base_url];
 }
--(void)fn_save_sypara:(NSMutableArray*)alist_result{
-    if ([alist_result count]!=0) {
-        DB_sypara *db_sypara=[[DB_sypara alloc]init];
-        [db_sypara fn_save_sypara_data:alist_result];
-    }
-}
+
 -(NSInteger)fn_isShow_GPS_function{
     NSInteger flag=0;
     DB_sypara *db_sypara=[[DB_sypara alloc]init];

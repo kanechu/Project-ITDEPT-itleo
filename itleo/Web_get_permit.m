@@ -18,8 +18,6 @@
     RequestContract *ao_form=[[RequestContract alloc]init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-    auth.system=@"ITNEW";//备注，这里先写死，日后记住改过来
-    base_url=@"http://192.168.1.17/kie_web_api/";//这里也先写死，日后记住改过来
     auth.app_code=APP_CODE;
     auth.company_code=COMPANY_CODE;
     ao_form.Auth=auth;

@@ -10,7 +10,7 @@
 
 @interface Web_get_sypara : NSObject
 
--(void)fn_get_sypara_data;
+-(void)fn_get_sypara_data:(NSString*)base_url;
 
 -(NSInteger)fn_isShow_GPS_function;
 

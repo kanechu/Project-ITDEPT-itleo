@@ -56,7 +56,8 @@
 #pragma mark show different languge
 -(void) fn_show_different_language{
 
-    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil) forState:UIControlStateNormal];
+    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
+    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
 }
 #pragma mark creat menu item
 -(void) fn_create_menu{
