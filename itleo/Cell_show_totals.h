@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *ilb_kgs;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_cbm;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_date;
+@property (weak, nonatomic) IBOutlet UILabel *ilb_remark;
 
 @end

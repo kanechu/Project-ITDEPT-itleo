@@ -148,9 +148,22 @@
 "lbl_refresh_success"="Refresh success!";
 "lbl_set_title"="Each line shows the number of set chart";
 //******CFS WareHouse Home*******
-//home
 "lbl_so_no"="S/O NO:*";
-
+//general
+"lbl_vsl_voy"="Vsl/Voy:";
+"lbl_shpr"="Shipper:";
+"lbl_cnee"="Consignee:";
+"lbl_load"="Load Port:";
+"lbl_dish"="Dish Port:";
+"lbl_dest"="Destination:";
+//group name
+"lbl_general"="General";
+"lbl_booking"="Booking";
+"lbl_receive"="Received";
+"lbl_loadPlan"="Load Plan/Container";
+//booking or receive
+"lbl_rec_kgs"="KGS:";
+"lbl_date"="Date:";
 //receive goods
 "ibtn_save"="Save";
 "ibtn_clear"="Clear";

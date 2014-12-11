@@ -70,14 +70,21 @@
         if ([module_code isEqualToString:@"AIR_LOAD_PLAN"]&& [f_exec isEqualToString:@"1"]) {
             [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_air_Load_Plan", nil) image:@"ic_airloadplan" segue:@"segue_aejob_browse"]];
         }
-
+        
         if ([module_code isEqualToString:@"EPOD"] && [f_exec isEqualToString:@"1"]) {
             [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"delivery" segue:@"segue_epod"]];
         }
+#warning -neet fix
+        if ([module_code isEqualToString:@"Chart"] && [f_exec isEqualToString:@"1"]) {
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
+            [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
+        }
+        if ([module_code isEqualToString:@"warehouse"] && [f_exec isEqualToString:@"1"]) {
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_itdept_logo" segue:@"segue_warehouse"]];
+        }
         
     }
-    
-    [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
+    [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"delivery" segue:@"segue_epod"]];
     [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_itdept_logo" segue:@"segue_warehouse"]];
     
     self.icollectionView.delegate=self;
@@ -93,6 +100,9 @@
     [_ibtn_home_logo setTitle:MY_LocalizedString(@"lbl_home", nil) forState:UIControlStateNormal];
     [_ibtn_home_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
 }
+/**
+ *  判断用户是否登录，如果没有登录，则弹出登录界面
+ */
 -(void)fn_users_isLogin{
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
@@ -102,10 +112,14 @@
     }else{
         NSString *lang=[self fn_get_lang_code];
         [[MY_LocalizedString getshareInstance]fn_setLanguage_type:lang];
-        [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
     }
     
 }
+/**
+ *  获取登录时候，选择的语言
+ *
+ *  @return 语言类型
+ */
 -(NSString*)fn_get_lang_code{
     DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
     NSMutableArray *arr=[db fn_get_all_LoginInfoData];
@@ -150,6 +164,9 @@
         [self fn_clear_the_cache];
     }
 }
+/**
+ *  确定强制退出后，将清除缓存
+ */
 -(void)fn_clear_the_cache{
     //logout的时候，清除epod所有相关的信息
     DB_ePod *db_epod=[[DB_ePod alloc]init];

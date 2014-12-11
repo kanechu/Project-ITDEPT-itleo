@@ -39,7 +39,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 {
     [super viewDidLoad];
     [self fn_set_control_pro];
-    alist_prompts=[@[MY_LocalizedString(@"lbl_kgs_per_pkg", nil),MY_LocalizedString(@"lbl_so_pkg", nil),MY_LocalizedString(@"lbl_so_cbm", nil),MY_LocalizedString(@"lbl_length", nil),MY_LocalizedString(@"lbl_width", nil),MY_LocalizedString(@"lbl_height", nil),MY_LocalizedString(@"lbl_remark", nil)]mutableCopy];
+    alist_prompts=[@[MY_LocalizedString(@"lbl_kgs_per_pkg", nil),MY_LocalizedString(@"lbl_so_pkg", nil),MY_LocalizedString(@"lbl_length", nil),MY_LocalizedString(@"lbl_width", nil),MY_LocalizedString(@"lbl_height", nil),MY_LocalizedString(@"lbl_so_cbm", nil),MY_LocalizedString(@"lbl_remark", nil)]mutableCopy];
     alist_columns=[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"]mutableCopy];
     idic_load_datas=[[NSMutableDictionary alloc]init];
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
@@ -60,6 +60,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     [_ibtn_delete setTitle:MY_LocalizedString(@"lbl_delete", nil)];
     if (_flag_isAdd==1) {
         [_ibtn_delete setTitle:@""];
+        _ibtn_delete.enabled=NO;
     }
     [self fn_set_button_layer:_ibtn_save];
     [self fn_set_button_layer:_ibtn_clear];

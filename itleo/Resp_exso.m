@@ -18,8 +18,11 @@
 @synthesize imp_hbl_uid;
 @synthesize cst_ref_no;
 @synthesize load_code;
+@synthesize load_name;
 @synthesize dish_code;
+@synthesize dish_name;
 @synthesize dest_code;
+@synthesize dest_name;
 @synthesize voided;
 @synthesize booking_date;
 @synthesize received_date;

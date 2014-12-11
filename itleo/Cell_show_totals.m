@@ -7,7 +7,7 @@
 //
 
 #import "Cell_show_totals.h"
-
+#import "Cal_lineHeight.h"
 @implementation Cell_show_totals
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -31,4 +31,16 @@
     // Configure the view for the selected state
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    _ilb_remark.frame=CGRectMake(_ilb_remark.frame.origin.x, _ilb_remark.frame.origin.y, _ilb_remark.frame.size.width,[self fn_get_label_height:_ilb_remark]);
+}
+-(CGFloat)fn_get_label_height:(UILabel*)label{
+    Cal_lineHeight *cal_obj=[[Cal_lineHeight alloc]init];
+    CGFloat height=[cal_obj fn_heightWithString:label.text font:label.font constrainedToWidth:label.frame.size.width];
+    if (height<21) {
+        height=22;
+    }
+    return height;
+}
 @end

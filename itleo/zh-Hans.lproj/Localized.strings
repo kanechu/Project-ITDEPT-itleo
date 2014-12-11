@@ -147,16 +147,29 @@
 "lbl_refresh_success"="刷新成功！";
 "lbl_set_title"="设置每行显示图表数";
 //******CFS WareHouse Home*******
-//home
 "lbl_so_no"="客户托运单号:";
-
+//general
+"lbl_vsl_voy"="船名/航次:";
+"lbl_shpr"="发货人:";
+"lbl_cnee"="收货人:";
+"lbl_load"="装货港:";
+"lbl_dish"="卸货港:";
+"lbl_dest"="目的地:";
+//group name
+"lbl_general"="概览";
+"lbl_booking"="预订货";
+"lbl_receive"="已收货";
+"lbl_loadPlan"="卸货记录";
+//booking or receive
+"lbl_rec_kgs"="重量(千克):";
+"lbl_date"="日期:";
 //receive goods
 "ibtn_save"="保存";
 "ibtn_clear"="清除";
-"lbl_kgs_per_pkg"="每件重量:";
+"lbl_kgs_per_pkg"="每件重量(千克):";
 "lbl_so_pkg"="件数:";
-"lbl_so_cbm"="体积:";
-"lbl_length"="长度:";
-"lbl_width"="宽度:";
-"lbl_height"="高度:";
+"lbl_so_cbm"="体积(立方米):";
+"lbl_length"="长度(厘米):";
+"lbl_width"="宽度(厘米):";
+"lbl_height"="高度(厘米):";
 "lbl_remark"="备注:";
