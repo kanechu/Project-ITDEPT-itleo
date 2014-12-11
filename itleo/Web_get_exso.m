@@ -9,16 +9,14 @@
 #import "Web_get_exso.h"
 #import "Resp_exso.h"
 #import "DB_RespAppConfig.h"
+#import "DB_LoginInfo.h"
 @implementation Web_get_exso
 
 -(void)fn_get_exso_data:(NSString*)so_no{
     RequestContract *req_form=[[RequestContract alloc]init];
-    AuthContract *auth=[[AuthContract alloc]init];
-#warning - neet fix
-    auth.user_code=@"sa";
-    auth.password=@"bugfree12";
+    DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
+    AuthContract *auth=[db_login fn_get_RequestAuth];
     auth.company_code=COMPANY_CODE;
-    auth.system=@"PHP_ENSIGN";
     req_form.Auth=auth;
     SearchFormContract *searchForm=[[SearchFormContract alloc]init];
     searchForm.os_column=@"so_no";
