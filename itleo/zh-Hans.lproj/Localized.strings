@@ -148,6 +148,8 @@
 "lbl_set_title"="设置每行显示图表数";
 //******CFS WareHouse Home*******
 "lbl_so_no"="客户托运单号:";
+"lbl_search_so_alert"="正在搜索单号的信息,请稍等！";
+"lbl_so_result"="没有这个单号的信息！";
 //general
 "lbl_vsl_voy"="船名/航次:";
 "lbl_shpr"="发货人:";

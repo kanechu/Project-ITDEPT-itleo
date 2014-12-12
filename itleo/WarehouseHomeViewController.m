@@ -59,26 +59,20 @@
     _cal_obj=[[Cal_lineHeight alloc]init];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 - (IBAction)fn_search_S_O_NO_data:(id)sender {
-#warning -neet fix
-    [SVProgressHUD showWithStatus:@"搜索中，请等候！"];
+    [SVProgressHUD showWithStatus:MY_LocalizedString(@"lbl_search_so_alert", nil)];
     Web_get_exso *web_obj=[[Web_get_exso alloc]init];
     [web_obj fn_get_exso_data:_itf_so_no.text];
     web_obj.callBack_exso=^(NSMutableArray *arr_resp_result){
         _alist_resp_data=arr_resp_result;
         [self.skstableview reloadData];
-        [SVProgressHUD dismiss];
+        if ([_alist_resp_data count]!=0) {
+            [SVProgressHUD dismiss];
+        }else{
+            NSString *str_promt=[NSString stringWithFormat:@"%@,%@",_itf_so_no.text,MY_LocalizedString(@"lbl_so_result", nil)];
+            [SVProgressHUD dismissWithError:str_promt afterDelay:2.0f];
+        }
+       
     };
 }
 
@@ -259,5 +253,16 @@
         [self presentViewController:record_VC animated:YES completion:nil];
     }
 }
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

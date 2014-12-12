@@ -149,6 +149,8 @@
 "lbl_set_title"="Each line shows the number of set chart";
 //******CFS WareHouse Home*******
 "lbl_so_no"="S/O NO:*";
+"lbl_search_so_alert"="Searching SO NO information,please wait!";
+"lbl_so_result"="without this so no infomation!";
 //general
 "lbl_vsl_voy"="Vsl/Voy:";
 "lbl_shpr"="Shipper:";
