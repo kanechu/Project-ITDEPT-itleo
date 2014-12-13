@@ -151,6 +151,7 @@
 "lbl_so_no"="S/O NO:*";
 "lbl_search_so_alert"="Searching SO NO information,please wait!";
 "lbl_so_result"="without this so no infomation!";
+"ibtn_search"="Search";
 //general
 "lbl_vsl_voy"="Vsl/Voy:";
 "lbl_shpr"="Shipper:";
@@ -162,7 +163,7 @@
 "lbl_general"="General";
 "lbl_booking"="Booking";
 "lbl_receive"="Received";
-"lbl_loadPlan"="Load Plan/Container";
+"lbl_loadPlan"="Received Log";
 //booking or receive
 "lbl_rec_kgs"="KGS:";
 "lbl_date"="Date:";

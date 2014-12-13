@@ -14,6 +14,10 @@
 #import "Resp_DashboardGrpResult.h"
 #import "Resp_data.h"
 #import "Resp_get_chart.h"
+
+#import "Resp_exso.h"
+#import "Resp_ExsoBrowseResult.h"
+#import "Resp_CTexcfsdimResult.h"
 @implementation Web_base
 
 @synthesize il_url;
@@ -123,7 +127,54 @@
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
 }
-
+- (void) fn_get_exso_data:(RequestContract *)ao_form Auth:(AuthContract*)auth base_url:(NSString *)base_url{
+    //Auth
+    RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
+    NSArray *arr_auth=[NSArray arrayWithPropertiesOfObject:auth];
+    [lo_authMapping addAttributeMappingsFromArray:arr_auth];
+    //search form
+    RKObjectMapping *lo_searchMapping = [RKObjectMapping requestMapping];
+    [lo_searchMapping addAttributeMappingsFromArray:@[@"os_column",@"os_value",@"os_dyn_1"]];
+    
+    RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];
+    
+    RKRelationshipMapping *searchRelationship = [RKRelationshipMapping
+                                                 relationshipMappingFromKeyPath:@"SearchForm"
+                                                 toKeyPath:@"SearchForm"
+                                                 withMapping:lo_searchMapping];
+    
+    
+    RKRelationshipMapping *authRelationship = [RKRelationshipMapping
+                                               relationshipMappingFromKeyPath:@"Auth"
+                                               toKeyPath:@"Auth"
+                                               withMapping:lo_authMapping];
+    
+    [lo_reqMapping addPropertyMapping:authRelationship];
+    [lo_reqMapping addPropertyMapping:searchRelationship];
+    
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
+                                                                                   objectClass:[RequestContract class]
+                                                                                   rootKeyPath:nil method:RKRequestMethodPOST];
+    
+    RKObjectMapping* lo_response_mapping = [RKObjectMapping mappingForClass:[Resp_exso class]];
+    
+    RKObjectMapping* lo_excoBrowse_response_mapping = [RKObjectMapping mappingForClass:[Resp_ExsoBrowseResult class]];
+    
+    [lo_excoBrowse_response_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_ExsoBrowseResult class]]];
+    
+    RKObjectMapping* lo_cfsdim_response_mapping=[RKObjectMapping mappingForClass:[Resp_CTexcfsdimResult class]];
+    [lo_cfsdim_response_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_CTexcfsdimResult class]]];
+    
+    [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"ITLEOExsoBrowseResult" toKeyPath:@"ITLEOExsoBrowseResult" withMapping:lo_excoBrowse_response_mapping]];
+    [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"CTexcfsdimResult" toKeyPath:@"CTexcfsdimResult" withMapping:lo_cfsdim_response_mapping]];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
+                                                                                            method:RKRequestMethodPOST
+                                                                                       pathPattern:nil
+                                                                                           keyPath:nil
+                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
+}
 - (void) fn_uploaded_data:(UploadContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
     //Auth
     RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];

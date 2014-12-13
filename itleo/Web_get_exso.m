@@ -33,15 +33,15 @@
         }
         
     };
-    /*
-     DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
-     NSMutableArray *alist_result=[db_obj fn_get_all_RespAppConfig_data];
-     if ([alist_result count]!=0) {
-     NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
-     
-     }*/
-#warning -neet fix
-    NSString *str_base_url=@"http://192.168.1.17/kie_web_api/";
-    [web_obj fn_get_data:req_form base_url:str_base_url];
+    
+    DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
+    NSMutableArray *alist_result=[db_obj fn_get_all_RespAppConfig_data];
+    if ([alist_result count]!=0) {
+        NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
+        [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];
+    }
+/*
+    NSString *str_base_url=@"http://192.168.2.198:81/webservice/";
+    [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];*/
 }
 @end

@@ -147,9 +147,10 @@
 "lbl_refresh_success"="刷新成功！";
 "lbl_set_title"="设置每行显示图表数";
 //******CFS WareHouse Home*******
-"lbl_so_no"="客户托运单号:";
+"lbl_so_no"="客户托运单号:*";
 "lbl_search_so_alert"="正在搜索单号的信息,请稍等！";
 "lbl_so_result"="没有这个单号的信息！";
+"ibtn_search"="搜索";
 //general
 "lbl_vsl_voy"="船名/航次:";
 "lbl_shpr"="发货人:";
@@ -161,7 +162,7 @@
 "lbl_general"="概览";
 "lbl_booking"="预订货";
 "lbl_receive"="已收货";
-"lbl_loadPlan"="卸货记录";
+"lbl_loadPlan"="收货记录";
 //booking or receive
 "lbl_rec_kgs"="重量(千克):";
 "lbl_date"="日期:";
