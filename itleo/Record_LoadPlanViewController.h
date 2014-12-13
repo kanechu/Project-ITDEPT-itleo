@@ -11,6 +11,7 @@
 @interface Record_LoadPlanViewController : UIViewController<UITextFieldDelegate>
 
 @property (assign,nonatomic)NSInteger flag_isAdd;
+@property (strong,nonatomic)NSMutableDictionary *idic_received_log;
 
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_itleo_logo;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;

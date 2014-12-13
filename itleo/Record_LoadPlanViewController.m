@@ -53,8 +53,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     // Dispose of any resources that can be recreated.
 }
 -(void)fn_set_control_pro{
-    
-#warning -neet fix
+ #warning -neet fix
     [_ibtn_itleo_logo setTitle:@"Load plan" forState:UIControlStateNormal];
     [_ibtn_itleo_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     [_ibtn_delete setTitle:MY_LocalizedString(@"lbl_delete", nil)];

@@ -12,12 +12,12 @@
 #import "Cell_show_totals.h"
 #import "Cell_load_plan.h"
 #import "SKSTableViewCell.h"
-#import "Web_get_exso.h"
 #import "Cal_lineHeight.h"
+#import "Resp_exso.h"
+#import "Resp_CTexcfsdimResult.h"
 @interface WarehouseHomeViewController ()
 
 @property (nonatomic,strong) NSMutableArray *alist_groupAndnum;
-@property (nonatomic,strong) NSMutableArray *alist_resp_data;
 @property (nonatomic,strong) Cal_lineHeight *cal_obj;
 
 @end
@@ -36,12 +36,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSArray *arr_groupAndnum=@[@{@"name":MY_LocalizedString(@"lbl_general", nil),@"num":@"1"},@{@"name": MY_LocalizedString(@"lbl_booking", nil),@"num":@"1"},@{@"name": MY_LocalizedString(@"lbl_receive", nil),@"num":@"1"},@{@"name":MY_LocalizedString(@"lbl_loadPlan", nil),@"num":@"1"}];
-    _alist_groupAndnum=[arr_groupAndnum mutableCopy];
+
+    [self fn_set_property];
     
     _skstableview.SKSTableViewDelegate=self;
      [_skstableview fn_expandall];
-    [self fn_set_control_pro];
+  
     
     // Do any additional setup after loading the view.
 }
@@ -52,45 +52,25 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)fn_set_control_pro{
-    _ilb_so_no.text=MY_LocalizedString(@"lbl_so_no", nil);
-    _itf_so_no.delegate=self;
-    _itf_so_no.returnKeyType=UIReturnKeyDone;
+-(void)fn_set_property{
+  _ilb_so_no.text=MY_LocalizedString(@"lbl_so_no", nil);
+    _itf_so_no.text=_str_so_no;
     _cal_obj=[[Cal_lineHeight alloc]init];
-}
-
-- (IBAction)fn_search_S_O_NO_data:(id)sender {
-    [SVProgressHUD showWithStatus:MY_LocalizedString(@"lbl_search_so_alert", nil)];
-    Web_get_exso *web_obj=[[Web_get_exso alloc]init];
-    [web_obj fn_get_exso_data:_itf_so_no.text];
-    web_obj.callBack_exso=^(NSMutableArray *arr_resp_result){
-        _alist_resp_data=arr_resp_result;
-        [self.skstableview reloadData];
-        if ([_alist_resp_data count]!=0) {
-            [SVProgressHUD dismiss];
-        }else{
-            NSString *str_promt=[NSString stringWithFormat:@"%@,%@",_itf_so_no.text,MY_LocalizedString(@"lbl_so_result", nil)];
-            [SVProgressHUD dismissWithError:str_promt afterDelay:2.0f];
-        }
-       
-    };
+    
+    NSArray *arr_groupAndnum=@[@{@"name":MY_LocalizedString(@"lbl_general", nil),@"num":@"1"},@{@"name": MY_LocalizedString(@"lbl_booking", nil),@"num":@"1"},@{@"name": MY_LocalizedString(@"lbl_receive", nil),@"num":@"1"}];
+    _alist_groupAndnum=[arr_groupAndnum mutableCopy];
+    if ([_alist_exso_data count]!=0) {
+        Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
+        NSSet *alist_cfsdim=exso_obj.CTexcfsdimResult;
+        NSString *str_num=[NSString stringWithFormat:@"%d",[alist_cfsdim count]];
+        [_alist_groupAndnum addObject:@{@"name": MY_LocalizedString(@"lbl_loadPlan", nil),@"num":str_num}];
+    }
 }
 
 - (IBAction)fn_add_load_plan_row:(id)sender {
     Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
     record_VC.flag_isAdd=1;
     [self presentViewController:record_VC animated:YES completion:nil];
-}
-#pragma mark -UITextFieldDelegate
--(void)textFieldDidBeginEditing:(UITextField *)textField{
-     [_itf_so_no fn_setLine_color:[UIColor blueColor]];
-}
--(void)textFieldDidEndEditing:(UITextField *)textField{
-     [_itf_so_no fn_setLine_color:[UIColor lightGrayColor]];
-}
--(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
 }
 
 #pragma mark -SKSTableViewDelegate
@@ -119,8 +99,11 @@
 }
 -(UITableViewCell*)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableDictionary *dic=nil;
-    if ([_alist_resp_data count]!=0) {
-        dic=[_alist_resp_data objectAtIndex:indexPath.subRow-1];
+    if ([_alist_exso_data count]!=0 && indexPath.row!=3) {
+        Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:indexPath.subRow-1];
+        NSSet *set_exsoBrowse=exso_obj.ITLEOExsoBrowseResult;
+        NSArray *alist_exsoBrowse=[set_exsoBrowse allObjects];
+        dic=[alist_exsoBrowse objectAtIndex:indexPath.subRow-1];
     }
     static NSString *cellIndentifer=@"Cell_show_totals";
     Cell_show_totals *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
@@ -154,17 +137,34 @@
     if (indexPath.row==0) {
         static NSString *cellIndentifer=@"Cell_S_O_general";
         Cell_S_O_general *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
-        cell.ilb_vsl_voy.text=[dic valueForKey:@"vsl_voy_name"];
-        cell.ilb_shipper.text=[dic valueForKey:@"shpr_name"];
-        cell.ilb_consignee.text=[dic valueForKey:@"cnee_name"];
-        cell.ilb_loadPort.text=[dic valueForKey:@"load_name"];
-        cell.ilb_dishPort.text=[dic valueForKey:@"dish_name"];
-        cell.ilb_destination.text=[dic valueForKey:@"dest_name"];
+        if (dic!=nil) {
+            cell.ilb_vsl_voy.text=[dic valueForKey:@"vsl_voy_name"];
+            cell.ilb_shipper.text=[dic valueForKey:@"shpr_name"];
+            cell.ilb_consignee.text=[dic valueForKey:@"cnee_name"];
+            cell.ilb_loadPort.text=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"load_name"],[dic valueForKey:@"load_code"]];
+            cell.ilb_dishPort.text=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"dish_name"],[dic valueForKey:@"dish_code"]];
+            cell.ilb_destination.text=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"dest_name"],[dic valueForKey:@"dest_code"]];
+        }
+        
         return cell;
     }
+    
     if (indexPath.row==3) {
+        Resp_CTexcfsdimResult *resp_cfsdim=nil;
+        if ([_alist_exso_data count]!=0) {
+            Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
+            NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
+            NSArray *alist_cfsdimBrowse=[set_cfsdimBrowse allObjects];
+            resp_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
+        }
         static NSString *cellIndentifer=@"Cell_load_plan";
         Cell_load_plan *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
+        if ((indexPath.subRow-1)%2==0) {
+            cell.backgroundColor=COLOR_LIGHT_GRAY;
+        }else{
+            cell.backgroundColor=COLOR_LIGHT_BLUE;
+        }
+        
         NSString *str_rec_kgs=MY_LocalizedString(@"lbl_kgs_per_pkg", nil);
         NSString *str_rec_pkg=MY_LocalizedString(@"lbl_so_pkg", nil);
         NSString *str_rec_cbm=MY_LocalizedString(@"lbl_so_cbm", nil);
@@ -173,13 +173,13 @@
         NSString *str_rec_height=MY_LocalizedString(@"lbl_height", nil);
         NSString *str_remark=MY_LocalizedString(@"lbl_remark", nil);
         
-        cell.ilb_kgs_per_pkg.text=str_rec_kgs;
-        cell.ilb_pkg.text=str_rec_pkg;
-        cell.ilb_cbm.text=str_rec_cbm;
-        cell.ilb_length.text=str_rec_length;
-        cell.ilb_width.text=str_rec_width;
-        cell.ilb_height.text=str_rec_height;
-        cell.ilb_remark.text=str_remark;
+        cell.ilb_kgs_per_pkg.text=[str_rec_kgs stringByAppendingFormat:@"%@",resp_cfsdim.kgs];
+        cell.ilb_pkg.text=[str_rec_pkg stringByAppendingFormat:@"%@",resp_cfsdim.pkg];
+        cell.ilb_cbm.text=[str_rec_cbm stringByAppendingFormat:@"%@",resp_cfsdim.cbm];
+        cell.ilb_length.text=[str_rec_length stringByAppendingFormat:@"%@",resp_cfsdim.length];
+        cell.ilb_width.text=[str_rec_width stringByAppendingFormat:@"%@",resp_cfsdim.width];
+        cell.ilb_height.text=[str_rec_height stringByAppendingFormat:@"%@",resp_cfsdim.height];
+        cell.ilb_remark.text=[str_remark stringByAppendingFormat:@"%@",resp_cfsdim.remark];
         return cell;
     }
     return cell;
@@ -191,8 +191,29 @@
     return 30;
 }
 -(CGFloat)tableView:(SKSTableView *)tableView heightForSubRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row==3) {
+        static NSString *cellIndentifer=@"Cell_load_plan";
+        Cell_load_plan *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
+        Resp_CTexcfsdimResult *resp_cfsdim=nil;
+        if ([_alist_exso_data count]!=0) {
+            Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
+            NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
+            NSArray *alist_cfsdimBrowse=[set_cfsdimBrowse allObjects];
+            resp_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
+        }
+        
+        NSString *str_load_remark=resp_cfsdim.remark;
+        CGFloat load_remark_h=[_cal_obj fn_heightWithString:str_load_remark font:cell.ilb_remark.font constrainedToWidth:cell.ilb_remark.frame.size.height];
+        if (load_remark_h<21) {
+            load_remark_h=21;
+        }
+        return 117+load_remark_h;
+    }
+    Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:indexPath.subRow-1];
+    NSSet *set_exsoBrowse=exso_obj.ITLEOExsoBrowseResult;
+    NSArray *alist_exsoBrowse=[set_exsoBrowse allObjects];
+    NSMutableDictionary *dic=[alist_exsoBrowse objectAtIndex:indexPath.subRow-1];
     if (indexPath.row==0) {
-        NSMutableDictionary *dic=[_alist_resp_data objectAtIndex:indexPath.subRow-1];
         static NSString *cellIndentifer=@"Cell_S_O_general";
         Cell_S_O_general *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
         NSString *str_vsl_voy=[dic valueForKey:@"vsl_voy_name"];
@@ -210,37 +231,28 @@
         if (cnee_height<21) {
             cnee_height=21;
         }
-        NSString *str_loadPort=[dic valueForKey:@"load_code"];
+        NSString *str_loadPort=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"load_name"],[dic valueForKey:@"load_code"]];
         CGFloat loadPort_height=[_cal_obj fn_heightWithString:str_loadPort font:cell.ilb_loadPort.font constrainedToWidth:cell.ilb_loadPort.frame.size.width];
         if (loadPort_height<21) {
             loadPort_height=21;
         }
-        NSString *str_dishPort=[dic valueForKey:@"dish_code"];
+        NSString *str_dishPort=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"dish_name"],[dic valueForKey:@"dish_code"]];
         CGFloat dishPort_height=[_cal_obj fn_heightWithString:str_dishPort font:cell.ilb_dishPort.font constrainedToWidth:cell.ilb_dishPort.frame.size.width];
         if (dishPort_height<21) {
             dishPort_height=21;
         }
-        NSString *str_destination=[dic valueForKey:@"dest_code"];
+        NSString *str_destination=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"dest_name"],[dic valueForKey:@"dest_code"]];
         CGFloat dest_height=[_cal_obj fn_heightWithString:str_destination font:cell.ilb_destination.font constrainedToWidth:cell.ilb_destination.frame.size.width];
         if (dest_height<21) {
             dest_height=21;
         }
         return vsl_height+shipper_height+cnee_height+loadPort_height+dishPort_height+dest_height+10;
     }
-    if (indexPath.row==3) {
-        static NSString *cellIndentifer=@"Cell_load_plan";
-        Cell_load_plan *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
-        NSString *str_load_remark=@"";
-        CGFloat load_remark_h=[_cal_obj fn_heightWithString:str_load_remark font:cell.ilb_remark.font constrainedToWidth:cell.ilb_remark.frame.size.height];
-        if (load_remark_h<21) {
-            load_remark_h=21;
-        }
-        return 117+load_remark_h;
-    }
+    
+    
     static NSString *cellIndentifer=@"Cell_show_totals";
     Cell_show_totals *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
-     NSMutableDictionary *idic=[_alist_resp_data objectAtIndex:indexPath.subRow-1];
-    NSString *str_remark=[idic valueForKey:@"remark"];
+    NSString *str_remark=[dic valueForKey:@"remark"];
     CGFloat remark_heigth=[_cal_obj fn_heightWithString:str_remark font:cell.ilb_remark.font constrainedToWidth:cell.ilb_remark.frame.size.width];
     if (remark_heigth<21) {
         remark_heigth=21;
@@ -249,7 +261,15 @@
 }
 -(void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==3) {
+        NSMutableDictionary *idic_cfsdim=nil;
+        if ([_alist_exso_data count]!=0) {
+            Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
+            NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
+            NSArray *alist_cfsdimBrowse=[set_cfsdimBrowse allObjects];
+            idic_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
+        }
         Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
+        record_VC.idic_received_log=idic_cfsdim;
         [self presentViewController:record_VC animated:YES completion:nil];
     }
 }
