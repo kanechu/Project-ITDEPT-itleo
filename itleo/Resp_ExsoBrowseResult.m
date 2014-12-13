@@ -11,6 +11,7 @@
 @implementation Resp_ExsoBrowseResult
 
 @synthesize uid;
+@synthesize so_uid;
 @synthesize unique_id;
 @synthesize so_no;
 @synthesize vslvoy_uid;

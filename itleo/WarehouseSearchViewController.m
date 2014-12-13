@@ -40,19 +40,19 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)fn_set_control_pro{
-  _ilb_so_no.text=MY_LocalizedString(@"lbl_so_no", nil);
+    _ilb_so_no.text=MY_LocalizedString(@"lbl_so_no", nil);
     _itf_so_no.delegate=self;
     _itf_so_no.returnKeyType=UIReturnKeyDone;
     
     _ibtn_search.left_icon=[UIImage imageNamed:@"ibtn_search"];
     [_ibtn_search setTitle:MY_LocalizedString(@"ibtn_search", nil) forState:UIControlStateNormal];
     _ibtn_search.backgroundColor=COLOR_light_BLUE;
-     _ibtn_search.layer.backgroundColor=[UIColor lightGrayColor].CGColor;
+    _ibtn_search.layer.backgroundColor=[UIColor lightGrayColor].CGColor;
 }
 #pragma mark -UITextFieldDelegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-     _ibtn_search.layer.backgroundColor=COLOR_light_BLUE.CGColor;
     [_itf_so_no fn_setLine_color:[UIColor blueColor]];
+    _ibtn_search.layer.backgroundColor=COLOR_light_BLUE.CGColor;
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     [_itf_so_no fn_setLine_color:[UIColor lightGrayColor]];

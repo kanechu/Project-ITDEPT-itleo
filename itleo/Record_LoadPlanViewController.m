@@ -8,22 +8,26 @@
 
 #import "Record_LoadPlanViewController.h"
 #import "Cell_advance_search.h"
+#import "Warehouse_receive_data.h"
 #define TEXTFIELD_TAG 100
 typedef NSString* (^passValue)(NSInteger tag);
+
 @interface Record_LoadPlanViewController ()
 //存储输入内容的提示
-@property (nonatomic,strong) NSMutableArray *alist_prompts;
-@property (nonatomic,strong) NSMutableArray *alist_columns;
-@property (nonatomic,strong) NSMutableDictionary *idic_load_datas;
+@property (nonatomic,strong) NSArray *alist_prompts;
+@property (nonatomic,strong) NSArray *alist_columns;
+@property (nonatomic,strong) NSMutableDictionary *idic_load_value;
+
 @property (nonatomic,strong) Custom_textField *checkText;
 @property (nonatomic,strong) passValue pass_Value;
+
 @end
 
 @implementation Record_LoadPlanViewController
 
 @synthesize alist_prompts;
 @synthesize alist_columns;
-@synthesize idic_load_datas;
+@synthesize idic_load_value;
 @synthesize checkText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -38,10 +42,9 @@ typedef NSString* (^passValue)(NSInteger tag);
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self fn_set_control_pro];
-    alist_prompts=[@[MY_LocalizedString(@"lbl_kgs_per_pkg", nil),MY_LocalizedString(@"lbl_so_pkg", nil),MY_LocalizedString(@"lbl_length", nil),MY_LocalizedString(@"lbl_width", nil),MY_LocalizedString(@"lbl_height", nil),MY_LocalizedString(@"lbl_so_cbm", nil),MY_LocalizedString(@"lbl_remark", nil)]mutableCopy];
-    alist_columns=[@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"]mutableCopy];
-    idic_load_datas=[[NSMutableDictionary alloc]init];
+    [self fn_init_arr_or_dic];
+    [self fn_set_control_property];
+    
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
     [self fn_custom_gestureRecognizer];
     // Do any additional setup after loading the view.
@@ -52,9 +55,38 @@ typedef NSString* (^passValue)(NSInteger tag);
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)fn_set_control_pro{
- #warning -neet fix
-    [_ibtn_itleo_logo setTitle:@"Load plan" forState:UIControlStateNormal];
+- (void)fn_init_arr_or_dic{
+    alist_prompts=@[MY_LocalizedString(@"lbl_kgs_per_pkg", nil),MY_LocalizedString(@"lbl_so_pkg", nil),MY_LocalizedString(@"lbl_length", nil),MY_LocalizedString(@"lbl_width", nil),MY_LocalizedString(@"lbl_height", nil),MY_LocalizedString(@"lbl_so_cbm", nil),MY_LocalizedString(@"lbl_remark", nil)];
+    alist_columns=@[@"kgs",@"pkg",@"length",@"width",@"height",@"cbm",@"remark"];
+    NSArray *alist_load_columns=[NSArray arrayWithPropertiesOfObject:[Warehouse_receive_data class]];
+    idic_load_value=[[NSMutableDictionary alloc]init];
+    if (_idic_received_log!=nil) {
+        for (NSString *str_key in alist_load_columns) {
+            NSString *str_value=[_idic_received_log valueForKey:str_key];
+            if ([str_value length]!=0) {
+                [idic_load_value setObject:str_value forKey:str_key];
+            }else{
+                [idic_load_value setObject:@"" forKey:str_key];
+            }
+        }
+        
+    }else{
+        for (NSString *str_key in alist_load_columns) {
+            [idic_load_value setObject:@"" forKey:str_key];
+        }
+        NSArray *alist_keys=@[@"uid",@"so_uid",@"unique_id",@"voided"];
+        for (NSString *str_key in alist_keys) {
+            NSString *str_value=[_idic_exsoBrowse valueForKey:str_key];
+            if (str_value!=nil) {
+                [idic_load_value setObject:str_value forKey:str_key];
+            }
+        }
+    }
+    
+}
+- (void)fn_set_control_property{
+
+    [_ibtn_itleo_logo setTitle:MY_LocalizedString(@"lbl_receive_logo", nil) forState:UIControlStateNormal];
     [_ibtn_itleo_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     [_ibtn_delete setTitle:MY_LocalizedString(@"lbl_delete", nil)];
     if (_flag_isAdd==1) {
@@ -93,7 +125,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     [checkText fn_setLine_color:[UIColor lightGrayColor]];
      NSString *os_column_key=_pass_Value(textField.tag);
     if ([textField.text length]!=0) {
-        [idic_load_datas setObject:textField.text forKey:os_column_key];
+        [idic_load_value setObject:textField.text forKey:os_column_key];
     }
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -115,11 +147,11 @@ typedef NSString* (^passValue)(NSInteger tag);
     
 }
 - (IBAction)fn_save_data:(id)sender {
-    NSLog(@"%@",idic_load_datas);
+
 }
 
 - (IBAction)fn_clear_input_data:(id)sender {
-    [idic_load_datas removeAllObjects];
+    [idic_load_value removeAllObjects];
     [self.tableview reloadData];
 }
 
@@ -151,11 +183,17 @@ typedef NSString* (^passValue)(NSInteger tag);
     cell.itf_inputdata.delegate=self;
     cell.itf_inputdata.tag=TEXTFIELD_TAG+indexPath.row;
     NSString *os_column_key=[alist_columns objectAtIndex:indexPath.row];
-    cell.itf_inputdata.text=[idic_load_datas valueForKey:os_column_key];
+    cell.itf_inputdata.text=[idic_load_value valueForKey:os_column_key];
     
     return cell;
 }
 #pragma mark -UITableViewDelegate
-
-
+#pragma mark -KVC 
+//KVC会将字典所有的键值对（key_value)赋值给模型对象的属性。只有当字典的键值对个数跟模型的属性个数相等，并且属性名必须和字典的键值对一样时才可以使用kvc
+- (Warehouse_receive_data*)fn_initWithDict:(NSDictionary *)dict{
+    Warehouse_receive_data *receive_obj=[[Warehouse_receive_data alloc]init];
+    
+    [receive_obj setValuesForKeysWithDictionary:dict];
+    return receive_obj;
+}
 @end

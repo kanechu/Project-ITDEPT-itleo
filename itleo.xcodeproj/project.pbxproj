@@ -137,6 +137,7 @@
 		B2A7481119BEFD57006C96D1 /* PopSignUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7480E19BEFD57006C96D1 /* PopSignUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B2A9A0C11998517B00737D08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A9A0C01998517B00737D08 /* Images.xcassets */; };
 		B2A9A0C719985E1800737D08 /* Custom_BtnGraphicMixed.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A9A0C619985E1800737D08 /* Custom_BtnGraphicMixed.m */; };
+		B2AE75871A3BEF3D00F3F732 /* Warehouse_receive_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE75861A3BEF3D00F3F732 /* Warehouse_receive_data.m */; };
 		B2AE8D9D19C6B9C400B5B2E6 /* image_magnify_shrink.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE8D9C19C6B9C400B5B2E6 /* image_magnify_shrink.m */; };
 		B2AFFA3919C2945700BC26BB /* Cell_status_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AFFA3819C2945700BC26BB /* Cell_status_list.m */; };
 		B2AFFA8619C2FC7100BC26BB /* DB_ePod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AFFA8519C2FC7100BC26BB /* DB_ePod.m */; };
@@ -459,6 +460,8 @@
 		B2A9A0C01998517B00737D08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = itleo/Images.xcassets; sourceTree = "<group>"; };
 		B2A9A0C519985E1800737D08 /* Custom_BtnGraphicMixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Custom_BtnGraphicMixed.h; sourceTree = "<group>"; };
 		B2A9A0C619985E1800737D08 /* Custom_BtnGraphicMixed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Custom_BtnGraphicMixed.m; sourceTree = "<group>"; };
+		B2AE75851A3BEF3D00F3F732 /* Warehouse_receive_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warehouse_receive_data.h; sourceTree = "<group>"; };
+		B2AE75861A3BEF3D00F3F732 /* Warehouse_receive_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Warehouse_receive_data.m; sourceTree = "<group>"; };
 		B2AE8D9B19C6B9C400B5B2E6 /* image_magnify_shrink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_magnify_shrink.h; sourceTree = "<group>"; };
 		B2AE8D9C19C6B9C400B5B2E6 /* image_magnify_shrink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = image_magnify_shrink.m; sourceTree = "<group>"; };
 		B2AFFA3719C2945700BC26BB /* Cell_status_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_status_list.h; sourceTree = "<group>"; };
@@ -1075,6 +1078,8 @@
 				B2A328D819D5653A00DB8F9B /* Truck_order_data.m */,
 				B2BDD56F19D8ED4C00FEEA08 /* Truck_order_image_data.h */,
 				B2BDD57019D8ED4C00FEEA08 /* Truck_order_image_data.m */,
+				B2AE75851A3BEF3D00F3F732 /* Warehouse_receive_data.h */,
+				B2AE75861A3BEF3D00F3F732 /* Warehouse_receive_data.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -1328,6 +1333,7 @@
 				B276C0FD1995D8D800075515 /* AppConstants.m in Sources */,
 				B272EA6819AEDDA400256276 /* MZFormSheetBackgroundWindowViewController.m in Sources */,
 				B2281AAE19960311001A73B0 /* FMDatabaseAdditions.m in Sources */,
+				B2AE75871A3BEF3D00F3F732 /* Warehouse_receive_data.m in Sources */,
 				B2C3BAE819BAE215008B9A83 /* EPODViewController.m in Sources */,
 				B2C28E9F199C47B100F4D0BF /* DetailView.m in Sources */,
 				B28222A919FF39F00000FC2B /* Resp_upd_GPS.m in Sources */,

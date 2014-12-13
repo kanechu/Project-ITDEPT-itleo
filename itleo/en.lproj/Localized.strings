@@ -152,6 +152,7 @@
 "lbl_search_so_alert"="Searching SO NO information,please wait!";
 "lbl_so_result"="without this so no infomation!";
 "ibtn_search"="Search";
+"lbl_receive_logo"="Warehouse";
 //general
 "lbl_vsl_voy"="Vsl/Voy:";
 "lbl_shpr"="Shipper:";
@@ -170,7 +171,7 @@
 //receive goods
 "ibtn_save"="Save";
 "ibtn_clear"="Clear";
-"lbl_kgs_per_pkg"="KGS per PKG:";
+"lbl_kgs_per_pkg"="KGS/PKG:";
 "lbl_so_pkg"="PKG:";
 "lbl_so_cbm"="CBM:";
 "lbl_length"="Length(cm):";

@@ -12,6 +12,7 @@
 
 @property (assign,nonatomic)NSInteger flag_isAdd;
 @property (strong,nonatomic)NSMutableDictionary *idic_received_log;
+@property (strong,nonatomic)NSMutableDictionary *idic_exsoBrowse;
 
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_itleo_logo;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;

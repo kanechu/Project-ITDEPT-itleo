@@ -15,6 +15,7 @@
 #import "Cal_lineHeight.h"
 #import "Resp_exso.h"
 #import "Resp_CTexcfsdimResult.h"
+#import "Resp_ExsoBrowseResult.h"
 @interface WarehouseHomeViewController ()
 
 @property (nonatomic,strong) NSMutableArray *alist_groupAndnum;
@@ -68,8 +69,16 @@
 }
 
 - (IBAction)fn_add_load_plan_row:(id)sender {
+    Resp_ExsoBrowseResult *resp_obj=nil;
+    if ([_alist_exso_data count]!=0) {
+        Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
+        NSSet *set_exsoBrowse=exso_obj.ITLEOExsoBrowseResult;
+        NSArray *alist_exsoBrowse=[set_exsoBrowse allObjects];
+        resp_obj=[alist_exsoBrowse objectAtIndex:0];
+    }
     Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
     record_VC.flag_isAdd=1;
+    record_VC.idic_exsoBrowse=[[NSDictionary dictionaryWithPropertiesOfObject:resp_obj]mutableCopy];
     [self presentViewController:record_VC animated:YES completion:nil];
 }
 

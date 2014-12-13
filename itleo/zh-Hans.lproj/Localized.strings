@@ -151,6 +151,7 @@
 "lbl_search_so_alert"="正在搜索单号的信息,请稍等！";
 "lbl_so_result"="没有这个单号的信息！";
 "ibtn_search"="搜索";
+"lbl_receive_logo"="仓库收货";
 //general
 "lbl_vsl_voy"="船名/航次:";
 "lbl_shpr"="发货人:";

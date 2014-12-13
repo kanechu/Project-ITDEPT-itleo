@@ -11,6 +11,7 @@
 @interface Resp_ExsoBrowseResult : NSObject
 
 @property (nonatomic,copy) NSString *uid;
+@property (nonatomic,copy) NSString *so_uid;
 @property (nonatomic,copy) NSString *unique_id;
 @property (nonatomic,copy) NSString *so_no;
 @property (nonatomic,copy) NSString *vslvoy_uid;
