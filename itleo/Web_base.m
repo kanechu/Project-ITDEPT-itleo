@@ -10,6 +10,8 @@
 #import <RestKit/RestKit.h>
 #import "Epod_upd_milestone_image_contract.h"
 #import "UpdateFormContract_GPS.h"
+#import "Warehouse_receive_data.h"
+
 #import "Resp_DashboardDtlResult.h"
 #import "Resp_DashboardGrpResult.h"
 #import "Resp_data.h"
@@ -234,6 +236,46 @@
     //upload GPS form
     RKObjectMapping *lo_updateMapping = [RKObjectMapping requestMapping];
     NSMutableArray *arr_updateform=[[NSArray arrayWithPropertiesOfObject:[UpdateFormContract_GPS class]]mutableCopy];
+    [lo_updateMapping addAttributeMappingsFromArray:arr_updateform];
+    
+    RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];
+    
+    RKRelationshipMapping *searchRelationship = [RKRelationshipMapping
+                                                 relationshipMappingFromKeyPath:@"UpdateForm"
+                                                 toKeyPath:@"UpdateForm"
+                                                 withMapping:lo_updateMapping];
+    
+    
+    RKRelationshipMapping *authRelationship = [RKRelationshipMapping
+                                               relationshipMappingFromKeyPath:@"Auth"
+                                               toKeyPath:@"Auth"
+                                               withMapping:lo_authMapping];
+    
+    [lo_reqMapping addPropertyMapping:authRelationship];
+    [lo_reqMapping addPropertyMapping:searchRelationship];
+    
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
+                                                                                   objectClass:[UploadGPSContract class]
+                                                                                   rootKeyPath:nil method:RKRequestMethodPOST];
+    
+    RKObjectMapping* lo_response_mapping = [RKObjectMapping mappingForClass:[iresp_class class]];
+    [lo_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
+                                                                                            method:RKRequestMethodPOST
+                                                                                       pathPattern:nil
+                                                                                           keyPath:nil
+                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
+}
+- (void) fn_uploaded_warehouse_receive_data:(UploadGPSContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
+    //Auth
+    RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
+    NSArray *arr_auth=[NSArray arrayWithPropertiesOfObject:auth];
+    [lo_authMapping addAttributeMappingsFromArray:arr_auth];
+    //upload GPS form
+    RKObjectMapping *lo_updateMapping = [RKObjectMapping requestMapping];
+    NSMutableArray *arr_updateform=[[NSArray arrayWithPropertiesOfObject:[Warehouse_receive_data class]]mutableCopy];
     [lo_updateMapping addAttributeMappingsFromArray:arr_updateform];
     
     RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];

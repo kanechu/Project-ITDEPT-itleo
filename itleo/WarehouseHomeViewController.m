@@ -210,9 +210,8 @@
             NSArray *alist_cfsdimBrowse=[set_cfsdimBrowse allObjects];
             resp_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
         }
-        
         NSString *str_load_remark=resp_cfsdim.remark;
-        CGFloat load_remark_h=[_cal_obj fn_heightWithString:str_load_remark font:cell.ilb_remark.font constrainedToWidth:cell.ilb_remark.frame.size.height];
+        CGFloat load_remark_h=[_cal_obj fn_heightWithString:str_load_remark font:cell.ilb_remark.font constrainedToWidth:cell.ilb_remark.frame.size.width];
         if (load_remark_h<21) {
             load_remark_h=21;
         }

@@ -10,16 +10,16 @@
 
 @interface Warehouse_receive_data : NSObject
 
-@property (nonatomic, copy) NSString *uid;
-@property (nonatomic, copy) NSString *pkg;
-@property (nonatomic, copy) NSString *length;
-@property (nonatomic, copy) NSString *width;
-@property (nonatomic, copy) NSString *height;
-@property (nonatomic, copy) NSString *cbm;
-@property (nonatomic, copy) NSString *kgs;
-@property (nonatomic, copy) NSString *so_uid;
-@property (nonatomic, copy) NSString *unique_id;
-@property (nonatomic, copy) NSString *voided;
-@property (nonatomic, copy) NSString *remark;
+@property (nonatomic, copy)   NSString *uid;
+@property (nonatomic, assign) NSInteger pkg;
+@property (nonatomic, assign) NSInteger length;
+@property (nonatomic, assign) NSInteger width;
+@property (nonatomic, assign) NSInteger height;
+@property (nonatomic, assign) NSInteger cbm;
+@property (nonatomic, assign) NSInteger kgs;
+@property (nonatomic, copy)   NSString *so_uid;
+@property (nonatomic, copy)   NSString *unique_id;
+@property (nonatomic, assign) NSInteger voided;
+@property (nonatomic, copy)   NSString *remark;
 
 @end

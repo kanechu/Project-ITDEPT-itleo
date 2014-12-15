@@ -9,6 +9,11 @@
 #import "Record_LoadPlanViewController.h"
 #import "Cell_advance_search.h"
 #import "Warehouse_receive_data.h"
+#import "Web_base.h"
+#import "DB_LoginInfo.h"
+#import "DB_RespAppConfig.h"
+#import "Resp_upd_excfsdim.h"
+
 #define TEXTFIELD_TAG 100
 typedef NSString* (^passValue)(NSInteger tag);
 
@@ -144,9 +149,19 @@ typedef NSString* (^passValue)(NSInteger tag);
 */
 #pragma mark -event action
 - (IBAction)fn_delete_data:(id)sender {
-    
+    NSNumber *voided_int=[NSNumber numberWithInt:-1];
+    [idic_load_value setObject:voided_int forKey:@"voided"];
+    [self fn_upload_received_data];
 }
 - (IBAction)fn_save_data:(id)sender {
+    if (_flag_isAdd==1) {
+        [idic_load_value setObject:@"1" forKey:@"voided"];
+        [idic_load_value setObject:@"#" forKey:@"unique_id"];
+        [self fn_upload_received_data];
+    }else{
+        [idic_load_value setObject:@"1" forKey:@"voided"];
+        [self fn_upload_received_data];
+    }
 
 }
 
@@ -190,10 +205,37 @@ typedef NSString* (^passValue)(NSInteger tag);
 #pragma mark -UITableViewDelegate
 #pragma mark -KVC 
 //KVC会将字典所有的键值对（key_value)赋值给模型对象的属性。只有当字典的键值对个数跟模型的属性个数相等，并且属性名必须和字典的键值对一样时才可以使用kvc
-- (Warehouse_receive_data*)fn_initWithDict:(NSDictionary *)dict{
+- (Warehouse_receive_data*)fn_init_receiveDataModel_WithDict:(NSDictionary *)dict{
     Warehouse_receive_data *receive_obj=[[Warehouse_receive_data alloc]init];
     
     [receive_obj setValuesForKeysWithDictionary:dict];
     return receive_obj;
 }
+#pragma mark -upload data
+- (void)fn_upload_received_data{
+    UploadGPSContract *upload=[[UploadGPSContract alloc]init];
+    
+    Warehouse_receive_data *receive_obj=[self fn_init_receiveDataModel_WithDict:idic_load_value];
+    upload.UpdateForm=[NSSet setWithObject:receive_obj];
+    
+    DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
+    AuthContract *auth=[db_login fn_get_RequestAuth];
+    auth.encrypted=@"0";
+    upload.Auth=auth;
+    
+    Web_base *web_obj=[[Web_base alloc]init];
+    web_obj.il_url=STR_UPD_EXCFSDIM;
+    web_obj.ilist_resp_mapping=[NSArray arrayWithPropertiesOfObject:[Resp_upd_excfsdim class]];
+    web_obj.iresp_class=[Resp_upd_excfsdim class];
+    web_obj.callBack=^(NSMutableArray* arr_resp_result){
+        NSLog(@"%@",arr_resp_result);
+    };
+    DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
+    NSMutableArray *alist_result=[db_obj fn_get_all_RespAppConfig_data];
+    if ([alist_result count]!=0) {
+        NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
+        [web_obj fn_uploaded_warehouse_receive_data:upload Auth:auth base_url:str_base_url];
+    }
+}
+
 @end
