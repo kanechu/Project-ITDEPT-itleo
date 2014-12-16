@@ -145,6 +145,10 @@
 		B2B136B21A032779001317C8 /* Resp_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136B11A032779001317C8 /* Resp_sypara.m */; };
 		B2B136B91A032A2E001317C8 /* DB_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136B81A032A2E001317C8 /* DB_sypara.m */; };
 		B2B136BC1A032AA3001317C8 /* Web_get_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */; };
+		B2B2429B1A3ECBDA00C9047C /* BarCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B2429A1A3ECBDA00C9047C /* BarCodeViewController.m */; };
+		B2B242A01A3ECE3300C9047C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B2429F1A3ECE3200C9047C /* AVFoundation.framework */; };
+		B2B242A41A3ECE5500C9047C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B242A31A3ECE5500C9047C /* CoreMedia.framework */; };
+		B2B242A61A3ECE6000C9047C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B242A51A3ECE6000C9047C /* CoreVideo.framework */; };
 		B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */; };
 		B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B5C12F19E3D6420040F585 /* Localized.strings */; };
 		B2B8678B1A1D7A69002E2F48 /* Cell_summary_chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8678A1A1D7A69002E2F48 /* Cell_summary_chart.m */; };
@@ -477,6 +481,12 @@
 		B2B136B81A032A2E001317C8 /* DB_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_sypara.m; sourceTree = "<group>"; };
 		B2B136BA1A032AA3001317C8 /* Web_get_sypara.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_sypara.h; sourceTree = "<group>"; };
 		B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_get_sypara.m; sourceTree = "<group>"; };
+		B2B242991A3ECBDA00C9047C /* BarCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarCodeViewController.h; sourceTree = "<group>"; };
+		B2B2429A1A3ECBDA00C9047C /* BarCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCodeViewController.m; sourceTree = "<group>"; };
+		B2B2429F1A3ECE3200C9047C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B2B242A11A3ECE4B00C9047C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B2B242A31A3ECE5500C9047C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		B2B242A51A3ECE6000C9047C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		B2B5C12119E3D2430040F585 /* MY_LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MY_LocalizedString.h; sourceTree = "<group>"; };
 		B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MY_LocalizedString.m; sourceTree = "<group>"; };
 		B2B5C12719E3D5280040F585 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -541,6 +551,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2B242A61A3ECE6000C9047C /* CoreVideo.framework in Frameworks */,
+				B2B242A41A3ECE5500C9047C /* CoreMedia.framework in Frameworks */,
+				B2B242A01A3ECE3300C9047C /* AVFoundation.framework in Frameworks */,
 				B2829A3319D2B5D80054205E /* CoreLocation.framework in Frameworks */,
 				B272EA8C19AF16BF00256276 /* libRestKit.a in Frameworks */,
 				B276C0F61995D17400075515 /* libxml2.dylib in Frameworks */,
@@ -749,6 +762,10 @@
 		B276BBA51995B66800075515 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2B242A51A3ECE6000C9047C /* CoreVideo.framework */,
+				B2B242A31A3ECE5500C9047C /* CoreMedia.framework */,
+				B2B242A11A3ECE4B00C9047C /* QuartzCore.framework */,
+				B2B2429F1A3ECE3200C9047C /* AVFoundation.framework */,
 				B2829A3219D2B5D70054205E /* CoreLocation.framework */,
 				B276C0F51995D17400075515 /* libxml2.dylib */,
 				B276C0F11995D16400075515 /* libsqlite3.0.dylib */,
@@ -854,6 +871,8 @@
 				B27518CC19FE1C99000A4630 /* RangeSelectViewController.m */,
 				B27091AF1A3A96C100E28B4E /* WarehouseSearchViewController.h */,
 				B27091B01A3A96C100E28B4E /* WarehouseSearchViewController.m */,
+				B2B242991A3ECBDA00C9047C /* BarCodeViewController.h */,
+				B2B2429A1A3ECBDA00C9047C /* BarCodeViewController.m */,
 				B2A5488B1A2C1861008334C0 /* WarehouseHomeViewController.h */,
 				B2A5488C1A2C1861008334C0 /* WarehouseHomeViewController.m */,
 				B2A548921A2C1BA2008334C0 /* Record_LoadPlanViewController.h */,
@@ -1330,6 +1349,7 @@
 				B2750D6C199B18B3008ADCA1 /* Cell_advance_search.m in Sources */,
 				B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */,
 				B2281AA11995F4D5001A73B0 /* RespLogin.m in Sources */,
+				B2B2429B1A3ECBDA00C9047C /* BarCodeViewController.m in Sources */,
 				B2A3403B19DA3B1E0051F78B /* UpdateFormContract.m in Sources */,
 				B21B711B1A0B1D1A007DB5E3 /* YaxisValues.m in Sources */,
 				B27B5F4319C924F0000736B3 /* Conversion_helper.m in Sources */,

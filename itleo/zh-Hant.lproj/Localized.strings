@@ -155,6 +155,7 @@
 "lbl_so_result"="沒有這個單號的信息！";
 "ibtn_search"="搜索";
 "lbl_receive_logo"="倉庫收貨";
+"lbl_barcode_prompt"="將條形碼圖像置於矩形方框內，離手機攝像頭10CM左右，系統會自動識別";
 //General
 "lbl_vsl_voy"="船名/航次:";
 "lbl_shpr"="發貨人:";

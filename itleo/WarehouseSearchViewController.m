@@ -8,6 +8,7 @@
 
 #import "WarehouseSearchViewController.h"
 #import "WarehouseHomeViewController.h"
+#import "BarCodeViewController.h"
 #import "Web_get_exso.h"
 #import "CheckNetWork.h"
 @interface WarehouseSearchViewController ()
@@ -88,6 +89,14 @@
         };
         
     }
+}
+
+- (IBAction)fn_get_soNo_byScanning:(id)sender {
+    BarCodeViewController *barCodeVC=(BarCodeViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"BarCodeViewController"];
+    barCodeVC.callback=^(NSString *str_result){
+        _itf_so_no.text=str_result;
+    };
+    [self presentViewController:barCodeVC animated:YES completion:nil];
 }
 
 #pragma mark - Navigation

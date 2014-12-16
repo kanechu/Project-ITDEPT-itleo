@@ -153,6 +153,7 @@
 "lbl_so_result"="without this so no infomation!";
 "ibtn_search"="Search";
 "lbl_receive_logo"="Warehouse";
+"lbl_barcode_prompt"="Barcode image in a rectangular box, away from cell phone cameras around 10CM, the system will automatically recognize";
 //general
 "lbl_vsl_voy"="Vsl/Voy:";
 "lbl_shpr"="Shipper:";

@@ -19,5 +19,6 @@
 
 - (IBAction)fn_search_so_no_info:(id)sender;
 
+- (IBAction)fn_get_soNo_byScanning:(id)sender;
 
 @end
