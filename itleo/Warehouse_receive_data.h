@@ -21,5 +21,7 @@
 @property (nonatomic, copy)   NSString *unique_id;
 @property (nonatomic, assign) NSInteger voided;
 @property (nonatomic, copy)   NSString *remark;
+@property (nonatomic, copy)   NSString *char_col1;
+@property (nonatomic, copy)   NSString *char_col2;
 
 @end

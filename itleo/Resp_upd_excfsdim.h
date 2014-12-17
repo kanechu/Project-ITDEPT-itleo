@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Resp_uploadTran.h"
 @interface Resp_upd_excfsdim : NSObject
+
+@property (nonatomic, strong) Resp_uploadTran *UploadTran;
 
 @end

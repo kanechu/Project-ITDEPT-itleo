@@ -273,7 +273,7 @@
     RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
     NSArray *arr_auth=[NSArray arrayWithPropertiesOfObject:auth];
     [lo_authMapping addAttributeMappingsFromArray:arr_auth];
-    //upload GPS form
+    //upload warehouse data form
     RKObjectMapping *lo_updateMapping = [RKObjectMapping requestMapping];
     NSMutableArray *arr_updateform=[[NSArray arrayWithPropertiesOfObject:[Warehouse_receive_data class]]mutableCopy];
     [lo_updateMapping addAttributeMappingsFromArray:arr_updateform];
@@ -299,7 +299,17 @@
                                                                                    rootKeyPath:nil method:RKRequestMethodPOST];
     
     RKObjectMapping* lo_response_mapping = [RKObjectMapping mappingForClass:[iresp_class class]];
-    [lo_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping];
+    
+    RKObjectMapping* lo_tran_response_mapping=[RKObjectMapping mappingForClass:[iresp_class1 class]];
+    [lo_tran_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping1];
+    
+    [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"UploadTran" toKeyPath:@"UploadTran" withMapping:lo_tran_response_mapping]];
+   
+    
+    RKObjectMapping* lo_cfsdim_resp_mapping=[RKObjectMapping mappingForClass:[Resp_CTexcfsdimResult class]];
+    [lo_cfsdim_resp_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_CTexcfsdimResult class]]];
+    
+    [lo_tran_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"upload_response" toKeyPath:@"upload_response" withMapping:lo_cfsdim_resp_mapping]];
     
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
                                                                                             method:RKRequestMethodPOST

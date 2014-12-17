@@ -21,5 +21,7 @@
 @synthesize unique_id;
 @synthesize voided;
 @synthesize remark;
+@synthesize char_col1;
+@synthesize char_col2;
 
 @end

@@ -149,6 +149,7 @@
 		B2B242A01A3ECE3300C9047C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B2429F1A3ECE3200C9047C /* AVFoundation.framework */; };
 		B2B242A41A3ECE5500C9047C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B242A31A3ECE5500C9047C /* CoreMedia.framework */; };
 		B2B242A61A3ECE6000C9047C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B242A51A3ECE6000C9047C /* CoreVideo.framework */; };
+		B2B4D7BC1A4020E700884D90 /* Resp_uploadTran.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B4D7BB1A4020E700884D90 /* Resp_uploadTran.m */; };
 		B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */; };
 		B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B5C12F19E3D6420040F585 /* Localized.strings */; };
 		B2B8678B1A1D7A69002E2F48 /* Cell_summary_chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8678A1A1D7A69002E2F48 /* Cell_summary_chart.m */; };
@@ -487,6 +488,8 @@
 		B2B242A11A3ECE4B00C9047C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B2B242A31A3ECE5500C9047C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B2B242A51A3ECE6000C9047C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		B2B4D7BA1A4020E700884D90 /* Resp_uploadTran.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_uploadTran.h; sourceTree = "<group>"; };
+		B2B4D7BB1A4020E700884D90 /* Resp_uploadTran.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_uploadTran.m; sourceTree = "<group>"; };
 		B2B5C12119E3D2430040F585 /* MY_LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MY_LocalizedString.h; sourceTree = "<group>"; };
 		B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MY_LocalizedString.m; sourceTree = "<group>"; };
 		B2B5C12719E3D5280040F585 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -992,6 +995,8 @@
 				B28358051A3820E300D62F26 /* Resp_CTexcfsdimResult.m */,
 				B2AE758C1A3C438E00F3F732 /* Resp_upd_excfsdim.h */,
 				B2AE758D1A3C438E00F3F732 /* Resp_upd_excfsdim.m */,
+				B2B4D7BA1A4020E700884D90 /* Resp_uploadTran.h */,
+				B2B4D7BB1A4020E700884D90 /* Resp_uploadTran.m */,
 			);
 			name = DTOs;
 			sourceTree = "<group>";
@@ -1412,6 +1417,7 @@
 				B276C0DC1995C9DD00075515 /* NSDictionary.m in Sources */,
 				B2281AB119960311001A73B0 /* FMResultSet.m in Sources */,
 				B2B8678B1A1D7A69002E2F48 /* Cell_summary_chart.m in Sources */,
+				B2B4D7BC1A4020E700884D90 /* Resp_uploadTran.m in Sources */,
 				B2A747B319BE9795006C96D1 /* QRadioButton.m in Sources */,
 				B2281AAF19960311001A73B0 /* FMDatabasePool.m in Sources */,
 				B2AE758E1A3C438E00F3F732 /* Resp_upd_excfsdim.m in Sources */,

@@ -10,4 +10,6 @@
 
 @implementation Resp_upd_excfsdim
 
+@synthesize UploadTran;
+
 @end

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Custom_BtnGraphicMixed.h"
+typedef void (^callBack_excfsdim)(NSMutableArray *alist_result);
 @interface Record_LoadPlanViewController : UIViewController<UITextFieldDelegate>
+
+@property (strong,nonatomic)callBack_excfsdim callback;
 
 @property (assign,nonatomic)NSInteger flag_isAdd;
 @property (strong,nonatomic)NSMutableDictionary *idic_received_log;

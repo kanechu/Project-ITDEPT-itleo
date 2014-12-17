@@ -42,7 +42,6 @@
     
     _skstableview.SKSTableViewDelegate=self;
      [_skstableview fn_expandall];
-  
     
     // Do any additional setup after loading the view.
 }
@@ -54,7 +53,7 @@
 }
 
 -(void)fn_set_property{
-  _ilb_so_no.text=MY_LocalizedString(@"lbl_so_no", nil);
+    _ilb_so_no.text=MY_LocalizedString(@"lbl_so_no", nil);
     _itf_so_no.text=_str_so_no;
     _cal_obj=[[Cal_lineHeight alloc]init];
     
@@ -79,6 +78,9 @@
     Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
     record_VC.flag_isAdd=1;
     record_VC.idic_exsoBrowse=[[NSDictionary dictionaryWithPropertiesOfObject:resp_obj]mutableCopy];
+    record_VC.callback=^(NSMutableArray *alist_result){
+       
+    };
     [self presentViewController:record_VC animated:YES completion:nil];
 }
 
@@ -278,6 +280,9 @@
         }
         Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
         record_VC.idic_received_log=idic_cfsdim;
+        record_VC.callback=^(NSMutableArray *alist_result){
+            NSLog(@"成功");
+        };
         [self presentViewController:record_VC animated:YES completion:nil];
     }
 }
