@@ -72,6 +72,7 @@
         auth.user_code=[dic valueForKey:@"user_code"];
         auth.password=[dic valueForKey:@"password"];
         auth.system=[dic valueForKey:@"system"];
+        auth.lang_code=[dic valueForKey:@"lang_code"];
     }
     auth.version=@"1.0";
     return auth;

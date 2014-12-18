@@ -176,6 +176,7 @@
 		B2DE9AB81A10B5E700259EB5 /* Web_get_chart_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AB71A10B5E700259EB5 /* Web_get_chart_data.m */; };
 		B2E391CA19C8137A00612FDD /* EPODRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E391C919C8137A00612FDD /* EPODRecordViewController.m */; };
 		B2E391D019C81AEB00612FDD /* Cell_epod_record.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E391CF19C81AEB00612FDD /* Cell_epod_record.m */; };
+		B2ECE5D21A427B97003AECFF /* Resp_DataRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECE5D11A427B97003AECFF /* Resp_DataRefresh.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -547,6 +548,8 @@
 		B2E391C919C8137A00612FDD /* EPODRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODRecordViewController.m; sourceTree = "<group>"; };
 		B2E391CE19C81AEB00612FDD /* Cell_epod_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_epod_record.h; sourceTree = "<group>"; };
 		B2E391CF19C81AEB00612FDD /* Cell_epod_record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_epod_record.m; sourceTree = "<group>"; };
+		B2ECE5D01A427B97003AECFF /* Resp_DataRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_DataRefresh.h; sourceTree = "<group>"; };
+		B2ECE5D11A427B97003AECFF /* Resp_DataRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_DataRefresh.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -997,6 +1000,8 @@
 				B2AE758D1A3C438E00F3F732 /* Resp_upd_excfsdim.m */,
 				B2B4D7BA1A4020E700884D90 /* Resp_uploadTran.h */,
 				B2B4D7BB1A4020E700884D90 /* Resp_uploadTran.m */,
+				B2ECE5D01A427B97003AECFF /* Resp_DataRefresh.h */,
+				B2ECE5D11A427B97003AECFF /* Resp_DataRefresh.m */,
 			);
 			name = DTOs;
 			sourceTree = "<group>";
@@ -1410,6 +1415,7 @@
 				B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */,
 				B21B71121A0B1D1A007DB5E3 /* BarChart.m in Sources */,
 				B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */,
+				B2ECE5D21A427B97003AECFF /* Resp_DataRefresh.m in Sources */,
 				B272EA6C19AEDDA400256276 /* NSInvocation+Copy.m in Sources */,
 				B2DE9AB51A10B03C00259EB5 /* Resp_data.m in Sources */,
 				B27D467319D02EC300B998BC /* PopViewManager.m in Sources */,

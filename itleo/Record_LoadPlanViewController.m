@@ -151,16 +151,16 @@ typedef NSString* (^passValue)(NSInteger tag);
 - (IBAction)fn_delete_data:(id)sender {
     NSNumber *voided_int=[NSNumber numberWithInt:-1];
     [idic_load_value setObject:voided_int forKey:@"voided"];
-    [self fn_upload_received_data];
+    [self fn_upload_received_data:kWarehouse_del];
 }
 - (IBAction)fn_save_data:(id)sender {
     if (_flag_isAdd==1) {
         [idic_load_value setObject:@"1" forKey:@"voided"];
         [idic_load_value setObject:@"#" forKey:@"unique_id"];
-        [self fn_upload_received_data];
+        [self fn_upload_received_data:kWarehouse_add];
     }else{
         [idic_load_value setObject:@"1" forKey:@"voided"];
-        [self fn_upload_received_data];
+        [self fn_upload_received_data:kWarehouse_edit];
     }
 
 }
@@ -212,7 +212,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     return receive_obj;
 }
 #pragma mark -upload data
-- (void)fn_upload_received_data{
+- (void)fn_upload_received_data:(KWarehouse_Operation)op{
     UploadGPSContract *upload=[[UploadGPSContract alloc]init];
     
     Warehouse_receive_data *receive_obj=[self fn_init_receiveDataModel_WithDict:idic_load_value];
@@ -221,7 +221,6 @@ typedef NSString* (^passValue)(NSInteger tag);
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
     auth.encrypted=@"0";
-    auth.lang_code=@"EN";
     upload.Auth=auth;
     
     Web_base *web_obj=[[Web_base alloc]init];
@@ -235,19 +234,18 @@ typedef NSString* (^passValue)(NSInteger tag);
     
     web_obj.callBack=^(NSMutableArray* arr_resp_result){
         if (_callback) {
-            _callback(arr_resp_result);
+            _callback(arr_resp_result,op);
         }
         [self dismissViewControllerAnimated:YES completion:nil];
     };
-    /*
-     DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
-     NSMutableArray *alist_result=[db_obj fn_get_all_RespAppConfig_data];
-     if ([alist_result count]!=0) {
-     NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
-     [web_obj fn_uploaded_warehouse_receive_data:upload Auth:auth base_url:str_base_url];
-     }*/
-    NSString *str_base_url=@"http://192.168.2.198:81/webservice/";
-    [web_obj fn_uploaded_warehouse_receive_data:upload Auth:auth base_url:str_base_url];
+    
+    DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
+    NSMutableArray *alist_result=[db_obj fn_get_all_RespAppConfig_data];
+    if ([alist_result count]!=0) {
+        NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
+        [web_obj fn_uploaded_warehouse_receive_data:upload Auth:auth base_url:str_base_url];
+    }
+    
 }
 
 @end

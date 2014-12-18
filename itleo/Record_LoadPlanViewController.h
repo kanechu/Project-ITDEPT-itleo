@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Custom_BtnGraphicMixed.h"
-typedef void (^callBack_excfsdim)(NSMutableArray *alist_result);
+typedef enum {
+    kWarehouse_add,
+    kWarehouse_edit,
+    kWarehouse_del
+}KWarehouse_Operation;
+typedef void (^callBack_excfsdim)(NSMutableArray *alist_result,KWarehouse_Operation op);
 @interface Record_LoadPlanViewController : UIViewController<UITextFieldDelegate>
 
 @property (strong,nonatomic)callBack_excfsdim callback;

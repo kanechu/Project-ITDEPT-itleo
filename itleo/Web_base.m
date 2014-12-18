@@ -20,6 +20,7 @@
 #import "Resp_exso.h"
 #import "Resp_ExsoBrowseResult.h"
 #import "Resp_CTexcfsdimResult.h"
+#import "Resp_DataRefresh.h"
 @implementation Web_base
 
 @synthesize il_url;
@@ -304,13 +305,19 @@
     [lo_tran_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping1];
     
     [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"UploadTran" toKeyPath:@"UploadTran" withMapping:lo_tran_response_mapping]];
-   
-    
+  
     RKObjectMapping* lo_cfsdim_resp_mapping=[RKObjectMapping mappingForClass:[Resp_CTexcfsdimResult class]];
     [lo_cfsdim_resp_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_CTexcfsdimResult class]]];
     
     [lo_tran_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"upload_response" toKeyPath:@"upload_response" withMapping:lo_cfsdim_resp_mapping]];
+    /*
+    RKObjectMapping* lo_dataRefresh_resp_mapping=[RKObjectMapping mappingForClass:[Resp_DataRefresh class]];
+    [lo_tran_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"DataRefresh" toKeyPath:@"DataRefresh" withMapping:lo_dataRefresh_resp_mapping]];
     
+    RKObjectMapping* lo_exso_resp_mapping=[RKObjectMapping mappingForClass:[Resp_ExsoBrowseResult class]];
+    [lo_exso_resp_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_ExsoBrowseResult class]]];
+    [lo_dataRefresh_resp_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"exso" toKeyPath:@"exso" withMapping:lo_exso_resp_mapping]];*/
+                                                  
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
                                                                                             method:RKRequestMethodPOST
                                                                                        pathPattern:nil

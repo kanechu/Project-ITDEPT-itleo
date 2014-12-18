@@ -66,7 +66,7 @@
     [_ibtn_setting_logo setTitle:MY_LocalizedString(@"ibtn_settings",nil) forState:UIControlStateNormal];
     [_ibtn_setting_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     _ilb_search_range.text=MY_LocalizedString(@"lbl_date_range", nil);
- _ilb_auto_range.text=MY_LocalizedString(@"lbl_interval", nil);
+    _ilb_auto_range.text=MY_LocalizedString(@"lbl_interval", nil);
     _ilb_transfer.text=MY_LocalizedString(@"lbl_transfer_records", nil);
     _ilb_transfer_GPS.text=MY_LocalizedString(@"lbl_transfer_GPS", nil);
     _ilb_record_GPS.text=MY_LocalizedString(@"lbl_record_GPS", nil);
@@ -85,7 +85,7 @@
     if (_flag_transfer_record==0) {
         _is_switch.on=NO;
     }
-   
+    
     [_is_switch1 addTarget:self action:@selector(fn_isAuto_transfer_GPS) forControlEvents:UIControlEventValueChanged];
     if (_flag_transfer_GPS==0) {
         _is_switch1.on=NO;

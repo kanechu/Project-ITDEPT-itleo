@@ -16,15 +16,20 @@
 #import "Resp_exso.h"
 #import "Resp_CTexcfsdimResult.h"
 #import "Resp_ExsoBrowseResult.h"
+
+#import "Resp_upd_excfsdim.h"
+#import "Resp_uploadTran.h"
 @interface WarehouseHomeViewController ()
 
 @property (nonatomic,strong) NSMutableArray *alist_groupAndnum;
 @property (nonatomic,strong) Cal_lineHeight *cal_obj;
-
+@property (nonatomic, strong) NSMutableArray *alist_exsoBrowse;
+@property (nonatomic, strong) NSMutableArray *alist_cfsdimBrowse;
 @end
 
 @implementation WarehouseHomeViewController
-
+@synthesize alist_exsoBrowse;
+@synthesize alist_cfsdimBrowse;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -61,25 +66,88 @@
     _alist_groupAndnum=[arr_groupAndnum mutableCopy];
     if ([_alist_exso_data count]!=0) {
         Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
-        NSSet *alist_cfsdim=exso_obj.CTexcfsdimResult;
-        NSString *str_num=[NSString stringWithFormat:@"%d",[alist_cfsdim count]];
+        NSSet *set_exsoBrowse=exso_obj.ITLEOExsoBrowseResult;
+        NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
+        alist_exsoBrowse=[[set_exsoBrowse allObjects]mutableCopy];
+        alist_cfsdimBrowse=[[set_cfsdimBrowse allObjects]mutableCopy];
+        NSString *str_num=[NSString stringWithFormat:@"%d",[set_cfsdimBrowse count]];
         [_alist_groupAndnum addObject:@{@"name": MY_LocalizedString(@"lbl_loadPlan", nil),@"num":str_num}];
     }
 }
 
+-(void)fn_update_skstableView{
+    
+    NSString *str_num=[NSString stringWithFormat:@"%d",[alist_cfsdimBrowse count]];
+    NSMutableDictionary *dic=[[_alist_groupAndnum lastObject]mutableCopy];
+    [dic setObject:str_num forKey:@"num"];
+    [_alist_groupAndnum removeLastObject];
+    [_alist_groupAndnum addObject:dic];
+    self.skstableview.expandableCells=nil;
+    [self.skstableview reloadData];
+    [self.skstableview fn_expandall];
+}
+-(Resp_CTexcfsdimResult*)fn_get_cfsdimResult:(NSMutableArray*)alist_result{
+    
+    Resp_upd_excfsdim *upd_excfsdim=[alist_result objectAtIndex:0];
+    Resp_uploadTran *uploadTran_obj=upd_excfsdim.UploadTran;
+    NSSet *set_cfsdim=uploadTran_obj.upload_response;
+    NSArray *arr_cfsdim=[set_cfsdim allObjects];
+    Resp_CTexcfsdimResult *cfsdim_obj=nil;
+    if ([arr_cfsdim count]!=0) {
+        cfsdim_obj= [arr_cfsdim firstObject];
+    }
+    
+    return cfsdim_obj;
+}
+-(void)fn_handle_Operation_data:(NSMutableArray* )alist_result operation:(KWarehouse_Operation)op{
+    
+    if (op==kWarehouse_del) {
+        Resp_CTexcfsdimResult *cfsdim_obj=[self fn_get_cfsdimResult:alist_result];
+        NSMutableArray *arr_cfsdimBrowse=[alist_cfsdimBrowse copy];
+        for (Resp_CTexcfsdimResult *cfsdimResult in arr_cfsdimBrowse) {
+            if ([cfsdimResult.unique_id isEqualToString:cfsdim_obj.unique_id]) {
+                [alist_cfsdimBrowse removeObject:cfsdimResult];
+            }
+        }
+    }
+    
+    if (op==kWarehouse_add) {
+        [alist_cfsdimBrowse addObject:[self fn_get_cfsdimResult:alist_result]];
+    }
+    if (op==kWarehouse_edit) {
+        Resp_CTexcfsdimResult *cfsdim_obj=[self fn_get_cfsdimResult:alist_result];
+        NSMutableArray *arr_cfsdimBrowse=[alist_cfsdimBrowse copy];
+        NSInteger i=0;
+        for (Resp_CTexcfsdimResult *cfsdimResult in arr_cfsdimBrowse) {
+            if ([cfsdimResult.unique_id isEqualToString:cfsdim_obj.unique_id]) {
+                [alist_cfsdimBrowse removeObject:cfsdimResult];
+                [alist_cfsdimBrowse insertObject:cfsdim_obj atIndex:i];
+            }
+            i++;
+        }
+    }
+    /*
+    Resp_upd_excfsdim *upd_excfsdim_obj=[alist_result objectAtIndex:0];
+    Resp_uploadTran *uploadTran_obj=upd_excfsdim_obj.UploadTran;
+    Resp_DataRefresh *dataRefresh_obj=uploadTran_obj.DataRefresh;
+    NSSet *set_dataRefresh=dataRefresh_obj.exso;
+    alist_exsoBrowse=[[set_dataRefresh allObjects]mutableCopy];*/
+    [self fn_update_skstableView];
+}
+
 - (IBAction)fn_add_load_plan_row:(id)sender {
     Resp_ExsoBrowseResult *resp_obj=nil;
-    if ([_alist_exso_data count]!=0) {
-        Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
-        NSSet *set_exsoBrowse=exso_obj.ITLEOExsoBrowseResult;
-        NSArray *alist_exsoBrowse=[set_exsoBrowse allObjects];
+    if ([alist_exsoBrowse count]!=0) {
         resp_obj=[alist_exsoBrowse objectAtIndex:0];
     }
     Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
     record_VC.flag_isAdd=1;
     record_VC.idic_exsoBrowse=[[NSDictionary dictionaryWithPropertiesOfObject:resp_obj]mutableCopy];
-    record_VC.callback=^(NSMutableArray *alist_result){
-       
+    record_VC.callback=^(NSMutableArray *alist_result,KWarehouse_Operation op){
+        if ([alist_result count]!=0) {
+            [self fn_handle_Operation_data:alist_result operation:op];
+        }
+        
     };
     [self presentViewController:record_VC animated:YES completion:nil];
 }
@@ -110,10 +178,7 @@
 }
 -(UITableViewCell*)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableDictionary *dic=nil;
-    if ([_alist_exso_data count]!=0 && indexPath.row!=3) {
-        Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:indexPath.subRow-1];
-        NSSet *set_exsoBrowse=exso_obj.ITLEOExsoBrowseResult;
-        NSArray *alist_exsoBrowse=[set_exsoBrowse allObjects];
+    if ([alist_exsoBrowse count]!=0 && indexPath.row!=3) {
         dic=[alist_exsoBrowse objectAtIndex:indexPath.subRow-1];
     }
     static NSString *cellIndentifer=@"Cell_show_totals";
@@ -162,10 +227,7 @@
     
     if (indexPath.row==3) {
         Resp_CTexcfsdimResult *resp_cfsdim=nil;
-        if ([_alist_exso_data count]!=0) {
-            Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
-            NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
-            NSArray *alist_cfsdimBrowse=[set_cfsdimBrowse allObjects];
+        if ([alist_cfsdimBrowse count]!=0) {
             resp_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
         }
         static NSString *cellIndentifer=@"Cell_load_plan";
@@ -206,10 +268,7 @@
         static NSString *cellIndentifer=@"Cell_load_plan";
         Cell_load_plan *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
         Resp_CTexcfsdimResult *resp_cfsdim=nil;
-        if ([_alist_exso_data count]!=0) {
-            Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
-            NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
-            NSArray *alist_cfsdimBrowse=[set_cfsdimBrowse allObjects];
+        if ([alist_cfsdimBrowse count]!=0) {
             resp_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
         }
         NSString *str_load_remark=resp_cfsdim.remark;
@@ -219,9 +278,6 @@
         }
         return 117+load_remark_h;
     }
-    Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:indexPath.subRow-1];
-    NSSet *set_exsoBrowse=exso_obj.ITLEOExsoBrowseResult;
-    NSArray *alist_exsoBrowse=[set_exsoBrowse allObjects];
     NSMutableDictionary *dic=[alist_exsoBrowse objectAtIndex:indexPath.subRow-1];
     if (indexPath.row==0) {
         static NSString *cellIndentifer=@"Cell_S_O_general";
@@ -272,21 +328,19 @@
 -(void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row==3) {
         NSMutableDictionary *idic_cfsdim=nil;
-        if ([_alist_exso_data count]!=0) {
-            Resp_exso *exso_obj=[_alist_exso_data objectAtIndex:0];
-            NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
-            NSArray *alist_cfsdimBrowse=[set_cfsdimBrowse allObjects];
+        if ([alist_cfsdimBrowse count]!=0) {
             idic_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
         }
         Record_LoadPlanViewController *record_VC=(Record_LoadPlanViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Record_LoadPlanViewController"];
         record_VC.idic_received_log=idic_cfsdim;
-        record_VC.callback=^(NSMutableArray *alist_result){
-            NSLog(@"成功");
+        record_VC.callback=^(NSMutableArray *alist_result,KWarehouse_Operation op){
+            if ([alist_result count]!=0) {
+                [self fn_handle_Operation_data:alist_result operation:op];
+            }
         };
         [self presentViewController:record_VC animated:YES completion:nil];
     }
 }
-
 /*
  #pragma mark - Navigation
  
