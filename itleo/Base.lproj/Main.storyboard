@@ -1019,10 +1019,11 @@
                                 <rect key="frame" x="10" y="100" width="300" height="300"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2mo-q3-Jri">
-                                <rect key="frame" x="10" y="524" width="300" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2mo-q3-Jri">
+                                <rect key="frame" x="10" y="524" width="300" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="取消">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1064,7 +1065,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mpc-VI-ZfR" customClass="Custom_Button">
-                                <rect key="frame" x="10" y="276" width="300" height="30"/>
+                                <rect key="frame" x="10" y="276" width="300" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                 <state key="normal" title="Search">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1081,11 +1082,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZEo-yi-3VA">
-                                <rect key="frame" x="250" y="160" width="50" height="30"/>
+                                <rect key="frame" x="250" y="148" width="44" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="扫描">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" backgroundImage="barcode"/>
                                 <connections>
                                     <action selector="fn_get_soNo_byScanning:" destination="GDo-Az-OQg" eventType="touchUpInside" id="yL4-9p-lpI"/>
                                 </connections>
@@ -1095,6 +1094,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8Mb-z1-Ijf"/>
                     <connections>
+                        <outlet property="ibtn_barCode" destination="ZEo-yi-3VA" id="rux-w1-ylf"/>
                         <outlet property="ibtn_search" destination="mpc-VI-ZfR" id="DR6-DE-9bf"/>
                         <outlet property="ilb_so_no" destination="XoL-2Z-OqL" id="s0s-cZ-SFt"/>
                         <outlet property="itf_so_no" destination="YbJ-hA-5VC" id="4xz-CU-0rL"/>
@@ -2383,6 +2383,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="barcode" width="44" height="44"/>
         <image name="checkbox_unchecked" width="14" height="14"/>
         <image name="delivery" width="128" height="128"/>
         <image name="ic_action_user" width="25" height="25"/>

@@ -55,6 +55,19 @@ typedef NSString* (^passValue)(NSInteger tag);
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    _callback=nil;
+    _idic_received_log=nil;
+    _idic_exsoBrowse=nil;
+    alist_columns=nil;
+    alist_prompts=nil;
+    idic_load_value=nil;
+    checkText=nil;
+    _pass_Value=nil;
+
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -73,6 +86,7 @@ typedef NSString* (^passValue)(NSInteger tag);
             }else{
                 [idic_load_value setObject:@"" forKey:str_key];
             }
+            str_value=nil;
         }
         
     }else{
@@ -85,9 +99,11 @@ typedef NSString* (^passValue)(NSInteger tag);
             if (str_value!=nil) {
                 [idic_load_value setObject:str_value forKey:str_key];
             }
+            str_value=nil;
         }
+        alist_keys=nil;
     }
-    
+    alist_load_columns=nil;
 }
 - (void)fn_set_control_property{
 
@@ -132,6 +148,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     if ([textField.text length]!=0) {
         [idic_load_value setObject:textField.text forKey:os_column_key];
     }
+    os_column_key=nil;
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -152,6 +169,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     NSNumber *voided_int=[NSNumber numberWithInt:-1];
     [idic_load_value setObject:voided_int forKey:@"voided"];
     [self fn_upload_received_data:kWarehouse_del];
+    voided_int=nil;
 }
 - (IBAction)fn_save_data:(id)sender {
     if (_flag_isAdd==1) {
@@ -199,7 +217,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     cell.itf_inputdata.tag=TEXTFIELD_TAG+indexPath.row;
     NSString *os_column_key=[alist_columns objectAtIndex:indexPath.row];
     cell.itf_inputdata.text=[idic_load_value valueForKey:os_column_key];
-    
+    os_column_key=nil;
     return cell;
 }
 #pragma mark -UITableViewDelegate

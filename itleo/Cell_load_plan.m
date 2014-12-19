@@ -41,6 +41,7 @@
     if (height<21) {
         height=22;
     }
+    cal_obj=nil;
     return height;
 }
 @end

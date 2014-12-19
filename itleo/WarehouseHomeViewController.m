@@ -72,6 +72,10 @@
         alist_cfsdimBrowse=[[set_cfsdimBrowse allObjects]mutableCopy];
         NSString *str_num=[NSString stringWithFormat:@"%d",[set_cfsdimBrowse count]];
         [_alist_groupAndnum addObject:@{@"name": MY_LocalizedString(@"lbl_loadPlan", nil),@"num":str_num}];
+        exso_obj=nil;
+        set_cfsdimBrowse=nil;
+        set_exsoBrowse=nil;
+        str_num=nil;
     }
 }
 
@@ -85,6 +89,8 @@
     self.skstableview.expandableCells=nil;
     [self.skstableview reloadData];
     [self.skstableview fn_expandall];
+    str_num=nil;
+    dic=nil;
 }
 -(Resp_CTexcfsdimResult*)fn_get_cfsdimResult:(NSMutableArray*)alist_result{
     
@@ -96,6 +102,10 @@
     if ([arr_cfsdim count]!=0) {
         cfsdim_obj= [arr_cfsdim firstObject];
     }
+    upd_excfsdim=nil;
+    uploadTran_obj=nil;
+    set_cfsdim=nil;
+    arr_cfsdim=nil;
     
     return cfsdim_obj;
 }
@@ -109,6 +119,8 @@
                 [alist_cfsdimBrowse removeObject:cfsdimResult];
             }
         }
+        cfsdim_obj=nil;
+        arr_cfsdimBrowse=nil;
     }
     
     if (op==kWarehouse_add) {
@@ -125,6 +137,8 @@
             }
             i++;
         }
+        cfsdim_obj=nil;
+        arr_cfsdimBrowse=nil;
     }
     /*
     Resp_upd_excfsdim *upd_excfsdim_obj=[alist_result objectAtIndex:0];
@@ -149,6 +163,7 @@
         }
         
     };
+    resp_obj=nil;
     [self presentViewController:record_VC animated:YES completion:nil];
 }
 
@@ -174,6 +189,7 @@
     cell.backgroundColor=COLOR_light_BLUE;
     cell.expandable=YES;
     cell.textLabel.text=[dic valueForKey:@"name"];
+    dic=nil;
     return cell;
 }
 -(UITableViewCell*)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -209,6 +225,11 @@
     cell.ilb_cbm.text=str_cbm;
     cell.ilb_date.text=str_date;
     cell.ilb_remark.text=str_remark;
+    str_pkg=nil;
+    str_kgs=nil;
+    str_cbm=nil;
+    str_date=nil;
+    str_remark=nil;
     
     if (indexPath.row==0) {
         static NSString *cellIndentifer=@"Cell_S_O_general";
@@ -224,6 +245,7 @@
         
         return cell;
     }
+    dic=nil;
     
     if (indexPath.row==3) {
         Resp_CTexcfsdimResult *resp_cfsdim=nil;
@@ -253,6 +275,15 @@
         cell.ilb_width.text=[str_rec_width stringByAppendingFormat:@"%@",resp_cfsdim.width];
         cell.ilb_height.text=[str_rec_height stringByAppendingFormat:@"%@",resp_cfsdim.height];
         cell.ilb_remark.text=[str_remark stringByAppendingFormat:@"%@",resp_cfsdim.remark];
+        resp_cfsdim=nil;
+        str_rec_kgs=nil;
+        str_rec_pkg=nil;
+        str_rec_cbm=nil;
+        str_rec_length=nil;
+        str_rec_width=nil;
+        str_rec_height=nil;
+        str_remark=nil;
+        
         return cell;
     }
     return cell;
@@ -276,6 +307,9 @@
         if (load_remark_h<21) {
             load_remark_h=21;
         }
+        resp_cfsdim=nil;
+        str_load_remark=nil;
+        cell=nil;
         return 117+load_remark_h;
     }
     NSMutableDictionary *dic=[alist_exsoBrowse objectAtIndex:indexPath.subRow-1];
@@ -287,31 +321,38 @@
         if (vsl_height<21) {
             vsl_height=21;
         }
+        str_vsl_voy=nil;
         NSString *str_shipper=[dic valueForKey:@"shpr_name"];
         CGFloat shipper_height=[_cal_obj fn_heightWithString:str_shipper font:cell.ilb_shipper.font constrainedToWidth:cell.ilb_shipper.frame.size.width];
         if (shipper_height<21) {
             shipper_height=21;
         }
+        str_shipper=nil;
         NSString *str_consignee=[dic valueForKey:@"cnee_name"];
         CGFloat cnee_height=[_cal_obj fn_heightWithString:str_consignee font:cell.ilb_consignee.font constrainedToWidth:cell.ilb_consignee.frame.size.width];
         if (cnee_height<21) {
             cnee_height=21;
         }
+        str_consignee=nil;
         NSString *str_loadPort=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"load_name"],[dic valueForKey:@"load_code"]];
         CGFloat loadPort_height=[_cal_obj fn_heightWithString:str_loadPort font:cell.ilb_loadPort.font constrainedToWidth:cell.ilb_loadPort.frame.size.width];
         if (loadPort_height<21) {
             loadPort_height=21;
         }
+        str_loadPort=nil;
         NSString *str_dishPort=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"dish_name"],[dic valueForKey:@"dish_code"]];
         CGFloat dishPort_height=[_cal_obj fn_heightWithString:str_dishPort font:cell.ilb_dishPort.font constrainedToWidth:cell.ilb_dishPort.frame.size.width];
         if (dishPort_height<21) {
             dishPort_height=21;
         }
+        str_dishPort=nil;
         NSString *str_destination=[NSString stringWithFormat:@"%@(%@)",[dic valueForKey:@"dest_name"],[dic valueForKey:@"dest_code"]];
         CGFloat dest_height=[_cal_obj fn_heightWithString:str_destination font:cell.ilb_destination.font constrainedToWidth:cell.ilb_destination.frame.size.width];
         if (dest_height<21) {
             dest_height=21;
         }
+        str_destination=nil;
+        cell=nil;
         return vsl_height+shipper_height+cnee_height+loadPort_height+dishPort_height+dest_height+10;
     }
     
@@ -323,6 +364,9 @@
     if (remark_heigth<21) {
         remark_heigth=21;
     }
+    str_remark=nil;
+    cell=nil;
+    dic=nil;
     return 79+remark_heigth;
 }
 -(void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -338,6 +382,7 @@
                 [self fn_handle_Operation_data:alist_result operation:op];
             }
         };
+        idic_cfsdim=nil;
         [self presentViewController:record_VC animated:YES completion:nil];
     }
 }

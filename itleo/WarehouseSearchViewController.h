@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *ilb_so_no;
 
 @property (weak, nonatomic) IBOutlet Custom_textField *itf_so_no;
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_barCode;
 
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_search;
 

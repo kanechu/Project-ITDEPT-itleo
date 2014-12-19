@@ -49,6 +49,10 @@
     [_ibtn_search setTitle:MY_LocalizedString(@"ibtn_search", nil) forState:UIControlStateNormal];
     _ibtn_search.backgroundColor=COLOR_light_BLUE;
     _ibtn_search.layer.backgroundColor=[UIColor lightGrayColor].CGColor;
+    
+    _ibtn_barCode.layer.cornerRadius=7;
+    _ibtn_barCode.layer.borderColor=COLOR_light_BLUE.CGColor;
+    _ibtn_barCode.layer.borderWidth=1.5;
 }
 #pragma mark -UITextFieldDelegate
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -81,11 +85,12 @@
             _alist_resp_exso=arr_resp_result;
             if ([arr_resp_result count]!=0) {
                 [SVProgressHUD dismiss];
+                [self performSegueWithIdentifier:@"segue_warehouseHome" sender:self];
             }else{
                 NSString *str_promt=[NSString stringWithFormat:@"%@,%@",_itf_so_no.text,MY_LocalizedString(@"lbl_so_result", nil)];
                 [SVProgressHUD dismissWithError:str_promt afterDelay:2.0f];
             }
-            [self performSegueWithIdentifier:@"segue_warehouseHome" sender:self];
+            
         };
         
     }
