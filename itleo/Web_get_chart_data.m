@@ -97,6 +97,7 @@ static NSMutableDictionary *idic_ChartImages=nil;
         }
         [idic_ChartImages setObject:alist_chartImgs forKey:[NSString stringWithFormat:@"%ld",(long)i]];
         i++;
+        alist_chartImgs=nil;
     }
 }
 

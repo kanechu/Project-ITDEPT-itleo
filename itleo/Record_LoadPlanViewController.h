@@ -14,7 +14,7 @@ typedef enum {
     kWarehouse_del
 }KWarehouse_Operation;
 typedef void (^callBack_excfsdim)(NSMutableArray *alist_result,KWarehouse_Operation op);
-@interface Record_LoadPlanViewController : UIViewController<UITextFieldDelegate>
+@interface Record_LoadPlanViewController : UIViewController<UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (strong,nonatomic)callBack_excfsdim callback;
 

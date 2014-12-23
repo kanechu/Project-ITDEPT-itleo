@@ -170,6 +170,10 @@
 "lbl_rec_kgs"="KGS:";
 "lbl_date"="Date:";
 //receive goods
+"lbl_saving_alert"="Saving,please wait!";
+"lbl_deleting_alert"="Deleting,please wait!";
+"lbl_save_success"="Save success!";
+"lbl_delete_success"="Delete success!";
 "ibtn_save"="Save";
 "ibtn_clear"="Clear";
 "lbl_kgs_per_pkg"="KGS/PKG:";

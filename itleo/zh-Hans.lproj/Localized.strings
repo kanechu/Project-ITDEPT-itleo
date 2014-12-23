@@ -169,6 +169,10 @@
 "lbl_rec_kgs"="重量(千克):";
 "lbl_date"="日期:";
 //receive goods
+"lbl_saving_alert"="正在保存,请等候！";
+"lbl_deleting_alert"="正在删除，请等候！";
+"lbl_save_success"="保存成功!";
+"lbl_delete_success"="删除成功!";
 "ibtn_save"="保存";
 "ibtn_clear"="清除";
 "lbl_kgs_per_pkg"="每件重量(千克):";

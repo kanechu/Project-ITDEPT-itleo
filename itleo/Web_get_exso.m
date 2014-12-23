@@ -39,7 +39,15 @@
     if ([alist_result count]!=0) {
         NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
         [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];
+        str_base_url=nil;
     }
 
+    req_form=nil;
+    db_login=nil;
+    auth=nil;
+    searchForm=nil;
+    web_obj=nil;
+    db_obj=nil;
+    alist_result=nil;
 }
 @end

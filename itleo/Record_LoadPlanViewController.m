@@ -164,12 +164,20 @@ typedef NSString* (^passValue)(NSInteger tag);
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark -UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex!=[alertView cancelButtonIndex]) {
+        NSNumber *voided_int=[NSNumber numberWithInt:-1];
+        [idic_load_value setObject:voided_int forKey:@"voided"];
+        [self fn_upload_received_data:kWarehouse_del];
+        voided_int=nil;
+    }
+}
 #pragma mark -event action
 - (IBAction)fn_delete_data:(id)sender {
-    NSNumber *voided_int=[NSNumber numberWithInt:-1];
-    [idic_load_value setObject:voided_int forKey:@"voided"];
-    [self fn_upload_received_data:kWarehouse_del];
-    voided_int=nil;
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"will_delete_prompt", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_delete", nil), nil];
+    [alert show];
+   
 }
 - (IBAction)fn_save_data:(id)sender {
     if (_flag_isAdd==1) {
@@ -231,6 +239,14 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 #pragma mark -upload data
 - (void)fn_upload_received_data:(KWarehouse_Operation)op{
+    NSString *str_prompt=nil;
+    if (op==kWarehouse_del) {
+        str_prompt=MY_LocalizedString(@"lbl_deleting_alert", nil);
+    }else{
+        str_prompt=MY_LocalizedString(@"lbl_saving_alert", nil);
+        
+    }
+    [SVProgressHUD showWithStatus:str_prompt];
     UploadGPSContract *upload=[[UploadGPSContract alloc]init];
     
     Warehouse_receive_data *receive_obj=[self fn_init_receiveDataModel_WithDict:idic_load_value];
@@ -254,6 +270,14 @@ typedef NSString* (^passValue)(NSInteger tag);
         if (_callback) {
             _callback(arr_resp_result,op);
         }
+        
+        NSString *str_success_alert=nil;
+        if (op==kWarehouse_del) {
+            str_success_alert=MY_LocalizedString(@"lbl_delete_success", nil);
+        }else{
+            str_success_alert=MY_LocalizedString(@"lbl_save_success", nil);
+        }
+        [SVProgressHUD dismissWithSuccess:str_success_alert];
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     

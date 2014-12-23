@@ -89,11 +89,14 @@
             }else{
                 NSString *str_promt=[NSString stringWithFormat:@"%@,%@",_itf_so_no.text,MY_LocalizedString(@"lbl_so_result", nil)];
                 [SVProgressHUD dismissWithError:str_promt afterDelay:2.0f];
+                str_promt=nil;
             }
             
         };
+        web_obj=nil;
         
     }
+    checkNet_obj=nil;
 }
 
 - (IBAction)fn_get_soNo_byScanning:(id)sender {
