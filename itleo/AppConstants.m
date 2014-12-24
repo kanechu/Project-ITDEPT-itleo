@@ -25,6 +25,8 @@ NSString* const STR_UPD_GPS_URL=@"api/epod/upd_gps";
 NSString* const STR_GET_CHART_URL=@"api/System/get_chart";
 NSString* const STR_EXSO_URL=@"api/Search/exso";
 NSString* const STR_UPD_EXCFSDIM=@"api/ct/upd_excfsdim";
+NSString* const STR_WHS_CONFIG=@"api/Search/whs_config";
+
 #else
 //NSString* const STR_BASE_URL = @"http://223.255.167.158/";
 NSString* const STR_BASE_URL = @"http://demo.itdept.com.hk/";
@@ -43,5 +45,5 @@ NSString* const STR_UPD_GPS_URL=@"api/epod/upd_gps";
 NSString* const STR_GET_CHART_URL=@"api/System/get_chart";
 NSString* const STR_EXSO_URL=@"api/Search/exso";
 NSString* const STR_UPD_EXCFSDIM=@"api/ct/upd_excfsdim";
-
+NSString* const STR_WHS_CONFIG=@"api/Search/whs_config";
 #endif

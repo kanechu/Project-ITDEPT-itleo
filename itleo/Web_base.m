@@ -21,6 +21,8 @@
 #import "Resp_ExsoBrowseResult.h"
 #import "Resp_CTexcfsdimResult.h"
 #import "Resp_DataRefresh.h"
+
+#import "Resp_UPLOAD_COL.h"
 @implementation Web_base
 
 @synthesize il_url;
@@ -178,6 +180,46 @@
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
 }
+- (void) fn_get_whs_config_data:(RequestContract *)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
+    //Auth
+    RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
+    NSArray *arr_auth=[NSArray arrayWithPropertiesOfObject:auth];
+    [lo_authMapping addAttributeMappingsFromArray:arr_auth];
+    
+    RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];
+    
+    RKRelationshipMapping *authRelationship = [RKRelationshipMapping
+                                               relationshipMappingFromKeyPath:@"Auth"
+                                               toKeyPath:@"Auth"
+                                               withMapping:lo_authMapping];
+    
+    [lo_reqMapping addPropertyMapping:authRelationship];
+    
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
+                                                                                   objectClass:[RequestContract class]
+                                                                                   rootKeyPath:nil method:RKRequestMethodPOST];
+    
+    RKObjectMapping* lo_response_mapping =[RKObjectMapping mappingForClass:iresp_class];
+    
+    RKObjectMapping* lo_maintform_response_mapping = [RKObjectMapping mappingForClass:iresp_class1];
+    
+    [lo_maintform_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping1];
+    
+    RKObjectMapping* lo_uploadCol_response_mapping=[RKObjectMapping mappingForClass:[Resp_UPLOAD_COL class]];
+    [lo_uploadCol_response_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_UPLOAD_COL class]]];
+    
+    [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"MaintForm" toKeyPath:@"MaintForm" withMapping:lo_maintform_response_mapping]];
+    [lo_maintform_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"UPLOAD_COL" toKeyPath:@"UPLOAD_COL" withMapping:lo_uploadCol_response_mapping]];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
+                                                                                            method:RKRequestMethodPOST
+                                                                                       pathPattern:nil
+                                                                                           keyPath:nil
+                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
+    
+}
+#pragma mark -upload data
 - (void) fn_uploaded_data:(UploadContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
     //Auth
     RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
