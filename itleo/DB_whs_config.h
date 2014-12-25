@@ -13,4 +13,12 @@
 
 @property (nonatomic,strong) DatabaseQueue *queue;
 
+- (BOOL)fn_save_whs_config_data:(NSMutableArray*)alist_result;
+
+- (NSMutableArray*)fn_get_group_data;
+
+- (NSMutableArray*)fn_get_upload_col_data;
+
+- (BOOL)fn_delete_all_data;
+
 @end

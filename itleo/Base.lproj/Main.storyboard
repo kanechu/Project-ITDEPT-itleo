@@ -1047,13 +1047,64 @@
         <!--Bar Code Sys Home View Controller-->
         <scene sceneID="gJK-Mw-M8T">
             <objects>
-                <viewController storyboardIdentifier="BarCodeSysHomeViewController" id="A21-yM-Qi1" customClass="BarCodeSysHomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BarCodeSysHomeViewController" automaticallyAdjustsScrollViewInsets="NO" id="A21-yM-Qi1" customClass="BarCodeSysHomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9rN-5v-Abf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="vrC-q0-42j" customClass="SKSTableView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell_whs_config" rowHeight="80" id="gyp-ue-qfz" customClass="Cell_advance_search">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gyp-ue-qfz" id="0xN-i9-OrT">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tlq-E0-Rq1">
+                                                    <rect key="frame" x="10" y="10" width="300" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="5RN-M8-BQK" customClass="Custom_textField">
+                                                    <rect key="frame" x="10" y="40" width="300" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="il_prompt" destination="tlq-E0-Rq1" id="q1D-CR-ZeO"/>
+                                            <outlet property="itf_inputdata" destination="5RN-M8-BQK" id="eq6-ro-Awx"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VDc-ua-7O2"/>
+                    <navigationItem key="navigationItem" id="VDc-ua-7O2">
+                        <barButtonItem key="leftBarButtonItem" id="1yn-RK-cIf">
+                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="waN-Dy-32E" customClass="Custom_BtnGraphicMixed">
+                                <rect key="frame" x="16" y="5" width="120" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ibtn_whs_logo" destination="waN-Dy-32E" id="idz-mg-uI9"/>
+                        <outlet property="skstableView" destination="vrC-q0-42j" id="oXJ-Zh-cp7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jim-3l-IRW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

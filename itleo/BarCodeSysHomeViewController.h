@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Custom_BtnGraphicMixed.h"
 @interface BarCodeSysHomeViewController : UIViewController
+@property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_whs_logo;
 
 @end

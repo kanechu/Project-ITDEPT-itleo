@@ -80,21 +80,32 @@ static int DB_VERSION = 1;
         NSString *ls_sql_DashboardGrpDResult=@"CREATE TABLE IF NOT EXISTS DashboardGrpDResult( id INTEGER PRIMARY KEY,unique_id TEXT NOT NULL DEFAULT'',grp_code TEXT NOT NULL DEFAULT'',grp_desc TEXT NOT NULL DEFAULT'',grp_title_en TEXT NOT NULL DEFAULT'',grp_title_cn TEXT NOT NULL DEFAULT '',grp_title_big5 TEXT NOT NULL DEFAULT'',rec_crt_usr TEXT NOT NULL DEFAULT'',rec_upd_usr TEXT NOT NULL DEFAULT'',rec_crt_date TEXT NOT NULL DEFAULT '',rec_upd_date TEXT NOT NULL DEFAULT '')";
         NSString *ls_sql_DashboardDtlResult=@"CREATE TABLE IF NOT EXISTS DashboardDtlResult( id INTEGER PRIMARY KEY,unique_id TEXT NOT NULL DEFAULT '',chart_seq TEXT NOT NULL DEFAULT '',dhb_group_id TEXT NOT NULL DEFAULT '',chart_title_en TEXT NOT NULL DEFAULT '',chart_title_cn TEXT NOT NULL DEFAULT '',chart_title_big5 TEXT NOT NULL DEFAULT '',chart_desc TEXT NOT NULL DEFAULT '',chart_type TEXT NOT NULL DEFAULT '',x_title_en TEXT NOT NULL DEFAULT '',x_title_cn TEXT NOT NULL DEFAULT '',x_title_big5 TEXT NOT NULL DEFAULT '',y_title_en TEXT NOT NULL DEFAULT '',y_title_cn TEXT NOT NULL DEFAULT '',y_title_big5 TEXT NOT NULL DEFAULT '',rec_crt_usr TEXT NOT NULL DEFAULT '',rec_upd_usr TEXT NOT NULL DEFAULT '',rec_crt_date TEXT NOT NULL DEFAULT '',rec_upd_date TEXT NOT NULL DEFAULT '')";
         NSString *ls_sql_data= @"CREATE TABLE IF NOT EXISTS data( unique_id INTEGER PRIMARY KEY,serie TEXT NOT NULL DEFAULT '',x TEXT NOT NULL DEFAULT '',y TEXT NOT NULL DEFAULT '',correlation_id INTEGER,FOREIGN KEY (correlation_id) REFERENCES DashboardDtlResult(unique_id))";
+        
+        NSString *ls_sql_whs_header= @"CREATE TABLE IF NOT EXISTS whs_config_header( unique_id INTEGER PRIMARY KEY,EN TEXT NOT NULL DEFAULT '',CN TEXT NOT NULL DEFAULT '',TCN TEXT NOT NULL DEFAULT '',ENABLE TEXT NOT NULL DEFAULT '',UPLOAD_TYPE TEXT NOT NULL DEFAULT '',NUM TEXT NOT NULL DEFAULT '' )";
+        NSString *ls_sql_whs_detail= @"CREATE TABLE IF NOT EXISTS whs_upload_col( uid INTEGER PRIMARY KEY,seq TEXT NOT NULL DEFAULT '',col_field TEXT NOT NULL DEFAULT '',EN TEXT NOT NULL DEFAULT '',CN TEXT NOT NULL DEFAULT '',TCN TEXT NOT NULL DEFAULT '',col_type TEXT NOT NULL DEFAULT '',col_option TEXT NOT NULL DEFAULT '',col_def TEXT NOT NULL DEFAULT '',group_name TEXT NOT NULL DEFAULT '',is_mandatory TEXT NOT NULL DEFAULT '',unique_id INTEGER,FOREIGN KEY (unique_id) REFERENCES whs_config_header(unique_id))";
+        //login data
         [database executeUpdate:ls_sql_RespAppConfig];
         [database executeUpdate:ls_sql_loginInfo];
+        [database executeUpdate:ls_sql_com_sys_code];
+        //air load plan data
         [database executeUpdate:ls_sql_aejob_browse];
         [database executeUpdate:ls_sql_aejob_dtl_browse];
-        [database executeUpdate:ls_sql_com_sys_code];
+        //epod data
         [database executeUpdate:ls_sql_vehicle_no];
         [database executeUpdate:ls_sql_truck_order];
         [database executeUpdate:ls_sql_truck_order_image];
         [database executeUpdate:ls_sql_location];
+        //control permit data
         [database executeUpdate:ls_sql_sypara];
         [database executeUpdate:ls_sql_permit];
-        
+        //Warehouse summary charts data
         [database executeUpdate:ls_sql_DashboardGrpDResult];
         [database executeUpdate:ls_sql_DashboardDtlResult];
         [database executeUpdate:ls_sql_data];
+        //save whs config
+        [database executeUpdate:ls_sql_whs_header];
+        [database executeUpdate:ls_sql_whs_detail];
+        
         [database close];
         return  lb_Success;
     }
