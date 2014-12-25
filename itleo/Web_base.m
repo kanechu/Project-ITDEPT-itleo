@@ -23,6 +23,7 @@
 #import "Resp_DataRefresh.h"
 
 #import "Resp_UPLOAD_COL.h"
+#import "Resp_language_type.h"
 @implementation Web_base
 
 @synthesize il_url;
@@ -205,11 +206,20 @@
     
     [lo_maintform_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping1];
     
+    RKObjectMapping* lo_languge_response_mapping=[RKObjectMapping mappingForClass:[Resp_language_type class]];
+    [lo_languge_response_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_language_type class]]];
+    
     RKObjectMapping* lo_uploadCol_response_mapping=[RKObjectMapping mappingForClass:[Resp_UPLOAD_COL class]];
-    [lo_uploadCol_response_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_UPLOAD_COL class]]];
+    NSMutableArray *alist_upload_col=[[NSArray arrayWithPropertiesOfObject:[Resp_UPLOAD_COL class]]mutableCopy];
+    [alist_upload_col removeObjectAtIndex:2];
+    [lo_uploadCol_response_mapping addAttributeMappingsFromArray:alist_upload_col];
     
     [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"MaintForm" toKeyPath:@"MaintForm" withMapping:lo_maintform_response_mapping]];
     [lo_maintform_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"UPLOAD_COL" toKeyPath:@"UPLOAD_COL" withMapping:lo_uploadCol_response_mapping]];
+    
+    [lo_uploadCol_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"col_label" toKeyPath:@"col_label" withMapping:lo_languge_response_mapping]];
+    
+    [lo_maintform_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"FORMAT_NAME" toKeyPath:@"FORMAT_NAME" withMapping:lo_languge_response_mapping]];
     
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
                                                                                             method:RKRequestMethodPOST

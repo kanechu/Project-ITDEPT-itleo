@@ -182,3 +182,5 @@
 "lbl_width"="宽度(厘米):";
 "lbl_height"="高度(厘米):";
 "lbl_remark"="备注:";
+//whs config
+"lbl_whs_logo"="仓库";

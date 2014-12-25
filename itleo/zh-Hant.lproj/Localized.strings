@@ -185,3 +185,5 @@
 "lbl_width"="寬度(釐米):";
 "lbl_height"="高度(釐米):";
 "lbl_remark"="備註:";
+//whs config
+"lbl_whs_logo"="倉庫";

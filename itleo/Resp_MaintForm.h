@@ -10,7 +10,7 @@
 
 @interface Resp_MaintForm : NSObject
 
-@property (nonatomic,strong) NSSet *FORMAT_NAME;
+@property (nonatomic,strong) NSArray *FORMAT_NAME;
 @property (nonatomic,copy) NSString *ENABLE;
 @property (nonatomic,copy) NSString *UPLOAD_TYPE;
 @property (nonatomic,strong) NSArray *UPLOAD_COL;

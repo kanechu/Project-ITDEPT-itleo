@@ -183,3 +183,5 @@
 "lbl_width"="Width(cm):";
 "lbl_height"="Height(cm):";
 "lbl_remark"="Remark:";
+//whs config
+"lbl_whs_logo"="Warehouse";

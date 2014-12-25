@@ -10,13 +10,13 @@
 
 @interface Resp_UPLOAD_COL : NSObject
 
-@property (nonatomic, assign) NSInteger seq;
+@property (nonatomic, copy) NSString *seq;
 @property (nonatomic, copy) NSString *col_field;
-@property (nonatomic, strong) NSSet *col_label;
+@property (nonatomic, strong) NSArray *col_label;
 @property (nonatomic, copy) NSString *col_type;
 @property (nonatomic, copy) NSString *col_option;
 @property (nonatomic, copy) NSString *col_def;
 @property (nonatomic, copy) NSString *group_name;
-@property (nonatomic, assign) NSInteger is_mandatory;
+@property (nonatomic, copy) NSString *is_mandatory;
 
 @end
