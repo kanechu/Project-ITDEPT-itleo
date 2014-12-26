@@ -148,7 +148,7 @@
         stringValue = metadataObject.stringValue;
     }
     [_session stopRunning];
-    [self dismissViewControllerAnimated:YES completion:^
+    [self dismissViewControllerAnimated:NO completion:^
      {
          [timer invalidate];
          timer=nil;

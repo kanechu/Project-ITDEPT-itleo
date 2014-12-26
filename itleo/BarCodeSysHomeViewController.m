@@ -116,7 +116,17 @@ typedef NSString* (^passValue)(NSInteger tag);
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)fn_scan_the_barcode:(id)sender{
+    UIButton *ibtn=(UIButton*)sender;
+    NSInteger tag=ibtn.tag;
     BarCodeViewController *barCodeVC=(BarCodeViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"BarCodeViewController"];
+    barCodeVC.callback=^(NSString *str_code){
+        NSString *os_column_key=_pass_Value(tag);
+        os_column_key=[os_column_key stringByAppendingFormat:@"%d",tag];
+        [idic_textfield_value setObject:str_code forKey:os_column_key];
+        self.skstableView.expandableCells=nil;
+        [self.skstableView reloadData];
+        [self.skstableView fn_expandall];
+    };
     [self presentViewController:barCodeVC animated:YES completion:nil];
 }
 #pragma mark -UITextFieldDelegate
@@ -127,6 +137,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self.checkText fn_setLine_color:[UIColor lightGrayColor]];
     NSString *os_column_key=_pass_Value(textField.tag);
+    os_column_key=[os_column_key stringByAppendingFormat:@"%d",textField.tag];
     if ([textField.text length]!=0) {
         [idic_textfield_value setObject:textField.text forKey:os_column_key];
     }
@@ -178,6 +189,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     NSString *col_type=[dic valueForKey:@"col_type"];
     NSInteger is_mandatory=[[dic valueForKey:@"is_mandatory"]integerValue];
     NSString *col_field=[dic valueForKey:@"col_field"];
+    col_field=[col_field stringByAppendingFormat:@"%d",TEXTFIELD_TAG*indexPath.row+indexPath.subRow];
     if (is_mandatory==0) {
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:lang_code]];
     }else{
@@ -188,7 +200,7 @@ typedef NSString* (^passValue)(NSInteger tag);
         UIButton *ibtn_barCode=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 38, 38)];
         [ibtn_barCode setBackgroundImage:[UIImage imageNamed:@"barcode"] forState:UIControlStateNormal];
         [ibtn_barCode addTarget:self action:@selector(fn_scan_the_barcode:) forControlEvents:UIControlEventTouchUpInside];
-        ibtn_barCode.tag=indexPath.row*10+indexPath.subRow;
+        ibtn_barCode.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
         cell.accessoryView=ibtn_barCode;
         ibtn_barCode=nil;
     }else{
