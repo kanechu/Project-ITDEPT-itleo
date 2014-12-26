@@ -15,20 +15,30 @@
 #import "Web_get_whs_config.h"
 #import "BarCodeViewController.h"
 #define FIXSPACE 15
+#define TEXTFIELD_TAG 100
+typedef NSString* (^passValue)(NSInteger tag);
 
-@interface BarCodeSysHomeViewController ()<SKSTableViewDelegate>
+@interface BarCodeSysHomeViewController ()<SKSTableViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet SKSTableView *skstableView;
+@property (strong, nonatomic) Custom_textField *checkText;
+//存储组标题信息
 @property (strong, nonatomic) NSMutableArray *alist_whs_headers;
 @property (strong, nonatomic) NSMutableArray *alist_upload_cols;
+
+@property (strong, nonatomic) NSMutableDictionary *idic_textfield_value;
+//当前语言
 @property (copy, nonatomic) NSString *lang_code;
+@property (nonatomic,strong) passValue pass_Value;
 
 @end
 
 @implementation BarCodeSysHomeViewController
 @synthesize alist_whs_headers;
 @synthesize alist_upload_cols;
+@synthesize idic_textfield_value;
 @synthesize lang_code;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,8 +51,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    /* Web_get_whs_config *web_obj=[[Web_get_whs_config alloc]init];
-    [web_obj fn_get_whs_config_data:@"http://192.168.1.17/kie_web_api/"];*/
   
     [self fn_set_property];
     [self fn_add_right_items];
@@ -66,7 +74,7 @@
     arr=nil;
     
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
-    alist_whs_headers=[db_whs fn_get_group_data];
+    alist_whs_headers=[db_whs fn_get_group_data:@"true"];
     NSMutableArray *arr_upload_cols=[db_whs fn_get_upload_col_data];
     
     alist_upload_cols=[[NSMutableArray alloc]init];
@@ -81,6 +89,7 @@
     db_whs=nil;
     self.skstableView.SKSTableViewDelegate=self;
     [self.skstableView fn_expandall];
+    idic_textfield_value=[[NSMutableDictionary alloc]init];
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
 }
 -(void)fn_add_right_items{
@@ -110,7 +119,23 @@
     BarCodeViewController *barCodeVC=(BarCodeViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"BarCodeViewController"];
     [self presentViewController:barCodeVC animated:YES completion:nil];
 }
-
+#pragma mark -UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    self.checkText=(Custom_textField*)textField;
+    [self.checkText fn_setLine_color:[UIColor blueColor]];
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [self.checkText fn_setLine_color:[UIColor lightGrayColor]];
+    NSString *os_column_key=_pass_Value(textField.tag);
+    if ([textField.text length]!=0) {
+        [idic_textfield_value setObject:textField.text forKey:os_column_key];
+    }
+    os_column_key=nil;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 #pragma mark -SKSTableViewDelegate
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -140,14 +165,25 @@
     NSMutableDictionary *dic=alist_upload_cols[indexPath.row][indexPath.subRow-1];
     static NSString *cellIndentifer=@"Cell_whs_config";
     Cell_advance_search *cell=[self.skstableView dequeueReusableCellWithIdentifier:cellIndentifer];
+    cell.itf_inputdata.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
+    cell.itf_inputdata.delegate=self;
+    __block BarCodeSysHomeViewController * blockSelf=self;
+    _pass_Value=^NSString*(NSInteger tag){
+        NSInteger i=tag/TEXTFIELD_TAG;
+        NSInteger j=tag-i*TEXTFIELD_TAG-1;
+        NSMutableDictionary *idic=blockSelf->alist_upload_cols[i][j];
+        NSString *col_field=[idic valueForKey:@"col_field"];
+        return col_field;
+    };
     NSString *col_type=[dic valueForKey:@"col_type"];
     NSInteger is_mandatory=[[dic valueForKey:@"is_mandatory"]integerValue];
-   // NSString *col_field=[dic valueForKey:@"col_field"];
+    NSString *col_field=[dic valueForKey:@"col_field"];
     if (is_mandatory==0) {
-        cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",[dic valueForKey:lang_code]];
-    }else{
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:lang_code]];
+    }else{
+        cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",[dic valueForKey:lang_code]];
     }
+    cell.itf_inputdata.text=[idic_textfield_value valueForKey:col_field];
     if ([col_type isEqualToString:@"barcode"]) {
         UIButton *ibtn_barCode=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 38, 38)];
         [ibtn_barCode setBackgroundImage:[UIImage imageNamed:@"barcode"] forState:UIControlStateNormal];

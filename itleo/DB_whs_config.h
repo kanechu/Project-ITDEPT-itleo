@@ -15,7 +15,7 @@
 
 - (BOOL)fn_save_whs_config_data:(NSMutableArray*)alist_result;
 
-- (NSMutableArray*)fn_get_group_data;
+- (NSMutableArray*)fn_get_group_data:(NSString*)enable;
 
 - (NSMutableArray*)fn_get_upload_col_data;
 

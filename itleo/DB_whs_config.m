@@ -82,11 +82,11 @@
     return ib_updated;
 }
 
-- (NSMutableArray*)fn_get_group_data{
+- (NSMutableArray*)fn_get_group_data:(NSString*)enable{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb_result=[db executeQuery:@"select * from whs_config_header"];
+            FMResultSet *lfmdb_result=[db executeQuery:@"select * from whs_config_header where ENABLE like ?",enable];
             while ([lfmdb_result next]) {
                 [alist_result addObject:[lfmdb_result resultDictionary]];
             }
