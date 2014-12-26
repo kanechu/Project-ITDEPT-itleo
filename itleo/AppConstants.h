@@ -10,6 +10,8 @@
 
 #define COMPANY_CODE @"ITNEW"
 #define APP_CODE @"ITLEO"
+#define VERSION @"1.0"
+#define IS_ENCRYPTED @"0"
 @interface AppConstants : NSObject
 
 extern NSString* const STR_BASE_URL;

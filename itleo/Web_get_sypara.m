@@ -20,7 +20,6 @@
     RequestContract *req_form = [[RequestContract alloc] init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-    auth.encrypted=@"0";
     req_form.Auth =auth;
     Web_base *web_base=[[Web_base alloc]init];
     web_base.il_url=STR_SYPARA_URL;
@@ -30,9 +29,13 @@
         if ([alist_result count]!=0) {
             DB_sypara *db_sypara=[[DB_sypara alloc]init];
             [db_sypara fn_save_sypara_data:alist_result];
+            db_sypara=nil;
         }
     };
     [web_base fn_get_data:req_form base_url:base_url];
+    req_form=nil;
+    db_login=nil;
+    web_base=nil;
 }
 
 -(NSInteger)fn_isShow_GPS_function{
@@ -46,6 +49,7 @@
             flag=1;
         }
     }
+    db_sypara=nil;
     return flag;
 }
 @end

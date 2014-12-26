@@ -30,10 +30,7 @@ static NSMutableDictionary *idic_ChartImages=nil;
     DB_LoginInfo *login_obj=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[login_obj fn_get_RequestAuth];
     auth.app_code=APP_CODE;
-    auth.system=@"ITNEW";
     request_form.Auth=auth;
-#warning neet fix
-    base_url=@"http://192.168.1.17/kie_web_api/";//这里也先写死，日后记住改过来
     if (requestType==kRequestAll) {
         SearchFormContract *searchform=[[SearchFormContract alloc]init];
         searchform.os_column=@"type";
@@ -70,6 +67,9 @@ static NSMutableDictionary *idic_ChartImages=nil;
         
     };
     [web_obj fn_get_chart_data:request_form Auth:auth base_url:base_url];
+    request_form=nil;
+    login_obj=nil;
+    web_obj=nil;
 }
 - (NSMutableDictionary*)fn_get_ChartImages{
     return idic_ChartImages;

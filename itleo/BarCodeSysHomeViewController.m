@@ -12,8 +12,8 @@
 #import "DB_LoginInfo.h"
 #import "Cell_advance_search.h"
 #import "SKSTableViewCell.h"
-#import "Web_get_whs_config.h"
 #import "BarCodeViewController.h"
+
 #define FIXSPACE 15
 #define TEXTFIELD_TAG 100
 typedef NSString* (^passValue)(NSInteger tag);

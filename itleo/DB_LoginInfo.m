@@ -74,7 +74,8 @@
         auth.system=[dic valueForKey:@"system"];
         auth.lang_code=[dic valueForKey:@"lang_code"];
     }
-    auth.version=@"1.0";
+    auth.encrypted=IS_ENCRYPTED;
+    auth.version=VERSION;
     return auth;
 }
 

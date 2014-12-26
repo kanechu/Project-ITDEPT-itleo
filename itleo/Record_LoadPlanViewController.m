@@ -254,7 +254,6 @@ typedef NSString* (^passValue)(NSInteger tag);
     
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-    auth.encrypted=@"0";
     upload.Auth=auth;
     
     Web_base *web_obj=[[Web_base alloc]init];

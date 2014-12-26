@@ -35,8 +35,12 @@
         if (call_back) {
             call_back(YES);
         }
+        db_permit=nil;
     };
     [web_base fn_get_data:ao_form base_url:base_url];
+    ao_form=nil;
+    db_login=nil;
+    web_base=nil;
 }
 -(NSMutableArray*)fn_get_function_module{
     DB_permit *db_permit=[[DB_permit alloc]init];
@@ -52,6 +56,7 @@
             [idic_result setObject:f_exec forKey:@"f_exec"];
             [alist_function addObject:idic_result];
         }
+        idic_result=nil;
     }
     return alist_function;
 }
