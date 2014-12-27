@@ -89,6 +89,8 @@
             [self.tableview setScrollEnabled:NO];
         }
     }
+    db_aejob=nil;
+    db=nil;
 }
 -(void)fn_get_aejob_dtl_browse_data:(NSString*)base_url{
     [SVProgressHUD showWithStatus:@"Loading,please wait!"];
@@ -116,9 +118,13 @@
         [db fn_save_aejob_dtl_browse_data:arr_resp_result];
         
         alist_aejob_dtl=[db fn_get_aejob_dtl_browse_data];
+        db=nil;
         [self.tableview reloadData];
     };
     [web_base fn_get_data:req_form base_url:base_url];
+    req_form=nil;
+    db=nil;
+    web_base=nil;
 }
 #pragma mark -no data alert
 -(void)fn_show_alert{

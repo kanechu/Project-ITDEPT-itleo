@@ -52,6 +52,7 @@ static NSMutableArray *alist_filtered_data;
     [self setExtraCellLineHidden];
     if ([alist_filtered_data count]==0) {
         [self fn_show_alert];
+        [self.skstableView setScrollEnabled:NO];
     }
    
     [self fn_create_datePick];
@@ -103,7 +104,9 @@ static NSMutableArray *alist_filtered_data;
             if ([obj fn_isPopUp_alert]==NO) {
                 [self fn_get_aejob_browse_data:base_url searchForm:arr_result];
             }
+            obj=nil;
         }
+        db=nil;
     };
     [self presentViewController:VC animated:YES completion:^(){}];
 }
@@ -132,6 +135,9 @@ static NSMutableArray *alist_filtered_data;
         [self fn_refresh_skstableview:arr_resp_result];
     };
     [web_base fn_get_data:req_form base_url:base_url];
+    req_form=nil;
+    db=nil;
+    web_base=nil;
 }
 #pragma mark 请求一次服务器，就更新一下Tableview
 -(void)fn_refresh_skstableview:(NSMutableArray*)arr_resp_result{
@@ -155,6 +161,7 @@ static NSMutableArray *alist_filtered_data;
     }
     self.skstableView.expandableCells=nil;
     [self.skstableView reloadData];
+    db=nil;
 }
 #pragma mark -No Data Alert
 -(void)fn_show_alert{
@@ -223,20 +230,8 @@ static NSMutableArray *alist_filtered_data;
     cell.il_kgs.text=kgs;
     return cell;
 }
--(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    static NSString *CellIdentifier=@"tableView_headerCell";
-    SKSTableViewCell *headerView=[self.skstableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!headerView) {
-        headerView=[[SKSTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
-    headerView.backgroundColor=COLOR_DARK_RED;
-    headerView.textLabel.text=@"Load Plan List";
-    headerView.textLabel.textColor=[UIColor whiteColor];
-    headerView.accessoryView=nil;
-    return headerView;
-}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 25;
+    return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
