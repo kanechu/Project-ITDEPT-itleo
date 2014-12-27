@@ -27,4 +27,5 @@
     #import "KeyboardNoticeManager.h"
     #import "MY_LocalizedString.h"
     #import "AllDefines.h"
+    #import "Conversion_helper.h"
 #endif

@@ -12,7 +12,7 @@
 #import "DB_sypara.h"
 #import "DB_RespAppConfig.h"
 #import "DB_LoginInfo.h"
-#import "Conversion_helper.h"
+
 @implementation Web_get_sypara
 
 -(void)fn_get_sypara_data:(NSString*)base_url{

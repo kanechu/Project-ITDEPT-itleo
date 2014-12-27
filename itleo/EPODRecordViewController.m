@@ -10,7 +10,6 @@
 #import "Cell_ShowRecords.h"
 #import "DB_ePod.h"
 #import "Checkbox.h"
-#import "Conversion_helper.h"
 #import "EPODDetailViewController.h"
 #import "CreateFootView.h"
 @interface EPODRecordViewController ()

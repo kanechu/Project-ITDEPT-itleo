@@ -11,7 +11,7 @@
 #import "Resp_permit.h"
 #import "DB_LoginInfo.h"
 #import "DB_permit.h"
-#import "Conversion_helper.h"
+
 @implementation Web_get_permit
 
 -(void)fn_get_permit_data:(NSString*)base_url callBack:(call_isGetPermit)call_back{

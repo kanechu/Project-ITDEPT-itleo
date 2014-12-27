@@ -20,4 +20,11 @@
 +(NSMutableArray*)fn_sort_the_array:(NSMutableArray*)alist_source  key:(NSString*)sortBy_name;
 +(NSArray*)fn_filtered_criteriaData:(NSString*)value arr:(NSMutableArray*)alist_will_filter;
 +(UIImage*)fn_imageWithView:(UIView*)view;
+
+/**
+ *  获取登录时候，选择的语言
+ *
+ *  @return 语言类型
+ */
++(NSString*)fn_get_lang_code;
 @end

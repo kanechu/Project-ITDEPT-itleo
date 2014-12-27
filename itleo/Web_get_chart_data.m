@@ -10,7 +10,6 @@
 #import "Web_base.h"
 #import "DB_LoginInfo.h"
 #import "DB_Chart.h"
-#import "Conversion_helper.h"
 #import "ChartData_handler.h"
 #import "ChartView_frame.h"
 static NSMutableDictionary *idic_ChartImages=nil;

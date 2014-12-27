@@ -7,7 +7,7 @@
 //
 
 #import "Conversion_helper.h"
-
+#import "DB_LoginInfo.h"
 @implementation Conversion_helper
 
 #pragma mark -base64Str and image transformation
@@ -81,5 +81,27 @@
     UIGraphicsEndImageContext();
     return image;
 }
-
+/**
+ *  获取登录时候，选择的语言
+ *
+ *  @return 语言类型
+ */
++(NSString*)fn_get_lang_code{
+    DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
+    NSMutableArray *arr=[db fn_get_all_LoginInfoData];
+    NSString *lang_code=@"";
+    if ([arr count]!=0) {
+        lang_code=[[arr objectAtIndex:0]valueForKey:@"lang_code"];
+        if ([lang_code isEqualToString:@"EN"]) {
+            lang_code=@"en";
+        }
+        if ([lang_code isEqualToString:@"CN"]) {
+            lang_code=@"zh-Hans";
+        }
+        if ([lang_code isEqualToString:@"TCN"]) {
+            lang_code=@"zh-Hant";
+        }
+    }
+    return lang_code;
+}
 @end

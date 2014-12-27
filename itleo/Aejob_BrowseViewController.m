@@ -273,6 +273,7 @@ static NSMutableArray *alist_filtered_data;
     //初始化UIDatePicker
     idp_datePicker=[[UIDatePicker alloc]init];
     [idp_datePicker setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)];
+    [idp_datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:[Conversion_helper fn_get_lang_code]]];
     //设置UIDatePicker的显示模式
     [idp_datePicker setDatePickerMode:UIDatePickerModeDate];
     //当值发生改变的时候调用的方法

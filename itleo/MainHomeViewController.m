@@ -109,34 +109,12 @@
     if (login_flag==0) {
         [self presentViewController:VC animated:NO completion:^(){}];
     }else{
-        NSString *lang=[self fn_get_lang_code];
+        NSString *lang=[Conversion_helper fn_get_lang_code];
         [[MY_LocalizedString getshareInstance]fn_setLanguage_type:lang];
     }
     
 }
-/**
- *  获取登录时候，选择的语言
- *
- *  @return 语言类型
- */
--(NSString*)fn_get_lang_code{
-    DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
-    NSMutableArray *arr=[db fn_get_all_LoginInfoData];
-    NSString *lang_code=@"";
-    if ([arr count]!=0) {
-        lang_code=[[arr objectAtIndex:0]valueForKey:@"lang_code"];
-        if ([lang_code isEqualToString:@"EN"]) {
-            lang_code=@"en";
-        }
-        if ([lang_code isEqualToString:@"CN"]) {
-            lang_code=@"zh-Hans";
-        }
-        if ([lang_code isEqualToString:@"TCN"]) {
-            lang_code=@"zh-Hant";
-        }
-    }
-    return lang_code;
-}
+
 - (IBAction)fn_logout_itleo:(id)sender {
     DB_ePod *db_epod=[[DB_ePod alloc]init];
     DB_Location *db_location=[[DB_Location alloc]init];

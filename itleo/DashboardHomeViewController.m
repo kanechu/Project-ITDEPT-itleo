@@ -11,7 +11,6 @@
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "Cell_summary_chart.h"
-#import "Conversion_helper.h"
 #import "ChartView_frame.h"
 #import "ChartData_handler.m"
 #import "DB_Chart.h"
