@@ -20,6 +20,7 @@
 #import "Web_get_sypara.h"
 #import "Web_get_permit.h"
 #import "Web_get_chart_data.h"
+#import "Web_get_whs_config.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 @interface LEOLoginViewController ()
@@ -264,6 +265,9 @@ static NSString  *is_language=@"";//标识语言类型
                         [SVProgressHUD dismiss];
                     }
                 }];
+                Web_get_whs_config *web_whs=[[Web_get_whs_config alloc]init];
+                [web_whs fn_get_whs_config_data:web_addr];
+                web_whs=nil;
                 Web_get_chart_data *web_chart=[Web_get_chart_data fn_shareInstance];
                 [web_chart fn_get_chart_data:web_addr uid:nil type:kRequestAll];
                 web_chart.callBack=^(){

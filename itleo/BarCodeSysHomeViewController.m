@@ -110,7 +110,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 #pragma mark -event action
 - (void)fn_save_whs_data{
-    
+   
 }
 - (void)fn_cancel_operation{
     [self.navigationController popViewControllerAnimated:YES];
@@ -212,7 +212,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     return 10;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 30;
+    return 35;
 }
 -(CGFloat)tableView:(SKSTableView *)tableView heightForSubRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;

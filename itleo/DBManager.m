@@ -83,6 +83,8 @@ static int DB_VERSION = 1;
         
         NSString *ls_sql_whs_header= @"CREATE TABLE IF NOT EXISTS whs_config_header( unique_id INTEGER PRIMARY KEY,EN TEXT NOT NULL DEFAULT '',CN TEXT NOT NULL DEFAULT '',TCN TEXT NOT NULL DEFAULT '',ENABLE TEXT NOT NULL DEFAULT '',UPLOAD_TYPE TEXT NOT NULL DEFAULT '',NUM TEXT NOT NULL DEFAULT '' )";
         NSString *ls_sql_whs_detail= @"CREATE TABLE IF NOT EXISTS whs_upload_col( uid INTEGER PRIMARY KEY,seq TEXT NOT NULL DEFAULT '',col_field TEXT NOT NULL DEFAULT '',EN TEXT NOT NULL DEFAULT '',CN TEXT NOT NULL DEFAULT '',TCN TEXT NOT NULL DEFAULT '',col_type TEXT NOT NULL DEFAULT '',col_option TEXT NOT NULL DEFAULT '',col_def TEXT NOT NULL DEFAULT '',group_name TEXT NOT NULL DEFAULT '',is_mandatory TEXT NOT NULL DEFAULT '',unique_id INTEGER,FOREIGN KEY (unique_id) REFERENCES whs_config_header(unique_id))";
+#warning -need to modify
+         NSString *ls_sql_whs_data= @"CREATE TABLE IF NOT EXISTS whs_config_data( unique_id INTEGER PRIMARY KEY,col_field_name TEXT NOT NULL DEFAULT '',col_field_value TEXT NOT NULL DEFAULT '',save_time TEXT NOT NULL DEFAULT '',is_uploaded TEXT NOT NULL DEFAULT '')";
         //login data
         [database executeUpdate:ls_sql_RespAppConfig];
         [database executeUpdate:ls_sql_loginInfo];
@@ -105,7 +107,7 @@ static int DB_VERSION = 1;
         //save whs config
         [database executeUpdate:ls_sql_whs_header];
         [database executeUpdate:ls_sql_whs_detail];
-        
+        [database executeUpdate:ls_sql_whs_data];
         [database close];
         return  lb_Success;
     }

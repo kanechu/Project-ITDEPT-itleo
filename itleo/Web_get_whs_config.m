@@ -20,7 +20,7 @@
     
     AuthContract *auth=[db_login fn_get_RequestAuth];
 #warning -neet fix
-    auth.company_code=@"ITNEW";
+    auth.company_code=COMPANY_CODE;
     auth.system=@"ITNEW";
     req_form.Auth=auth;
     Web_base *web_obj=[[Web_base alloc]init];

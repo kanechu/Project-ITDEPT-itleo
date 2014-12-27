@@ -15,9 +15,13 @@
 
 - (BOOL)fn_save_whs_config_data:(NSMutableArray*)alist_result;
 
+- (BOOL)fn_save_input_warehouse_data:(NSMutableDictionary*)idic_whs_data;
+
 - (NSMutableArray*)fn_get_group_data:(NSString*)enable;
 
 - (NSMutableArray*)fn_get_upload_col_data;
+
+- (NSMutableArray*)fn_get_warehouse_record;
 
 - (BOOL)fn_delete_all_data;
 
