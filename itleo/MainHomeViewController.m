@@ -19,7 +19,6 @@
 #import "DB_Location.h"
 #import "DB_ePod.h"
 #import "DB_sypara.h"
-#import "DB_permit.h"
 #import "DB_Chart.h"
 @interface MainHomeViewController ()
 @property(strong,nonatomic)NSMutableArray *alist_menu;
@@ -161,11 +160,7 @@
      */
     DB_sypara *db_sypara=[[DB_sypara alloc]init];
     [db_sypara fn_delete_all_sypara_data];
-    /**
-     *  清除permit
-     */
-    DB_permit *db_permit=[[DB_permit alloc]init];
-    [db_permit fn_delete_all_permit_data];
+   
     //清除图表数据
     DB_Chart *db_chart=[[DB_Chart alloc]init];
     [db_chart fn_delete_all_chart_data];

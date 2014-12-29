@@ -104,7 +104,8 @@ typedef NSString* (^passValue)(NSInteger tag);
     UIBarButtonItem *ibtn_space2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     ibtn_space2.width=FIXSPACE;
     UIBarButtonItem *ibtn_cancel=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_cancel_operation)];
-    NSArray *array=@[ibtn_save,ibtn_space,ibtn_space1,ibtn_space2,ibtn_cancel];
+    UIBarButtonItem *ibtn_scan_log=[[UIBarButtonItem alloc]initWithTitle:@"Scan Log" style:UIBarButtonItemStyleBordered target:self action:@selector(fn_scan_log)];
+    NSArray *array=@[ibtn_save,ibtn_space,ibtn_space1,ibtn_space2,ibtn_cancel,ibtn_space,ibtn_space1,ibtn_space2,ibtn_scan_log];
     self.navigationItem.rightBarButtonItems=array;
     array=nil;
 }
@@ -114,6 +115,9 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 - (void)fn_cancel_operation{
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)fn_scan_log{
+    
 }
 - (void)fn_scan_the_barcode:(id)sender{
     UIButton *ibtn=(UIButton*)sender;

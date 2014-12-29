@@ -71,6 +71,9 @@
         alist_exsoBrowse=[[set_exsoBrowse allObjects]mutableCopy];
         alist_cfsdimBrowse=[[set_cfsdimBrowse allObjects]mutableCopy];
         NSString *str_num=[NSString stringWithFormat:@"%d",[set_cfsdimBrowse count]];
+        if ([set_cfsdimBrowse count]==0) {
+            str_num=@"1";
+        }
         [_alist_groupAndnum addObject:@{@"name": MY_LocalizedString(@"lbl_loadPlan", nil),@"num":str_num}];
         exso_obj=nil;
         set_cfsdimBrowse=nil;
@@ -82,6 +85,9 @@
 -(void)fn_update_skstableView{
     
     NSString *str_num=[NSString stringWithFormat:@"%d",[alist_cfsdimBrowse count]];
+    if ([alist_cfsdimBrowse count]==0) {
+        str_num=@"1";
+    }
     NSMutableDictionary *dic=[[_alist_groupAndnum lastObject]mutableCopy];
     [dic setObject:str_num forKey:@"num"];
     [_alist_groupAndnum removeLastObject];
@@ -140,12 +146,6 @@
         cfsdim_obj=nil;
         arr_cfsdimBrowse=nil;
     }
-    /*
-    Resp_upd_excfsdim *upd_excfsdim_obj=[alist_result objectAtIndex:0];
-    Resp_uploadTran *uploadTran_obj=upd_excfsdim_obj.UploadTran;
-    Resp_DataRefresh *dataRefresh_obj=uploadTran_obj.DataRefresh;
-    NSSet *set_dataRefresh=dataRefresh_obj.exso;
-    alist_exsoBrowse=[[set_dataRefresh allObjects]mutableCopy];*/
     [self fn_update_skstableView];
 }
 
@@ -251,6 +251,16 @@
         Resp_CTexcfsdimResult *resp_cfsdim=nil;
         if ([alist_cfsdimBrowse count]!=0) {
             resp_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
+        }else{
+            static NSString *cell_Indentifer=@"cell_no_record_view";
+            UITableViewCell *cell=[self.skstableview dequeueReusableCellWithIdentifier:cell_Indentifer];
+            if (!cell) {
+                cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell_Indentifer];
+            }
+            UILabel *ilb_alert=(UILabel*)[cell.contentView viewWithTag:88];
+            ilb_alert.text=MY_LocalizedString(@"no_record_alert", nil);
+            return cell;
+        
         }
         static NSString *cellIndentifer=@"Cell_load_plan";
         Cell_load_plan *cell=[self.skstableview dequeueReusableCellWithIdentifier:cellIndentifer];
@@ -301,6 +311,8 @@
         Resp_CTexcfsdimResult *resp_cfsdim=nil;
         if ([alist_cfsdimBrowse count]!=0) {
             resp_cfsdim=[alist_cfsdimBrowse objectAtIndex:indexPath.subRow-1];
+        }else{
+            return 60;
         }
         NSString *str_load_remark=resp_cfsdim.remark;
         CGFloat load_remark_h=[_cal_obj fn_heightWithString:str_load_remark font:cell.ilb_remark.font constrainedToWidth:cell.ilb_remark.frame.size.width];
@@ -383,7 +395,9 @@
             }
         };
         idic_cfsdim=nil;
-        [self presentViewController:record_VC animated:YES completion:nil];
+        if ([alist_cfsdimBrowse count]!=0) {
+            [self presentViewController:record_VC animated:YES completion:nil];
+        }
     }
 }
 /*

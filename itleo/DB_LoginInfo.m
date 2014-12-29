@@ -76,6 +76,7 @@
     }
     auth.encrypted=IS_ENCRYPTED;
     auth.version=VERSION;
+    auth.app_code=APP_CODE;
     return auth;
 }
 

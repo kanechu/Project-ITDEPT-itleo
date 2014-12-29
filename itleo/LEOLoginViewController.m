@@ -23,6 +23,9 @@
 #import "Web_get_whs_config.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
+#define DEFAULT_USER_NAME @"anonymous"
+#define DEFAULT_PASSWORD @"anonymous1"
+#define DEFAULT_SYSTEM @"ITNEW"
 @interface LEOLoginViewController ()
 @property(nonatomic,strong)UITextField *checkText;
 @property(nonatomic,copy)NSString *lang_code;
@@ -192,12 +195,12 @@ static NSString  *is_language=@"";//标识语言类型
     [SVProgressHUD showWithStatus:MY_LocalizedString(@"login_prompt", nil)];
     RequestContract *req_form=[[RequestContract alloc]init];
     AuthContract *auth=[[AuthContract alloc]init];
-    auth.user_code=@"anonymous";
-    auth.password=@"anonymous1";
-    auth.system=@"ITNEW";
-    auth.version=@"1.0";
+    auth.user_code=DEFAULT_USER_NAME;
+    auth.password=DEFAULT_PASSWORD;
+    auth.system=DEFAULT_SYSTEM;
+    auth.version=VERSION;
     auth.com_sys_code=_itf_system.text;//用户输入的
-    auth.app_code=@"ITLEO";
+    auth.app_code=APP_CODE;
     req_form.Auth=auth;
     
     Web_base *web_base=[[Web_base alloc]init];

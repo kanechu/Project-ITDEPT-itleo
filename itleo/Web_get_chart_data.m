@@ -28,7 +28,6 @@ static NSMutableDictionary *idic_ChartImages=nil;
     RequestContract *request_form=[[RequestContract alloc]init];
     DB_LoginInfo *login_obj=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[login_obj fn_get_RequestAuth];
-    auth.app_code=APP_CODE;
     request_form.Auth=auth;
     if (requestType==kRequestAll) {
         SearchFormContract *searchform=[[SearchFormContract alloc]init];

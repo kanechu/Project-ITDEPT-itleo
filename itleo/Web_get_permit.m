@@ -18,7 +18,6 @@
     RequestContract *ao_form=[[RequestContract alloc]init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-    auth.app_code=APP_CODE;
     auth.company_code=COMPANY_CODE;
     ao_form.Auth=auth;
     SearchFormContract *searchform=[[SearchFormContract alloc]init];
@@ -31,7 +30,11 @@
     web_base.ilist_resp_mapping=[NSArray arrayWithPropertiesOfObject:[Resp_permit class]];
     web_base.callBack=^(NSMutableArray *alist_arr){
         DB_permit *db_permit=[[DB_permit alloc]init];
-        [db_permit fn_save_permit_data:alist_arr];
+        if ([alist_arr count]!=0) {
+            //清除旧permit，存新的permit
+            [db_permit fn_delete_all_permit_data];
+            [db_permit fn_save_permit_data:alist_arr];
+        }
         if (call_back) {
             call_back(YES);
         }

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define COMPANY_CODE @"ITNEW"
-#define APP_CODE @"ITLEO"
+#define APP_CODE @"MOB_ITLEO"
 #define VERSION @"1.0"
 #define IS_ENCRYPTED @"0"
 @interface AppConstants : NSObject
