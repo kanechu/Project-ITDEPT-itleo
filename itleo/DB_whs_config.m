@@ -47,9 +47,8 @@
                         
                     }
                     NSArray *arr_upload_col=resp_maint_obj.UPLOAD_COL;
-                    NSString *num=[NSString stringWithFormat:@"%d",[arr_upload_col count]];
-                    [dic_whs_header setObject:num forKey:@"NUM"];
-                    ib_updated=[db executeUpdate:@"insert into whs_config_header(EN,CN,TCN,ENABLE,UPLOAD_TYPE,NUM)values(:EN,:CN,:TCN,:ENABLE,:UPLOAD_TYPE,:NUM)" withParameterDictionary:dic_whs_header];
+                    
+                    ib_updated=[db executeUpdate:@"insert into whs_config_header(EN,CN,TCN,ENABLE,UPLOAD_TYPE)values(:EN,:CN,:TCN,:ENABLE,:UPLOAD_TYPE)" withParameterDictionary:dic_whs_header];
                     dic_whs_header=nil;
                     
                     for (Resp_UPLOAD_COL *upload_col_obj in arr_upload_col) {
@@ -122,12 +121,24 @@
     }];
     return alist_result;
 }
-
-- (NSMutableArray*)fn_get_upload_col_data{
+- (NSMutableArray*)fn_get_cols_group_nameAndnum:(NSString*)unique_id{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb_result=[db executeQuery:@"select * from whs_upload_col"];
+            FMResultSet *lfmdb_result=[db executeQuery:@"select group_name,COUNT(group_name) as num from whs_upload_col where unique_id=? group by group_name",unique_id];
+            while ([lfmdb_result next]) {
+                [alist_result addObject:[lfmdb_result resultDictionary]];
+            }
+            [db close];
+        }
+    }];
+    return alist_result;
+}
+- (NSMutableArray*)fn_get_upload_col_data:(NSString*)unique_id{
+    __block NSMutableArray *alist_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            FMResultSet *lfmdb_result=[db executeQuery:@"select * from whs_upload_col where unique_id=?",unique_id];
             while ([lfmdb_result next]) {
                 [alist_result addObject:[lfmdb_result resultDictionary]];
             }

@@ -19,7 +19,8 @@
 
 - (NSMutableArray*)fn_get_group_data:(NSString*)enable;
 
-- (NSMutableArray*)fn_get_upload_col_data;
+- (NSMutableArray*)fn_get_cols_group_nameAndnum:(NSString*)unique_id;
+- (NSMutableArray*)fn_get_upload_col_data:(NSString*)unique_id;
 
 - (NSMutableArray*)fn_get_warehouse_record;
 

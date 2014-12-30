@@ -6,10 +6,9 @@
 //  Copyright (c) 2014年 itdept. All rights reserved.
 //
 
-#import "BarCodeSysHomeViewController.h"
+#import "BarCodeSysDetailViewController.h"
 #import "SKSTableView.h"
 #import "DB_whs_config.h"
-#import "DB_LoginInfo.h"
 #import "Cell_advance_search.h"
 #import "SKSTableViewCell.h"
 #import "BarCodeViewController.h"
@@ -18,24 +17,25 @@
 #define TEXTFIELD_TAG 100
 typedef NSString* (^passValue)(NSInteger tag);
 
-@interface BarCodeSysHomeViewController ()<SKSTableViewDelegate,UITextFieldDelegate>
+@interface BarCodeSysDetailViewController ()<SKSTableViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet SKSTableView *skstableView;
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_scan_log;
+
 @property (strong, nonatomic) Custom_textField *checkText;
 //存储组标题信息
-@property (strong, nonatomic) NSMutableArray *alist_whs_headers;
-@property (strong, nonatomic) NSMutableArray *alist_upload_cols;
+@property (strong, nonatomic) NSMutableArray *alist_group_nameAndnum;
+@property (strong, nonatomic) NSMutableArray *alist_filter_upload_cols;
 
 @property (strong, nonatomic) NSMutableDictionary *idic_textfield_value;
-//当前语言
-@property (copy, nonatomic) NSString *lang_code;
+
 @property (nonatomic,strong) passValue pass_Value;
 
 @end
 
-@implementation BarCodeSysHomeViewController
-@synthesize alist_whs_headers;
-@synthesize alist_upload_cols;
+@implementation BarCodeSysDetailViewController
+@synthesize alist_group_nameAndnum;
+@synthesize alist_filter_upload_cols;
 @synthesize idic_textfield_value;
 @synthesize lang_code;
 
@@ -63,33 +63,33 @@ typedef NSString* (^passValue)(NSInteger tag);
     // Dispose of any resources that can be recreated.
 }
 - (void)fn_set_property{
-    [_ibtn_whs_logo setTitle:MY_LocalizedString(@"lbl_whs_logo", nil) forState:UIControlStateNormal];
+    [_ibtn_whs_logo setTitle:_logo_title forState:UIControlStateNormal];
     [_ibtn_whs_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
-    DB_LoginInfo *db=[[DB_LoginInfo alloc]init];
-    NSMutableArray *arr=[db fn_get_all_LoginInfoData];
-    if ([arr count]!=0) {
-        lang_code=[[arr objectAtIndex:0]valueForKey:@"lang_code"];
-    }
-    db=nil;
-    arr=nil;
+    
+    _ibtn_scan_log.layer.cornerRadius=5;
+    _ibtn_scan_log.backgroundColor=COLOR_light_BLUE;
+    [_ibtn_scan_log setTitle:MY_LocalizedString(@"lbl_scan_log", nil) forState:UIControlStateNormal];
     
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
-    alist_whs_headers=[db_whs fn_get_group_data:@"true"];
-    NSMutableArray *arr_upload_cols=[db_whs fn_get_upload_col_data];
+    alist_group_nameAndnum=[db_whs fn_get_cols_group_nameAndnum:_unique_id];
+    NSMutableArray *arr_upload_cols=[db_whs fn_get_upload_col_data:_unique_id];
     
-    alist_upload_cols=[[NSMutableArray alloc]init];
-    for (NSMutableDictionary *dic_whs_header in alist_whs_headers) {
-        NSString *unique_id=[dic_whs_header valueForKey:@"unique_id"];
-        NSArray *arr_filtered=[arr_upload_cols filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(unique_id==%@)",unique_id]];
-        [alist_upload_cols addObject:arr_filtered];
-        unique_id=nil;
+    alist_filter_upload_cols=[[NSMutableArray alloc]init];
+    for (NSMutableDictionary *dic_group_data in alist_group_nameAndnum) {
+        NSString *group_name=[dic_group_data valueForKey:@"group_name"];
+        NSArray *arr_filtered=[arr_upload_cols filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(group_name==%@)",group_name]];
+        [alist_filter_upload_cols addObject:arr_filtered];
+        group_name=nil;
         arr_filtered=nil;
     }
     arr_upload_cols=nil;
     db_whs=nil;
+    
     self.skstableView.SKSTableViewDelegate=self;
     [self.skstableView fn_expandall];
+    //初始化字典，用于存储输入的数据
     idic_textfield_value=[[NSMutableDictionary alloc]init];
+    
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
 }
 -(void)fn_add_right_items{
@@ -104,8 +104,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     UIBarButtonItem *ibtn_space2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     ibtn_space2.width=FIXSPACE;
     UIBarButtonItem *ibtn_cancel=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_cancel_operation)];
-    UIBarButtonItem *ibtn_scan_log=[[UIBarButtonItem alloc]initWithTitle:@"Scan Log" style:UIBarButtonItemStyleBordered target:self action:@selector(fn_scan_log)];
-    NSArray *array=@[ibtn_save,ibtn_space,ibtn_space1,ibtn_space2,ibtn_cancel,ibtn_space,ibtn_space1,ibtn_space2,ibtn_scan_log];
+    NSArray *array=@[ibtn_save,ibtn_space,ibtn_space1,ibtn_space2,ibtn_cancel];
     self.navigationItem.rightBarButtonItems=array;
     array=nil;
 }
@@ -116,22 +115,23 @@ typedef NSString* (^passValue)(NSInteger tag);
 - (void)fn_cancel_operation{
     [self.navigationController popViewControllerAnimated:YES];
 }
-- (void)fn_scan_log{
-    
-}
+
 - (void)fn_scan_the_barcode:(id)sender{
     UIButton *ibtn=(UIButton*)sender;
     NSInteger tag=ibtn.tag;
     BarCodeViewController *barCodeVC=(BarCodeViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"BarCodeViewController"];
     barCodeVC.callback=^(NSString *str_code){
         NSString *os_column_key=_pass_Value(tag);
-        os_column_key=[os_column_key stringByAppendingFormat:@"%d",tag];
         [idic_textfield_value setObject:str_code forKey:os_column_key];
+        
         self.skstableView.expandableCells=nil;
         [self.skstableView reloadData];
         [self.skstableView fn_expandall];
     };
     [self presentViewController:barCodeVC animated:YES completion:nil];
+}
+- (IBAction)fn_scan_log:(id)sender {
+    
 }
 #pragma mark -UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -141,7 +141,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self.checkText fn_setLine_color:[UIColor lightGrayColor]];
     NSString *os_column_key=_pass_Value(textField.tag);
-    os_column_key=[os_column_key stringByAppendingFormat:@"%d",textField.tag];
+
     if ([textField.text length]!=0) {
         [idic_textfield_value setObject:textField.text forKey:os_column_key];
     }
@@ -156,15 +156,15 @@ typedef NSString* (^passValue)(NSInteger tag);
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [alist_whs_headers count];
+    return [alist_group_nameAndnum count];
 }
 -(NSInteger)tableView:(SKSTableView *)tableView numberOfSubRowsAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *numOfrow=[[alist_whs_headers objectAtIndex:indexPath.row]valueForKey:@"NUM"];
+    NSString *numOfrow=[[alist_group_nameAndnum objectAtIndex:indexPath.row]valueForKey:@"num"];
     return [numOfrow integerValue];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //获取每组的字典
-    NSDictionary *dic=[alist_whs_headers objectAtIndex:indexPath.row];
+    NSDictionary *dic=[alist_group_nameAndnum objectAtIndex:indexPath.row];
     static NSString *cellIndentifier=@"SKSTableViewCell";
     SKSTableViewCell *cell=[self.skstableView dequeueReusableCellWithIdentifier:cellIndentifier];
     if (!cell) {
@@ -172,28 +172,30 @@ typedef NSString* (^passValue)(NSInteger tag);
     }
     cell.backgroundColor=COLOR_light_BLUE;
     cell.expandable=YES;
-    cell.textLabel.text=[dic valueForKey:lang_code];
+    cell.textLabel.text=[dic valueForKey:@"group_name"];
     dic=nil;
     return cell;
 }
 -(UITableViewCell*)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSMutableDictionary *dic=alist_upload_cols[indexPath.row][indexPath.subRow-1];
+    NSMutableDictionary *dic=alist_filter_upload_cols[indexPath.row][indexPath.subRow-1];
     static NSString *cellIndentifer=@"Cell_whs_config";
     Cell_advance_search *cell=[self.skstableView dequeueReusableCellWithIdentifier:cellIndentifer];
+    
     cell.itf_inputdata.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
     cell.itf_inputdata.delegate=self;
-    __block BarCodeSysHomeViewController * blockSelf=self;
+    
+    __block BarCodeSysDetailViewController * blockSelf=self;
     _pass_Value=^NSString*(NSInteger tag){
         NSInteger i=tag/TEXTFIELD_TAG;
         NSInteger j=tag-i*TEXTFIELD_TAG-1;
-        NSMutableDictionary *idic=blockSelf->alist_upload_cols[i][j];
+        NSMutableDictionary *idic=blockSelf->alist_filter_upload_cols[i][j];
         NSString *col_field=[idic valueForKey:@"col_field"];
         return col_field;
     };
     NSString *col_type=[dic valueForKey:@"col_type"];
     NSInteger is_mandatory=[[dic valueForKey:@"is_mandatory"]integerValue];
     NSString *col_field=[dic valueForKey:@"col_field"];
-    col_field=[col_field stringByAppendingFormat:@"%d",TEXTFIELD_TAG*indexPath.row+indexPath.subRow];
+    
     if (is_mandatory==0) {
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:lang_code]];
     }else{
