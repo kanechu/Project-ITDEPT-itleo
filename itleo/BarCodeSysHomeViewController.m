@@ -67,6 +67,7 @@
     //获取menu的字典
     NSDictionary *dic=[_alist_whs_menus objectAtIndex:indexPath.row];
     UIButton *ibtn_menu=(UIButton*)[cell.contentView viewWithTag:55];
+    ibtn_menu.layer.cornerRadius=5;
     [ibtn_menu addTarget:self action:@selector(fn_enter_next_page:) forControlEvents:UIControlEventTouchUpInside];
     ibtn_menu.tag=indexPath.row;
     NSString *str_menuItem=[dic valueForKey:_lang_code];

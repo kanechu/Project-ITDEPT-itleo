@@ -76,8 +76,8 @@ typedef NSString* (^passValue)(NSInteger tag);
     
     alist_filter_upload_cols=[[NSMutableArray alloc]init];
     for (NSMutableDictionary *dic_group_data in alist_group_nameAndnum) {
-        NSString *group_name=[dic_group_data valueForKey:@"group_name"];
-        NSArray *arr_filtered=[arr_upload_cols filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(group_name==%@)",group_name]];
+        NSString *group_name=[dic_group_data valueForKey:@"group_name_en"];
+        NSArray *arr_filtered=[arr_upload_cols filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"(group_name_en==%@)",group_name]];
         [alist_filter_upload_cols addObject:arr_filtered];
         group_name=nil;
         arr_filtered=nil;
@@ -92,6 +92,19 @@ typedef NSString* (^passValue)(NSInteger tag);
     
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
 }
+-(NSString *)fn_lang_code_filed_name:(NSDictionary*)dic{
+    NSString *str_lang_code=[lang_code lowercaseString];
+    NSString *filed_name=@"";
+    for (NSString *key in [dic allKeys]) {
+        NSRange range=[key rangeOfString:str_lang_code];
+        if (range.location!=NSNotFound) {
+            filed_name=key;
+           break;
+        }
+    }
+    return filed_name;
+}
+
 -(void)fn_add_right_items{
     UIBarButtonItem *ibtn_save=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"ibtn_save", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_save_whs_data)];
     UIBarButtonItem *ibtn_space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -110,7 +123,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 #pragma mark -event action
 - (void)fn_save_whs_data{
-   
+    NSLog(@"%@",idic_textfield_value);
 }
 - (void)fn_cancel_operation{
     [self.navigationController popViewControllerAnimated:YES];
@@ -172,7 +185,8 @@ typedef NSString* (^passValue)(NSInteger tag);
     }
     cell.backgroundColor=COLOR_light_BLUE;
     cell.expandable=YES;
-    cell.textLabel.text=[dic valueForKey:@"group_name"];
+    NSString *language_type=[self fn_lang_code_filed_name:dic];
+    cell.textLabel.text=[dic valueForKey:language_type];
     dic=nil;
     return cell;
 }
@@ -195,11 +209,11 @@ typedef NSString* (^passValue)(NSInteger tag);
     NSString *col_type=[dic valueForKey:@"col_type"];
     NSInteger is_mandatory=[[dic valueForKey:@"is_mandatory"]integerValue];
     NSString *col_field=[dic valueForKey:@"col_field"];
-    
+    NSString *language_type=[self fn_lang_code_filed_name:dic];
     if (is_mandatory==0) {
-        cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:lang_code]];
+        cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:language_type]];
     }else{
-        cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",[dic valueForKey:lang_code]];
+        cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",[dic valueForKey:language_type]];
     }
     cell.itf_inputdata.text=[idic_textfield_value valueForKey:col_field];
     if ([col_type isEqualToString:@"barcode"]) {

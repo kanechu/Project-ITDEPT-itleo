@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *col_type;
 @property (nonatomic, copy) NSString *col_option;
 @property (nonatomic, copy) NSString *col_def;
-@property (nonatomic, copy) NSString *group_name;
+@property (nonatomic, copy) NSArray *group_name;
 @property (nonatomic, copy) NSString *is_mandatory;
 
 @end

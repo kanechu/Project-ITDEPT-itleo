@@ -53,20 +53,50 @@
                     
                     for (Resp_UPLOAD_COL *upload_col_obj in arr_upload_col) {
                         NSMutableDictionary *dic_whs_detail=[[NSDictionary dictionaryWithPropertiesOfObject:upload_col_obj]mutableCopy];
-                        [dic_whs_detail removeObjectForKey:@"col_label"];
+                        [dic_whs_detail removeObjectsForKeys:@[@"col_label",@"group_name"]];
+            
                         [dic_whs_detail setObject:[NSString stringWithFormat:@"%d",i] forKey:@"unique_id"];
                         NSArray *arr_col_labels=upload_col_obj.col_label;
                         for (Resp_language_type *language_obj in arr_col_labels) {
                             NSDictionary *dic_language=[NSDictionary dictionaryWithPropertiesOfObject:language_obj];
                             for (NSString *str_key in [dic_language allKeys]) {
                                 NSString *key_value=[dic_language valueForKey:str_key];
-                                [dic_whs_detail setObject:key_value forKey:str_key];
+                                if ([str_key isEqualToString:@"EN"]) {
+                                  [dic_whs_detail setObject:key_value forKey:@"col_lable_en"];
+                                }
+                                if ([str_key isEqualToString:@"CN"]) {
+                                    [dic_whs_detail setObject:key_value forKey:@"col_lable_cn"];
+                                }
+                                if ([str_key isEqualToString:@"TCN"]) {
+                                    [dic_whs_detail setObject:key_value forKey:@"col_lable_tcn"];
+                                }
                                 key_value=nil;
                             }
                             dic_language=nil;
                             
                         }
-                        ib_updated=[db executeUpdate:@"insert into whs_upload_col(seq,col_field,EN,CN,TCN,col_type,col_option,col_def,group_name,is_mandatory,unique_id)values(:seq,:col_field,:EN,:CN,:TCN,:col_type,:col_option,:col_def,:group_name,:is_mandatory,:unique_id)" withParameterDictionary:dic_whs_detail];
+                        NSArray *arr_group_names=upload_col_obj.group_name;
+                        for (Resp_language_type *language_obj in arr_group_names) {
+                            NSDictionary *dic_language=[NSDictionary dictionaryWithPropertiesOfObject:language_obj];
+                            for (NSString *str_key in [dic_language allKeys]) {
+                                NSString *key_value=[dic_language valueForKey:str_key];
+                                if ([str_key isEqualToString:@"EN"]) {
+                                    [dic_whs_detail setObject:key_value forKey:@"group_name_en"];
+                                }
+                                if ([str_key isEqualToString:@"CN"]) {
+                                    [dic_whs_detail setObject:key_value forKey:@"group_name_cn"];
+                                }
+                                if ([str_key isEqualToString:@"TCN"]) {
+                                    [dic_whs_detail setObject:key_value forKey:@"group_name_tcn"];
+                                }
+
+                                key_value=nil;
+                            }
+                            dic_language=nil;
+                            
+                        }
+                        
+                        ib_updated=[db executeUpdate:@"insert into whs_upload_col(seq,col_field,col_lable_en,col_lable_cn,col_lable_tcn,col_type,col_option,col_def,group_name_en,group_name_cn,group_name_tcn,is_mandatory,unique_id)values(:seq,:col_field,:col_lable_en,:col_lable_cn,:col_lable_tcn,:col_type,:col_option,:col_def,:group_name_en,:group_name_cn,:group_name_tcn,:is_mandatory,:unique_id)" withParameterDictionary:dic_whs_detail];
                         dic_whs_detail=nil;
                     }
                   i++;
@@ -125,7 +155,7 @@
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb_result=[db executeQuery:@"select group_name,COUNT(group_name) as num from whs_upload_col where unique_id=? group by group_name",unique_id];
+            FMResultSet *lfmdb_result=[db executeQuery:@"select group_name_en,group_name_cn,group_name_tcn,COUNT(group_name_en) as num from whs_upload_col where unique_id=? group by group_name_en",unique_id];
             while ([lfmdb_result next]) {
                 [alist_result addObject:[lfmdb_result resultDictionary]];
             }

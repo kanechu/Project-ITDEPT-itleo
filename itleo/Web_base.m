@@ -212,13 +212,14 @@
     RKObjectMapping* lo_uploadCol_response_mapping=[RKObjectMapping mappingForClass:[Resp_UPLOAD_COL class]];
     NSMutableArray *alist_upload_col=[[NSArray arrayWithPropertiesOfObject:[Resp_UPLOAD_COL class]]mutableCopy];
     [alist_upload_col removeObjectAtIndex:2];
+    [alist_upload_col removeObjectAtIndex:5];
     [lo_uploadCol_response_mapping addAttributeMappingsFromArray:alist_upload_col];
     
     [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"MaintForm" toKeyPath:@"MaintForm" withMapping:lo_maintform_response_mapping]];
     [lo_maintform_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"UPLOAD_COL" toKeyPath:@"UPLOAD_COL" withMapping:lo_uploadCol_response_mapping]];
     
     [lo_uploadCol_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"col_label" toKeyPath:@"col_label" withMapping:lo_languge_response_mapping]];
-    
+    [lo_uploadCol_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"group_name" toKeyPath:@"group_name" withMapping:lo_languge_response_mapping]];    
     [lo_maintform_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"FORMAT_NAME" toKeyPath:@"FORMAT_NAME" withMapping:lo_languge_response_mapping]];
     
     RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
