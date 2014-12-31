@@ -109,32 +109,22 @@
     }];
     return ib_updated;
 }
-- (BOOL)fn_save_input_warehouse_data:(NSMutableDictionary*)idic_whs_data{
+- (BOOL)fn_save_warehouse_log:(NSMutableDictionary*)idic_whs_data{
     __block BOOL ib_updated=NO;
-    NSDate *current_date=[NSDate date];
-    NSString *millisecond=[Conversion_helper fn_millisecondFromDate:current_date];
-    NSMutableArray *alist_result=[NSMutableArray array];
-    for (NSString *key in [idic_whs_data allKeys]) {
-        NSMutableDictionary *idic=[[NSMutableDictionary alloc]init];
-        NSString *key_value=[idic_whs_data valueForKey:key];
-        NSString *str_uploaded=@"lili";
-        [idic setObject:key forKey:@"col_field_name"];
-        [idic setObject:key_value forKey:@"col_field_value"];
-        [idic setObject:millisecond forKey:@"save_time"];
-        [idic setObject:str_uploaded forKey:@"is_uploaded "];
-        [alist_result addObject:idic];
-        idic=nil;
+    NSString *key_value=[idic_whs_data valueForKey:@"order"];
+    [idic_whs_data removeObjectForKey:@"order"];
+    if (key_value==nil) {
+        key_value=@"";
     }
+    [idic_whs_data setObject:key_value forKey:@"order_no"];
+    
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            for (NSDictionary *dic in alist_result) {
-                ib_updated=[db executeUpdate:@"insert into whs_config_data(col_field_name,col_field_value,save_time,is_uploaded)values(:col_field_name,:col_field_value,:save_time,:is_uploaded)" withParameterDictionary:dic];
-            }
+            ib_updated=[db executeUpdate:@"insert into whs_log(upload_type,user_code,company_code,type_code,order_no,ref_no,value,excu_datetime,result_status,result_message,refkey,free1,free2,free3,free4,free5,free6,free7,free8,free9,free10,free11,free12,free13,free14,free15,free16,free17,free18,free19,free20)values(:upload_type,:user_code,:company_code,:type_code,:order_no,:ref_no,:value,:excu_datetime,:result_status,:result_message,:refkey,:free1,:free2,:free3,:free4,:free5,:free6,:free7,:free8,:free9,:free10,:free11,:free12,:free13,:free14,:free15,:free16,:free17,:free18,:free19,:free20)" withParameterDictionary:idic_whs_data];
             
             [db close];
         }
     }];
-    alist_result=nil;
     return ib_updated;
 }
 
@@ -182,7 +172,7 @@
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb=[db executeQuery:@"select * from whs_config_data  group by save_time"];
+            FMResultSet *lfmdb=[db executeQuery:@"select * from whs_log"];
             while ([lfmdb next]) {
                 [alist_result addObject:[lfmdb resultDictionary]];
             }

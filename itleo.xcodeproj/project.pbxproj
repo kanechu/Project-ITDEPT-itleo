@@ -169,6 +169,7 @@
 		B2C3BAEE19BAEEA9008B9A83 /* Custom_Button.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAED19BAEEA9008B9A83 /* Custom_Button.m */; };
 		B2C3BAF119BB003F008B9A83 /* EPODDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C3BAF019BB003F008B9A83 /* EPODDetailViewController.m */; };
 		B2C4722A19FA65B70099199D /* EPODSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C4722919FA65B70099199D /* EPODSettingsViewController.m */; };
+		B2C6061E1A53A8C90012AA04 /* Warehouse_log.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C6061D1A53A8C90012AA04 /* Warehouse_log.m */; };
 		B2CD8010199DFEDA00E6DCB7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */; };
 		B2CDE4BD1A130A210091B523 /* DtlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CDE4BC1A130A210091B523 /* DtlChartViewController.m */; };
 		B2CF14901A0768B00042DD64 /* Resp_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF148F1A0768B00042DD64 /* Resp_permit.m */; };
@@ -542,6 +543,8 @@
 		B2C3BAF019BB003F008B9A83 /* EPODDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODDetailViewController.m; sourceTree = "<group>"; };
 		B2C4722819FA65B70099199D /* EPODSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPODSettingsViewController.h; sourceTree = "<group>"; };
 		B2C4722919FA65B70099199D /* EPODSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODSettingsViewController.m; sourceTree = "<group>"; };
+		B2C6061C1A53A8C90012AA04 /* Warehouse_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warehouse_log.h; sourceTree = "<group>"; };
+		B2C6061D1A53A8C90012AA04 /* Warehouse_log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Warehouse_log.m; sourceTree = "<group>"; };
 		B2CD800D199DFEDA00E6DCB7 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		B2CDE4BB1A130A210091B523 /* DtlChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DtlChartViewController.h; sourceTree = "<group>"; };
@@ -1154,6 +1157,8 @@
 				B2BDD57019D8ED4C00FEEA08 /* Truck_order_image_data.m */,
 				B2AE75851A3BEF3D00F3F732 /* Warehouse_receive_data.h */,
 				B2AE75861A3BEF3D00F3F732 /* Warehouse_receive_data.m */,
+				B2C6061C1A53A8C90012AA04 /* Warehouse_log.h */,
+				B2C6061D1A53A8C90012AA04 /* Warehouse_log.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -1487,6 +1492,7 @@
 				B276BBB31995B66800075515 /* main.m in Sources */,
 				B21B711F1A0B1D1A007DB5E3 /* PieSegmentLayer.m in Sources */,
 				B272EA6B19AEDDA400256276 /* MZTransition.m in Sources */,
+				B2C6061E1A53A8C90012AA04 /* Warehouse_log.m in Sources */,
 				B2BDD57119D8ED4C00FEEA08 /* Truck_order_image_data.m in Sources */,
 				B286C24C1A47FDEC0045C238 /* BarCodeSysDetailViewController.m in Sources */,
 				B2AFFA8619C2FC7100BC26BB /* DB_ePod.m in Sources */,

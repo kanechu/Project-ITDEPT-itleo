@@ -9,6 +9,7 @@
 #import "BarCodeSysDetailViewController.h"
 #import "SKSTableView.h"
 #import "DB_whs_config.h"
+#import "Warehouse_log.h"
 #import "Cell_advance_search.h"
 #import "SKSTableViewCell.h"
 #import "BarCodeViewController.h"
@@ -26,8 +27,12 @@ typedef NSString* (^passValue)(NSInteger tag);
 //存储组标题信息
 @property (strong, nonatomic) NSMutableArray *alist_group_nameAndnum;
 @property (strong, nonatomic) NSMutableArray *alist_filter_upload_cols;
-
+//存储已经输入的数据
 @property (strong, nonatomic) NSMutableDictionary *idic_textfield_value;
+//存储已经输入的数据的副本
+@property (strong, nonatomic) NSMutableDictionary *idic_value_copy;
+//存储必须输入数据的项
+@property (strong, nonatomic) NSMutableDictionary *idic_is_mandatory;
 
 @property (nonatomic,strong) passValue pass_Value;
 
@@ -88,8 +93,9 @@ typedef NSString* (^passValue)(NSInteger tag);
     self.skstableView.SKSTableViewDelegate=self;
     [self.skstableView fn_expandall];
     //初始化字典，用于存储输入的数据
-    idic_textfield_value=[[NSMutableDictionary alloc]init];
-    
+    Warehouse_log *whs_obj=[[Warehouse_log alloc]init];
+    idic_textfield_value=[[NSDictionary dictionaryWithPropertiesOfObject:whs_obj]mutableCopy];
+    _idic_is_mandatory=[[NSMutableDictionary alloc]initWithCapacity:1];
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
 }
 -(NSString *)fn_lang_code_filed_name:(NSDictionary*)dic{
@@ -123,7 +129,26 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 #pragma mark -event action
 - (void)fn_save_whs_data{
-    NSLog(@"%@",idic_textfield_value);
+    NSInteger flag_can_saved=1;
+    for (NSString *str_key in [_idic_is_mandatory allKeys]) {
+        NSString *str_value=[idic_textfield_value valueForKey:str_key];
+        if ([str_value length]==0) {
+            flag_can_saved=0;
+            break;
+        }
+        str_value=nil;
+    }
+    if (![idic_textfield_value isEqual:_idic_value_copy] && flag_can_saved==1) {
+        DB_whs_config *db_whs=[[DB_whs_config alloc]init];
+        [db_whs fn_save_warehouse_log:[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value]];
+         _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
+        
+    }else if (flag_can_saved==1){
+        [self fn_show_alert_info:@"已经上传保存过了"];
+    }else{
+        [self fn_show_alert_info:@"带*是必填项,不能为空"];
+    }
+   
 }
 - (void)fn_cancel_operation{
     [self.navigationController popViewControllerAnimated:YES];
@@ -146,6 +171,12 @@ typedef NSString* (^passValue)(NSInteger tag);
 - (IBAction)fn_scan_log:(id)sender {
     
 }
+#pragma mark -show alert
+- (void)fn_show_alert_info:(NSString*)str_alert{
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+
 #pragma mark -UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     self.checkText=(Custom_textField*)textField;
@@ -209,13 +240,16 @@ typedef NSString* (^passValue)(NSInteger tag);
     NSString *col_type=[dic valueForKey:@"col_type"];
     NSInteger is_mandatory=[[dic valueForKey:@"is_mandatory"]integerValue];
     NSString *col_field=[dic valueForKey:@"col_field"];
+    cell.itf_inputdata.text=[idic_textfield_value valueForKey:col_field];
     NSString *language_type=[self fn_lang_code_filed_name:dic];
     if (is_mandatory==0) {
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:language_type]];
+        
     }else{
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",[dic valueForKey:language_type]];
+        [_idic_is_mandatory setObject:col_field forKey:col_field];
     }
-    cell.itf_inputdata.text=[idic_textfield_value valueForKey:col_field];
+    
     if ([col_type isEqualToString:@"barcode"]) {
         UIButton *ibtn_barCode=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 38, 38)];
         [ibtn_barCode setBackgroundImage:[UIImage imageNamed:@"barcode"] forState:UIControlStateNormal];
