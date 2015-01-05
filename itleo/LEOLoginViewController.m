@@ -29,11 +29,13 @@ static NSString  *is_language=@"";//标识语言类型
 @interface LEOLoginViewController ()
 @property(nonatomic,strong)UITextField *checkText;
 @property(nonatomic,copy)NSString *lang_code;
+@property(nonatomic, assign) CGRect keyboardRect;
 @end
 
 @implementation LEOLoginViewController
 @synthesize checkText;
 @synthesize lang_code;
+@synthesize keyboardRect;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,7 +48,7 @@ static NSString  *is_language=@"";//标识语言类型
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self fn_set_button_pro];
+    [self fn_set_controls_property];
     [self fn_show_different_language];
     [self fn_custom_gesture];
     [self fn_registKeyBoardNotification];
@@ -84,15 +86,17 @@ static NSString  *is_language=@"";//标识语言类型
     
     NSValue* aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     
-    CGRect keyboardRect = [aValue CGRectValue];
-    
+    CGRect keyboardRect1 = [aValue CGRectValue];
+    if (keyboardRect1.size.width!=0) {
+        keyboardRect=keyboardRect1;
+    }
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     
     NSTimeInterval animationDuration;
     
     [animationDurationValue getValue:&animationDuration];
     
-    CGRect textFrame =[checkText convertRect:checkText.bounds toView:nil];
+    CGRect textFrame =[checkText convertRect:checkText.bounds toView:self.view];
     
     float textY = textFrame.origin.y + textFrame.size.height;//得到textfield下边框距离顶部的高度
     float bottomY = self.view.frame.size.height - textY;//得到下边框到底部的距离
@@ -149,7 +153,7 @@ static NSString  *is_language=@"";//标识语言类型
     [_itf_usercode resignFirstResponder];
 }
 #pragma mark 设置按钮
--(void)fn_set_button_pro{
+-(void)fn_set_controls_property{
     _ibtn_login.layer.cornerRadius=2;
     _ibtn_login.layer.borderWidth=0.5;
     _ibtn_login.layer.borderColor=[UIColor lightGrayColor].CGColor;
@@ -176,6 +180,10 @@ static NSString  *is_language=@"";//标识语言类型
         lang_code=@"TCN";
     }
     [[MY_LocalizedString getshareInstance]fn_setLanguage_type:is_language];
+    _itf_usercode.returnKeyType=UIReturnKeyNext;
+    _itf_password.returnKeyType=UIReturnKeyNext;
+    _itf_system.returnKeyType=UIReturnKeyDone;
+
 }
 #pragma mark -language change
 -(void)fn_show_different_language{
@@ -318,6 +326,21 @@ static NSString  *is_language=@"";//标识语言类型
         [self fn_popUp_alert:str_prompt];
     }
 }
+
+- (IBAction)fn_userName_textField_DidEndOnExit:(id)sender {
+    [self.itf_password becomeFirstResponder];
+    [self keyboardWillShow:nil];
+}
+
+- (IBAction)fn_pass_textField_DidEndOnExit:(id)sender {
+    
+    [self.itf_system becomeFirstResponder];
+    [self keyboardWillShow:nil];
+}
+
+- (IBAction)fn_sys_textField_DidEndOnExit:(id)sender {
+    [sender resignFirstResponder];//隐藏键盘
+}
 - (IBAction)fn_isShowPassword:(id)sender {
     _ibtn_showPassword.selected=!_ibtn_showPassword.selected;
     if (_ibtn_showPassword.selected) {
@@ -341,10 +364,6 @@ static NSString  *is_language=@"";//标识语言类型
     }else if(_itf_system.editing){
         _iv_system_line.backgroundColor=COLOR_DARK_GREEN;
     }
-}
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [checkText resignFirstResponder];
-    return YES;
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     _iv_system_line.backgroundColor=[UIColor lightGrayColor];

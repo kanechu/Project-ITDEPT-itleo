@@ -34,4 +34,8 @@ typedef void (^callBack_refresh)(void);
 - (IBAction)fn_isShowPassword:(id)sender;
 - (IBAction)fn_login_itleo:(id)sender;
 
+- (IBAction)fn_userName_textField_DidEndOnExit:(id)sender;
+- (IBAction)fn_pass_textField_DidEndOnExit:(id)sender;
+- (IBAction)fn_sys_textField_DidEndOnExit:(id)sender;
+
 @end
