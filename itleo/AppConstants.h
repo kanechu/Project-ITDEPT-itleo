@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define COMPANY_CODE @"ITNEW"
-#define APP_CODE @"MOB_ITLEO"
+#define COMPANY_CODE @"ITNEW" //@"OLA" 客户的
+#define APP_CODE  @"MOB_ITLEO" //@"ITLEO" 客户的
 #define VERSION @"1.0"
 #define IS_ENCRYPTED @"0"
 @interface AppConstants : NSObject
@@ -26,7 +26,8 @@ extern NSString* const STR_EPOD_ORDER_INFO_URL;
 extern NSString* const STR_UPD_GPS_URL;
 extern NSString* const STR_GET_CHART_URL;
 extern NSString* const STR_EXSO_URL;
-extern NSString* const STR_UPD_EXCFSDIM;
-extern NSString* const STR_WHS_CONFIG;
+extern NSString* const STR_UPD_EXCFSDIM_URL;
+extern NSString* const STR_WHS_CONFIG_URL;
+extern NSString* const STR_EPOD_STATUS_URL;
 
 @end

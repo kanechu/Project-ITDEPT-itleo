@@ -14,6 +14,7 @@
 #import "NSDictionary.h"
 #import "DB_LoginInfo.h"
 #import "Resp_upd_image_result.h"
+#import "Resp_get_status.h"
 @interface DB_ePod()
 @property(nonatomic,copy)NSString *user_code;
 @property(nonatomic,copy)NSString *system;
@@ -236,4 +237,43 @@
     }];
     return isDeleted;
 }
+#pragma mark -epod status method
+
+- (BOOL)fn_save_epod_status_data:(NSMutableArray*)alist_status{
+    __block BOOL ib_updated=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            for (Resp_get_status *Resp_status in alist_status) {
+                NSDictionary *dic=[NSDictionary dictionaryWithPropertiesOfObject:Resp_status];
+                ib_updated=[db executeUpdate:@"insert into epod_status(status_code,status_desc_en,status_desc_sc,status_desc_tc)values(:status_code,:status_desc_en,:status_desc_sc,:status_desc_tc)" withParameterDictionary:dic];
+            }
+            [db close];
+        }
+    }];
+    return ib_updated;
+}
+- (NSMutableArray*)fn_get_epod_status_data{
+    __block NSMutableArray *alist_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            FMResultSet *lfmdb_result=[db executeQuery:@"select * from epod_status"];
+            while ([lfmdb_result next]) {
+                [alist_result addObject:[lfmdb_result resultDictionary]];
+            }
+            [db close];
+        }
+    }];
+    return alist_result;
+}
+- (BOOL)fn_delete_all_epod_status_data{
+    __block BOOL ib_deleted=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_deleted=[db executeUpdate:@"delete from epod_status"];
+            [db close];
+        }
+    }];
+    return ib_deleted;
+}
+
 @end

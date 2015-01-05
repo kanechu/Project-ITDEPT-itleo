@@ -257,7 +257,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     upload.Auth=auth;
     
     Web_base *web_obj=[[Web_base alloc]init];
-    web_obj.il_url=STR_UPD_EXCFSDIM;
+    web_obj.il_url=STR_UPD_EXCFSDIM_URL;
     web_obj.iresp_class=[Resp_upd_excfsdim class];
     
     NSMutableArray *alist_uploadTran=[[NSArray arrayWithPropertiesOfObject:[Resp_uploadTran class]]mutableCopy];

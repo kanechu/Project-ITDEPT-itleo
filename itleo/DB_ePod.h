@@ -30,4 +30,9 @@
 
 -(BOOL)fn_delete_all_epod_data;
 
+//epod status method
+- (BOOL)fn_save_epod_status_data:(NSMutableArray*)alist_status;
+- (NSMutableArray*)fn_get_epod_status_data;
+- (BOOL)fn_delete_all_epod_status_data;
+
 @end

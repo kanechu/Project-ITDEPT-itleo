@@ -20,7 +20,7 @@
 #import "Web_get_sypara.h"
 #import "Web_get_permit.h"
 #import "Web_get_chart_data.h"
-#import "Web_get_whs_config.h"
+#import "Web_whs_config.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 #define DEFAULT_USER_NAME @"anonymous"
@@ -276,7 +276,8 @@ static NSString  *is_language=@"";//标识语言类型
                         [SVProgressHUD dismiss];
                     }
                 }];
-                Web_get_whs_config *web_whs=[[Web_get_whs_config alloc]init];
+                [web_permit_obj fn_get_epod_status_data:web_addr];
+                Web_whs_config *web_whs=[[Web_whs_config alloc]init];
                 [web_whs fn_get_whs_config_data:web_addr];
                 web_whs=nil;
                 Web_get_chart_data *web_chart=[Web_get_chart_data fn_shareInstance];
