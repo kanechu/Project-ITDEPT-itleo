@@ -168,11 +168,11 @@
     return alist_result;
 }
 
-- (NSMutableArray*)fn_get_warehouse_record{
+- (NSMutableArray*)fn_get_warehouse_record:(NSString*)str_upload_type{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb=[db executeQuery:@"select * from whs_log"];
+            FMResultSet *lfmdb=[db executeQuery:@"select * from whs_log where upload_type like ?",str_upload_type];
             while ([lfmdb next]) {
                 [alist_result addObject:[lfmdb resultDictionary]];
             }
@@ -189,6 +189,13 @@
             ib_deleted=[db executeUpdate:@"delete from whs_upload_col"];
             [db close];
         }
+    }];
+    return ib_deleted;
+}
+- (BOOL)fn_delete_all_wharehouse_log{
+    __block BOOL ib_deleted=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        ib_deleted=[db executeUpdate:@"delete from whs_log"];
     }];
     return ib_deleted;
 }

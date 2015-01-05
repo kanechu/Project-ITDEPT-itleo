@@ -92,6 +92,7 @@
     VC.lang_code=_lang_code;
     VC.unique_id=[dic valueForKey:@"unique_id"];
     VC.logo_title=[dic valueForKey:_lang_code];
+    VC.str_upload_type=[dic valueForKey:@"UPLOAD_TYPE"];
 }
 
 

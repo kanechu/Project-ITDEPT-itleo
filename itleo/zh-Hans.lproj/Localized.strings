@@ -184,3 +184,6 @@
 "lbl_remark"="备注:";
 //whs config
 "lbl_scan_log"="浏览记录";
+"lbl_is_mandatory"="不能为空，带有*的项是必填的！";
+"lbl_force_return"="正在编辑的数据没有保存，要保存吗？";
+"lbl_discard"="舍弃";

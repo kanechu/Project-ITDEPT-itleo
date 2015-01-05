@@ -187,3 +187,6 @@
 "lbl_remark"="備註:";
 //whs config
 "lbl_scan_log"="瀏覽記錄";
+"lbl_is_mandatory"="不能為空，帶有＊的項是必填的！";
+"lbl_force_return"="正在編輯的數據沒有保存，要保存嗎？";
+"lbl_discard"="捨棄";

@@ -20,6 +20,7 @@
 #import "DB_ePod.h"
 #import "DB_sypara.h"
 #import "DB_Chart.h"
+#import "DB_whs_config.h"
 @interface MainHomeViewController ()
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
@@ -160,10 +161,15 @@
      */
     DB_sypara *db_sypara=[[DB_sypara alloc]init];
     [db_sypara fn_delete_all_sypara_data];
-   
+    db_sypara=nil;
     //清除图表数据
     DB_Chart *db_chart=[[DB_Chart alloc]init];
     [db_chart fn_delete_all_chart_data];
+    db_chart=nil;
+    //清除whs log data
+    DB_whs_config *db_whs=[[DB_whs_config alloc]init];
+    [db_whs fn_delete_all_wharehouse_log];
+    db_whs=nil;
     //获取定时器
     NSTimer *GPS_timer=[[Timer_bg_upload_data fn_shareInstance]fn_get_GPS_timer];
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];

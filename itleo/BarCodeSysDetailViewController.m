@@ -7,8 +7,10 @@
 //
 
 #import "BarCodeSysDetailViewController.h"
+#import "WhsLogs_ViewController.h"
 #import "SKSTableView.h"
 #import "DB_whs_config.h"
+#import "DB_LoginInfo.h"
 #import "Warehouse_log.h"
 #import "Cell_advance_search.h"
 #import "SKSTableViewCell.h"
@@ -18,7 +20,7 @@
 #define TEXTFIELD_TAG 100
 typedef NSString* (^passValue)(NSInteger tag);
 
-@interface BarCodeSysDetailViewController ()<SKSTableViewDelegate,UITextFieldDelegate>
+@interface BarCodeSysDetailViewController ()<SKSTableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet SKSTableView *skstableView;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_scan_log;
@@ -33,6 +35,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 @property (strong, nonatomic) NSMutableDictionary *idic_value_copy;
 //存储必须输入数据的项
 @property (strong, nonatomic) NSMutableDictionary *idic_is_mandatory;
+@property (strong, nonatomic) NSMutableDictionary *idic_datas;
 
 @property (nonatomic,strong) passValue pass_Value;
 
@@ -96,6 +99,17 @@ typedef NSString* (^passValue)(NSInteger tag);
     Warehouse_log *whs_obj=[[Warehouse_log alloc]init];
     idic_textfield_value=[[NSDictionary dictionaryWithPropertiesOfObject:whs_obj]mutableCopy];
     _idic_is_mandatory=[[NSMutableDictionary alloc]initWithCapacity:1];
+    [idic_textfield_value setObject:COMPANY_CODE forKey:@"company_code"];
+    [idic_textfield_value setObject:_str_upload_type forKey:@"upload_type"];
+    DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
+    NSMutableArray *arr_login=[db_login fn_get_all_LoginInfoData];
+    if ([arr_login count]!=0) {
+        NSString *str_user_code=[[arr_login objectAtIndex:0] valueForKey:@"user_code"];
+        [idic_textfield_value setObject:str_user_code forKey:@"user_code"];
+    }
+    db_login=nil;
+    
+    _idic_datas=[[NSMutableDictionary alloc]init];
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
 }
 -(NSString *)fn_lang_code_filed_name:(NSDictionary*)dic{
@@ -130,10 +144,13 @@ typedef NSString* (^passValue)(NSInteger tag);
 #pragma mark -event action
 - (void)fn_save_whs_data{
     NSInteger flag_can_saved=1;
+    //用于标识必填项名
+    NSString *str_mandatory=@"";
     for (NSString *str_key in [_idic_is_mandatory allKeys]) {
         NSString *str_value=[idic_textfield_value valueForKey:str_key];
         if ([str_value length]==0) {
             flag_can_saved=0;
+            str_mandatory=[_idic_is_mandatory valueForKey:str_key];
             break;
         }
         str_value=nil;
@@ -144,14 +161,26 @@ typedef NSString* (^passValue)(NSInteger tag);
          _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
         
     }else if (flag_can_saved==1){
-        [self fn_show_alert_info:@"已经上传保存过了"];
+    
     }else{
-        [self fn_show_alert_info:@"带*是必填项,不能为空"];
+        [self fn_show_alert_info:[NSString stringWithFormat:@"%@%@",str_mandatory, MY_LocalizedString(@"lbl_is_mandatory", nil)]];
     }
    
 }
 - (void)fn_cancel_operation{
-    [self.navigationController popViewControllerAnimated:YES];
+    NSInteger flag_isExit=0;
+    for (NSString *str_value in [_idic_datas allValues]) {
+        if ([str_value length]!=0) {
+            flag_isExit=1;
+        }
+    }
+    if (flag_isExit==1) {
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"lbl_force_return", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_discard", nil) otherButtonTitles:MY_LocalizedString(@"ibtn_save",nil), nil];
+        [alertView show];
+    }else{
+       [self.navigationController popViewControllerAnimated:YES]; 
+    }
+    
 }
 
 - (void)fn_scan_the_barcode:(id)sender{
@@ -169,12 +198,20 @@ typedef NSString* (^passValue)(NSInteger tag);
     [self presentViewController:barCodeVC animated:YES completion:nil];
 }
 - (IBAction)fn_scan_log:(id)sender {
-    
+    WhsLogs_ViewController *whs_VC=(WhsLogs_ViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"WhsLogs_ViewController"];
+    whs_VC.str_upload_type=_str_upload_type;
+    [self presentViewController:whs_VC animated:YES completion:nil];
 }
 #pragma mark -show alert
 - (void)fn_show_alert_info:(NSString*)str_alert{
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
     [alert show];
+}
+#pragma mark -UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==[alertView cancelButtonIndex]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark -UITextFieldDelegate
@@ -188,6 +225,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 
     if ([textField.text length]!=0) {
         [idic_textfield_value setObject:textField.text forKey:os_column_key];
+        [_idic_datas setObject:textField.text forKey:os_column_key];
     }
     os_column_key=nil;
 }
@@ -246,8 +284,11 @@ typedef NSString* (^passValue)(NSInteger tag);
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:language_type]];
         
     }else{
-        cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",[dic valueForKey:language_type]];
-        [_idic_is_mandatory setObject:col_field forKey:col_field];
+        NSString *str_prompt=[dic valueForKey:language_type];
+        cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",str_prompt];
+        if (str_prompt!=nil) {
+            [_idic_is_mandatory setObject:str_prompt forKey:col_field];
+        }
     }
     
     if ([col_type isEqualToString:@"barcode"]) {

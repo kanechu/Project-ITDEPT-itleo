@@ -22,8 +22,8 @@
 - (NSMutableArray*)fn_get_cols_group_nameAndnum:(NSString*)unique_id;
 - (NSMutableArray*)fn_get_upload_col_data:(NSString*)unique_id;
 
-- (NSMutableArray*)fn_get_warehouse_record;
+- (NSMutableArray*)fn_get_warehouse_record:(NSString*)str_upload_type;
 
 - (BOOL)fn_delete_all_data;
-
+- (BOOL)fn_delete_all_wharehouse_log;
 @end

@@ -177,6 +177,7 @@
 		B2CF14991A077D880042DD64 /* DB_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14981A077D880042DD64 /* DB_permit.m */; };
 		B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207119DFA3A50005253C /* Resp_order_info.m */; };
 		B2D8207819DFAD6D0005253C /* Order_InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */; };
+		B2DC90A51A565464005A9D27 /* WhsLogs_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC90A41A565464005A9D27 /* WhsLogs_ViewController.m */; };
 		B2DE9AA61A106B3500259EB5 /* Timer_bg_upload_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AA51A106B3500259EB5 /* Timer_bg_upload_data.m */; };
 		B2DE9AAC1A10ABF800259EB5 /* Resp_get_chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AAB1A10ABF800259EB5 /* Resp_get_chart.m */; };
 		B2DE9AAF1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AAE1A10ACCB00259EB5 /* Resp_DashboardGrpResult.m */; };
@@ -559,6 +560,8 @@
 		B2D8207119DFA3A50005253C /* Resp_order_info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_order_info.m; sourceTree = "<group>"; };
 		B2D8207619DFAD6D0005253C /* Order_InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order_InfoViewController.h; sourceTree = "<group>"; };
 		B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order_InfoViewController.m; sourceTree = "<group>"; };
+		B2DC90A31A565464005A9D27 /* WhsLogs_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhsLogs_ViewController.h; sourceTree = "<group>"; };
+		B2DC90A41A565464005A9D27 /* WhsLogs_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhsLogs_ViewController.m; sourceTree = "<group>"; };
 		B2DE9AA41A106B3500259EB5 /* Timer_bg_upload_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer_bg_upload_data.h; sourceTree = "<group>"; };
 		B2DE9AA51A106B3500259EB5 /* Timer_bg_upload_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer_bg_upload_data.m; sourceTree = "<group>"; };
 		B2DE9AAA1A10ABF800259EB5 /* Resp_get_chart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_get_chart.h; sourceTree = "<group>"; };
@@ -914,6 +917,8 @@
 				B2A21CEC1A514B2E00958278 /* BarCodeSysHomeViewController.m */,
 				B286C24A1A47FDEC0045C238 /* BarCodeSysDetailViewController.h */,
 				B286C24B1A47FDEC0045C238 /* BarCodeSysDetailViewController.m */,
+				B2DC90A31A565464005A9D27 /* WhsLogs_ViewController.h */,
+				B2DC90A41A565464005A9D27 /* WhsLogs_ViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1436,6 +1441,7 @@
 				B29E579119E28A9E00E2CAE9 /* DatabaseQueue.m in Sources */,
 				B293A2FD1A2F0AFE00DEC6C0 /* Cell_S_O_general.m in Sources */,
 				B2A7481019BEFD57006C96D1 /* MyView.m in Sources */,
+				B2DC90A51A565464005A9D27 /* WhsLogs_ViewController.m in Sources */,
 				B270C6101999A70C0089664C /* SKSTableViewCell.m in Sources */,
 				B276C0E61995CA3A00075515 /* SearchFormContract.m in Sources */,
 				B2E391D019C81AEB00612FDD /* Cell_epod_record.m in Sources */,

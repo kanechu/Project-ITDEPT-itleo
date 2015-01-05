@@ -13,6 +13,7 @@
 @property (copy, nonatomic) NSString *unique_id;
 @property (copy, nonatomic) NSString *lang_code;
 @property (copy, nonatomic) NSString *logo_title;
+@property (copy, nonatomic) NSString *str_upload_type;
 
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_whs_logo;
 

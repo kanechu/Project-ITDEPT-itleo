@@ -185,3 +185,6 @@
 "lbl_remark"="Remark:";
 //whs config
 "lbl_scan_log"="Scan Log";
+"lbl_is_mandatory"="can not be empty, items marked with * are mandatory!";
+"lbl_force_return"="Data being edited is not saved,you want to save it?";
+"lbl_discard"="Discard";
