@@ -9,9 +9,10 @@
 #import "Web_get_permit.h"
 #import "Web_base.h"
 #import "Resp_permit.h"
+#import "Resp_get_status.h"
 #import "DB_LoginInfo.h"
 #import "DB_permit.h"
-
+#import "DB_ePod.h"
 @implementation Web_get_permit
 
 -(void)fn_get_permit_data:(NSString*)base_url callBack:(call_isGetPermit)call_back{
@@ -62,5 +63,35 @@
         idic_result=nil;
     }
     return alist_function;
+}
+//GET EPOD STATUS
+-(void)fn_get_epod_status_data:(NSString*)base_url{
+    RequestContract *ao_form=[[RequestContract alloc]init];
+    DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
+    AuthContract *auth=[db_login fn_get_RequestAuth];
+    auth.company_code=COMPANY_CODE;
+    ao_form.Auth=auth;
+    SearchFormContract *searchform=[[SearchFormContract alloc]init];
+    searchform.os_column=@"status_type";
+    searchform.os_value=@"EPOD";
+    ao_form.SearchForm=[NSSet setWithObject:searchform];
+    Web_base *web_base=[[Web_base alloc]init];
+    web_base.il_url=STR_EPOD_STATUS_URL;
+    web_base.iresp_class=[Resp_get_status class];
+    web_base.ilist_resp_mapping=[NSArray arrayWithPropertiesOfObject:[Resp_get_status class]];
+    web_base.callBack=^(NSMutableArray *arr_result){
+        DB_ePod *db_epod=[[DB_ePod alloc]init];
+        if ([arr_result count]!=0) {
+            //清除旧epod status，存新的epod status
+            [db_epod fn_delete_all_epod_status_data];
+            [db_epod fn_save_epod_status_data:arr_result];
+        }
+       
+        db_epod=nil;
+    };
+    [web_base fn_get_data:ao_form base_url:base_url];
+    ao_form=nil;
+    db_login=nil;
+    web_base=nil;
 }
 @end

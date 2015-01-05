@@ -152,6 +152,7 @@
 		B2B242A01A3ECE3300C9047C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B2429F1A3ECE3200C9047C /* AVFoundation.framework */; };
 		B2B242A41A3ECE5500C9047C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B242A31A3ECE5500C9047C /* CoreMedia.framework */; };
 		B2B242A61A3ECE6000C9047C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B242A51A3ECE6000C9047C /* CoreVideo.framework */; };
+		B2B4CACC1A5A400700D98D4A /* Resp_get_status.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B4CACB1A5A400700D98D4A /* Resp_get_status.m */; };
 		B2B4D7BC1A4020E700884D90 /* Resp_uploadTran.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B4D7BB1A4020E700884D90 /* Resp_uploadTran.m */; };
 		B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B5C12219E3D2430040F585 /* MY_LocalizedString.m */; };
 		B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B5C12F19E3D6420040F585 /* Localized.strings */; };
@@ -160,7 +161,7 @@
 		B2BF88DE1A4A4F8500E70852 /* Resp_whs_config.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88DD1A4A4F8500E70852 /* Resp_whs_config.m */; };
 		B2BF88E41A4A504600E70852 /* Resp_MaintForm.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88E31A4A504600E70852 /* Resp_MaintForm.m */; };
 		B2BF88E71A4A50FD00E70852 /* Resp_UPLOAD_COL.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88E61A4A50FD00E70852 /* Resp_UPLOAD_COL.m */; };
-		B2BF88EA1A4A55B300E70852 /* Web_get_whs_config.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88E91A4A55B300E70852 /* Web_get_whs_config.m */; };
+		B2BF88EA1A4A55B300E70852 /* Web_whs_config.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88E91A4A55B300E70852 /* Web_whs_config.m */; };
 		B2BF88ED1A4A649300E70852 /* DB_whs_config.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88EC1A4A649300E70852 /* DB_whs_config.m */; };
 		B2C28E9F199C47B100F4D0BF /* DetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C28E9E199C47B100F4D0BF /* DetailView.m */; };
 		B2C28EA5199C693500F4D0BF /* Cell_aejob_dtl_browse.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C28EA4199C693500F4D0BF /* Cell_aejob_dtl_browse.m */; };
@@ -505,6 +506,8 @@
 		B2B242A11A3ECE4B00C9047C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B2B242A31A3ECE5500C9047C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B2B242A51A3ECE6000C9047C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		B2B4CACA1A5A400700D98D4A /* Resp_get_status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_get_status.h; sourceTree = "<group>"; };
+		B2B4CACB1A5A400700D98D4A /* Resp_get_status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_get_status.m; sourceTree = "<group>"; };
 		B2B4D7BA1A4020E700884D90 /* Resp_uploadTran.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_uploadTran.h; sourceTree = "<group>"; };
 		B2B4D7BB1A4020E700884D90 /* Resp_uploadTran.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_uploadTran.m; sourceTree = "<group>"; };
 		B2B5C12119E3D2430040F585 /* MY_LocalizedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MY_LocalizedString.h; sourceTree = "<group>"; };
@@ -526,8 +529,8 @@
 		B2BF88E31A4A504600E70852 /* Resp_MaintForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_MaintForm.m; sourceTree = "<group>"; };
 		B2BF88E51A4A50FD00E70852 /* Resp_UPLOAD_COL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_UPLOAD_COL.h; sourceTree = "<group>"; };
 		B2BF88E61A4A50FD00E70852 /* Resp_UPLOAD_COL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_UPLOAD_COL.m; sourceTree = "<group>"; };
-		B2BF88E81A4A55B300E70852 /* Web_get_whs_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_whs_config.h; sourceTree = "<group>"; };
-		B2BF88E91A4A55B300E70852 /* Web_get_whs_config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_get_whs_config.m; sourceTree = "<group>"; };
+		B2BF88E81A4A55B300E70852 /* Web_whs_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_whs_config.h; sourceTree = "<group>"; };
+		B2BF88E91A4A55B300E70852 /* Web_whs_config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_whs_config.m; sourceTree = "<group>"; };
 		B2BF88EB1A4A649300E70852 /* DB_whs_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_whs_config.h; sourceTree = "<group>"; };
 		B2BF88EC1A4A649300E70852 /* DB_whs_config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_whs_config.m; sourceTree = "<group>"; };
 		B2C28E9D199C47B100F4D0BF /* DetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailView.h; sourceTree = "<group>"; };
@@ -1048,6 +1051,8 @@
 				B27AB2A81A4BA5B8007A3814 /* Resp_language_type.m */,
 				B2BF88E51A4A50FD00E70852 /* Resp_UPLOAD_COL.h */,
 				B2BF88E61A4A50FD00E70852 /* Resp_UPLOAD_COL.m */,
+				B2B4CACA1A5A400700D98D4A /* Resp_get_status.h */,
+				B2B4CACB1A5A400700D98D4A /* Resp_get_status.m */,
 			);
 			name = DTOs;
 			sourceTree = "<group>";
@@ -1127,8 +1132,8 @@
 				B2DE9AB71A10B5E700259EB5 /* Web_get_chart_data.m */,
 				B29443191A353A5B00F5AD2A /* Web_get_exso.h */,
 				B294431A1A353A5B00F5AD2A /* Web_get_exso.m */,
-				B2BF88E81A4A55B300E70852 /* Web_get_whs_config.h */,
-				B2BF88E91A4A55B300E70852 /* Web_get_whs_config.m */,
+				B2BF88E81A4A55B300E70852 /* Web_whs_config.h */,
+				B2BF88E91A4A55B300E70852 /* Web_whs_config.m */,
 			);
 			name = WebRequest;
 			sourceTree = "<group>";
@@ -1385,7 +1390,7 @@
 				B2CDE4BD1A130A210091B523 /* DtlChartViewController.m in Sources */,
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
 				B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */,
-				B2BF88EA1A4A55B300E70852 /* Web_get_whs_config.m in Sources */,
+				B2BF88EA1A4A55B300E70852 /* Web_whs_config.m in Sources */,
 				B29204C31A15E83000D133A9 /* ChartView_frame.m in Sources */,
 				B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */,
 				B255BA0D19B01441004BBF0F /* Custom_textField.m in Sources */,
@@ -1427,6 +1432,7 @@
 				B276BBDD1995B6A500075515 /* MainHomeViewController.m in Sources */,
 				B2BF88ED1A4A649300E70852 /* DB_whs_config.m in Sources */,
 				B2281ABD19961045001A73B0 /* DB_RespAejob_dtl_browse.m in Sources */,
+				B2B4CACC1A5A400700D98D4A /* Resp_get_status.m in Sources */,
 				B21B71191A0B1D1A007DB5E3 /* PointInfo.m in Sources */,
 				B2C28EA5199C693500F4D0BF /* Cell_aejob_dtl_browse.m in Sources */,
 				B2B136B21A032779001317C8 /* Resp_sypara.m in Sources */,
