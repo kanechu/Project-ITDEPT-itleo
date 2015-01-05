@@ -62,13 +62,13 @@
                             for (NSString *str_key in [dic_language allKeys]) {
                                 NSString *key_value=[dic_language valueForKey:str_key];
                                 if ([str_key isEqualToString:@"EN"]) {
-                                  [dic_whs_detail setObject:key_value forKey:@"col_lable_en"];
+                                  [dic_whs_detail setObject:key_value forKey:@"col_label_en"];
                                 }
                                 if ([str_key isEqualToString:@"CN"]) {
-                                    [dic_whs_detail setObject:key_value forKey:@"col_lable_cn"];
+                                    [dic_whs_detail setObject:key_value forKey:@"col_label_cn"];
                                 }
                                 if ([str_key isEqualToString:@"TCN"]) {
-                                    [dic_whs_detail setObject:key_value forKey:@"col_lable_tcn"];
+                                    [dic_whs_detail setObject:key_value forKey:@"col_label_tcn"];
                                 }
                                 key_value=nil;
                             }
@@ -96,7 +96,7 @@
                             
                         }
                         
-                        ib_updated=[db executeUpdate:@"insert into whs_upload_col(seq,col_field,col_lable_en,col_lable_cn,col_lable_tcn,col_type,col_option,col_def,group_name_en,group_name_cn,group_name_tcn,is_mandatory,unique_id)values(:seq,:col_field,:col_lable_en,:col_lable_cn,:col_lable_tcn,:col_type,:col_option,:col_def,:group_name_en,:group_name_cn,:group_name_tcn,:is_mandatory,:unique_id)" withParameterDictionary:dic_whs_detail];
+                        ib_updated=[db executeUpdate:@"insert into whs_upload_col(seq,col_field,col_label_en,col_label_cn,col_label_tcn,col_type,col_option,col_def,group_name_en,group_name_cn,group_name_tcn,is_mandatory,unique_id)values(:seq,:col_field,:col_label_en,:col_label_cn,:col_label_tcn,:col_type,:col_option,:col_def,:group_name_en,:group_name_cn,:group_name_tcn,:is_mandatory,:unique_id)" withParameterDictionary:dic_whs_detail];
                         dic_whs_detail=nil;
                     }
                   i++;

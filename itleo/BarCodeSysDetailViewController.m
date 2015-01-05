@@ -112,19 +112,28 @@ typedef NSString* (^passValue)(NSInteger tag);
     _idic_datas=[[NSMutableDictionary alloc]init];
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
 }
--(NSString *)fn_lang_code_filed_name:(NSDictionary*)dic{
-    NSString *str_lang_code=[lang_code lowercaseString];
-    NSString *filed_name=@"";
-    for (NSString *key in [dic allKeys]) {
-        NSRange range=[key rangeOfString:str_lang_code];
-        if (range.location!=NSNotFound) {
-            filed_name=key;
-           break;
-        }
+-(NSString *)fn_get_group_name_field{
+       NSString *filed_name=@"";
+    if ([lang_code isEqualToString:@"EN"]) {
+        filed_name=@"group_name_en";
+    }else if ([lang_code isEqualToString:@"CN"]){
+        filed_name=@"group_name_cn";
+    }else if ([lang_code isEqualToString:@"TCN"]){
+        filed_name=@"group_name_tcn";
     }
     return filed_name;
 }
-
+-(NSString *)fn_get_col_label_field{
+    NSString *filed_name=@"";
+    if ([lang_code isEqualToString:@"EN"]) {
+        filed_name=@"col_label_en";
+    }else if ([lang_code isEqualToString:@"CN"]){
+        filed_name=@"col_label_cn";
+    }else if ([lang_code isEqualToString:@"TCN"]){
+        filed_name=@"col_label_tcn";
+    }
+    return filed_name;
+}
 -(void)fn_add_right_items{
     UIBarButtonItem *ibtn_save=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"ibtn_save", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_save_whs_data)];
     UIBarButtonItem *ibtn_space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -254,7 +263,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     }
     cell.backgroundColor=COLOR_light_BLUE;
     cell.expandable=YES;
-    NSString *language_type=[self fn_lang_code_filed_name:dic];
+    NSString *language_type=[self fn_get_group_name_field];
     cell.textLabel.text=[dic valueForKey:language_type];
     dic=nil;
     return cell;
@@ -279,7 +288,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     NSInteger is_mandatory=[[dic valueForKey:@"is_mandatory"]integerValue];
     NSString *col_field=[dic valueForKey:@"col_field"];
     cell.itf_inputdata.text=[idic_textfield_value valueForKey:col_field];
-    NSString *language_type=[self fn_lang_code_filed_name:dic];
+    NSString *language_type=[self fn_get_col_label_field];
     if (is_mandatory==0) {
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:language_type]];
         
