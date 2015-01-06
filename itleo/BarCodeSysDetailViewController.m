@@ -100,7 +100,6 @@ typedef NSString* (^passValue)(NSInteger tag);
     Warehouse_log *whs_obj=[[Warehouse_log alloc]init];
     idic_textfield_value=[[NSDictionary dictionaryWithPropertiesOfObject:whs_obj]mutableCopy];
     _idic_is_mandatory=[[NSMutableDictionary alloc]initWithCapacity:1];
-#warning neet fix
     DB_RespAppConfig *db_appCinfig=[[DB_RespAppConfig alloc]init];
     NSString *company_code=[db_appCinfig fn_get_company_code];
     [idic_textfield_value setObject:company_code forKey:@"company_code"];
