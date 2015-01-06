@@ -76,7 +76,6 @@ typedef NSString* (^passValue)(NSInteger tag);
     [_ibtn_whs_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     
     _ibtn_scan_log.layer.cornerRadius=5;
-    _ibtn_scan_log.backgroundColor=COLOR_light_BLUE;
     [_ibtn_scan_log setTitle:MY_LocalizedString(@"lbl_scan_log", nil) forState:UIControlStateNormal];
     
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
@@ -264,10 +263,11 @@ typedef NSString* (^passValue)(NSInteger tag);
     if (!cell) {
         cell=[[SKSTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier];
     }
-    cell.backgroundColor=COLOR_light_BLUE;
+    cell.backgroundColor=COLOR_DARK_BLUE;
     cell.expandable=YES;
     NSString *language_type=[self fn_get_group_name_field];
     cell.textLabel.text=[dic valueForKey:language_type];
+    cell.textLabel.textColor=[UIColor whiteColor];
     dic=nil;
     return cell;
 }

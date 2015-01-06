@@ -186,9 +186,10 @@
     if (!cell) {
        cell=[[SKSTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier];
     }
-    cell.backgroundColor=COLOR_light_BLUE;
+    cell.backgroundColor=COLOR_DARK_BLUE;
     cell.expandable=YES;
     cell.textLabel.text=[dic valueForKey:@"name"];
+    cell.textLabel.textColor=[UIColor whiteColor];
     dic=nil;
     return cell;
 }

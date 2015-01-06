@@ -20,7 +20,7 @@
 
 #define COLOR_BITTER_LIME [UIColor colorWithRed:191.0/255.0 green:255.0/255.0 blue:0.0/255.0 alpha:1]
 
-//#define COLOR_AQUA [UIColor colorWithRed:0 green:255.0/255.0 blue:255.0/255.0 alpha:1]
+#define COLOR_DARK_BLUE [UIColor colorWithRed:65.0/255.0 green:95.0/255.0 blue:237.0/255.0 alpha:1]
 #define COLOR_light_BLUE [UIColor colorWithRed:176.0/255.0 green:213.0/255.0 blue:251.0/255.0 alpha:1]
 
 #define COLOR_LIGHT_YELLOW1 [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:210.0/255.0 alpha:1]
