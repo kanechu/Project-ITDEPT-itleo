@@ -21,9 +21,7 @@
     self=[super init];
     if (self) {
         DB_RespAppConfig *db_appconfig=[[DB_RespAppConfig alloc]init];
-        if ([[db_appconfig fn_get_all_RespAppConfig_data] count]!=0) {
-            base_url=[[[db_appconfig fn_get_all_RespAppConfig_data]objectAtIndex:0]valueForKey:@"web_addr"];
-        }
+        base_url=[db_appconfig fn_get_base_url];
     }
     return self;
 }

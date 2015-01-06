@@ -19,8 +19,7 @@
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     
     AuthContract *auth=[db_login fn_get_RequestAuth];
-#warning -neet fix
-    auth.company_code=COMPANY_CODE;
+#warning neet to modify
     auth.system=@"ITNEW";
     req_form.Auth=auth;
     Web_base *web_obj=[[Web_base alloc]init];

@@ -55,5 +55,24 @@
     }];
     return isDeleted;
 }
+-(NSString*)fn_get_base_url{
+    NSMutableArray *alist_appconfig=[self fn_get_all_RespAppConfig_data];
+    NSString *str_base_url;
+    if ([alist_appconfig count]!=0) {
+        str_base_url=[[alist_appconfig objectAtIndex:0]valueForKey:@"web_addr"];
+    }
+    return str_base_url;
+}
 
+-(NSString*)fn_get_company_code{
+    
+    NSMutableArray *alist_appconfig=[self fn_get_all_RespAppConfig_data];
+    NSString *str_company_code;
+    if ([alist_appconfig count]!=0) {
+        str_company_code=[[alist_appconfig objectAtIndex:0]valueForKey:@"company_code"];
+        str_company_code=[Conversion_helper fn_cut_whitespace:str_company_code];
+    }
+    return str_company_code;
+    
+}
 @end

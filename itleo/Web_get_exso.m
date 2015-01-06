@@ -16,7 +16,6 @@
     RequestContract *req_form=[[RequestContract alloc]init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-    auth.company_code=COMPANY_CODE;
     req_form.Auth=auth;
     SearchFormContract *searchForm=[[SearchFormContract alloc]init];
     searchForm.os_column=@"so_no";
@@ -31,23 +30,17 @@
         if (_callBack_exso) {
             _callBack_exso(arr_resp_result);
         }
-        
     };
-    
     DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
-    NSMutableArray *alist_result=[db_obj fn_get_all_RespAppConfig_data];
-    if ([alist_result count]!=0) {
-        NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
-        [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];
-        str_base_url=nil;
-    }
-
+    NSString *str_base_url=[db_obj fn_get_base_url];
+    [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];
+    
+    str_base_url=nil;
     req_form=nil;
     db_login=nil;
     auth=nil;
     searchForm=nil;
     web_obj=nil;
     db_obj=nil;
-    alist_result=nil;
 }
 @end

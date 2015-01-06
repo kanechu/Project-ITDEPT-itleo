@@ -11,6 +11,7 @@
 #import "FMDatabaseAdditions.h"
 #import "FMDatabase.h"
 #import "AuthContract.h"
+#import "DB_RespAppConfig.h"
 @implementation DB_LoginInfo
 @synthesize queue;
 
@@ -74,9 +75,12 @@
         auth.system=[dic valueForKey:@"system"];
         auth.lang_code=[dic valueForKey:@"lang_code"];
     }
+    DB_RespAppConfig *db_appconfig=[[DB_RespAppConfig alloc]init];
+    auth.company_code=[db_appconfig fn_get_company_code];
     auth.encrypted=IS_ENCRYPTED;
     auth.version=VERSION;
     auth.app_code=APP_CODE;
+    db_appconfig=nil;
     return auth;
 }
 

@@ -18,4 +18,8 @@
 
 -(BOOL)fn_delete_all_RespAppConfig_data;
 
+-(NSString*)fn_get_base_url;
+
+-(NSString*)fn_get_company_code;
+
 @end

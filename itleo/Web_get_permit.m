@@ -19,7 +19,6 @@
     RequestContract *ao_form=[[RequestContract alloc]init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-    auth.company_code=COMPANY_CODE;
     ao_form.Auth=auth;
     SearchFormContract *searchform=[[SearchFormContract alloc]init];
     searchform.os_column=@"type";
@@ -69,7 +68,6 @@
     RequestContract *ao_form=[[RequestContract alloc]init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-    auth.company_code=COMPANY_CODE;
     ao_form.Auth=auth;
     SearchFormContract *searchform=[[SearchFormContract alloc]init];
     searchform.os_column=@"status_type";

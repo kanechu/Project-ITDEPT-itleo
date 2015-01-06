@@ -10,7 +10,6 @@
 #import "Resp_sypara.h"
 #import "Web_base.h"
 #import "DB_sypara.h"
-#import "DB_RespAppConfig.h"
 #import "DB_LoginInfo.h"
 
 @implementation Web_get_sypara
