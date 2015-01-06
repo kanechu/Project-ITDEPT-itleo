@@ -20,10 +20,9 @@
 #import "Order_InfoViewController.h"
 
 @interface EPODDetailViewController ()
+
 //存储显示的配置单状态
 @property(nonatomic,strong) NSMutableArray *arr_status;
-//存储上传到服务器的配置单状态标识
-@property(nonatomic,strong) NSArray *arr_status_flag;
 //“其他”状态的说明
 @property(nonatomic,copy) NSString *status_explain;
 //客户选择的配载单状态
@@ -44,7 +43,7 @@
 @synthesize flag_enable;
 @synthesize flag_textfield;
 @synthesize alist_image_ms;
-@synthesize arr_status_flag;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,16 +56,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _arr_status=[NSMutableArray arrayWithObjects:MY_LocalizedString(@"lbl_start", nil),MY_LocalizedString(@"lbl_arrive", nil),MY_LocalizedString(@"lbl_complete", nil),MY_LocalizedString(@"lbl_other", nil), nil];
-    arr_status_flag=@[@"pod1",@"pod2",@"pod3",@"pod4"];
-    flag_enable=0;
+    DB_ePod *db_epod=[[DB_ePod alloc]init];
+    _arr_status=[db_epod fn_get_epod_status_data];
+    NSMutableDictionary *dic=[[NSMutableDictionary alloc]initWithObjectsAndKeys:MY_LocalizedString(@"lbl_other", nil),@"status_code",nil];
+    [_arr_status addObject:dic];
     
     [self fn_set_control_pro];
     [self fn_custom_gestureRecognizer];
     
     [KeyboardNoticeManager sharedKeyboardNoticeManager];
     
-
 	// Do any additional setup after loading the view.
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -130,14 +129,17 @@
         if ([alist_result count]!=0) {
             flag_status=[[alist_result objectAtIndex:0]valueForKey:@"status"];
             NSInteger flag_isOther=0;
-            for (NSString *status in arr_status_flag) {
-                if ([flag_status isEqualToString:status]) {
+            for (NSMutableDictionary *dic in _arr_status) {
+                NSString *str_status_code=[dic valueForKey:@"status_code"];
+                if ([flag_status isEqualToString:str_status_code]) {
                     flag_isOther=1;
+                    break;
                 }
+                str_status_code=nil;
             }
             if (flag_isOther==0) {
                 _status_explain=flag_status;
-                flag_status=@"pod4";
+                flag_status=MY_LocalizedString(@"lbl_other", nil);
             }
         }
         [self fn_get_epod_ms];
@@ -159,6 +161,20 @@
     [_itf_order_no resignFirstResponder];
     [self.tableview reloadData];
 }
+- (NSString*)fn_get_lang_code_type{
+    NSString *str_field=@"";
+    NSString *str_lang_code=[Conversion_helper fn_get_lang_code];
+    if ([str_lang_code isEqualToString:@"en"]) {
+        str_field=@"status_desc_en";
+    }
+    if ([str_lang_code isEqualToString:@"zh-Hans"]) {
+        str_field=@"status_desc_sc";
+    }
+    if ([str_lang_code isEqualToString:@"zh-Hant"]) {
+        str_field=@"status_desc_tc";
+    }
+    return str_field;
+}
 
 #pragma mark -UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -166,24 +182,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *is_status=[_arr_status objectAtIndex:indexPath.row];
-    NSString *is_status_flag=[arr_status_flag objectAtIndex:indexPath.row];
-    if ([is_status_flag isEqualToString:@"pod4"]) {
+    NSString *dic_status=[_arr_status objectAtIndex:indexPath.row];
+    NSString *is_status_flag=[dic_status valueForKey:@"status_code"];
+    if ([is_status_flag isEqualToString:MY_LocalizedString(@"lbl_other", nil)]) {
         static NSString *cellIndentifier=@"Cell_status_list";
         Cell_status_list *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIndentifier];
-        [cell.ibtn_radio setTitle:is_status forState:UIControlStateNormal];
+        [cell.ibtn_radio setTitle:is_status_flag forState:UIControlStateNormal];
         cell.ibtn_radio.delegate=self;
         
         cell.itf_declare.delegate=self;
-    cell.itf_declare.placeholder=MY_LocalizedString(@"lbl_desc", nil);
-        cell.itf_declare.text=_status_explain;
-        
+        cell.itf_declare.placeholder=MY_LocalizedString(@"lbl_desc", nil);
+        if (flag_enable==1) {
+            cell.itf_declare.text=_status_explain;
+        }else{
+            cell.itf_declare.text=nil;
+        }
         cell.flag_enable=flag_enable;
         if ([flag_status isEqualToString:is_status_flag]) {
             cell.ibtn_radio.checked=YES;
         }
         return cell;
-
+        
     }else{
         static NSString *cellIndentifier=@"UITableViewCell";
         UITableViewCell *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIndentifier forIndexPath:indexPath];
@@ -192,24 +211,25 @@
         }
         UILabel *il_status_prompt=(UILabel*)[cell.contentView viewWithTag:100];
         QRadioButton *ibtn=(QRadioButton*)[cell.contentView viewWithTag:200];
-        
-        [ibtn setTitle:is_status  forState:UIControlStateNormal];
+        NSString *str_status=[dic_status valueForKey:[self fn_get_lang_code_type]];
+        [ibtn setTitle:str_status  forState:UIControlStateNormal];
         ibtn.delegate=self;
         if (indexPath.row==0) {
             il_status_prompt.text=MY_LocalizedString(@"lbl_status", nil);
         }else{
             il_status_prompt.text=@"";
         }
+        NSString *is_status_flag=[dic_status valueForKey:@"status_code"];
         if ([is_status_flag isEqualToString:flag_status]) {
             ibtn.checked=YES;
         }
         return cell;
     }
-    return nil;
 }
 #pragma mark -UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *is_status=[_arr_status objectAtIndex:indexPath.row];
+    NSMutableDictionary *dic_status=[_arr_status objectAtIndex:indexPath.row];
+    NSString *is_status=[dic_status valueForKey:@"status_code"];
     if ([is_status isEqualToString:MY_LocalizedString(@"lbl_other", nil)]){
         return 70;
     }else{
@@ -219,14 +239,28 @@
 #pragma mark -QRadioButtonDelegate
 - (void)didSelectedRadioButton:(QRadioButton *)radio groupId:(NSString *)groupId{
     flag_status=radio.titleLabel.text;
-    NSInteger index=[_arr_status indexOfObject:flag_status];
-    flag_status=[arr_status_flag objectAtIndex:index];
-    if ([flag_status isEqualToString:@"pod4"]) {
+    if ([flag_status isEqualToString:MY_LocalizedString(@"lbl_other", nil)]) {
         flag_enable=1;
     }else{
         flag_enable=0;
+        NSInteger index=[[self fn_get_str_status]  indexOfObject:flag_status];
+        NSMutableDictionary *dic_status=[_arr_status objectAtIndex:index];
+        flag_status=[dic_status valueForKey:@"status_code"];
     }
     [self.tableview reloadData];
+}
+- (NSMutableArray*)fn_get_str_status{
+    NSMutableArray *alist_status=[NSMutableArray array];
+    NSMutableArray *arr_status_copy=[NSMutableArray arrayWithArray:_arr_status];
+    [arr_status_copy removeLastObject];
+    for (NSMutableDictionary *dic in arr_status_copy) {
+        NSString *str_status_code=[dic valueForKey:[self fn_get_lang_code_type]];
+        if (str_status_code!=nil) {
+            [alist_status addObject:str_status_code];
+        }
+        str_status_code=nil;
+    }
+    return alist_status;
 }
 #pragma mark -event action
 

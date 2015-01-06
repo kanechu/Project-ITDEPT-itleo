@@ -218,8 +218,8 @@ static NSString  *is_language=@"";//标识语言类型
     web_base.callBack=^(NSMutableArray *arr_resp_result){
         DB_RespAppConfig *db=[[DB_RespAppConfig alloc]init];
         [db fn_save_RespAppConfig_data:arr_resp_result];
-        NSString *web_addr=nil;
-        NSString *sys_name=nil;
+        NSString *web_addr;
+        NSString *sys_name;
         if ([arr_resp_result count]!=0) {
             web_addr=[[arr_resp_result objectAtIndex:0]valueForKey:@"web_addr"];
             sys_name=[[arr_resp_result objectAtIndex:0]valueForKey:@"sys_name"];

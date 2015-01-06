@@ -46,9 +46,6 @@
 "lbl_order_no"="配载单号";
 "lbl_check_order"="查看配载单讯息";
 "lbl_status"="配载单状态:";
-"lbl_start"="开始";
-"lbl_arrive"="到达";
-"lbl_complete"="完成";
 "lbl_other"="其他";
 "lbl_desc"="说明";
 "lbl_image_num"="图片数目";

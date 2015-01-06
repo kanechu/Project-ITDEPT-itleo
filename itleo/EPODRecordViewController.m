@@ -251,18 +251,31 @@
 }
 -(NSString*)fn_show_status:(NSString*)status_flag{
     NSString *is_status=status_flag;
-    if ([status_flag isEqualToString:@"pod1"]) {
-        is_status=MY_LocalizedString(@"lbl_start", nil);
-    }else if ([status_flag isEqualToString:@"pod2"]) {
-        is_status=MY_LocalizedString(@"lbl_arrive", nil);
-    }else if([status_flag isEqualToString:@"pod3"]){
-        is_status=MY_LocalizedString(@"lbl_complete", nil);
-    }else{
-        is_status=status_flag;
+    DB_ePod *db_epod=[[DB_ePod alloc]init];
+    NSMutableArray *alist_status=[db_epod fn_get_epod_status_data];
+    for (NSMutableDictionary *dic in alist_status) {
+        NSString *str_status_code=[dic valueForKey:@"status_code"];
+        if ([str_status_code isEqualToString:status_flag]) {
+            is_status=[dic valueForKey:[self fn_get_lang_code_type]];
+            break;
+        }
     }
     return is_status;
 }
-
+- (NSString*)fn_get_lang_code_type{
+    NSString *str_field=@"";
+    NSString *str_lang_code=[Conversion_helper fn_get_lang_code];
+    if ([str_lang_code isEqualToString:@"en"]) {
+        str_field=@"status_desc_en";
+    }
+    if ([str_lang_code isEqualToString:@"zh-Hans"]) {
+        str_field=@"status_desc_sc";
+    }
+    if ([str_lang_code isEqualToString:@"zh-Hant"]) {
+        str_field=@"status_desc_tc";
+    }
+    return str_field;
+}
 #pragma mark 同一个Label显示不同颜色的文字方法
 -(NSMutableAttributedString*)fn_different_fontcolor:(NSString*)_str range:(NSRange)_range{
     NSMutableAttributedString *str=[[NSMutableAttributedString alloc]initWithString:_str];

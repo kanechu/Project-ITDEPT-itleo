@@ -281,12 +281,9 @@ typedef NSString* (^passValue)(NSInteger tag);
     };
     
     DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
-    NSMutableArray *alist_result=[db_obj fn_get_all_RespAppConfig_data];
-    if ([alist_result count]!=0) {
-        NSString *str_base_url=[[alist_result objectAtIndex:0]valueForKey:@"web_addr"];
-        [web_obj fn_uploaded_warehouse_receive_data:upload Auth:auth base_url:str_base_url];
-    }
-    
+    NSString *str_base_url=[db_obj fn_get_base_url];
+    [web_obj fn_uploaded_warehouse_receive_data:upload Auth:auth base_url:str_base_url];
+    db_obj=nil;
 }
 
 @end

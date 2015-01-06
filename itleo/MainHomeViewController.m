@@ -87,6 +87,7 @@
 #warning -neet fix
     [alist_menu addObject:[Menu_home fn_create_item:@"BarCodeSys" image:@"barcode" segue:@"segue_barCodeSysHome"]];
     [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"delivery" segue:@"segue_epod"]];
+    [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_itdept_logo" segue:@"segue_warehouse"]];
     self.icollectionView.delegate=self;
     self.icollectionView.dataSource=self;
     [self.icollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell_menu"];

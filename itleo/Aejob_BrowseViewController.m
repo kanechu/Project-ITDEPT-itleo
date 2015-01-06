@@ -81,31 +81,27 @@ static NSMutableArray *alist_filtered_data;
     searchForm.os_value=millisecond;//用户选择
     NSArray *alist_searchform=[NSArray arrayWithObject:searchForm];
     DB_RespAppConfig *db=[[DB_RespAppConfig alloc]init];
-    NSMutableArray *arr=[db fn_get_all_RespAppConfig_data];
-    if ([arr count]!=0) {
-        NSString *base_url=[[arr objectAtIndex:0]valueForKey:@"web_addr"];
-        CheckNetWork *obj=[[CheckNetWork alloc]init];
-        if ([obj fn_isPopUp_alert]==NO) {
-            [self fn_get_aejob_browse_data:base_url searchForm:alist_searchform];
-            [self.skstableView setScrollEnabled:NO];
-        }else{
-            [self.skstableView setScrollEnabled:NO];
-        }
+    NSString *base_url=[db fn_get_base_url];
+    db=nil;
+    CheckNetWork *obj=[[CheckNetWork alloc]init];
+    if ([obj fn_isPopUp_alert]==NO) {
+        [self fn_get_aejob_browse_data:base_url searchForm:alist_searchform];
+        [self.skstableView setScrollEnabled:NO];
+    }else{
+        [self.skstableView setScrollEnabled:NO];
     }
+
 }
 - (IBAction)fn_advance_search_aejob:(id)sender {
     Aejob_AdvanceSearchViewController *VC=(Aejob_AdvanceSearchViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Aejob_AdvanceSearchViewController"];
     VC.callback=^(NSMutableArray *arr_result){
         DB_RespAppConfig *db=[[DB_RespAppConfig alloc]init];
-        NSMutableArray *arr=[db fn_get_all_RespAppConfig_data];
-        if ([arr count]!=0) {
-            NSString *base_url=[[arr objectAtIndex:0]valueForKey:@"web_addr"];
-            CheckNetWork *obj=[[CheckNetWork alloc]init];
-            if ([obj fn_isPopUp_alert]==NO) {
-                [self fn_get_aejob_browse_data:base_url searchForm:arr_result];
-            }
-            obj=nil;
+        NSString *base_url=[db fn_get_base_url];
+        CheckNetWork *obj=[[CheckNetWork alloc]init];
+        if ([obj fn_isPopUp_alert]==NO) {
+            [self fn_get_aejob_browse_data:base_url searchForm:arr_result];
         }
+        obj=nil;
         db=nil;
     };
     [self presentViewController:VC animated:YES completion:^(){}];

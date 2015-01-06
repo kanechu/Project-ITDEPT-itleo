@@ -11,6 +11,7 @@
 #import "SKSTableView.h"
 #import "DB_whs_config.h"
 #import "DB_LoginInfo.h"
+#import "DB_RespAppConfig.h"
 #import "Warehouse_log.h"
 #import "Cell_advance_search.h"
 #import "SKSTableViewCell.h"
@@ -99,7 +100,10 @@ typedef NSString* (^passValue)(NSInteger tag);
     Warehouse_log *whs_obj=[[Warehouse_log alloc]init];
     idic_textfield_value=[[NSDictionary dictionaryWithPropertiesOfObject:whs_obj]mutableCopy];
     _idic_is_mandatory=[[NSMutableDictionary alloc]initWithCapacity:1];
-    [idic_textfield_value setObject:COMPANY_CODE forKey:@"company_code"];
+#warning neet fix
+    DB_RespAppConfig *db_appCinfig=[[DB_RespAppConfig alloc]init];
+    NSString *company_code=[db_appCinfig fn_get_company_code];
+    [idic_textfield_value setObject:company_code forKey:@"company_code"];
     [idic_textfield_value setObject:_str_upload_type forKey:@"upload_type"];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     NSMutableArray *arr_login=[db_login fn_get_all_LoginInfoData];

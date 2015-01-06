@@ -47,9 +47,6 @@
 "lbl_order_no"="Order Number";
 "lbl_check_order"="View Order Info";
 "lbl_status"="Order Status:";
-"lbl_start"="Start";
-"lbl_arrive"="Arrive";
-"lbl_complete"="Complete";
 "lbl_other"="Other";
 "lbl_desc"="Description";
 "lbl_image_num"="Number of Images";
