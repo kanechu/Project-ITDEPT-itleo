@@ -13,6 +13,7 @@
 @synthesize FORMAT_NAME;
 @synthesize ENABLE;
 @synthesize UPLOAD_TYPE;
+@synthesize PHP_FUNC;
 @synthesize UPLOAD_COL;
 
 @end

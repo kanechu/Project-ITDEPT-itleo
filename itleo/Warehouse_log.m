@@ -14,6 +14,7 @@
 @synthesize user_code;
 @synthesize company_code;
 @synthesize type_code;
+@synthesize php_func;
 @synthesize order;
 @synthesize ref_no;
 @synthesize value;

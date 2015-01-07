@@ -72,15 +72,19 @@ typedef NSString* (^passValue)(NSInteger tag);
     // Dispose of any resources that can be recreated.
 }
 - (void)fn_set_property{
+    NSString *_logo_title=[_idic_maintform valueForKey:lang_code];
     [_ibtn_whs_logo setTitle:_logo_title forState:UIControlStateNormal];
     [_ibtn_whs_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
+    _logo_title=nil;
     
     _ibtn_scan_log.layer.cornerRadius=5;
     [_ibtn_scan_log setTitle:MY_LocalizedString(@"lbl_scan_log", nil) forState:UIControlStateNormal];
     
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
-    alist_group_nameAndnum=[db_whs fn_get_cols_group_nameAndnum:_unique_id];
-    NSMutableArray *arr_upload_cols=[db_whs fn_get_upload_col_data:_unique_id];
+    NSString *unique_id=[_idic_maintform valueForKey:@"unique_id"];
+    alist_group_nameAndnum=[db_whs fn_get_cols_group_nameAndnum:unique_id];
+    NSMutableArray *arr_upload_cols=[db_whs fn_get_upload_col_data:unique_id];
+    unique_id=nil;
     
     alist_filter_upload_cols=[[NSMutableArray alloc]init];
     for (NSMutableDictionary *dic_group_data in alist_group_nameAndnum) {
@@ -99,10 +103,21 @@ typedef NSString* (^passValue)(NSInteger tag);
     Warehouse_log *whs_obj=[[Warehouse_log alloc]init];
     idic_textfield_value=[[NSDictionary dictionaryWithPropertiesOfObject:whs_obj]mutableCopy];
     _idic_is_mandatory=[[NSMutableDictionary alloc]initWithCapacity:1];
-    DB_RespAppConfig *db_appCinfig=[[DB_RespAppConfig alloc]init];
-    NSString *company_code=[db_appCinfig fn_get_company_code];
+    DB_RespAppConfig *db_appConfig=[[DB_RespAppConfig alloc]init];
+    NSMutableArray *alist_appconfig=[db_appConfig fn_get_all_RespAppConfig_data];
+    NSString *php_addr;
+    NSString *company_code=[db_appConfig fn_get_company_code];
+    if ([alist_appconfig count]!=0) {
+        NSMutableDictionary *idic_appconfig=[alist_appconfig objectAtIndex:0];
+        php_addr=[idic_appconfig valueForKey:@"php_addr"];
+        idic_appconfig=nil;
+    }
+    db_appConfig=nil;
     [idic_textfield_value setObject:company_code forKey:@"company_code"];
-    [idic_textfield_value setObject:_str_upload_type forKey:@"upload_type"];
+    [idic_textfield_value setObject:[_idic_maintform valueForKey:@"UPLOAD_TYPE"] forKey:@"upload_type"];
+    NSString *str_php_func_url=[_idic_maintform valueForKey:@"PHP_FUNC"];
+    str_php_func_url=[php_addr stringByAppendingString:str_php_func_url];
+    [idic_textfield_value setObject:str_php_func_url forKey:@"php_func"];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     NSMutableArray *arr_login=[db_login fn_get_all_LoginInfoData];
     if ([arr_login count]!=0) {
@@ -210,7 +225,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 - (IBAction)fn_scan_log:(id)sender {
     WhsLogs_ViewController *whs_VC=(WhsLogs_ViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"WhsLogs_ViewController"];
-    whs_VC.str_upload_type=_str_upload_type;
+    whs_VC.str_upload_type=[_idic_maintform valueForKey:@"UPLOAD_TYPE"];
     [self presentViewController:whs_VC animated:YES completion:nil];
 }
 #pragma mark -show alert

@@ -13,6 +13,7 @@
 @property (nonatomic,strong) NSArray *FORMAT_NAME;
 @property (nonatomic,copy) NSString *ENABLE;
 @property (nonatomic,copy) NSString *UPLOAD_TYPE;
+@property (nonatomic,copy) NSString *PHP_FUNC;
 @property (nonatomic,strong) NSArray *UPLOAD_COL;
 
 @end

@@ -14,6 +14,7 @@
 @property (copy, nonatomic) NSString *user_code;
 @property (copy, nonatomic) NSString *company_code;
 @property (copy, nonatomic) NSString *type_code;
+@property (copy, nonatomic) NSString *php_func;
 @property (copy, nonatomic) NSString *order;
 @property (copy, nonatomic) NSString *ref_no;
 @property (copy, nonatomic) NSString *value;

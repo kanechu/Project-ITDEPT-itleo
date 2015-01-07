@@ -48,7 +48,7 @@
                     }
                     NSArray *arr_upload_col=resp_maint_obj.UPLOAD_COL;
                     
-                    ib_updated=[db executeUpdate:@"insert into whs_config_header(EN,CN,TCN,ENABLE,UPLOAD_TYPE)values(:EN,:CN,:TCN,:ENABLE,:UPLOAD_TYPE)" withParameterDictionary:dic_whs_header];
+                    ib_updated=[db executeUpdate:@"insert into whs_config_header(EN,CN,TCN,ENABLE,UPLOAD_TYPE,PHP_FUNC)values(:EN,:CN,:TCN,:ENABLE,:UPLOAD_TYPE,:PHP_FUNC)" withParameterDictionary:dic_whs_header];
                     dic_whs_header=nil;
                     
                     for (Resp_UPLOAD_COL *upload_col_obj in arr_upload_col) {
@@ -120,7 +120,7 @@
     
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            ib_updated=[db executeUpdate:@"insert into whs_log(upload_type,user_code,company_code,type_code,order_no,ref_no,value,excu_datetime,result_status,result_message,refkey,free1,free2,free3,free4,free5,free6,free7,free8,free9,free10,free11,free12,free13,free14,free15,free16,free17,free18,free19,free20)values(:upload_type,:user_code,:company_code,:type_code,:order_no,:ref_no,:value,:excu_datetime,:result_status,:result_message,:refkey,:free1,:free2,:free3,:free4,:free5,:free6,:free7,:free8,:free9,:free10,:free11,:free12,:free13,:free14,:free15,:free16,:free17,:free18,:free19,:free20)" withParameterDictionary:idic_whs_data];
+            ib_updated=[db executeUpdate:@"insert into whs_log(upload_type,user_code,company_code,type_code,php_func,order_no,ref_no,value,excu_datetime,result_status,result_message,refkey,free1,free2,free3,free4,free5,free6,free7,free8,free9,free10,free11,free12,free13,free14,free15,free16,free17,free18,free19,free20)values(:upload_type,:user_code,:company_code,:type_code,:php_func,:order_no,:ref_no,:value,:excu_datetime,:result_status,:result_message,:refkey,:free1,:free2,:free3,:free4,:free5,:free6,:free7,:free8,:free9,:free10,:free11,:free12,:free13,:free14,:free15,:free16,:free17,:free18,:free19,:free20)" withParameterDictionary:idic_whs_data];
             
             [db close];
         }
