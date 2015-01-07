@@ -10,7 +10,6 @@
 
 @implementation Warehouse_log
 
-@synthesize upload_type;
 @synthesize user_code;
 @synthesize company_code;
 @synthesize type_code;

@@ -114,7 +114,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     }
     db_appConfig=nil;
     [idic_textfield_value setObject:company_code forKey:@"company_code"];
-    [idic_textfield_value setObject:[_idic_maintform valueForKey:@"UPLOAD_TYPE"] forKey:@"upload_type"];
+    [idic_textfield_value setObject:[_idic_maintform valueForKey:@"UPLOAD_TYPE"] forKey:@"type_code"];
     NSString *str_php_func_url=[_idic_maintform valueForKey:@"PHP_FUNC"];
     str_php_func_url=[php_addr stringByAppendingString:str_php_func_url];
     [idic_textfield_value setObject:str_php_func_url forKey:@"php_func"];

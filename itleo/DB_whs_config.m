@@ -120,7 +120,7 @@
     
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            ib_updated=[db executeUpdate:@"insert into whs_log(upload_type,user_code,company_code,type_code,php_func,order_no,ref_no,value,excu_datetime,result_status,result_message,refkey,free1,free2,free3,free4,free5,free6,free7,free8,free9,free10,free11,free12,free13,free14,free15,free16,free17,free18,free19,free20)values(:upload_type,:user_code,:company_code,:type_code,:php_func,:order_no,:ref_no,:value,:excu_datetime,:result_status,:result_message,:refkey,:free1,:free2,:free3,:free4,:free5,:free6,:free7,:free8,:free9,:free10,:free11,:free12,:free13,:free14,:free15,:free16,:free17,:free18,:free19,:free20)" withParameterDictionary:idic_whs_data];
+            ib_updated=[db executeUpdate:@"insert into whs_log(user_code,company_code,type_code,php_func,order_no,ref_no,value,excu_datetime,result_status,result_message,refkey,free1,free2,free3,free4,free5,free6,free7,free8,free9,free10,free11,free12,free13,free14,free15,free16,free17,free18,free19,free20)values(:user_code,:company_code,:type_code,:php_func,:order_no,:ref_no,:value,:excu_datetime,:result_status,:result_message,:refkey,:free1,:free2,:free3,:free4,:free5,:free6,:free7,:free8,:free9,:free10,:free11,:free12,:free13,:free14,:free15,:free16,:free17,:free18,:free19,:free20)" withParameterDictionary:idic_whs_data];
             
             [db close];
         }
@@ -168,11 +168,11 @@
     return alist_result;
 }
 
-- (NSMutableArray*)fn_get_warehouse_record:(NSString*)str_upload_type{
+- (NSMutableArray*)fn_get_warehouse_record:(NSString*)str_type_code{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            FMResultSet *lfmdb=[db executeQuery:@"select * from whs_log where upload_type like ?",str_upload_type];
+            FMResultSet *lfmdb=[db executeQuery:@"select * from whs_log where type_code like ?",str_type_code];
             while ([lfmdb next]) {
                 [alist_result addObject:[lfmdb resultDictionary]];
             }

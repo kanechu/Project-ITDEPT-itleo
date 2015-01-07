@@ -10,7 +10,6 @@
 
 @interface Warehouse_log : NSObject
 
-@property (copy, nonatomic) NSString *upload_type;
 @property (copy, nonatomic) NSString *user_code;
 @property (copy, nonatomic) NSString *company_code;
 @property (copy, nonatomic) NSString *type_code;
