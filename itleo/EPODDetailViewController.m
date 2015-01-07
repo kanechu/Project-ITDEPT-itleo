@@ -8,6 +8,8 @@
 
 #import "EPODDetailViewController.h"
 #import "ManageImageViewController.h"
+#import "BarCodeViewController.h"
+#import "Order_InfoViewController.h"
 #import "Web_update_epod.h"
 #import "Cell_status_list.h"
 #import "DB_ePod.h"
@@ -17,9 +19,9 @@
 #import "DB_LoginInfo.h"
 #import "RespEpod_updmilestone.h"
 #import "Epod_upd_milestone_image_contract.h"
-#import "Order_InfoViewController.h"
 
 @interface EPODDetailViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_barCode;
 
 //存储显示的配置单状态
 @property(nonatomic,strong) NSMutableArray *arr_status;
@@ -60,7 +62,7 @@
     _arr_status=[db_epod fn_get_epod_status_data];
     NSMutableDictionary *dic=[[NSMutableDictionary alloc]initWithObjectsAndKeys:MY_LocalizedString(@"lbl_other", nil),@"status_code",nil];
     [_arr_status addObject:dic];
-    
+    dic=nil;
     [self fn_set_control_pro];
     [self fn_custom_gestureRecognizer];
     
@@ -87,6 +89,11 @@
     _itf_order_no.layer.borderColor=[UIColor lightGrayColor].CGColor;
     _itf_order_no.layer.borderWidth=1;
     _itf_order_no.delegate=self;
+    _itf_order_no.returnKeyType=UIReturnKeyDone;
+    
+    _ibtn_barCode.layer.cornerRadius=7;
+    _ibtn_barCode.layer.borderColor=COLOR_light_BLUE.CGColor;
+    _ibtn_barCode.layer.borderWidth=1.5;
     
     [_ibtn_check_info setTitle:MY_LocalizedString(@"lbl_check_order", nil) forState:UIControlStateNormal];
     [_ibtn_manage setTitle:MY_LocalizedString(@"ibtn_image_mang", nil) forState:UIControlStateNormal];
@@ -148,7 +155,7 @@
     }
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [_itf_order_no resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
 }
 
@@ -187,6 +194,7 @@
     if ([is_status_flag isEqualToString:MY_LocalizedString(@"lbl_other", nil)]) {
         static NSString *cellIndentifier=@"Cell_status_list";
         Cell_status_list *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIndentifier];
+        cell.itf_declare.returnKeyType=UIReturnKeyDone;
         [cell.ibtn_radio setTitle:is_status_flag forState:UIControlStateNormal];
         cell.ibtn_radio.delegate=self;
         
@@ -263,6 +271,13 @@
     return alist_status;
 }
 #pragma mark -event action
+- (IBAction)fn_scan_the_barcode:(id)sender {
+    BarCodeViewController *barCodeVC=(BarCodeViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"BarCodeViewController"];
+    barCodeVC.callback=^(NSString *str_result){
+        _itf_order_no.text=str_result;
+    };
+    [self presentViewController:barCodeVC animated:YES completion:nil];
+}
 
 - (IBAction)fn_check_info:(id)sender {
     if ([_itf_order_no.text length]==0) {
