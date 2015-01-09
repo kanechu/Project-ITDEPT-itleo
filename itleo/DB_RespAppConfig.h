@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 @class DatabaseQueue;
+typedef enum {
+    //枚举成员
+    kCompany_code,
+    kWeb_addr,
+    kPhp_addr
+}kAppConfig_field;//枚举名称
+
 @interface DB_RespAppConfig : NSObject
 
 @property(nonatomic,strong)DatabaseQueue *queue;
@@ -18,8 +25,5 @@
 
 -(BOOL)fn_delete_all_RespAppConfig_data;
 
--(NSString*)fn_get_base_url;
-
--(NSString*)fn_get_company_code;
-
+-(NSString*)fn_get_field_content:(kAppConfig_field)field_name;
 @end

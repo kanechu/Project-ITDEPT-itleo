@@ -17,10 +17,12 @@
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
     req_form.Auth=auth;
+    db_login=nil;
     SearchFormContract *searchForm=[[SearchFormContract alloc]init];
     searchForm.os_column=@"so_no";
     searchForm.os_value=so_no;
     req_form.SearchForm=[NSSet setWithObject:searchForm];
+    searchForm=nil;
     Web_base *web_obj=[[Web_base alloc]init];
     web_obj.il_url=STR_EXSO_URL;
     web_obj.iresp_class=[Resp_exso class];
@@ -32,15 +34,12 @@
         }
     };
     DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
-    NSString *str_base_url=[db_obj fn_get_base_url];
-    [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];
-    
-    str_base_url=nil;
-    req_form=nil;
-    db_login=nil;
-    auth=nil;
-    searchForm=nil;
-    web_obj=nil;
+    NSString *str_base_url=[db_obj fn_get_field_content:kWeb_addr];
     db_obj=nil;
+    [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];
+    str_base_url=nil;
+    auth=nil;
+    req_form=nil;
+    web_obj=nil;
 }
 @end

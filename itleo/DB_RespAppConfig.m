@@ -45,6 +45,7 @@
     }];
     return llist_result;
 }
+
 -(BOOL)fn_delete_all_RespAppConfig_data{
     __block BOOL isDeleted=NO;
     [queue inDataBase:^(FMDatabase *db){
@@ -55,24 +56,21 @@
     }];
     return isDeleted;
 }
--(NSString*)fn_get_base_url{
+-(NSString*)fn_get_field_content:(kAppConfig_field)field_name{
     NSMutableArray *alist_appconfig=[self fn_get_all_RespAppConfig_data];
-    NSString *str_base_url;
-    if ([alist_appconfig count]!=0) {
-        str_base_url=[[alist_appconfig objectAtIndex:0]valueForKey:@"web_addr"];
+    NSString *str_field_content;
+    NSString *str_key;
+    if (field_name==kWeb_addr) {
+        str_key=@"web_addr";
+    }else if (field_name==kPhp_addr){
+        str_key=@"php_addr";
+    }else if (field_name==kCompany_code){
+        str_key=@"company_code";
     }
-    return str_base_url;
-}
-
--(NSString*)fn_get_company_code{
-    
-    NSMutableArray *alist_appconfig=[self fn_get_all_RespAppConfig_data];
-    NSString *str_company_code;
     if ([alist_appconfig count]!=0) {
-        str_company_code=[[alist_appconfig objectAtIndex:0]valueForKey:@"company_code"];
-        str_company_code=[Conversion_helper fn_cut_whitespace:str_company_code];
+        str_field_content=[[alist_appconfig objectAtIndex:0]valueForKey:str_key];
+        str_field_content=[Conversion_helper fn_cut_whitespace:str_field_content];
     }
-    return str_company_code;
-    
+    return str_field_content;
 }
 @end

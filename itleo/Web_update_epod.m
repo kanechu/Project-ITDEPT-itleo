@@ -21,7 +21,7 @@
     self=[super init];
     if (self) {
         DB_RespAppConfig *db_appconfig=[[DB_RespAppConfig alloc]init];
-        base_url=[db_appconfig fn_get_base_url];
+        base_url=[db_appconfig fn_get_field_content:kWeb_addr];
     }
     return self;
 }

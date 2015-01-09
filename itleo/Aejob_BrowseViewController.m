@@ -81,7 +81,7 @@ static NSMutableArray *alist_filtered_data;
     searchForm.os_value=millisecond;//用户选择
     NSArray *alist_searchform=[NSArray arrayWithObject:searchForm];
     DB_RespAppConfig *db=[[DB_RespAppConfig alloc]init];
-    NSString *base_url=[db fn_get_base_url];
+    NSString *base_url=[db fn_get_field_content:kWeb_addr];
     db=nil;
     CheckNetWork *obj=[[CheckNetWork alloc]init];
     if ([obj fn_isPopUp_alert]==NO) {
@@ -96,7 +96,7 @@ static NSMutableArray *alist_filtered_data;
     Aejob_AdvanceSearchViewController *VC=(Aejob_AdvanceSearchViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"Aejob_AdvanceSearchViewController"];
     VC.callback=^(NSMutableArray *arr_result){
         DB_RespAppConfig *db=[[DB_RespAppConfig alloc]init];
-        NSString *base_url=[db fn_get_base_url];
+        NSString *base_url=[db fn_get_field_content:kWeb_addr];
         CheckNetWork *obj=[[CheckNetWork alloc]init];
         if ([obj fn_isPopUp_alert]==NO) {
             [self fn_get_aejob_browse_data:base_url searchForm:arr_result];
