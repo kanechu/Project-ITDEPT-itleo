@@ -10,7 +10,8 @@
 
 @interface Warehouse_log : NSObject
 
-@property (copy, nonatomic) NSString *user_code;
+@property (copy, nonatomic) NSString *usrname;
+@property (copy, nonatomic) NSString *usrpass;
 @property (copy, nonatomic) NSString *company_code;
 @property (copy, nonatomic) NSString *type_code;
 @property (copy, nonatomic) NSString *php_func;

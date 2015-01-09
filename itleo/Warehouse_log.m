@@ -10,8 +10,8 @@
 
 @implementation Warehouse_log
 
-@synthesize user_code;
-@synthesize company_code;
+@synthesize usrname;
+@synthesize usrpass;
 @synthesize type_code;
 @synthesize php_func;
 @synthesize order;
