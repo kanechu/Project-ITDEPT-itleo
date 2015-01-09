@@ -109,24 +109,6 @@
     }];
     return ib_updated;
 }
-- (BOOL)fn_save_warehouse_log:(NSMutableDictionary*)idic_whs_data{
-    __block BOOL ib_updated=NO;
-    NSString *key_value=[idic_whs_data valueForKey:@"order"];
-    [idic_whs_data removeObjectForKey:@"order"];
-    if (key_value==nil) {
-        key_value=@"";
-    }
-    [idic_whs_data setObject:key_value forKey:@"order_no"];
-    //因Order by中Order是个关键字，不能用“Order”做字段，所以把Order 对应的值，存在order_no字段下
-    [queue inDataBase:^(FMDatabase *db){
-        if ([db open]) {
-            ib_updated=[db executeUpdate:@"insert into whs_log(usrname,usrpass,company_code,type_code,php_func,order_no,ref_no,value,excu_datetime,result_status,result_message,refkey,free1,free2,free3,free4,free5,free6,free7,free8,free9,free10,free11,free12,free13,free14,free15,free16,free17,free18,free19,free20)values(:usrname,:usrpass,:company_code,:type_code,:php_func,:order_no,:ref_no,:value,:excu_datetime,:result_status,:result_message,:refkey,:free1,:free2,:free3,:free4,:free5,:free6,:free7,:free8,:free9,:free10,:free11,:free12,:free13,:free14,:free15,:free16,:free17,:free18,:free19,:free20)" withParameterDictionary:idic_whs_data];
-            
-            [db close];
-        }
-    }];
-    return ib_updated;
-}
 
 - (NSMutableArray*)fn_get_group_data:(NSString*)enable{
     __block NSMutableArray *alist_result=[NSMutableArray array];
@@ -168,7 +150,38 @@
     return alist_result;
 }
 
-- (NSMutableArray*)fn_get_warehouse_record:(NSString*)str_type_code{
+- (BOOL)fn_delete_all_data{
+    __block BOOL ib_deleted=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_deleted=[db executeUpdate:@"delete from whs_config_header"];
+            ib_deleted=[db executeUpdate:@"delete from whs_upload_col"];
+            [db close];
+        }
+    }];
+    return ib_deleted;
+}
+
+#pragma mark -save warehouse log data
+- (BOOL)fn_save_warehouse_log:(NSMutableDictionary*)idic_whs_data{
+    __block BOOL ib_updated=NO;
+    NSString *key_value=[idic_whs_data valueForKey:@"order"];
+    [idic_whs_data removeObjectForKey:@"order"];
+    if (key_value==nil) {
+        key_value=@"";
+    }
+    [idic_whs_data setObject:key_value forKey:@"order_no"];
+    //因Order by中Order是个关键字，不能用“Order”做字段，所以把Order 对应的值，存在order_no字段下
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_updated=[db executeUpdate:@"insert into whs_log(usrname,usrpass,company_code,type_code,php_func,order_no,ref_no,value,excu_datetime,result_status,result_message,refkey,free1,free2,free3,free4,free5,free6,free7,free8,free9,free10,free11,free12,free13,free14,free15,free16,free17,free18,free19,free20)values(:usrname,:usrpass,:company_code,:type_code,:php_func,:order_no,:ref_no,:value,:excu_datetime,:result_status,:result_message,:refkey,:free1,:free2,:free3,:free4,:free5,:free6,:free7,:free8,:free9,:free10,:free11,:free12,:free13,:free14,:free15,:free16,:free17,:free18,:free19,:free20)" withParameterDictionary:idic_whs_data];
+            
+            [db close];
+        }
+    }];
+    return ib_updated;
+}
+- (NSMutableArray*)fn_get_warehouse_log:(NSString*)str_type_code{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
@@ -181,17 +194,17 @@
     }];
     return alist_result;
 }
-- (BOOL)fn_delete_all_data{
-    __block BOOL ib_deleted=NO;
+- (BOOL)fn_update_warehouse_log_data:(NSString*)unique_id result_status:(NSString*)result_status result_msg:(NSString*)result_msg{
+    __block BOOL ib_updated=NO;
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            ib_deleted=[db executeUpdate:@"delete from whs_config_header"];
-            ib_deleted=[db executeUpdate:@"delete from whs_upload_col"];
+            ib_updated=[db executeUpdate:@"update whs_log set result_status=?,result_message=? where unique_id=?",result_status,result_msg,unique_id];
             [db close];
         }
     }];
-    return ib_deleted;
+    return ib_updated;
 }
+
 - (BOOL)fn_delete_all_wharehouse_log{
     __block BOOL ib_deleted=NO;
     [queue inDataBase:^(FMDatabase *db){

@@ -16,6 +16,7 @@
 #import "Cell_advance_search.h"
 #import "SKSTableViewCell.h"
 #import "BarCodeViewController.h"
+#import "Web_whs_config.h"
 
 #define FIXSPACE 15
 #define TEXTFIELD_TAG 100
@@ -104,26 +105,18 @@ typedef NSString* (^passValue)(NSInteger tag);
     idic_textfield_value=[[NSDictionary dictionaryWithPropertiesOfObject:whs_obj]mutableCopy];
     _idic_is_mandatory=[[NSMutableDictionary alloc]initWithCapacity:1];
     DB_RespAppConfig *db_appConfig=[[DB_RespAppConfig alloc]init];
-    NSMutableArray *alist_appconfig=[db_appConfig fn_get_all_RespAppConfig_data];
-    NSString *php_addr;
-    NSString *company_code=[db_appConfig fn_get_company_code];
-    if ([alist_appconfig count]!=0) {
-        NSMutableDictionary *idic_appconfig=[alist_appconfig objectAtIndex:0];
-        php_addr=[idic_appconfig valueForKey:@"php_addr"];
-        idic_appconfig=nil;
-    }
+    NSString *php_addr=[db_appConfig fn_get_field_content:kPhp_addr];
+    NSString *company_code=[db_appConfig fn_get_field_content:kCompany_code];
     db_appConfig=nil;
     [idic_textfield_value setObject:company_code forKey:@"company_code"];
     [idic_textfield_value setObject:[_idic_maintform valueForKey:@"UPLOAD_TYPE"] forKey:@"type_code"];
     NSString *str_php_func_url=[_idic_maintform valueForKey:@"PHP_FUNC"];
-    str_php_func_url=[php_addr stringByAppendingString:str_php_func_url];
+    str_php_func_url=[php_addr stringByAppendingString:[NSString stringWithFormat:@"/%@",str_php_func_url]];
     [idic_textfield_value setObject:str_php_func_url forKey:@"php_func"];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
-    NSMutableArray *arr_login=[db_login fn_get_all_LoginInfoData];
-    if ([arr_login count]!=0) {
-        NSString *str_user_code=[[arr_login objectAtIndex:0] valueForKey:@"user_code"];
-        [idic_textfield_value setObject:str_user_code forKey:@"user_code"];
-    }
+    AuthContract *auth=[db_login fn_get_RequestAuth];
+    [idic_textfield_value setObject:auth.user_code forKey:@"usrname"];
+    [idic_textfield_value setObject:auth.password forKey:@"usrpass"];
     db_login=nil;
     
     _idic_datas=[[NSMutableDictionary alloc]init];
@@ -169,6 +162,15 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 #pragma mark -event action
 - (void)fn_save_whs_data{
+    //dic_parameters post到服务器的参数表
+    NSMutableDictionary *dic_parameters=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
+    for (NSString *str_key in idic_textfield_value.allKeys) {
+        NSString *str_value=[idic_textfield_value valueForKey:str_key];
+        if ([str_value length]==0) {
+            [dic_parameters removeObjectForKey:str_key];
+        }
+        str_value=nil;
+    }
     NSInteger flag_can_saved=1;
     //用于标识必填项名
     NSString *str_mandatory=@"";
@@ -182,16 +184,36 @@ typedef NSString* (^passValue)(NSInteger tag);
         str_value=nil;
     }
     if (![idic_textfield_value isEqual:_idic_value_copy] && flag_can_saved==1) {
-        DB_whs_config *db_whs=[[DB_whs_config alloc]init];
-        [db_whs fn_save_warehouse_log:[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value]];
-         _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
+        
+        Web_whs_config *web_obj=[[Web_whs_config alloc]init];
+        web_obj.str_url=[dic_parameters valueForKey:@"php_func"];
+        [dic_parameters removeObjectForKey:@"php_func"];
+        [web_obj fn_post_multipart_formData_to_server:dic_parameters completionHandler:^(NSMutableDictionary* dic_result){
+            NSDictionary *dic_operation=[[dic_result valueForKey:@"result"] valueForKey:@"operation"];
+            NSString *str_status=[dic_operation valueForKey:@"status"];
+            NSString *str_msg=[dic_operation valueForKey:@"message"];
+            DB_whs_config *db_whs=[[DB_whs_config alloc]init];
+#warning neet fix----
+            NSString *str_alert;
+            if (str_status) {
+               str_alert=@"上传成功";
+            }else{
+                str_alert=@"上传失败";
+            }
+            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            [_idic_datas removeAllObjects];
+            [idic_textfield_value setObject:str_msg forKey:@"result_message"];
+            [idic_textfield_value setObject:str_status forKey:@"result_status"];
+            [db_whs fn_save_warehouse_log:[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value]];
+            _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
+        }];
         
     }else if (flag_can_saved==1){
-    
+        
     }else{
         [self fn_show_alert_info:[NSString stringWithFormat:@"%@%@",str_mandatory, MY_LocalizedString(@"lbl_is_mandatory", nil)]];
     }
-   
 }
 - (void)fn_cancel_operation{
     NSInteger flag_isExit=0;
@@ -224,8 +246,13 @@ typedef NSString* (^passValue)(NSInteger tag);
     [self presentViewController:barCodeVC animated:YES completion:nil];
 }
 - (IBAction)fn_scan_log:(id)sender {
+    DB_whs_config *db_whs=[[DB_whs_config alloc]init];
+    NSString *unique_id=[_idic_maintform valueForKey:@"unique_id"];
+    NSMutableArray *arr_upload_cols=[db_whs fn_get_upload_col_data:unique_id];
     WhsLogs_ViewController *whs_VC=(WhsLogs_ViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"WhsLogs_ViewController"];
     whs_VC.str_upload_type=[_idic_maintform valueForKey:@"UPLOAD_TYPE"];
+    whs_VC.alist_cols=arr_upload_cols;
+    whs_VC.lang_code=lang_code;
     [self presentViewController:whs_VC animated:YES completion:nil];
 }
 #pragma mark -show alert

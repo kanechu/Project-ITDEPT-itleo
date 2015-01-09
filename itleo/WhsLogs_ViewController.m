@@ -9,6 +9,7 @@
 #import "WhsLogs_ViewController.h"
 #import "DB_whs_config.h"
 #import "Custom_BtnGraphicMixed.h"
+#import "Cal_lineHeight.h"
 @interface WhsLogs_ViewController ()
 
 @property (nonatomic,strong) NSMutableArray *alist_whs_logs;
@@ -21,6 +22,7 @@
 @implementation WhsLogs_ViewController
 
 @synthesize alist_whs_logs;
+@synthesize lang_code;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +47,7 @@
 }
 - (void)fn_set_property{
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
-    alist_whs_logs=[db_whs fn_get_warehouse_record:_str_upload_type];
+    alist_whs_logs=[db_whs fn_get_warehouse_log:_str_upload_type];
     
     [_ibtn_logo setTitle:MY_LocalizedString(@"lbl_scan_log", nil) forState:UIControlStateNormal];
     [_ibtn_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
@@ -60,15 +62,16 @@
 }
 - (NSString*)fn_get_whs_data:(NSMutableDictionary*)dic{
     NSString *str_whs=@"";
-    [dic removeObjectsForKeys:@[@"unique_id",@"user_code",@"upload_type",@"company_code"]];
-    for (NSString *str_key in [dic allKeys]) {
-       NSString *str_value=[dic valueForKey:str_key];
-        if ([str_value length]!=0) {
-            str_whs=[str_whs stringByAppendingFormat:@"%@后一天",str_value];
+    NSString *str_col_label;
+    for (NSMutableDictionary *dic_cols in _alist_cols) {
+        NSString *col_field=[dic_cols valueForKey:@"col_field"];
+        str_col_label=[dic_cols valueForKey:[self fn_get_col_label_field]];
+        if ([col_field isEqualToString:@"order"]) {
+            col_field=@"order_no";
         }
-        str_value=nil;
+        NSString *str_value=[dic valueForKey:col_field];
+        str_whs=[str_whs stringByAppendingFormat:@"%@:%@\n",str_col_label,str_value];
     }
-    
     return str_whs;
 }
 
@@ -84,10 +87,18 @@
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifer];
     }
-    UITextView *textView=(UITextView*)[cell.contentView viewWithTag:25];
-    textView.text=[self fn_get_whs_data:dic];
-    textView.layer.borderWidth=1;
-    textView.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    NSString *str_log=[self fn_get_whs_data:dic];
+    UILabel *ilb_log=(UILabel*)[cell.contentView viewWithTag:55];
+    ilb_log.text=str_log;
+    ilb_log.layer.borderWidth=1;
+    ilb_log.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    Cal_lineHeight *cal_obj=[[Cal_lineHeight alloc]init];
+    CGFloat height=[cal_obj fn_heightWithString:str_log font:[UIFont systemFontOfSize:17.0] constrainedToWidth:244];
+    if (height<100) {
+        height=80;
+    }
+    [ilb_log setFrame:CGRectMake(ilb_log.frame.origin.x, ilb_log.frame.origin.y, ilb_log.frame.size.width,height)];
+    
     UIButton *ibtn_edit=(UIButton*)[cell.contentView viewWithTag:35];
     [ibtn_edit setTitle:@"编辑" forState:UIControlStateNormal];
     ibtn_edit.tag=indexPath.row;
@@ -102,7 +113,21 @@
     ibtn_delete.layer.cornerRadius=5;
     return cell;
 }
+#pragma mark -UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSMutableDictionary *dic=[alist_whs_logs objectAtIndex:indexPath.row];
+    NSString *str_log=[self fn_get_whs_data:dic];
+    Cal_lineHeight *cal_obj=[[Cal_lineHeight alloc]init];
+    CGFloat height=[cal_obj fn_heightWithString:str_log font:[UIFont systemFontOfSize:17.0] constrainedToWidth:244];
+    if (height<21) {
+        height=21;
+    }
+    if (height+20<100) {
+        return 100;
+    }
+    return height+20;
 
+}
 /*
 #pragma mark - Navigation
 
@@ -113,7 +138,16 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)ibtn_logo:(id)sender {
+-(NSString *)fn_get_col_label_field{
+    NSString *filed_name=@"";
+    if ([lang_code isEqualToString:@"EN"]) {
+        filed_name=@"col_label_en";
+    }else if ([lang_code isEqualToString:@"CN"]){
+        filed_name=@"col_label_cn";
+    }else if ([lang_code isEqualToString:@"TCN"]){
+        filed_name=@"col_label_tcn";
+    }
+    return filed_name;
 }
+
 @end
