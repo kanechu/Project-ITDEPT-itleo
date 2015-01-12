@@ -96,7 +96,6 @@
 "lbl_record"="Records";
 "lbl_select"="Select All";
 "lbl_result"="Result";
-"lbl_date"="Date";
 "lbl_back"="Back";
 "lbl_status_show"="Status";
 "lbl_delete"="Delete";
@@ -185,3 +184,4 @@
 "lbl_is_mandatory"="can not be empty, items marked with * are mandatory!";
 "lbl_force_return"="Data being edited is not saved,you want to save it?";
 "lbl_discard"="Discard";
+"lbl_edit"="Edit";

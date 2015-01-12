@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface WhsLogs_ViewController : UIViewController
+
 @property (copy, nonatomic) NSString *str_upload_type;
+//存储UPLOAD_COL
 @property (nonatomic, nonatomic) NSMutableArray *alist_cols;
 @property (copy, nonatomic) NSString *lang_code;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @end

@@ -104,4 +104,19 @@
     }
     return lang_code;
 }
++(NSString*)fn_DateToStringDate:(NSDate*)date{
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *str=[dateFormatter stringFromDate:date];
+    dateFormatter=nil;
+    return str;
+}
+#pragma mark 同一个Label显示不同颜色的文字方法
++(NSMutableAttributedString*)fn_different_fontcolor:(NSString*)_str range:(NSRange)_range{
+    NSMutableAttributedString *str=[[NSMutableAttributedString alloc]initWithString:_str];
+    if (_range.length>0) {
+        [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:_range];
+    }
+    return str;
+}
 @end

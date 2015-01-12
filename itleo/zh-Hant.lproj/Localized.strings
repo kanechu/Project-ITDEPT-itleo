@@ -97,7 +97,6 @@
 "lbl_record"="記錄";
 "lbl_select"="全選";
 "lbl_result"="結果";
-"lbl_date"="日期";
 "lbl_back"="返回";
 "lbl_status_show"="狀態";
 "lbl_delete"="刪除";
@@ -187,3 +186,4 @@
 "lbl_is_mandatory"="不能為空，帶有＊的項是必填的！";
 "lbl_force_return"="正在編輯的數據沒有保存，要保存嗎？";
 "lbl_discard"="捨棄";
+"lbl_edit"="編輯";

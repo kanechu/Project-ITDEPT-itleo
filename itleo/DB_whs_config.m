@@ -171,6 +171,7 @@
         key_value=@"";
     }
     [idic_whs_data setObject:key_value forKey:@"order_no"];
+    [idic_whs_data setObject:[self fn_get_current_date] forKey:@"excu_datetime"];
     //因Order by中Order是个关键字，不能用“Order”做字段，所以把Order 对应的值，存在order_no字段下
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
@@ -208,8 +209,37 @@
 - (BOOL)fn_delete_all_wharehouse_log{
     __block BOOL ib_deleted=NO;
     [queue inDataBase:^(FMDatabase *db){
-        ib_deleted=[db executeUpdate:@"delete from whs_log"];
+        if ([db open]) {
+            ib_deleted=[db executeUpdate:@"delete from whs_log"];
+            [db close];
+        }
     }];
     return ib_deleted;
+}
+- (BOOL)fn_delete_wharehouse_log:(NSString*)unique_id{
+    __block BOOL ib_deleted=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_deleted=[db executeUpdate:@"delete from whs_log where unique_id=?",unique_id];
+            [db close];
+        }
+    }];
+    return ib_deleted;
+}
+- (BOOL)fn_delete_partOf_wharehouse_log:(NSString*)str_upload_type{
+    __block BOOL ib_deleted=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_deleted=[db executeUpdate:@"delete from whs_log where type_code=?",str_upload_type];
+            [db close];
+        }
+    }];
+    return ib_deleted;
+}
+-(NSString*)fn_get_current_date{
+    NSDate *current_date=[NSDate date];
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [formatter stringFromDate:current_date];
 }
 @end

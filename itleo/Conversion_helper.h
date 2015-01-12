@@ -27,4 +27,21 @@
  *  @return 语言类型
  */
 +(NSString*)fn_get_lang_code;
+/**
+ *  日期类型 date 转换成日期字符串
+ *
+ *  @param date 日期类型
+ *
+ *  @return 日期字符串
+ */
++(NSString*)fn_DateToStringDate:(NSDate*)date;
+/**
+ *  一个Label显示不同颜色
+ *
+ *  @param _str   需要变换颜色的字符串
+ *  @param _range 变换颜色字符串的范围
+ *
+ *  @return 结果
+ */
++(NSMutableAttributedString*)fn_different_fontcolor:(NSString*)_str range:(NSRange)_range;
 @end

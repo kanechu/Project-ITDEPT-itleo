@@ -10,12 +10,13 @@
 #import "DB_whs_config.h"
 #import "Custom_BtnGraphicMixed.h"
 #import "Cal_lineHeight.h"
-@interface WhsLogs_ViewController ()
+#import "CreateFootView.h"
+@interface WhsLogs_ViewController ()<UIActionSheetDelegate>
 
-@property (nonatomic,strong) NSMutableArray *alist_whs_logs;
+@property (nonatomic, strong) NSMutableArray *alist_whs_logs;
+@property (nonatomic, assign) NSInteger flag_select_row;
 
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_logo;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_cancel;
 
 @end
 
@@ -48,18 +49,62 @@
 - (void)fn_set_property{
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
     alist_whs_logs=[db_whs fn_get_warehouse_log:_str_upload_type];
+    db_whs=nil;
     
     [_ibtn_logo setTitle:MY_LocalizedString(@"lbl_scan_log", nil) forState:UIControlStateNormal];
     [_ibtn_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
+    
+    if ([alist_whs_logs count]!=0) {
+        self.tableview.tableFooterView=[[UIView alloc]init];
+    }else{
+        UIView *footView=[CreateFootView fn_create_footView:MY_LocalizedString(@"no_record_alert", nil)];
+        self.tableview.tableFooterView=footView;
+    }
+    
 }
 #pragma mark -event action
-- (IBAction)fn_edit_whs_log:(id)sender {
-}
-- (IBAction)fn_delete_whs_log:(id)sender {
-}
+
 - (IBAction)fn_cancel_the_browse:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+/*屏蔽 删除、添加
+- (void)fn_longPress_event_action:(UILongPressGestureRecognizer*)GestureRecognizer{
+    UITableViewCell *cell=(UITableViewCell*)[GestureRecognizer view];
+    _flag_select_row=cell.tag;
+    if (GestureRecognizer.state==UIGestureRecognizerStateBegan) {
+        UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) destructiveButtonTitle:MY_LocalizedString(@"ibtn_delete_all", nil) otherButtonTitles:MY_LocalizedString(@"lbl_delete", nil),MY_LocalizedString(@"lbl_edit", nil), nil];
+        [actionSheet showInView:self.view];
+    }
+}
+ 
+#pragma mark -UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex!=[actionSheet cancelButtonIndex]) {
+        DB_whs_config *db_whs=[[DB_whs_config alloc]init];
+        NSMutableDictionary *dic=[alist_whs_logs objectAtIndex:_flag_select_row];
+        NSString *uid=[dic valueForKey:@"unique_id"];
+        BOOL ib_deleted=NO;
+        if (buttonIndex==[actionSheet destructiveButtonIndex]) {
+            ib_deleted=[db_whs fn_delete_partOf_wharehouse_log:_str_upload_type];
+            if (ib_deleted) {
+                [alist_whs_logs removeAllObjects];
+            }
+        }else if (buttonIndex==[actionSheet firstOtherButtonIndex]){
+            ib_deleted=[db_whs fn_delete_wharehouse_log:uid];
+            if (ib_deleted) {
+                [alist_whs_logs removeObjectAtIndex:_flag_select_row];
+            }
+        }else if (buttonIndex==[actionSheet firstOtherButtonIndex]+1){
+            [self dismissViewControllerAnimated:YES completion:nil];
+            if (_callBack) {
+                _callBack(dic);
+            }
+        }
+       
+        [self.tableview reloadData];
+    }
+    
+}*/
 - (NSString*)fn_get_whs_data:(NSMutableDictionary*)dic{
     NSString *str_whs=@"";
     NSString *str_col_label;
@@ -70,7 +115,9 @@
             col_field=@"order_no";
         }
         NSString *str_value=[dic valueForKey:col_field];
-        str_whs=[str_whs stringByAppendingFormat:@"%@:%@\n",str_col_label,str_value];
+        str_whs=[str_whs stringByAppendingFormat:@"%@:  %@\n",str_col_label,str_value];
+        str_value=nil;
+        col_field=nil;
     }
     return str_whs;
 }
@@ -82,35 +129,47 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableDictionary *dic=[alist_whs_logs objectAtIndex:indexPath.row];
-   static NSString *cellIndentifer=@"cell_whs_log";
+    static NSString *cellIndentifer=@"cell_whs_log";
     UITableViewCell *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIndentifer];
     if (!cell) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifer];
     }
+    cell.tag=indexPath.row;
+   /* 屏蔽此手势操作
+    UILongPressGestureRecognizer *gestureRecongnizer=[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(fn_longPress_event_action:)];
+    [cell addGestureRecognizer:gestureRecongnizer];*/
     NSString *str_log=[self fn_get_whs_data:dic];
     UILabel *ilb_log=(UILabel*)[cell.contentView viewWithTag:55];
     ilb_log.text=str_log;
-    ilb_log.layer.borderWidth=1;
-    ilb_log.layer.borderColor=[UIColor lightGrayColor].CGColor;
     Cal_lineHeight *cal_obj=[[Cal_lineHeight alloc]init];
-    CGFloat height=[cal_obj fn_heightWithString:str_log font:[UIFont systemFontOfSize:17.0] constrainedToWidth:244];
-    if (height<100) {
-        height=80;
+    CGFloat height=[cal_obj fn_heightWithString:str_log font:ilb_log.font constrainedToWidth:ilb_log.frame.size.width];
+    if (height<21) {
+        height=21;
     }
     [ilb_log setFrame:CGRectMake(ilb_log.frame.origin.x, ilb_log.frame.origin.y, ilb_log.frame.size.width,height)];
     
-    UIButton *ibtn_edit=(UIButton*)[cell.contentView viewWithTag:35];
-    [ibtn_edit setTitle:@"编辑" forState:UIControlStateNormal];
-    ibtn_edit.tag=indexPath.row;
-    ibtn_edit.layer.borderWidth=1;
-    ibtn_edit.layer.borderColor=[UIColor lightGrayColor].CGColor;
-    ibtn_edit.layer.cornerRadius=5;
-    UIButton *ibtn_delete=(UIButton*)[cell.contentView viewWithTag:45];
-    [ibtn_delete setTitle:MY_LocalizedString(@"lbl_delete", nil) forState:UIControlStateNormal];
-    ibtn_delete.tag=indexPath.row;
-    ibtn_delete.layer.borderWidth=1;
-    ibtn_delete.layer.borderColor=[UIColor lightGrayColor].CGColor;
-    ibtn_delete.layer.cornerRadius=5;
+    UILabel *ilb_result=(UILabel*)[cell.contentView viewWithTag:65];
+    NSString *str_status=[dic valueForKey:@"result_status"];
+    if ([str_status isEqualToString:@"1"]) {
+        ilb_result.textColor=COLOR_DARK_GREEN1;
+    }else{
+        ilb_result.textColor=COLOR_DARK_RED;
+    }
+    NSString *subStr_result=MY_LocalizedString(@"lbl_result", nil);
+    NSString *str_result=[NSString stringWithFormat:@"%@:  %@",subStr_result,[dic valueForKey:@"result_message"]];
+    NSRange range;
+    range.location=0;
+    range.length=[subStr_result length]+1;
+    ilb_result.attributedText=[Conversion_helper fn_different_fontcolor:str_result range:range];
+    str_result=nil;
+    subStr_result=nil;
+    
+    
+    UILabel *ilb_date=(UILabel*)[cell.contentView viewWithTag:75];
+    NSString *str_date=[dic valueForKey:@"excu_datetime"];
+    ilb_date.text=[NSString stringWithFormat:@"%@  %@",MY_LocalizedString(@"lbl_date", nil),str_date];
+    str_date=nil;
+    
     return cell;
 }
 #pragma mark -UITableViewDelegate
@@ -118,14 +177,11 @@
     NSMutableDictionary *dic=[alist_whs_logs objectAtIndex:indexPath.row];
     NSString *str_log=[self fn_get_whs_data:dic];
     Cal_lineHeight *cal_obj=[[Cal_lineHeight alloc]init];
-    CGFloat height=[cal_obj fn_heightWithString:str_log font:[UIFont systemFontOfSize:17.0] constrainedToWidth:244];
+    CGFloat height=[cal_obj fn_heightWithString:str_log font:[UIFont systemFontOfSize:17.0] constrainedToWidth:300];
     if (height<21) {
         height=21;
     }
-    if (height+20<100) {
-        return 100;
-    }
-    return height+20;
+    return height+20+42;
 
 }
 /*

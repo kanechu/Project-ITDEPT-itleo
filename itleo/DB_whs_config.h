@@ -30,6 +30,8 @@
 
 - (BOOL)fn_update_warehouse_log_data:(NSString*)unique_id result_status:(NSString*)result_status result_msg:(NSString*)result_msg;
 
+- (BOOL)fn_delete_wharehouse_log:(NSString*)unique_id;
+- (BOOL)fn_delete_partOf_wharehouse_log:(NSString*)str_upload_type;
 - (BOOL)fn_delete_all_wharehouse_log;
 
 @end
