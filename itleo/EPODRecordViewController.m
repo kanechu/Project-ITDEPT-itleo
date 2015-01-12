@@ -204,14 +204,14 @@
         str_date=[dic valueForKey:@"error_date"];
     }
     if ([str_date length]!=0) {
-        cell.ilb_date.text=[NSString stringWithFormat:@"%@:  %@",MY_LocalizedString(@"lbl_date", nil),[self fn_get_date_from_millisecond:str_date]] ;
+        cell.ilb_date.text=[NSString stringWithFormat:@"%@  %@",MY_LocalizedString(@"lbl_date", nil),[self fn_get_date_from_millisecond:str_date]] ;
     }
     NSString *subresult=MY_LocalizedString(@"lbl_result", nil);
     NSString *result=[NSString stringWithFormat:@"%@:  %@",subresult,[self fn_get_detail_declare:[dic valueForKey:@"result"]]];
     NSRange range;
     range.location=0;
     range.length=[subresult length]+1;
-    cell.ilb_result.attributedText=[self fn_different_fontcolor:result range:range];
+    cell.ilb_result.attributedText=[Conversion_helper fn_different_fontcolor:result range:range];
     cell.ilb_delete.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_delete", nil)];
     [cell.ibox_Delete addTarget:self action:@selector(fn_checkBoxTapped:forEvent:) forControlEvents:UIControlEventValueChanged];
     if (flag_isAll==1) {
@@ -275,14 +275,6 @@
         str_field=@"status_desc_tc";
     }
     return str_field;
-}
-#pragma mark 同一个Label显示不同颜色的文字方法
--(NSMutableAttributedString*)fn_different_fontcolor:(NSString*)_str range:(NSRange)_range{
-    NSMutableAttributedString *str=[[NSMutableAttributedString alloc]initWithString:_str];
-    if (_range.length>0) {
-        [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:_range];
-    }
-    return str;
 }
 
 #pragma mark -checkBox event action

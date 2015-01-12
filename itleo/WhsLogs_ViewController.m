@@ -174,10 +174,13 @@
 }
 #pragma mark -UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellIndentifer=@"cell_whs_log";
+    UITableViewCell *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIndentifer];
+    UILabel *ilb_log=(UILabel*)[cell.contentView viewWithTag:55];
     NSMutableDictionary *dic=[alist_whs_logs objectAtIndex:indexPath.row];
     NSString *str_log=[self fn_get_whs_data:dic];
     Cal_lineHeight *cal_obj=[[Cal_lineHeight alloc]init];
-    CGFloat height=[cal_obj fn_heightWithString:str_log font:[UIFont systemFontOfSize:17.0] constrainedToWidth:300];
+    CGFloat height=[cal_obj fn_heightWithString:str_log font:ilb_log.font constrainedToWidth:ilb_log.frame.size.width];
     if (height<21) {
         height=21;
     }
