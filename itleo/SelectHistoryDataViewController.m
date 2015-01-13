@@ -88,7 +88,10 @@
         }else{
             cell.accessoryType=UITableViewCellAccessoryNone;
         }
+    }else if(_flag_type==2){
+        ilb_sys_code.text=[alist_sys_code objectAtIndex:indexPath.row];
     }else{
+        
         ilb_sys_code.text=[[alist_sys_code objectAtIndex:indexPath.row]valueForKey:_field_name];
     }
     return cell;
@@ -111,6 +114,12 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         select_summary_type=[alist_sys_code objectAtIndex:indexPath.row];
         [[NSNotificationCenter defaultCenter]postNotificationName:@"chart_summary_type" object:select_summary_type];
+    }else if(_flag_type==2){
+        NSString *str_option=[alist_sys_code objectAtIndex:indexPath.row];
+        if (_callback_str) {
+            _callback_str(str_option);
+        }
+
     }else{
         NSMutableDictionary *sys_code=[alist_sys_code objectAtIndex:indexPath.row];
         if (_callback) {
@@ -123,10 +132,10 @@
 //Override to support conditional editing of the table view
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
     //Return NO if you do not want the specified item to be editable.
-    if (_flag_type==1) {
-        return NO;
+    if (_flag_type==0) {
+        return YES;
     }
-    return YES;
+    return NO;
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle==UITableViewCellEditingStyleDelete) {

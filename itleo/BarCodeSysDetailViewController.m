@@ -17,10 +17,11 @@
 #import "SKSTableViewCell.h"
 #import "BarCodeViewController.h"
 #import "Web_whs_config.h"
-
+#import "SelectHistoryDataViewController.h"
+#import "PopViewManager.h"
 #define FIXSPACE 15
 #define TEXTFIELD_TAG 100
-typedef NSString* (^passValue)(NSInteger tag);
+typedef NSDictionary* (^passValue)(NSInteger tag);
 
 @interface BarCodeSysDetailViewController ()<SKSTableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 
@@ -40,6 +41,9 @@ typedef NSString* (^passValue)(NSInteger tag);
 @property (strong, nonatomic) NSMutableDictionary *idic_datas;
 
 @property (nonatomic,strong) passValue pass_Value;
+@property (strong,nonatomic)UIDatePicker *idp_picker;
+//id_startdate用来记录日期拾取器获取的日期
+@property (copy,nonatomic)NSDate *id_startdate;
 
 @end
 
@@ -48,6 +52,8 @@ typedef NSString* (^passValue)(NSInteger tag);
 @synthesize alist_filter_upload_cols;
 @synthesize idic_textfield_value;
 @synthesize lang_code;
+@synthesize idp_picker;
+@synthesize id_startdate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,6 +69,7 @@ typedef NSString* (^passValue)(NSInteger tag);
     [super viewDidLoad];
   
     [self fn_set_property];
+    [self fn_create_datePick];
     [self fn_add_right_items];
     // Do any additional setup after loading the view.
 }
@@ -160,10 +167,27 @@ typedef NSString* (^passValue)(NSInteger tag);
     self.navigationItem.rightBarButtonItems=array;
     array=nil;
 }
+-(NSMutableDictionary*)fn_get_options:(NSString*)col_options{
+    NSMutableDictionary *dic_options=[[NSMutableDictionary alloc]init];
+    NSArray *arr_options=[col_options componentsSeparatedByString:@","];
+    for (NSString *str_option in arr_options) {
+        NSArray *arr_subOpitons=[str_option componentsSeparatedByString:@"/"];
+        NSString *str_value=[arr_subOpitons objectAtIndex:0];
+        NSString *str_key=[arr_subOpitons objectAtIndex:1];
+        [dic_options setObject:str_value forKey:str_key];
+        arr_subOpitons=nil;
+        str_value=nil;
+        str_key=nil;
+        
+    }
+    return dic_options;
+}
 #pragma mark -event action
 - (void)fn_save_whs_data{
     //dic_parameters post到服务器的参数表
     NSMutableDictionary *dic_parameters=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
+    [idic_textfield_value setObject:@"" forKey:@"result_message"];
+    [idic_textfield_value setObject:@"" forKey:@"result_status"];
     for (NSString *str_key in idic_textfield_value.allKeys) {
         NSString *str_value=[idic_textfield_value valueForKey:str_key];
         if ([str_value length]==0) {
@@ -188,20 +212,20 @@ typedef NSString* (^passValue)(NSInteger tag);
         Web_whs_config *web_obj=[[Web_whs_config alloc]init];
         web_obj.str_url=[dic_parameters valueForKey:@"php_func"];
         [dic_parameters removeObjectForKey:@"php_func"];
+        [dic_parameters removeObjectForKey:@"company_code"];
         [web_obj fn_post_multipart_formData_to_server:dic_parameters completionHandler:^(NSMutableDictionary* dic_result){
             NSDictionary *dic_operation=[[dic_result valueForKey:@"result"] valueForKey:@"operation"];
-            NSString *str_status=[dic_operation valueForKey:@"status"];
+            NSString  *str_status=[dic_operation valueForKey:@"status"];
             NSString *str_msg=[dic_operation valueForKey:@"message"];
             DB_whs_config *db_whs=[[DB_whs_config alloc]init];
 #warning neet fix----
             NSString *str_alert;
-            if (str_status) {
-               str_alert=@"上传成功";
+            if ([str_status boolValue]) {
+                str_alert=@"上传成功";
             }else{
                 str_alert=@"上传失败";
             }
-            UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            [alert show];
+            [self fn_show_alert_info:str_alert];
             [_idic_datas removeAllObjects];
             [idic_textfield_value setObject:str_msg forKey:@"result_message"];
             [idic_textfield_value setObject:str_status forKey:@"result_status"];
@@ -236,15 +260,61 @@ typedef NSString* (^passValue)(NSInteger tag);
     NSInteger tag=ibtn.tag;
     BarCodeViewController *barCodeVC=(BarCodeViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"BarCodeViewController"];
     barCodeVC.callback=^(NSString *str_code){
-        NSString *os_column_key=_pass_Value(tag);
-        [idic_textfield_value setObject:str_code forKey:os_column_key];
-        
+        NSDictionary *idic_cols=_pass_Value(tag);
+        NSString *col_field=[idic_cols valueForKey:@"col_field"];
+        [idic_textfield_value setObject:str_code forKey:col_field];
+        idic_cols=nil;
         self.skstableView.expandableCells=nil;
         [self.skstableView reloadData];
         [self.skstableView fn_expandall];
     };
     [self presentViewController:barCodeVC animated:YES completion:nil];
 }
+- (void)fn_choice_value:(id)sender{
+    UIButton *ibtn=(UIButton*)sender;
+    NSDictionary *idic_cols=_pass_Value(ibtn.tag);
+    NSString *col_field=[idic_cols valueForKey:@"col_field"];
+    NSString *col_option=[idic_cols valueForKey:@"col_option"];
+    SelectHistoryDataViewController *selectVC=(SelectHistoryDataViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectHistoryDataViewController"];
+    selectVC.flag_type=2;
+    NSMutableDictionary *dic_options=[self fn_get_options:col_option];
+    selectVC.alist_sys_code=[[dic_options allKeys]mutableCopy];
+    selectVC.callback_str=^(NSString *str_key){
+        NSString *str_value=[dic_options valueForKey:str_key];
+        [idic_textfield_value setObject:str_value forKey:col_field];
+        str_value=nil;
+        self.skstableView.expandableCells=nil;
+        [self.skstableView reloadData];
+        [self.skstableView fn_expandall];
+    };
+    PopViewManager *pop_obj=[[PopViewManager alloc]init];
+    [pop_obj fn_PopupView:selectVC Size:CGSizeMake(230, 300) uponView:self];
+}
+- (void)fn_click_checkBox:(id)sender {
+    UIButton *ibtn=(UIButton*)sender;
+    NSDictionary *idic_cols=_pass_Value(ibtn.tag);
+    NSString *col_field=[idic_cols valueForKey:@"col_field"];
+    NSString *is_selected=[idic_textfield_value valueForKey:col_field];
+    BOOL selected=[is_selected boolValue];
+    ibtn.selected=!ibtn.selected;
+    NSString *selected_value=nil;
+    if (ibtn.selected) {
+        if (selected) {
+            selected_value=@"0";
+        }else{
+            selected_value=@"1";
+        }
+    }else{
+        if (selected) {
+            selected_value=@"0";
+        }else{
+            selected_value=@"1";
+        }
+    }
+    [idic_textfield_value setObject:selected_value forKey:col_field];
+    [idic_textfield_value setObject:selected_value  forKey:col_field];
+}
+
 - (IBAction)fn_scan_log:(id)sender {
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
     NSString *unique_id=[_idic_maintform valueForKey:@"unique_id"];
@@ -257,7 +327,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 #pragma mark -show alert
 - (void)fn_show_alert_info:(NSString*)str_alert{
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:nil cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
     [alert show];
 }
 #pragma mark -UIAlertViewDelegate
@@ -272,15 +342,16 @@ typedef NSString* (^passValue)(NSInteger tag);
     self.checkText=(Custom_textField*)textField;
     [self.checkText fn_setLine_color:[UIColor blueColor]];
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self.checkText fn_setLine_color:[UIColor lightGrayColor]];
-    NSString *os_column_key=_pass_Value(textField.tag);
-
-    if ([textField.text length]!=0) {
-        [idic_textfield_value setObject:textField.text forKey:os_column_key];
-        [_idic_datas setObject:textField.text forKey:os_column_key];
+    NSDictionary *idic_cols=_pass_Value(textField.tag);
+    NSString *col_field=[idic_cols valueForKey:@"col_field"];
+    if (textField.text!=nil) {
+        [idic_textfield_value setObject:textField.text forKey:col_field];
+        [_idic_datas setObject:textField.text forKey:col_field];
     }
-    os_column_key=nil;
+    col_field=nil;
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -315,25 +386,53 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 -(UITableViewCell*)tableView:(SKSTableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath{
     NSMutableDictionary *dic=alist_filter_upload_cols[indexPath.row][indexPath.subRow-1];
-    static NSString *cellIndentifer=@"Cell_whs_config";
-    Cell_advance_search *cell=[self.skstableView dequeueReusableCellWithIdentifier:cellIndentifer];
-    
-    cell.itf_inputdata.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
-    cell.itf_inputdata.delegate=self;
-    
     __block BarCodeSysDetailViewController * blockSelf=self;
-    _pass_Value=^NSString*(NSInteger tag){
+    _pass_Value=^NSDictionary*(NSInteger tag){
         NSInteger i=tag/TEXTFIELD_TAG;
         NSInteger j=tag-i*TEXTFIELD_TAG-1;
-        NSMutableDictionary *idic=blockSelf->alist_filter_upload_cols[i][j];
-        NSString *col_field=[idic valueForKey:@"col_field"];
-        return col_field;
+        return blockSelf->alist_filter_upload_cols[i][j];
     };
     NSString *col_type=[dic valueForKey:@"col_type"];
     NSInteger is_mandatory=[[dic valueForKey:@"is_mandatory"]integerValue];
     NSString *col_field=[dic valueForKey:@"col_field"];
-    cell.itf_inputdata.text=[idic_textfield_value valueForKey:col_field];
     NSString *language_type=[self fn_get_col_label_field];
+    
+    if ([col_type isEqualToString:@"checkbox"]) {
+        static NSString *cellIdentifer=@"cell_checkBox";
+        UITableViewCell *cell=[self.skstableView dequeueReusableCellWithIdentifier:cellIdentifer];
+        UILabel *ilb_alert=(UILabel*)[cell.contentView viewWithTag:55];
+        ilb_alert.text=[dic valueForKey:language_type];
+        
+        UIButton *ibtn_select=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 38, 38)];
+        [ibtn_select addTarget:self action:@selector(fn_click_checkBox:) forControlEvents:UIControlEventTouchUpInside];
+        ibtn_select.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
+        NSString *is_selected=[idic_textfield_value valueForKey:col_field];
+        if ([is_selected length]==0) {
+            is_selected=@"0";
+        }
+        if ([is_selected isEqualToString:@"0"]) {
+            [ibtn_select setImage:[UIImage imageNamed:@"unselected"] forState:UIControlStateNormal];
+            [ibtn_select setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateSelected];
+        }
+        if ([is_selected isEqualToString:@"1"]) {
+            [ibtn_select setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
+            [ibtn_select setImage:[UIImage imageNamed:@"unselected"] forState:UIControlStateSelected];
+        }
+        cell.accessoryView=ibtn_select;
+        ibtn_select=nil;
+        return cell;
+    }
+    
+    
+    static NSString *cellIndentifer=@"Cell_whs_config";
+    Cell_advance_search *cell=[self.skstableView dequeueReusableCellWithIdentifier:cellIndentifer];
+    cell.accessoryView=nil;
+    cell.itf_inputdata.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
+    cell.itf_inputdata.delegate=self;
+
+    cell.itf_inputdata.text=[idic_textfield_value valueForKey:col_field];
+    cell.flag_enable=0;
+    cell.keyboardType=kDefault_keyboard;
     if (is_mandatory==0) {
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:language_type]];
         
@@ -351,9 +450,30 @@ typedef NSString* (^passValue)(NSInteger tag);
         [ibtn_barCode addTarget:self action:@selector(fn_scan_the_barcode:) forControlEvents:UIControlEventTouchUpInside];
         ibtn_barCode.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
         cell.accessoryView=ibtn_barCode;
+        cell.itf_inputdata.inputView=nil;
         ibtn_barCode=nil;
-    }else{
-        cell.accessoryView=nil;
+    }else if([col_type isEqualToString:@"string"]){
+        cell.itf_inputdata.inputView=nil;
+    }else if ([col_type isEqualToString:@"date"]){
+
+        cell.itf_inputdata.inputView=idp_picker;
+        cell.itf_inputdata.inputAccessoryView=[self fn_create_toolbar];
+        cell.itf_inputdata.text=[Conversion_helper fn_DateToStringDate:id_startdate];
+       
+    }else if ([col_type isEqualToString:@"int"]){
+        cell.keyboardType=kNum_keyboard;
+    }else if ([col_type isEqualToString:@"numeric"]){
+        cell.keyboardType=kDecimal_keyboard;
+    }else if ([col_type isEqualToString:@"choice"]){
+        cell.flag_enable=1;
+        UIButton *ibtn_choice=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,48, 38)];
+        [ibtn_choice setTitle:MY_LocalizedString(@"ibtn_choose", nil) forState:UIControlStateNormal];
+        [ibtn_choice setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [ibtn_choice addTarget:self action:@selector(fn_choice_value:) forControlEvents:UIControlEventTouchUpInside];
+        ibtn_choice.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
+        cell.accessoryView=ibtn_choice;
+        cell.itf_inputdata.inputView=nil;
+        ibtn_choice=nil;
     }
     return cell;
 }
@@ -364,7 +484,45 @@ typedef NSString* (^passValue)(NSInteger tag);
     return 35;
 }
 -(CGFloat)tableView:(SKSTableView *)tableView heightForSubRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSMutableDictionary *dic=alist_filter_upload_cols[indexPath.row][indexPath.subRow-1];
+    NSString *col_type=[dic valueForKey:@"col_type"];
+    if ([col_type isEqualToString:@"checkbox"]) {
+        return 44;
+    }
     return 80;
+}
+
+#pragma mark UIDatePick
+-(void)fn_create_datePick{
+    //初始化UIDatePicker
+    idp_picker=[[UIDatePicker alloc]init];
+    [idp_picker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:[Conversion_helper fn_get_lang_code]]];
+    [idp_picker setAutoresizingMask:(UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)];
+    //设置UIDatePicker的显示模式
+    [idp_picker setDatePickerMode:UIDatePickerModeDate];
+    id_startdate=[idp_picker date];
+    //当值发生改变的时候调用的方法
+    [idp_picker addTarget:self action:@selector(fn_change_date) forControlEvents:UIControlEventValueChanged];
+    
+}
+-(void)fn_change_date{
+    //获得当前UIPickerDate所在的日期
+    id_startdate=[idp_picker date];
+    
+}
+#pragma mark create toolbar
+-(UIToolbar*)fn_create_toolbar{
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    [toolbar setBarStyle:UIBarStyleBlackOpaque];
+    [toolbar sizeToFit];
+    UIBarButtonItem *buttonflexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *buttonDone = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(fn_Click_done:)];
+    
+    [toolbar setItems:[NSArray arrayWithObjects:buttonflexible,buttonDone, nil]];
+    return toolbar;
+}
+-(void)fn_Click_done:(id)sender{
+    [self.skstableView reloadData];
 }
 
 /*

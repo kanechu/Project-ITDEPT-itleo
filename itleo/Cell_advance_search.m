@@ -25,5 +25,20 @@
 
     // Configure the view for the selected state
 }
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    if (_flag_enable==0) {
+        _itf_inputdata.enabled=YES;
+    }else{
+        _itf_inputdata.enabled=NO;
+    }
+    if (_keyboardType==kNum_keyboard) {
+        _itf_inputdata.keyboardType=UIKeyboardTypeNumberPad;
+    }else if (_keyboardType==kDecimal_keyboard){
+        _itf_inputdata.keyboardType=UIKeyboardTypeDecimalPad;
+    }else{
+        _itf_inputdata.keyboardType=UIKeyboardTypeDefault;
+    }
+}
 
 @end

@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 typedef void (^callBack_code)(NSMutableDictionary*);
+typedef void (^callBack_str)(NSString*);
+
 @interface SelectHistoryDataViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 @property (strong,nonatomic)callBack_code callback;
+@property (strong,nonatomic) callBack_str callback_str;
 @property (strong,nonatomic)NSMutableArray *alist_sys_code;
 @property (copy,nonatomic)NSString *field_name;
 @property (assign,nonatomic)NSInteger flag_type;
