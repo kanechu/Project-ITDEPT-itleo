@@ -185,3 +185,5 @@
 "lbl_force_return"="Data being edited is not saved,you want to save it?";
 "lbl_discard"="Discard";
 "lbl_edit"="Edit";
+"lbl_save_fail"="Save failed!";
+"lbl_has_saved"="The data has been saved, no need to repeat save!";

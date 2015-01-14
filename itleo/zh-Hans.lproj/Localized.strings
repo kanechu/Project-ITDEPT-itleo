@@ -184,3 +184,5 @@
 "lbl_force_return"="正在编辑的数据没有保存，要保存吗？";
 "lbl_discard"="舍弃";
 "lbl_edit"="编辑";
+"lbl_save_fail"="保存失败！";
+"lbl_has_saved"="该数据已经保存，无需重复保存！";

@@ -183,7 +183,12 @@
         ilb_result.textColor=COLOR_DARK_RED;
     }
     NSString *subStr_result=MY_LocalizedString(@"lbl_result", nil);
-    NSString *str_result=[NSString stringWithFormat:@"%@:  %@",subStr_result,[dic valueForKey:@"result_message"]];
+    NSString *result_message=[dic valueForKey:@"result_message"];
+    if ([str_status isEqualToString:@"2"]) {
+        result_message=MY_LocalizedString(@"lbl_Network_error", nil);
+    }
+    NSString *str_result=[NSString stringWithFormat:@"%@:  %@",subStr_result,result_message];
+    result_message=nil;
     NSRange range;
     range.location=0;
     range.length=[subStr_result length]+1;

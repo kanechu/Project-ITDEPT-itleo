@@ -19,6 +19,7 @@
 #import "Web_whs_config.h"
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
+#import "CheckNetWork.h"
 #define FIXSPACE 15
 #define TEXTFIELD_TAG 100
 typedef NSDictionary* (^passValue)(NSInteger tag);
@@ -223,29 +224,36 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
         web_obj.str_url=[dic_parameters valueForKey:@"php_func"];
         [dic_parameters removeObjectForKey:@"php_func"];
         [dic_parameters removeObjectForKey:@"company_code"];
-
-        [web_obj fn_post_multipart_formData_to_server:dic_parameters completionHandler:^(NSMutableDictionary* dic_result){
-            NSDictionary *dic_operation=[[dic_result valueForKey:@"result"] valueForKey:@"operation"];
-            NSString  *str_status=[dic_operation valueForKey:@"status"];
-            NSString *str_msg=[dic_operation valueForKey:@"message"];
-            DB_whs_config *db_whs=[[DB_whs_config alloc]init];
-#warning neet fix----
-            NSString *str_alert;
-            if ([str_status boolValue]) {
-                str_alert=@"上传成功";
-            }else{
-                str_alert=@"上传失败";
-            }
-            [self fn_show_alert_info:str_alert];
-            [_idic_datas removeAllObjects];
-            [idic_textfield_value setObject:str_msg forKey:@"result_message"];
-            [idic_textfield_value setObject:str_status forKey:@"result_status"];
+        
+        DB_whs_config *db_whs=[[DB_whs_config alloc]init];
+        CheckNetWork *check_obj=[[CheckNetWork alloc]init];
+        if ([check_obj fn_isPopUp_alert]) {
+            //status為2代表網絡連接失敗
+            [idic_textfield_value setObject:@"2" forKey:@"result_status"];
             [db_whs fn_save_warehouse_log:[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value]];
             _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
-        }];
+        }else{
+            [SVProgressHUD showWithStatus:MY_LocalizedString(@"lbl_saving_alert", nil)];
+            [web_obj fn_post_multipart_formData_to_server:dic_parameters completionHandler:^(NSMutableDictionary* dic_result){
+                NSDictionary *dic_operation=[[dic_result valueForKey:@"result"] valueForKey:@"operation"];
+                NSString  *str_status=[dic_operation valueForKey:@"status"];
+                NSString *str_msg=[dic_operation valueForKey:@"message"];
+                
+                if ([str_status boolValue]) {
+                    [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_save_success", nil) afterDelay:2.0];
+                }else{
+                    [SVProgressHUD dismissWithError:MY_LocalizedString(@"lbl_save_fail", nil) afterDelay:2.0];
+                }
+                [_idic_datas removeAllObjects];
+                [idic_textfield_value setObject:str_msg forKey:@"result_message"];
+                [idic_textfield_value setObject:str_status forKey:@"result_status"];
+                [db_whs fn_save_warehouse_log:[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value]];
+                _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
+            }];
+        }
         
     }else if (flag_can_saved==1 && flag_isSaved==0){
-        [self fn_show_alert_info:@"已经保存过输入的数据，无需重复保存"];
+        [self fn_show_alert_info:MY_LocalizedString(@"lbl_has_saved", nil)];
         _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
     }else{
         [self fn_show_alert_info:[NSString stringWithFormat:@"%@%@",str_mandatory, MY_LocalizedString(@"lbl_is_mandatory", nil)]];

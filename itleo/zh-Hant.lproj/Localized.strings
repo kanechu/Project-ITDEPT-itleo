@@ -187,3 +187,5 @@
 "lbl_force_return"="正在編輯的數據沒有保存，要保存嗎？";
 "lbl_discard"="捨棄";
 "lbl_edit"="編輯";
+"lbl_save_fail"="保存失敗！";
+"lbl_has_saved"="該數據已經保存，無需重複保存！";
