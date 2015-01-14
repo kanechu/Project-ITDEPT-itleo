@@ -105,6 +105,29 @@
     }
     
 }*/
+-(NSString*)fn_get_show_options:(NSMutableDictionary*)dic_cols value:(NSString*)str_value{
+    NSString *col_options=[dic_cols valueForKey:@"col_option"];
+    NSMutableDictionary *idic_options=[[NSMutableDictionary alloc]init];
+    NSArray *arr_options=[col_options componentsSeparatedByString:@","];
+    for (NSString *str_option in arr_options) {
+        NSArray *arr_subOpitons=[str_option componentsSeparatedByString:@"/"];
+        NSString *str_value=[arr_subOpitons objectAtIndex:0];
+        NSString *str_key=[arr_subOpitons objectAtIndex:1];
+        [idic_options setObject:str_value forKey:str_key];
+        arr_subOpitons=nil;
+        str_value=nil;
+        str_key=nil;
+        
+    }
+    for (NSString *str_key in idic_options) {
+        NSString *value=[idic_options valueForKey:str_key];
+        if ([value isEqualToString:str_value]) {
+            str_value=str_key;
+            break;
+        }
+    }
+    return str_value;
+}
 - (NSString*)fn_get_whs_data:(NSMutableDictionary*)dic{
     NSString *str_whs=@"";
     NSString *str_col_label;
@@ -115,6 +138,10 @@
             col_field=@"order_no";
         }
         NSString *str_value=[dic valueForKey:col_field];
+        NSString *col_type=[dic_cols valueForKey:@"col_type"];
+        if ([col_type isEqualToString:@"choice"]) {
+            str_value=[self fn_get_show_options:dic_cols value:str_value];
+        }
         str_whs=[str_whs stringByAppendingFormat:@"%@:  %@\n",str_col_label,str_value];
         str_value=nil;
         col_field=nil;

@@ -39,7 +39,8 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
 //存储必须输入数据的项
 @property (strong, nonatomic) NSMutableDictionary *idic_is_mandatory;
 @property (strong, nonatomic) NSMutableDictionary *idic_datas;
-
+//存储选项
+@property (strong, nonatomic)   NSMutableDictionary *dic_options;
 @property (nonatomic,strong) passValue pass_Value;
 @property (strong,nonatomic)UIDatePicker *idp_picker;
 //id_startdate用来记录日期拾取器获取的日期
@@ -54,6 +55,7 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
 @synthesize lang_code;
 @synthesize idp_picker;
 @synthesize id_startdate;
+@synthesize dic_options;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -168,22 +170,41 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     array=nil;
 }
 -(NSMutableDictionary*)fn_get_options:(NSString*)col_options{
-    NSMutableDictionary *dic_options=[[NSMutableDictionary alloc]init];
+    NSMutableDictionary *idic_options=[[NSMutableDictionary alloc]init];
     NSArray *arr_options=[col_options componentsSeparatedByString:@","];
     for (NSString *str_option in arr_options) {
         NSArray *arr_subOpitons=[str_option componentsSeparatedByString:@"/"];
         NSString *str_value=[arr_subOpitons objectAtIndex:0];
         NSString *str_key=[arr_subOpitons objectAtIndex:1];
-        [dic_options setObject:str_value forKey:str_key];
+        [idic_options setObject:str_value forKey:str_key];
         arr_subOpitons=nil;
         str_value=nil;
         str_key=nil;
         
     }
-    return dic_options;
+    return idic_options;
 }
 #pragma mark -event action
 - (void)fn_save_whs_data{
+    //用于标识刚输入的内容，是否已经保存过
+    NSInteger flag_isSaved=1;
+    if ([idic_textfield_value isEqual:_idic_value_copy]) {
+        flag_isSaved=0;
+    }
+    //用于标识必填项，是否不为空
+     NSInteger flag_can_saved=1;
+    //用于存储必填项名
+    NSString *str_mandatory=@"";
+    for (NSString *str_key in [_idic_is_mandatory allKeys]) {
+        NSString *str_value=[idic_textfield_value valueForKey:str_key];
+        if ([str_value length]==0) {
+            flag_can_saved=0;
+            str_mandatory=[_idic_is_mandatory valueForKey:str_key];
+            break;
+        }
+        str_value=nil;
+    }
+    
     //dic_parameters post到服务器的参数表
     NSMutableDictionary *dic_parameters=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
     [idic_textfield_value setObject:@"" forKey:@"result_message"];
@@ -195,24 +216,14 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
         }
         str_value=nil;
     }
-    NSInteger flag_can_saved=1;
-    //用于标识必填项名
-    NSString *str_mandatory=@"";
-    for (NSString *str_key in [_idic_is_mandatory allKeys]) {
-        NSString *str_value=[idic_textfield_value valueForKey:str_key];
-        if ([str_value length]==0) {
-            flag_can_saved=0;
-            str_mandatory=[_idic_is_mandatory valueForKey:str_key];
-            break;
-        }
-        str_value=nil;
-    }
-    if (![idic_textfield_value isEqual:_idic_value_copy] && flag_can_saved==1) {
+   
+    if (flag_isSaved==1 && flag_can_saved==1) {
         
         Web_whs_config *web_obj=[[Web_whs_config alloc]init];
         web_obj.str_url=[dic_parameters valueForKey:@"php_func"];
         [dic_parameters removeObjectForKey:@"php_func"];
         [dic_parameters removeObjectForKey:@"company_code"];
+
         [web_obj fn_post_multipart_formData_to_server:dic_parameters completionHandler:^(NSMutableDictionary* dic_result){
             NSDictionary *dic_operation=[[dic_result valueForKey:@"result"] valueForKey:@"operation"];
             NSString  *str_status=[dic_operation valueForKey:@"status"];
@@ -233,8 +244,9 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
             _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
         }];
         
-    }else if (flag_can_saved==1){
-        
+    }else if (flag_can_saved==1 && flag_isSaved==0){
+        [self fn_show_alert_info:@"已经保存过输入的数据，无需重复保存"];
+        _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
     }else{
         [self fn_show_alert_info:[NSString stringWithFormat:@"%@%@",str_mandatory, MY_LocalizedString(@"lbl_is_mandatory", nil)]];
     }
@@ -277,7 +289,7 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     NSString *col_option=[idic_cols valueForKey:@"col_option"];
     SelectHistoryDataViewController *selectVC=(SelectHistoryDataViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectHistoryDataViewController"];
     selectVC.flag_type=2;
-    NSMutableDictionary *dic_options=[self fn_get_options:col_option];
+    dic_options=[self fn_get_options:col_option];
     selectVC.alist_sys_code=[[dic_options allKeys]mutableCopy];
     selectVC.callback_str=^(NSString *str_key){
         NSString *str_value=[dic_options valueForKey:str_key];
@@ -466,13 +478,25 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
         cell.keyboardType=kDecimal_keyboard;
     }else if ([col_type isEqualToString:@"choice"]){
         cell.flag_enable=1;
-        UIButton *ibtn_choice=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,48, 38)];
+        UIButton *ibtn_choice=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,80, 38)];
         [ibtn_choice setTitle:MY_LocalizedString(@"ibtn_choose", nil) forState:UIControlStateNormal];
         [ibtn_choice setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         [ibtn_choice addTarget:self action:@selector(fn_choice_value:) forControlEvents:UIControlEventTouchUpInside];
         ibtn_choice.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
         cell.accessoryView=ibtn_choice;
         cell.itf_inputdata.inputView=nil;
+        NSString *str_value=[idic_textfield_value valueForKey:col_field];
+        NSString *key=@"";
+        for (NSString *str_key in dic_options) {
+            NSString *value=[dic_options objectForKey:str_key];
+            if ([value isEqualToString:str_value]) {
+                key=str_key;
+                break;
+            }
+            value=nil;
+        }
+        cell.itf_inputdata.text=key;
+        key=nil;
         ibtn_choice=nil;
     }
     return cell;

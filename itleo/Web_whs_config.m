@@ -54,20 +54,23 @@
 
 -(void)fn_post_multipart_formData_to_server:(NSDictionary*)dic_parameters completionHandler:(callBack_dic)callBack{
     NSURLRequest *urlRequest=[self fn_create_urlrequest:dic_parameters];
-    NSURLResponse *response=nil;
-    NSError *error=nil;
-    NSData *reciveData=[NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-    if (error) {
-        NSLog(@"出现异常%@",error);
-    }else{
-        NSHTTPURLResponse *httpResponse=(NSHTTPURLResponse*)response;
-        if (httpResponse.statusCode==200) {
-            NSMutableDictionary *dic_result=[NSJSONSerialization JSONObjectWithData:reciveData options:NSJSONReadingMutableLeaves error:nil];
-            if (callBack) {
-                callBack(dic_result);
+    // send the async request (note that the completion block will be called on the main thread)
+    [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response,NSData *data,NSError *error){
+          // back on the main thread, check for errors, if no errors start the parsing
+        if (error) {
+            NSLog(@"出现异常%@",error);
+        }else{
+            NSHTTPURLResponse *httpResponse=(NSHTTPURLResponse*)response;
+            if (httpResponse.statusCode==200) {
+                NSMutableDictionary *dic_result=[NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+                if (callBack) {
+                    callBack(dic_result);
+                }
             }
         }
-    }
+        
+    }];
+  
 }
 
 -(NSMutableURLRequest*)fn_create_urlrequest:(NSDictionary *)dic_parameters{
