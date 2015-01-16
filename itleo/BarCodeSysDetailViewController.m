@@ -234,6 +234,7 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
             _idic_value_copy=[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value];
         }else{
             [SVProgressHUD showWithStatus:MY_LocalizedString(@"lbl_saving_alert", nil)];
+            [dic_parameters setObject:lang_code forKey:@"lang_code"];
             [web_obj fn_post_multipart_formData_to_server:dic_parameters completionHandler:^(NSMutableDictionary* dic_result){
                 NSDictionary *dic_operation=[[dic_result valueForKey:@"result"] valueForKey:@"operation"];
                 NSString  *str_status=[dic_operation valueForKey:@"status"];
