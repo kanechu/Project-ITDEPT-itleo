@@ -238,7 +238,7 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
             [web_obj fn_post_multipart_formData_to_server:dic_parameters completionHandler:^(NSMutableDictionary* dic_result){
                 NSDictionary *dic_operation=[[dic_result valueForKey:@"result"] valueForKey:@"operation"];
                 NSString  *str_status=[dic_operation valueForKey:@"status"];
-                NSString *str_msg=[dic_operation valueForKey:@"message"];
+                NSString *str_msg=[dic_operation valueForKey:@"message_lang"];
                 
                 if ([str_status boolValue]) {
                     [SVProgressHUD dismissWithSuccess:MY_LocalizedString(@"lbl_save_success", nil) afterDelay:2.0];
@@ -246,6 +246,9 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
                     [SVProgressHUD dismissWithError:MY_LocalizedString(@"lbl_save_fail", nil) afterDelay:2.0];
                 }
                 [_idic_datas removeAllObjects];
+                if ([str_msg length]==0) {
+                    str_msg=@"";
+                }
                 [idic_textfield_value setObject:str_msg forKey:@"result_message"];
                 [idic_textfield_value setObject:str_status forKey:@"result_status"];
                 [db_whs fn_save_warehouse_log:[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value]];

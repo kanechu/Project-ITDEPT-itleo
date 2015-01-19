@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="IQV-4m-wot">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="IQV-4m-wot">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Main Home View Controller-->
@@ -206,7 +207,7 @@
             </objects>
             <point key="canvasLocation" x="-591" y="-620"/>
         </scene>
-        <!--Aejob Browse View Controller - Search Loadplan-->
+        <!--Search Loadplan-->
         <scene sceneID="cvB-u3-yap">
             <objects>
                 <viewController id="nGA-zr-oig" customClass="Aejob_BrowseViewController" sceneMemberID="viewController">
@@ -1226,21 +1227,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="55" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XgX-h0-cIP">
-                                                    <rect key="frame" x="10" y="10" width="300" height="21"/>
+                                                    <rect key="frame" x="10" y="5" width="300" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="65" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="result" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zXb-kZ-PbA">
-                                                    <rect key="frame" x="10" y="31" width="300" height="21"/>
+                                                    <rect key="frame" x="10" y="26" width="300" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.57254901960000004" green="0.098039215690000001" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7dn-zR-KWR">
-                                                    <rect key="frame" x="10" y="53" width="300" height="21"/>
+                                                    <rect key="frame" x="10" y="47" width="300" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
@@ -2144,7 +2145,7 @@
             </objects>
             <point key="canvasLocation" x="19" y="1611"/>
         </scene>
-        <!--Aejob dtl Browse View Controller - Loadplan Detail-->
+        <!--Loadplan Detail-->
         <scene sceneID="nrQ-UW-eM4">
             <objects>
                 <viewController storyboardIdentifier="Aejob_dtl_BrowseViewController" id="M0O-QK-U5q" customClass="Aejob_dtl_BrowseViewController" sceneMemberID="viewController">

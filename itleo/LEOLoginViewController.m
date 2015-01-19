@@ -238,6 +238,7 @@ static NSString  *is_language=@"";//标识语言类型
         auth.password=_itf_password.text;
         auth.system=sys_name;
         auth.version=VERSION;
+        auth.encrypted=IS_ENCRYPTED;
         req_form.Auth=auth;
         Web_base *web_base=[[Web_base alloc]init];
         web_base.il_url=STR_LOGIN_URL;

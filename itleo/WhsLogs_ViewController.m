@@ -11,6 +11,7 @@
 #import "Custom_BtnGraphicMixed.h"
 #import "Cal_lineHeight.h"
 #import "CreateFootView.h"
+#define ISIOS8   ([[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending )
 @interface WhsLogs_ViewController ()<UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *alist_whs_logs;
@@ -215,6 +216,9 @@
     CGFloat height=[cal_obj fn_heightWithString:str_log font:ilb_log.font constrainedToWidth:ilb_log.frame.size.width];
     if (height<21) {
         height=21;
+    }
+    if (ISIOS8) {
+        return height+42;
     }
     return height+20+42;
 
