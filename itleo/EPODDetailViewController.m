@@ -150,7 +150,7 @@
             }
         }
         [self fn_get_epod_ms];
-        _ilb_show_picture_nums.text=[NSString stringWithFormat:@"%@:%d",MY_LocalizedString(@"lbl_image_num", nil),[alist_result count]];
+        _ilb_show_picture_nums.text=[NSString stringWithFormat:@"%@:%@",MY_LocalizedString(@"lbl_image_num", nil),@([alist_result count])];
         [self.tableview reloadData];
     }
 }
@@ -308,7 +308,7 @@
     VC.is_order_no=_itf_order_no.text;
     VC.callBack=^(NSMutableArray *alist_image){
         alist_image_ms=alist_image;
-        _ilb_show_picture_nums.text=[NSString stringWithFormat:@"%@:%d",MY_LocalizedString(@"lbl_image_num", nil),[alist_image count]];
+        _ilb_show_picture_nums.text=[NSString stringWithFormat:@"%@:%@",MY_LocalizedString(@"lbl_image_num", nil),@(alist_image.count)];
         
     };
     

@@ -70,7 +70,7 @@
         NSSet *set_cfsdimBrowse=exso_obj.CTexcfsdimResult;
         alist_exsoBrowse=[[set_exsoBrowse allObjects]mutableCopy];
         alist_cfsdimBrowse=[[set_cfsdimBrowse allObjects]mutableCopy];
-        NSString *str_num=[NSString stringWithFormat:@"%d",[set_cfsdimBrowse count]];
+        NSString *str_num=[NSString stringWithFormat:@"%@",@(set_cfsdimBrowse.count)];
         if ([set_cfsdimBrowse count]==0) {
             str_num=@"1";
         }
@@ -84,7 +84,7 @@
 
 -(void)fn_update_skstableView{
     
-    NSString *str_num=[NSString stringWithFormat:@"%d",[alist_cfsdimBrowse count]];
+    NSString *str_num=[NSString stringWithFormat:@"%@",@(alist_cfsdimBrowse.count)];
     if ([alist_cfsdimBrowse count]==0) {
         str_num=@"1";
     }

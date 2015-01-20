@@ -55,7 +55,7 @@
                         NSMutableDictionary *dic_whs_detail=[[NSDictionary dictionaryWithPropertiesOfObject:upload_col_obj]mutableCopy];
                         [dic_whs_detail removeObjectsForKeys:@[@"col_label",@"group_name"]];
             
-                        [dic_whs_detail setObject:[NSString stringWithFormat:@"%d",i] forKey:@"unique_id"];
+                        [dic_whs_detail setObject:@(i).stringValue forKey:@"unique_id"];
                         NSArray *arr_col_labels=upload_col_obj.col_label;
                         for (Resp_language_type *language_obj in arr_col_labels) {
                             NSDictionary *dic_language=[NSDictionary dictionaryWithPropertiesOfObject:language_obj];

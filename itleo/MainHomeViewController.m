@@ -61,6 +61,7 @@
 }
 #pragma mark creat menu item
 -(void) fn_create_menu{
+    alist_menu=nil;
     alist_menu=[[NSMutableArray alloc]init];
     Web_get_permit *web_obj=[[Web_get_permit alloc]init];
     NSMutableArray *alist_fuction=[web_obj fn_get_function_module];
@@ -72,7 +73,7 @@
         }
         
         if ([module_code isEqualToString:@"EPOD"] && [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"delivery" segue:@"segue_epod"]];
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_epod", nil) image:@"delivery" segue:@"segue_epod"]];
         }
 #warning -neet fix
         if ([module_code isEqualToString:@"Chart"] && [f_exec isEqualToString:@"1"]) {
@@ -80,14 +81,12 @@
             [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
         }
         if ([module_code isEqualToString:@"CFSRECV"] && [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_itdept_logo" segue:@"segue_warehouse"]];
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_cfsrecv", nil) image:@"ic_cfsrecv" segue:@"segue_cfsrecv"]];
         }
-        
+        if ([module_code isEqualToString:@"WAREHOUSE"] && [f_exec isEqualToString:@"1"]) {
+            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_warehouse" segue:@"segue_warehouse"]];
+        }
     }
-#warning -neet fix
-    [alist_menu addObject:[Menu_home fn_create_item:@"BarCodeSys" image:@"barcode" segue:@"segue_barCodeSysHome"]];
-    [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_eop", nil) image:@"delivery" segue:@"segue_epod"]];
-    [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_itdept_logo" segue:@"segue_warehouse"]];
     self.icollectionView.delegate=self;
     self.icollectionView.dataSource=self;
     [self.icollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell_menu"];
@@ -176,7 +175,7 @@
     NSTimer *GPS_timer=[[Timer_bg_upload_data fn_shareInstance]fn_get_GPS_timer];
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
     VC.refresh=^(){
-        [self viewDidLoad];
+        [self fn_create_menu];
         [self.icollectionView reloadData];
         //开启定时器
         [GPS_timer setFireDate:[NSDate distantPast]];

@@ -117,7 +117,7 @@
     DB_ePod *db=[[DB_ePod alloc]init];
     NSMutableArray *arr_epod=[db fn_select_unUpload_truck_order_data:@"0" isUploade2:@"2"];
     if ([arr_epod count]!=0) {
-        NSString *title=[NSString stringWithFormat:@"%@: %d",MY_LocalizedString(@"show_unUpload_msg", nil),[arr_epod count]] ;
+        NSString *title=[NSString stringWithFormat:@"%@: %@",MY_LocalizedString(@"show_unUpload_msg", nil),@(arr_epod.count)] ;
         
         [_ibtn_showMsg setTitle:title forState:UIControlStateNormal];
     }else{

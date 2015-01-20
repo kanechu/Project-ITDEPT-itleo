@@ -25,10 +25,11 @@
 //main home
 "lbl_cancel"="Cancel";
 "lbl_home"="Home";
-"module_eop"="EPOD";
+"module_epod"="EPOD";
 "module_air_Load_Plan"="Air Load Plan";
 "module_charts"="Charts";
 "module_warehouse"="Warehouse";
+"module_cfsrecv"="CFSRECV";
 "logout_alert"="If you log out, will remove the existing record. Are you forced to quit?";
 //select UI
 "select_tilte"="Please Select";
