@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define APP_CODE  @"MOB_ITLEO" // 客户服务器那边用@"ITLEO"，因为没改成"MOB_ITLEO"
-#define VERSION @"1.0"
+//获取itleo 设置的版本
+#define VERSION [[[NSBundle mainBundle]infoDictionary]valueForKey:@"CFBundleShortVersionString"]!=nil ? [[[NSBundle mainBundle]infoDictionary]valueForKey:@"CFBundleShortVersionString"] : @"1.0"
 #define IS_ENCRYPTED @"0"
 @interface AppConstants : NSObject
 
