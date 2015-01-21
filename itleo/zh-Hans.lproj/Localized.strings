@@ -34,6 +34,7 @@
 "select_tilte"="请选取信息";
 //epod main home
 "lbl_epod_title"="EPOD";
+"lbl_epod_detail"="最终交付证明";
 "lbl_vehicle_no"="车牌号码";
 "ibtn_lookup"="查找";
 "ibtn_sign_photo"="签收及拍照";

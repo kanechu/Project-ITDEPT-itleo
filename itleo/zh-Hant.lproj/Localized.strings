@@ -35,6 +35,7 @@
 
 //epod main home
 "lbl_epod_title"="EPOD";
+"lbl_epod_detail"="最終交付證明";
 "lbl_vehicle_no"="車牌號碼";
 "ibtn_lookup"="查找";
 "ibtn_sign_photo"="簽收及拍照";

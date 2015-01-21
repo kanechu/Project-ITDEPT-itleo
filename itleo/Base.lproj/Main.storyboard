@@ -794,10 +794,10 @@
                                 <rect key="frame" x="20" y="74" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Proof Of Delivery" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1XB-n1-dJv">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Proof Of Delivery" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1XB-n1-dJv">
                                 <rect key="frame" x="128" y="92" width="172" height="63"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -879,6 +879,7 @@
                         <outlet property="ibtn_receive" destination="fPM-DI-7BJ" id="c2D-It-kjG"/>
                         <outlet property="ibtn_settings" destination="mOw-0h-1mc" id="f54-ir-CYO"/>
                         <outlet property="ibtn_showMsg" destination="Qr3-Kw-RSn" id="tgy-Oj-9as"/>
+                        <outlet property="ilb_epod_tilte" destination="1XB-n1-dJv" id="VY1-bY-TN0"/>
                         <outlet property="ilb_vehicle_no" destination="cVw-xq-zWG" id="GE8-lj-Fdk"/>
                         <outlet property="itf_bus_no" destination="tmp-TY-XiT" id="ueF-Je-fNQ"/>
                         <segue destination="gAk-bn-aL5" kind="push" identifier="segue_detail_epod" id="VK5-gA-tVE"/>

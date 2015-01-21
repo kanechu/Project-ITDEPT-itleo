@@ -21,6 +21,7 @@
 @interface EPODViewController ()
 
 @property(nonatomic,strong)NSTimer *record_GPS_timer;
+@property (weak, nonatomic) IBOutlet UILabel *ilb_epod_tilte;
 
 @end
 
@@ -53,6 +54,7 @@
 }
 - (void)fn_set_control_pro{
     self.title=MY_LocalizedString(@"lbl_epod_title", nil);
+    _ilb_epod_tilte.text=MY_LocalizedString(@"lbl_epod_detail", nil);
     _ilb_vehicle_no.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_vehicle_no", nil)];
     
     [_ibtn_lookUp setTitle:MY_LocalizedString(@"ibtn_lookup", nil) forState:UIControlStateNormal];

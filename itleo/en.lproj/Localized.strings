@@ -35,6 +35,7 @@
 "select_tilte"="Please Select";
 //epod main home
 "lbl_epod_title"="EPOD";
+"lbl_epod_detail"="End Proof Of Delivery";
 "lbl_vehicle_no"="Vehicle Number";
 "ibtn_lookup"="LookUp";
 "ibtn_sign_photo"="Sign and Photograph";
