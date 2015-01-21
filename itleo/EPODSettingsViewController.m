@@ -13,7 +13,9 @@
 @property (strong,nonatomic)NSMutableArray *alist_variate;
 
 @property (assign,nonatomic)NSInteger flag_range_type;
+//存储日期的key
 @property (copy, nonatomic)NSString *str_date_range;
+//存储时间的key
 @property (copy, nonatomic)NSString *str_interval_range;
 @end
 
@@ -51,16 +53,20 @@
     }else{
         _str_date_range=@"lbl_day";
         _ilb_date_range.text=MY_LocalizedString(_str_date_range, nil);
+        [userDefaults setObject:_str_date_range forKey:@"date_range"];
     }
+    date_key=nil;
     NSString *interval_key=[userDefaults objectForKey:@"interval_range"];
     if ([interval_key length]!=0) {
         _ilb_interval.text=MY_LocalizedString(interval_key, nil);
         _str_interval_range=interval_key;
         
     }else{
-        _str_interval_range=@"lbl_seconds";
+        _str_interval_range=@"lbl_minute";
         _ilb_interval.text=MY_LocalizedString(_str_interval_range, nil);
+        [userDefaults setObject:_str_interval_range forKey:@"interval_range"];
     }
+    interval_key=nil;
 }
 -(void)fn_set_control_pro{
     [_ibtn_setting_logo setTitle:MY_LocalizedString(@"ibtn_settings",nil) forState:UIControlStateNormal];
