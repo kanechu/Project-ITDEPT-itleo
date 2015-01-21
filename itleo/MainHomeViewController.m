@@ -109,6 +109,10 @@
     NSInteger login_flag=[userDefaults integerForKey:@"isLogin"];
     if (login_flag==0) {
         [self presentViewController:VC animated:NO completion:^(){}];
+        VC.refresh=^(){
+            [self fn_create_menu];
+            [self.icollectionView reloadData];
+        };
     }else{
         NSString *lang=[Conversion_helper fn_get_lang_code];
         [[MY_LocalizedString getshareInstance]fn_setLanguage_type:lang];

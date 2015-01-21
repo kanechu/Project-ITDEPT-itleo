@@ -294,26 +294,6 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     };
     [self presentViewController:barCodeVC animated:YES completion:nil];
 }
-- (void)fn_choice_value:(id)sender{
-    UIButton *ibtn=(UIButton*)sender;
-    NSDictionary *idic_cols=_pass_Value(ibtn.tag);
-    NSString *col_field=[idic_cols valueForKey:@"col_field"];
-    NSString *col_option=[idic_cols valueForKey:@"col_option"];
-    SelectHistoryDataViewController *selectVC=(SelectHistoryDataViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectHistoryDataViewController"];
-    selectVC.flag_type=2;
-    dic_options=[self fn_get_options:col_option];
-    selectVC.alist_sys_code=[[dic_options allKeys]mutableCopy];
-    selectVC.callback_str=^(NSString *str_key){
-        NSString *str_value=[dic_options valueForKey:str_key];
-        [idic_textfield_value setObject:str_value forKey:col_field];
-        str_value=nil;
-        self.skstableView.expandableCells=nil;
-        [self.skstableView reloadData];
-        [self.skstableView fn_expandall];
-    };
-    PopViewManager *pop_obj=[[PopViewManager alloc]init];
-    [pop_obj fn_PopupView:selectVC Size:CGSizeMake(230, 300) uponView:self];
-}
 - (void)fn_click_checkBox:(id)sender {
     UIButton *ibtn=(UIButton*)sender;
     NSDictionary *idic_cols=_pass_Value(ibtn.tag);
@@ -362,11 +342,34 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
 }
 
 #pragma mark -UITextFieldDelegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    NSDictionary *idic_cols=_pass_Value(textField.tag);
+    NSString *col_field=[idic_cols valueForKey:@"col_field"];
+    NSString *col_option=[idic_cols valueForKey:@"col_option"];
+    NSString *col_type=[idic_cols valueForKey:@"col_type"];
+    if ([col_type isEqualToString:@"choice"]) {
+        SelectHistoryDataViewController *selectVC=(SelectHistoryDataViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectHistoryDataViewController"];
+        selectVC.flag_type=2;
+        dic_options=[self fn_get_options:col_option];
+        selectVC.alist_sys_code=[[dic_options allKeys]mutableCopy];
+        selectVC.callback_str=^(NSString *str_key){
+            NSString *str_value=[dic_options valueForKey:str_key];
+            [idic_textfield_value setObject:str_value forKey:col_field];
+            str_value=nil;
+            self.skstableView.expandableCells=nil;
+            [self.skstableView reloadData];
+            [self.skstableView fn_expandall];
+        };
+        PopViewManager *pop_obj=[[PopViewManager alloc]init];
+        [pop_obj fn_PopupView:selectVC Size:CGSizeMake(230, 300) uponView:self];
+        return NO;
+    }
+    return YES;
+}
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     self.checkText=(Custom_textField*)textField;
     [self.checkText fn_setLine_color:[UIColor blueColor]];
 }
-
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self.checkText fn_setLine_color:[UIColor lightGrayColor]];
     NSDictionary *idic_cols=_pass_Value(textField.tag);
@@ -489,13 +492,6 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     }else if ([col_type isEqualToString:@"numeric"]){
         cell.keyboardType=kDecimal_keyboard;
     }else if ([col_type isEqualToString:@"choice"]){
-        cell.flag_enable=1;
-        UIButton *ibtn_choice=[[UIButton alloc]initWithFrame:CGRectMake(0, 0,80, 38)];
-        [ibtn_choice setTitle:MY_LocalizedString(@"ibtn_choose", nil) forState:UIControlStateNormal];
-        [ibtn_choice setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        [ibtn_choice addTarget:self action:@selector(fn_choice_value:) forControlEvents:UIControlEventTouchUpInside];
-        ibtn_choice.tag=TEXTFIELD_TAG*indexPath.row+indexPath.subRow;
-        cell.accessoryView=ibtn_choice;
         cell.itf_inputdata.inputView=nil;
         NSString *str_value=[idic_textfield_value valueForKey:col_field];
         NSString *key=@"";
@@ -509,7 +505,6 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
         }
         cell.itf_inputdata.text=key;
         key=nil;
-        ibtn_choice=nil;
     }
     return cell;
 }
