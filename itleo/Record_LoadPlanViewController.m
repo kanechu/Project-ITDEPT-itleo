@@ -175,6 +175,7 @@ typedef NSString* (^passValue)(NSInteger tag);
 }
 #pragma mark -event action
 - (IBAction)fn_delete_data:(id)sender {
+    [checkText resignFirstResponder];
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"will_delete_prompt", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_delete", nil), nil];
     [alert show];
    
