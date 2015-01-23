@@ -111,9 +111,18 @@
  */
 @property (nonatomic, assign) BOOL shouldExpandOnlyOneCell;
 /**
- *  for reload skstableview
+ * Reload data for table view while collapsing already expanded index paths.
+ *
+ *  @discussion It is requested to scroll to a specific position after reload data, use refreshDataWithScrollingToIndexPath: method. This method does not change scroll
+ *      position.
  */
-@property (nonatomic, copy) NSMutableDictionary *expandableCells;
+- (void)refreshData;
+/**
+ * Relaod data and scroll to the given index path while collapsing already expanded index paths.
+ *
+ *  @param indexPath The index path which the table view should be scrolled to. DO NOT set subrow property.
+ */
+- (void)refreshDataWithScrollingToIndexPath:(NSIndexPath *)indexPath;
 /**
  *  open all cell
  */
