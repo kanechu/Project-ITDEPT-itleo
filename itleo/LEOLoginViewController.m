@@ -21,11 +21,13 @@
 #import "Web_get_permit.h"
 #import "Web_get_chart_data.h"
 #import "Web_whs_config.h"
+
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 #define DEFAULT_USER_NAME @"anonymous"
 #define DEFAULT_PASSWORD @"anonymous1"
 #define DEFAULT_SYSTEM @"ITNEW"
+
 @interface LEOLoginViewController ()
 @property(nonatomic,strong)UITextField *checkText;
 @property(nonatomic,copy)NSString *lang_code;

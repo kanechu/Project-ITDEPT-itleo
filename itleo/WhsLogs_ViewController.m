@@ -11,7 +11,7 @@
 #import "Custom_BtnGraphicMixed.h"
 #import "Cal_lineHeight.h"
 #import "CreateFootView.h"
-#define ISIOS8   ([[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending )
+
 @interface WhsLogs_ViewController ()<UIActionSheetDelegate>
 
 @property (nonatomic, strong) NSMutableArray *alist_whs_logs;
@@ -217,7 +217,7 @@
     if (height<21) {
         height=21;
     }
-    if (ISIOS8) {
+    if (SYSTEM_VERSION_GREATER_THAN_IOS8) {
         return height+42;
     }
     return height+20+42;
