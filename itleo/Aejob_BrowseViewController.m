@@ -155,8 +155,7 @@ static NSMutableArray *alist_filtered_data;
             [alist_filtered_data addObject:arr];
         }
     }
-    self.skstableView.expandableCells=nil;
-    [self.skstableView reloadData];
+    [self.skstableView refreshData];
     db=nil;
 }
 #pragma mark -No Data Alert

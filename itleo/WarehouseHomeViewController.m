@@ -92,8 +92,7 @@
     [dic setObject:str_num forKey:@"num"];
     [_alist_groupAndnum removeLastObject];
     [_alist_groupAndnum addObject:dic];
-    self.skstableview.expandableCells=nil;
-    [self.skstableview reloadData];
+    [self.skstableview refreshData];
     [self.skstableview fn_expandall];
     str_num=nil;
     dic=nil;
