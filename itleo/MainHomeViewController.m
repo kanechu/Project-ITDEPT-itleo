@@ -24,6 +24,7 @@
 @interface MainHomeViewController ()
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
+@property(assign,nonatomic)NSInteger flag_launch_isLogin;
 @end
 
 @implementation MainHomeViewController
@@ -41,11 +42,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
+    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
     [self fn_users_isLogin];
     [self fn_set_nav_left_item];
     [self fn_create_menu];
-    [self fn_show_different_language];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
+}
+- (void)viewDidAppear:(BOOL)animated{
+    //启动的时候，没有登录，则弹出登录界面
+    if (_flag_launch_isLogin==0) {
+        [self fn_present_loginView];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,12 +61,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark show different languge
--(void) fn_show_different_language{
 
-    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
-    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
-}
 #pragma mark creat menu item
 -(void) fn_create_menu{
     alist_menu=nil;
@@ -101,23 +104,28 @@
     [_ibtn_home_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
 }
 /**
- *  判断用户是否登录，如果没有登录，则弹出登录界面
+ *  判断用户是否登录，如果已经登录，则设置语言环境
  */
 -(void)fn_users_isLogin{
-    LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-    NSInteger login_flag=[userDefaults integerForKey:@"isLogin"];
-    if (login_flag==0) {
-        [self presentViewController:VC animated:NO completion:^(){}];
-        VC.refresh=^(){
-            [self fn_create_menu];
-            [self.icollectionView reloadData];
-        };
-    }else{
+    _flag_launch_isLogin=[userDefaults integerForKey:@"isLogin"];
+    if (_flag_launch_isLogin==1) {
         NSString *lang=[Conversion_helper fn_get_lang_code];
         [[MY_LocalizedString getshareInstance]fn_setLanguage_type:lang];
     }
-    
+}
+- (void)fn_present_loginView{
+    LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
+    if (_flag_launch_isLogin==0) {
+        [self presentViewController:VC animated:NO completion:nil];
+    }else{
+        [self presentViewController:VC animated:YES completion:nil];
+    }
+    VC.refresh=^(){
+        [self fn_create_menu];
+        [self.icollectionView reloadData];
+        _flag_launch_isLogin=1;
+    };
 }
 
 - (IBAction)fn_logout_itleo:(id)sender {
@@ -175,23 +183,10 @@
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
     [db_whs fn_delete_all_wharehouse_log];
     db_whs=nil;
-    //获取定时器
-    NSTimer *GPS_timer=[[Timer_bg_upload_data fn_shareInstance]fn_get_GPS_timer];
-    LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
-    VC.refresh=^(){
-        [self fn_create_menu];
-        [self.icollectionView reloadData];
-        //开启定时器
-        [GPS_timer setFireDate:[NSDate distantPast]];
-    };
-    [self presentViewController:VC animated:YES completion:^(){}];
+    [self fn_present_loginView];
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:0 forKey:@"isLogin"];
     [userDefaults synchronize];
-    
-     //关闭定时器
-    [GPS_timer setFireDate:[NSDate distantFuture]];
-
 }
 
 #pragma mark UICollectionView Datasource
