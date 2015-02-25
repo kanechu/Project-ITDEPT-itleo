@@ -43,10 +43,8 @@
 {
     [super viewDidLoad];
     [self fn_users_isLogin];
-    [self fn_set_nav_left_item];
     [self fn_create_menu];
-    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
-    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
+    
     // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -64,6 +62,7 @@
 
 #pragma mark creat menu item
 -(void) fn_create_menu{
+    [self fn_set_nav_item];
     alist_menu=nil;
     alist_menu=[[NSMutableArray alloc]init];
     Web_get_permit *web_obj=[[Web_get_permit alloc]init];
@@ -94,7 +93,7 @@
     self.icollectionView.dataSource=self;
     [self.icollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell_menu"];
 }
--(void)fn_set_nav_left_item{
+-(void)fn_set_nav_item{
     self.navigationItem.backBarButtonItem=[[UIBarButtonItem alloc] initWithTitle:MY_LocalizedString(@"lbl_home", nil)
                                                                            style:UIBarButtonItemStylePlain
                                                                           target:nil
@@ -102,6 +101,9 @@
     [self.navigationItem setHidesBackButton:YES];
     [_ibtn_home_logo setTitle:MY_LocalizedString(@"lbl_home", nil) forState:UIControlStateNormal];
     [_ibtn_home_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
+
+    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
+    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
 }
 /**
  *  判断用户是否登录，如果已经登录，则设置语言环境
