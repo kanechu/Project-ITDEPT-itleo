@@ -42,11 +42,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
-    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
     [self fn_users_isLogin];
     [self fn_set_nav_left_item];
     [self fn_create_menu];
+    [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
+    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
     // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated{
