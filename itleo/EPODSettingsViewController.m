@@ -35,7 +35,7 @@
     [super viewDidLoad];
     [self fn_assignment_flag];
     [self fn_set_control_pro];
-    [self fn_isUsed_GPS_function];
+    //[self fn_isUsed_GPS_function];
     
 }
 

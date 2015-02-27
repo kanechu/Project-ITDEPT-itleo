@@ -126,6 +126,10 @@
     VC.refresh=^(){
         [self fn_create_menu];
         [self.icollectionView reloadData];
+        if (_flag_launch_isLogin==1){
+            [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_GPS];
+            [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_records];
+        }
         _flag_launch_isLogin=1;
     };
 }
@@ -136,7 +140,7 @@
     NSInteger epod_count=[[db_epod fn_select_all_ePod_data] count];
     NSInteger location_count=[[db_location fn_get_location_data:@"0"] count];
     if (epod_count!=0 || location_count!=0) {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:MY_LocalizedString(@"lbl_cancel", nil), nil];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
         [alert show];
     }else{
         [self fn_clear_the_cache];
@@ -152,7 +156,7 @@
 }
 #pragma mark -UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex==[alertView cancelButtonIndex]) {
+    if (buttonIndex==[alertView firstOtherButtonIndex]) {
         [self fn_clear_the_cache];
     }
 }
@@ -189,6 +193,8 @@
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:0 forKey:@"isLogin"];
     [userDefaults synchronize];
+    [[Timer_bg_upload_data fn_shareInstance]fn_stop_upload_GPS];
+    [[Timer_bg_upload_data fn_shareInstance]fn_stop_upload_records];
 }
 
 #pragma mark UICollectionView Datasource
