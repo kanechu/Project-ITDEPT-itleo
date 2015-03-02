@@ -134,7 +134,7 @@
 //选择完毕
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:^(){}];
-    UIImage *image=[info valueForKey:UIImagePickerControllerEditedImage];
+    UIImage *image=[info valueForKey:UIImagePickerControllerOriginalImage];
     [alist_image_ms addObject:[self fn_set_upload_image_ms:image]];
     [self.conllectionview reloadData];
 }
