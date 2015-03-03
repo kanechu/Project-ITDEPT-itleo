@@ -80,6 +80,7 @@
 "ibtn_photo"="拍照";
 "ibtn_sign"="簽收";
 "ibtn_choose"="選取";
+"ibtn_history_capture"="歷史採集";
 "delete_image"="你確定刪除這張圖片？";
 "delete_all_image"="你確定刪除所有的圖片嗎？";
 //action sheet

@@ -79,6 +79,7 @@
 "ibtn_photo"="Photo";
 "ibtn_sign"="Sign";
 "ibtn_choose"="Choose";
+"ibtn_history_capture"="History/Captured";
 "delete_image"="Are you sure to delete this image?";
 "delete_all_image"="Are you sure to delete all of the pictures?";
 //action sheet

@@ -78,6 +78,7 @@
 "ibtn_photo"="拍照";
 "ibtn_sign"="签收";
 "ibtn_choose"="选取";
+"ibtn_history_capture"="历史采集";
 "delete_image"="你确定删除这张图片吗？";
 "delete_all_image"="你确定删除所有的图片吗？";
 //action sheet

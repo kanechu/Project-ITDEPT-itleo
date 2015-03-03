@@ -28,6 +28,7 @@ typedef void (^callBack_image)(NSMutableArray*);
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_photograph;
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_receiving;
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_select_picture;
+@property (weak, nonatomic) IBOutlet Custom_Button *ibtn_history_capture;
 
 - (IBAction)fn_delete_image:(id)sender;
 - (IBAction)fn_back_previous_page:(id)sender ;

@@ -75,6 +75,10 @@
     [_ibtn_select_picture setTitle:MY_LocalizedString(@"ibtn_choose", nil) forState:UIControlStateNormal];
     [_ibtn_select_picture addTarget:self action:@selector(fn_select_picture:) forControlEvents:UIControlEventTouchUpInside];
     
+    _ibtn_history_capture.left_icon=[UIImage imageNamed:@"ic_history"];
+    [_ibtn_history_capture setTitle:MY_LocalizedString(@"ibtn_history_capture", nil) forState:UIControlStateNormal];
+    [_ibtn_history_capture addTarget:self action:@selector(fn_look_history_capture:) forControlEvents:UIControlEventTouchUpInside];
+    
 }
 -(Truck_order_image_data*)fn_set_upload_image_ms:(UIImage*)image{
     Truck_order_image_data *upload_image_ms=[[Truck_order_image_data alloc]init];
@@ -118,6 +122,11 @@
     [self presentViewController:imagePicker animated:YES completion:^(){}];
     
 }
+//查看历史图片
+-(void)fn_look_history_capture:(id)sender{
+    
+}
+
 - (IBAction)fn_back_previous_page:(id)sender {
     if (_callBack) {
         _callBack(alist_image_ms);
