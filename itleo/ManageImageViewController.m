@@ -11,6 +11,7 @@
 #import "Cell_show_picture.h"
 #import "image_magnify_shrink.h"
 #import "AddRemarkViewController.h"
+#import "HistoryCaptureViewController.h"
 #import "PopViewManager.h"
 #import "Truck_order_image_data.h"
 
@@ -20,11 +21,13 @@
 @property(nonatomic,assign)NSInteger flag_item;
 //标识弹出的警告
 @property(nonatomic,assign)NSInteger flag_alert;
+
 @end
 
 @implementation ManageImageViewController
 @synthesize flag_item;
 @synthesize alist_image_ms;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,10 +43,6 @@
     [self fn_set_control_pro];
     [self fn_set_collectionView_pro];
     
-    if (alist_image_ms==nil) {
-        alist_image_ms=[NSMutableArray array];
-    }
-    
 	// Do any additional setup after loading the view.
 }
 
@@ -53,6 +52,9 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)fn_set_control_pro{
+    if (alist_image_ms==nil) {
+        alist_image_ms=[NSMutableArray array];
+    }
     [_ibtn_backItem setTitle:MY_LocalizedString(@"lbl_back", nil)];
     
     _ilb_order_no.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_order_no", nil)];
@@ -122,16 +124,16 @@
     [self presentViewController:imagePicker animated:YES completion:^(){}];
     
 }
-//查看历史图片
+//查看历史采集的数据
 -(void)fn_look_history_capture:(id)sender{
-    
+
+    [self performSegueWithIdentifier:@"segue_history_capture" sender:self];
 }
 
 - (IBAction)fn_back_previous_page:(id)sender {
     if (_callBack) {
         _callBack(alist_image_ms);
     }
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -168,19 +170,15 @@
     Truck_order_image_data *upload_image_ms=[alist_image_ms objectAtIndex:li_item];
     UIImage *image=[Conversion_helper fn_base64Str_convert_image:upload_image_ms.image];
     cell.i_image.image=image;
-    if ([upload_image_ms.image_isUploaded isEqualToString:@"true"]) {
-        cell.i_UploadedImage.hidden=NO;
-    }else{
-        cell.i_UploadedImage.hidden=YES;
-    }
-  
+    cell.i_UploadedImage.hidden=YES;
     cell.i_UploadedImage.image=[UIImage imageNamed:@"selected"];
     return cell;
 }
 #pragma mark -UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    UIActionSheet *my_sheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:MY_LocalizedString(@"lbl_magnigy", nil),MY_LocalizedString(@"lbl_delete_img", nil),MY_LocalizedString(@"lbl_text_remark", nil),MY_LocalizedString(@"lbl_draw_remark", nil),MY_LocalizedString(@"lbl_reset", nil), nil];
+    UIActionSheet *my_sheet=[[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) destructiveButtonTitle:nil otherButtonTitles:MY_LocalizedString(@"lbl_magnigy", nil),MY_LocalizedString(@"lbl_delete_img", nil),MY_LocalizedString(@"lbl_text_remark", nil),MY_LocalizedString(@"lbl_draw_remark", nil), nil];
+    //重置上载状态MY_LocalizedString(@"lbl_reset", nil)
 
     [my_sheet showInView:self.view];
     flag_item=indexPath.item;
@@ -225,10 +223,11 @@
                 [PopSignUtil closePop];
             }];
         }
+        /*重置上载状态
         if (buttonIndex==4) {
             upload_image_ms.image_isUploaded=@"0";
             [self.conllectionview reloadData];
-        }
+        }*/
     }
 }
 -(void)deleteItemsFromDataSourceAtIndexPaths:(NSArray  *)itemPaths
@@ -269,5 +268,17 @@
 }
 - (void)fn_image_shrink{
     [background removeFromSuperview];
+}
+#pragma mark - Navigation
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    HistoryCaptureViewController *historyCaptureVC=(HistoryCaptureViewController*)[segue destinationViewController];
+    historyCaptureVC.alist_image_ms=_alist_historyImage_ms;
+    historyCaptureVC.callBack=^(NSMutableArray *alist_images){
+        if (alist_images!=nil) {
+            [alist_image_ms addObjectsFromArray:alist_images];
+            [self.conllectionview reloadData];
+        }
+    };
 }
 @end

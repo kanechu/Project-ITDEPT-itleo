@@ -83,6 +83,7 @@
     [_ibtn_record_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     
     [_ibtn_select setTitle:MY_LocalizedString(@"lbl_select", nil) forState:UIControlStateNormal];
+    [_ibtn_select setTitle:MY_LocalizedString(@"lbl_cancel", nil) forState:UIControlStateSelected];
     
     self.tableview.delegate=self;
     self.tableview.dataSource=self;

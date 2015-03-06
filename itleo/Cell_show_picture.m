@@ -18,6 +18,21 @@
     }
     return self;
 }
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self=[super initWithCoder:aDecoder];
+    if (self) {
+        self.restorationIdentifier=@"cell_history";
+        self.backgroundColor=[UIColor clearColor];
+        self.autoresizingMask=UIViewAutoresizingNone;
+    
+        UIView *bgView = [[UIView alloc] initWithFrame:self.frame];
+        bgView.layer.borderColor = [UIColor redColor].CGColor;
+        bgView.layer.borderWidth = 2;
+        bgView.layer.cornerRadius = 2;
+        self.selectedBackgroundView = bgView;
+    }
+    return self;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
@@ -27,6 +42,7 @@
     // Drawing code
 }
 */
+
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.layer.cornerRadius=2;

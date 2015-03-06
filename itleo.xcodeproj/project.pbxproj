@@ -139,6 +139,7 @@
 		B2A7480F19BEFD57006C96D1 /* DrawSignView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7480A19BEFD57006C96D1 /* DrawSignView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B2A7481019BEFD57006C96D1 /* MyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7480C19BEFD57006C96D1 /* MyView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B2A7481119BEFD57006C96D1 /* PopSignUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A7480E19BEFD57006C96D1 /* PopSignUtil.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2A926DA1AA5AC6C003EC92B /* HistoryCaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A926D91AA5AC6C003EC92B /* HistoryCaptureViewController.m */; };
 		B2A9A0C11998517B00737D08 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2A9A0C01998517B00737D08 /* Images.xcassets */; };
 		B2A9A0C719985E1800737D08 /* Custom_BtnGraphicMixed.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A9A0C619985E1800737D08 /* Custom_BtnGraphicMixed.m */; };
 		B2AE75871A3BEF3D00F3F732 /* Warehouse_receive_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE75861A3BEF3D00F3F732 /* Warehouse_receive_data.m */; };
@@ -483,6 +484,8 @@
 		B2A7480C19BEFD57006C96D1 /* MyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyView.m; sourceTree = "<group>"; };
 		B2A7480D19BEFD57006C96D1 /* PopSignUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopSignUtil.h; sourceTree = "<group>"; };
 		B2A7480E19BEFD57006C96D1 /* PopSignUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopSignUtil.m; sourceTree = "<group>"; };
+		B2A926D81AA5AC6C003EC92B /* HistoryCaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryCaptureViewController.h; sourceTree = "<group>"; };
+		B2A926D91AA5AC6C003EC92B /* HistoryCaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryCaptureViewController.m; sourceTree = "<group>"; };
 		B2A9A0C01998517B00737D08 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = itleo/Images.xcassets; sourceTree = "<group>"; };
 		B2A9A0C519985E1800737D08 /* Custom_BtnGraphicMixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Custom_BtnGraphicMixed.h; sourceTree = "<group>"; };
 		B2A9A0C619985E1800737D08 /* Custom_BtnGraphicMixed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Custom_BtnGraphicMixed.m; sourceTree = "<group>"; };
@@ -902,6 +905,8 @@
 				B2D8207719DFAD6D0005253C /* Order_InfoViewController.m */,
 				B29690B919C18CCC00976E7E /* ManageImageViewController.h */,
 				B29690BA19C18CCC00976E7E /* ManageImageViewController.m */,
+				B2A926D81AA5AC6C003EC92B /* HistoryCaptureViewController.h */,
+				B2A926D91AA5AC6C003EC92B /* HistoryCaptureViewController.m */,
 				B2A328CC19D4F91800DB8F9B /* AddRemarkViewController.h */,
 				B2A328CD19D4F91800DB8F9B /* AddRemarkViewController.m */,
 				B2E391C819C8137A00612FDD /* EPODRecordViewController.h */,
@@ -1444,6 +1449,7 @@
 				B2281A9E1995F16E001A73B0 /* RespAejob_dtl_browse.m in Sources */,
 				B2A3404219DA409F0051F78B /* UploadContract.m in Sources */,
 				B2B136B91A032A2E001317C8 /* DB_sypara.m in Sources */,
+				B2A926DA1AA5AC6C003EC92B /* HistoryCaptureViewController.m in Sources */,
 				B27AB2A91A4BA5B8007A3814 /* Resp_language_type.m in Sources */,
 				B21B71161A0B1D1A007DB5E3 /* LineChart.m in Sources */,
 				B272EA6619AEDDA400256276 /* MZAppearance.m in Sources */,

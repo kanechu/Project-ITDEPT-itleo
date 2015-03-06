@@ -13,9 +13,10 @@ typedef void (^callBack_image)(NSMutableArray*);
 
 @property(nonatomic,strong)callBack_image callBack;
 @property(nonatomic,copy)NSString *is_order_no;
-//存储每张图片的信息（一条记录）
+//存储每张历史采集图片的信息（一条记录）
+@property(nonatomic,strong)NSMutableArray *alist_historyImage_ms;
+//存储新添加图片的信息
 @property(nonatomic,strong)NSMutableArray *alist_image_ms;
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_backItem;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_order_no;
 @property (weak, nonatomic) IBOutlet UITextField *itf_order_no;

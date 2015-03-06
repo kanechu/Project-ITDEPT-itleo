@@ -33,8 +33,10 @@
 @property(nonatomic,assign)NSInteger flag_enable;
 //配置单信息
 @property(nonatomic,strong)Truck_order_data *truck_order_data;
-//存储图片的信息
+//存储新添加图片的信息
 @property(nonatomic,strong)NSMutableArray *alist_image_ms;
+//存储历史采集图片的信息
+@property(nonatomic,strong)NSMutableArray *alist_historyImage_msg;
 //区分不同的文本框
 @property(nonatomic,assign)NSInteger flag_textfield;
 
@@ -45,7 +47,7 @@
 @synthesize flag_enable;
 @synthesize flag_textfield;
 @synthesize alist_image_ms;
-
+@synthesize alist_historyImage_msg;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -304,6 +306,7 @@
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     ManageImageViewController *VC=(ManageImageViewController*)[segue destinationViewController];
+    VC.alist_historyImage_ms=alist_historyImage_msg;
     VC.alist_image_ms=alist_image_ms;
     VC.is_order_no=_itf_order_no.text;
     VC.callBack=^(NSMutableArray *alist_image){
@@ -327,7 +330,7 @@
         uploaded_image_ms.image_isUploaded=[dic valueForKey:@"image_isUploaded"];
         [arr_images_ms addObject:uploaded_image_ms];
     }
-    alist_image_ms=arr_images_ms;
+    alist_historyImage_msg=arr_images_ms;
 }
 #pragma mark -UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
