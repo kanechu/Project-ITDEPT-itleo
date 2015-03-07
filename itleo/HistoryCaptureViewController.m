@@ -10,15 +10,18 @@
 #import "Cell_show_picture.h"
 #import "Truck_order_image_data.h"
 #import "Custom_BtnGraphicMixed.h"
-
+#import "EnlargeImageViewController.h"
 @interface HistoryCaptureViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_history_logo;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_select;
-@property (weak, nonatomic) IBOutlet UIButton *ibtn_back;
-@property (weak, nonatomic) IBOutlet UIButton *ibtn_ok;
-
+//存储多选的图片信息
 @property (strong,nonatomic) NSMutableArray *alist_history_img;
+@property (assign,nonatomic) NSInteger flag_item;
+
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_back_item;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_ok_item;
 
 @end
 
@@ -32,6 +35,14 @@
     [self fn_set_collectionView_pro];
     // Do any additional setup after loading the view.
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSArray *alist_indexPaths=[self.collectionview indexPathsForSelectedItems];
+    for (NSIndexPath *obj in alist_indexPaths) {
+        [self.collectionview deselectItemAtIndexPath:obj animated:NO];
+    }
+    alist_indexPaths=nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -42,21 +53,17 @@
     [_ibtn_history_logo setTitle:MY_LocalizedString(@"ibtn_history_capture", nil) forState:UIControlStateNormal];
     [_ibtn_history_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     
-    [_ibtn_select setTitle:MY_LocalizedString(@"lbl_select", nil) forState:UIControlStateNormal];
+    [_ibtn_select setTitle:MY_LocalizedString(@"lbl_enable_multi_select", nil) forState:UIControlStateNormal];
     [_ibtn_select setTitle:MY_LocalizedString(@"lbl_cancel", nil) forState:UIControlStateSelected];
     
-    [_ibtn_back setTitle:MY_LocalizedString(@"lbl_back", nil) forState:UIControlStateNormal];
-    _ibtn_back.layer.borderColor=[UIColor lightGrayColor].CGColor;
-    _ibtn_back.layer.borderWidth=1;
-    _ibtn_back.layer.cornerRadius=4;
+    [_ibtn_back_item setTitle:MY_LocalizedString(@"lbl_back", nil)];
+    [_ibtn_back_item setAction:@selector(fn_back_manageImage_page:)];
     
-    [_ibtn_ok setTitle:MY_LocalizedString(@"lbl_ok", nil) forState:UIControlStateNormal];
-    _ibtn_ok.layer.borderColor=[UIColor lightGrayColor].CGColor;
-    _ibtn_ok.layer.borderWidth=1;
-    _ibtn_ok.layer.cornerRadius=4;
+    [_ibtn_ok_item setTitle:MY_LocalizedString(@"lbl_ok", nil)];
+    [_ibtn_ok_item setAction:@selector(fn_determine_selection:)];
+    _ibtn_ok_item.enabled=NO;
     
     alist_history_img=[[NSMutableArray alloc]init];
-    
 }
 #pragma mark -event action
 
@@ -64,11 +71,18 @@
     _ibtn_select.selected=!_ibtn_select.selected;
     if (_ibtn_select.selected) {
         self.collectionview.allowsMultipleSelection=YES;
-        [_ibtn_history_logo setTitle:@"选择图片" forState:UIControlStateNormal];
+        [_ibtn_history_logo setTitle:MY_LocalizedString(@"lbl_hitory_capture_logo", nil) forState:UIControlStateNormal];
+        
     }else{
         self.collectionview.allowsMultipleSelection=NO;
         [_ibtn_history_logo setTitle:MY_LocalizedString(@"ibtn_history_capture", nil) forState:UIControlStateNormal];
         [alist_history_img removeAllObjects];
+        NSArray *alist_indexPaths=[self.collectionview indexPathsForSelectedItems];
+        for (NSIndexPath *obj in alist_indexPaths) {
+            [self.collectionview deselectItemAtIndexPath:obj animated:NO];
+        }
+        alist_indexPaths=nil;
+        _ibtn_ok_item.enabled=NO;
     }
 }
 - (IBAction)fn_back_manageImage_page:(id)sender {
@@ -118,7 +132,14 @@
 }
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.collectionview.allowsMultipleSelection==YES) {
+        
         [alist_history_img addObject:[alist_image_ms objectAtIndex:indexPath.item]];
+        if ([alist_history_img count]!=0) {
+            _ibtn_ok_item.enabled=YES;
+        }
+    }else{
+        _flag_item=indexPath.item;
+        [self performSegueWithIdentifier:@"segue_enlarge_img" sender:self];
     }
 
 }
@@ -129,6 +150,9 @@
     if (self.collectionview.allowsMultipleSelection==YES) {
         Truck_order_image_data *img_data=[alist_image_ms objectAtIndex:indexPath.item];
         [alist_history_img removeObject:img_data];
+        if ([alist_history_img count]==0) {
+            _ibtn_ok_item.enabled=NO;
+        }
     }
 }
 #pragma mark – UICollectionViewDelegateFlowLayout
@@ -138,14 +162,18 @@
     return UIEdgeInsetsMake(10, 0, 0, 0);
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    EnlargeImageViewController *enlargeImgVc=(EnlargeImageViewController*)[segue destinationViewController];
+    enlargeImgVc.alist_image_ms=alist_image_ms;
+    enlargeImgVc.flag_item=_flag_item;
 }
-*/
 
+
+- (IBAction)ibtn_back_item:(id)sender {
+}
 @end

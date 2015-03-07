@@ -44,7 +44,6 @@
 "vehicle_empty"="抱歉，车牌号不能为空!";
 "show_unUpload_msg"="你未上传成功的记录有";
 //epod detail
-"lbl_epod_set_title"="EPOD 信息";
 "lbl_order_no"="配载单号";
 "lbl_check_order"="查看配载单讯息";
 "lbl_status"="配载单状态:";
@@ -189,3 +188,6 @@
 "lbl_edit"="编辑";
 "lbl_save_fail"="保存失败！";
 "lbl_has_saved"="该数据已经保存，无需重复保存！";
+//history capture
+"lbl_hitory_capture_logo"="多选状态";
+"lbl_enable_multi_select"="选择";

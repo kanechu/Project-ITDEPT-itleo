@@ -19,10 +19,13 @@
 #import "DB_LoginInfo.h"
 #import "RespEpod_updmilestone.h"
 #import "Epod_upd_milestone_image_contract.h"
+#import "Custom_BtnGraphicMixed.h"
 
 @interface EPODDetailViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *ibtn_barCode;
 
+@property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_title_logo;
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_back;
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_barCode;
 //存储显示的配置单状态
 @property(nonatomic,strong) NSMutableArray *arr_status;
 //“其他”状态的说明
@@ -83,7 +86,11 @@
 }
 
 - (void)fn_set_control_pro{
-    self.title=MY_LocalizedString(@"lbl_epod_set_title", nil);
+    
+    [_ibtn_title_logo setTitle:MY_LocalizedString(@"ibtn_sign_photo", nil) forState:UIControlStateNormal];
+    [_ibtn_title_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
+    
+    [_ibtn_back setTitle:MY_LocalizedString(@"lbl_back", nil) forState:UIControlStateNormal];
     
     _ilb_order_no.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_order_no", nil)];
     [_itf_order_no becomeFirstResponder];
@@ -331,6 +338,9 @@
         [arr_images_ms addObject:uploaded_image_ms];
     }
     alist_historyImage_msg=arr_images_ms;
+}
+- (IBAction)fn_back_epod_home:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark -UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

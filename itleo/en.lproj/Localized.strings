@@ -45,7 +45,6 @@
 "vehicle_empty"="Sorry,Vehicle Number can not be empty!";
 "show_unUpload_msg"="You did not upload successfully records";
 //epod detail
-"lbl_epod_set_title"="EPOD Info";
 "lbl_order_no"="Order Number";
 "lbl_check_order"="View Order Info";
 "lbl_status"="Order Status:";
@@ -190,3 +189,7 @@
 "lbl_edit"="Edit";
 "lbl_save_fail"="Save failed!";
 "lbl_has_saved"="The data has been saved, no need to repeat save!";
+//history capture
+"lbl_hitory_capture_logo"="Multiple state";
+"lbl_enable_multi_select"="Select";
+

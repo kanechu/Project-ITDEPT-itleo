@@ -14,10 +14,12 @@
 #import "HistoryCaptureViewController.h"
 #import "PopViewManager.h"
 #import "Truck_order_image_data.h"
+#import "Custom_BtnGraphicMixed.h"
 
 @interface ManageImageViewController (){
     UIView *background;
 }
+@property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_title_logo;
 @property(nonatomic,assign)NSInteger flag_item;
 //标识弹出的警告
 @property(nonatomic,assign)NSInteger flag_alert;
@@ -56,6 +58,8 @@
         alist_image_ms=[NSMutableArray array];
     }
     [_ibtn_backItem setTitle:MY_LocalizedString(@"lbl_back", nil)];
+    [_ibtn_title_logo setTitle:MY_LocalizedString(@"ibtn_image_mang", nil) forState:UIControlStateNormal];
+    [_ibtn_title_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     
     _ilb_order_no.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_order_no", nil)];
     _itf_order_no.text=_is_order_no;
@@ -126,8 +130,10 @@
 }
 //查看历史采集的数据
 -(void)fn_look_history_capture:(id)sender{
-
+    
     [self performSegueWithIdentifier:@"segue_history_capture" sender:self];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"selectImg" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_add_image:) name:@"selectImg" object:nil];
 }
 
 - (IBAction)fn_back_previous_page:(id)sender {
@@ -140,6 +146,15 @@
 - (IBAction)fn_delete_image:(id)sender {
     _flag_alert=1;
     [self fn_popUp_alertView:MY_LocalizedString(@"delete_all_image", nil)];
+}
+//在放大模式选择图片后，触发的方法
+- (void)fn_add_image:(NSNotification*)notification{
+    Truck_order_image_data *img_ms=(Truck_order_image_data*)[notification object];
+    if (img_ms!=nil) {
+        [alist_image_ms addObject:img_ms];
+        [self.conllectionview reloadData];
+    }
+    img_ms=nil;
 }
 #pragma mark -UIImagePickerControllerDelegate
 //选择完毕

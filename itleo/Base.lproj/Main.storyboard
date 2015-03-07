@@ -769,7 +769,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="aTZ-ef-yMm">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="8nw-Ie-EEq">
+                        <barButtonItem key="leftBarButtonItem" id="xeO-Gc-m3S">
+                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NmI-r3-Z2v" customClass="Custom_BtnGraphicMixed">
+                                <rect key="frame" x="16" y="7" width="145" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="8nw-Ie-EEq">
                             <connections>
                                 <action selector="fn_back_previous_page:" destination="oaY-oo-7Do" id="g19-Vc-dGO"/>
                             </connections>
@@ -783,6 +794,7 @@
                         <outlet property="ibtn_photograph" destination="V3C-v4-ied" id="m9K-Ps-vyP"/>
                         <outlet property="ibtn_receiving" destination="qay-MJ-qad" id="ffY-zS-iZN"/>
                         <outlet property="ibtn_select_picture" destination="4JU-Ks-eqF" id="APe-9y-td1"/>
+                        <outlet property="ibtn_title_logo" destination="NmI-r3-Z2v" id="TAe-fc-Wn3"/>
                         <outlet property="ilb_imges" destination="SRh-kh-x9w" id="OhX-fr-z6f"/>
                         <outlet property="ilb_order_no" destination="twy-cI-j6K" id="28G-dJ-zA9"/>
                         <outlet property="itf_order_no" destination="hfR-WX-hHE" id="CD8-z5-A0E"/>
@@ -796,35 +808,11 @@
         <!--History Capture View Controller-->
         <scene sceneID="rGS-wd-7Wa">
             <objects>
-                <viewController storyboardIdentifier="HistoryCaptureViewController" id="KZH-lb-e3b" customClass="HistoryCaptureViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryCaptureViewController" automaticallyAdjustsScrollViewInsets="NO" id="KZH-lb-e3b" customClass="HistoryCaptureViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="urf-fk-0Kg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6GH-iG-n7C">
-                                <rect key="frame" x="5" y="532" width="145" height="35"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.25490196079999999" green="0.37135036500000002" blue="0.92777714420000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="返回">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="fn_back_manageImage_page:" destination="KZH-lb-e3b" eventType="touchUpInside" id="HfF-tr-RP3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HoB-gT-cwk">
-                                <rect key="frame" x="170" y="532" width="145" height="35"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.25490196079999999" green="0.37135036500000002" blue="0.92777714420000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="确定">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="fn_determine_selection:" destination="KZH-lb-e3b" eventType="touchUpInside" id="1ds-dU-vBz"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="nLb-Sw-YwK">
                                 <rect key="frame" x="0.0" y="64" width="320" height="456"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -862,6 +850,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="d4S-dn-bxS">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="RZe-B0-qfh"/>
+                                    <barButtonItem title="返回" id="FT3-T5-YkS">
+                                        <connections>
+                                            <action selector="fn_back_manageImage_page:" destination="KZH-lb-e3b" id="bc4-l6-Eu7"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="RPT-72-enu"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Vqt-E1-gdh"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="dI2-8M-B0i"/>
+                                    <barButtonItem title="确定" id="1rI-fp-hpW">
+                                        <connections>
+                                            <action selector="fn_determine_selection:" destination="KZH-lb-e3b" id="N0v-XV-4FB"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="r2P-9A-Xjg"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -880,6 +889,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KDj-bO-1zh">
                                 <rect key="frame" x="-23" y="-15" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="选择">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -891,15 +901,81 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionview" destination="nLb-Sw-YwK" id="chr-zJ-jad"/>
-                        <outlet property="ibtn_back" destination="6GH-iG-n7C" id="fh6-iT-p8v"/>
+                        <outlet property="ibtn_back_item" destination="FT3-T5-YkS" id="rnw-lQ-RFs"/>
                         <outlet property="ibtn_history_logo" destination="w2v-X0-XF0" id="s9n-Wn-N2f"/>
-                        <outlet property="ibtn_ok" destination="HoB-gT-cwk" id="alW-MP-T56"/>
+                        <outlet property="ibtn_ok_item" destination="1rI-fp-hpW" id="LrJ-Ut-gII"/>
                         <outlet property="ibtn_select" destination="KDj-bO-1zh" id="5Og-MD-H8z"/>
+                        <outlet property="toolbar" destination="d4S-dn-bxS" id="pCq-u2-m4G"/>
+                        <segue destination="scx-mg-qUM" kind="push" identifier="segue_enlarge_img" id="paC-JO-tn9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xdK-VB-CPA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1587" y="1619"/>
+        </scene>
+        <!--Enlarge Image View Controller-->
+        <scene sceneID="dkQ-gR-JAZ">
+            <objects>
+                <viewController storyboardIdentifier="EnlargeImageViewController" automaticallyAdjustsScrollViewInsets="NO" id="scx-mg-qUM" customClass="EnlargeImageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H83-f7-QzF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8Lx-Au-Zw7">
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="KZG-IB-zTc">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="H42-SA-En5">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="TMM-ZU-DhO"/>
+                                    <barButtonItem title="返回" id="ClP-3E-bSA">
+                                        <connections>
+                                            <action selector="fn_back_manageImage_page:" destination="scx-mg-qUM" id="lcP-Wl-tF5"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="eSn-He-cVz"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="x2r-g7-ena"/>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Vyh-k2-al7"/>
+                                    <barButtonItem title="确定" id="yFO-qs-uGt">
+                                        <connections>
+                                            <action selector="fn_determine_selectImg:" destination="scx-mg-qUM" id="9ns-xf-kxH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Dcj-Qe-eWv"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3jJ-GN-FF0">
+                        <barButtonItem key="leftBarButtonItem" id="lnZ-mh-ykg">
+                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MrX-ct-BE9">
+                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ibtn_back_item" destination="ClP-3E-bSA" id="AUd-Pe-Mto"/>
+                        <outlet property="ibtn_ok_item" destination="yFO-qs-uGt" id="flW-5O-zr7"/>
+                        <outlet property="scrollView" destination="8Lx-Au-Zw7" id="bV5-KB-1jk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TcW-P9-s9W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1943" y="1619"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Tad-J3-TbA">
@@ -1103,10 +1179,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ctu-Zr-O9r">
                         <barButtonItem key="leftBarButtonItem" id="bPc-cV-KfE">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Rb-Xl-aCX" customClass="Custom_BtnGraphicMixed">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Rb-Xl-aCX" customClass="Custom_BtnGraphicMixed">
                                 <rect key="frame" x="16" y="5" width="100" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1117,6 +1193,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KLm-gd-KaI">
                                 <rect key="frame" x="233" y="5" width="71" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="全选"/>
                                 <connections>
                                     <action selector="fn_select_all_records:" destination="ByI-bV-151" eventType="touchUpInside" id="oHe-ER-jQZ"/>
@@ -2248,11 +2325,37 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="W99-Ua-LUO"/>
+                    <navigationItem key="navigationItem" id="W99-Ua-LUO">
+                        <barButtonItem key="leftBarButtonItem" id="kIk-HY-PC4">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5V9-H1-hg4" customClass="Custom_BtnGraphicMixed">
+                                <rect key="frame" x="16" y="7" width="160" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="hzp-VM-D2H">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="U2j-TH-OSF">
+                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="返回">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fn_back_epod_home:" destination="gAk-bn-aL5" eventType="touchUpInside" id="eCE-dk-otX"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="ibtn_back" destination="U2j-TH-OSF" id="8r6-IV-Yav"/>
                         <outlet property="ibtn_barCode" destination="2fJ-QX-MDt" id="Kf8-q0-wGV"/>
                         <outlet property="ibtn_check_info" destination="Z1B-kS-l0i" id="jSq-Nw-xTR"/>
                         <outlet property="ibtn_manage" destination="rb5-5r-G2y" id="pJp-E9-70m"/>
+                        <outlet property="ibtn_title_logo" destination="5V9-H1-hg4" id="zyN-0s-1bl"/>
                         <outlet property="ibtn_uploading" destination="LJl-5J-Mbp" id="dm5-08-AJh"/>
                         <outlet property="ilb_order_no" destination="uyO-LF-fwA" id="wD2-vx-MrD"/>
                         <outlet property="ilb_show_picture_nums" destination="A3b-Vw-il7" id="vW7-rv-Swd"/>
