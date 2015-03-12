@@ -22,6 +22,7 @@
 #import "DB_Chart.h"
 #import "DB_whs_config.h"
 @interface MainHomeViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *ilb_version;
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
 @property(assign,nonatomic)NSInteger flag_launch_isLogin;
@@ -44,7 +45,6 @@
     [super viewDidLoad];
     [self fn_users_isLogin];
     [self fn_create_menu];
-    
     // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -104,6 +104,7 @@
 
     [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
     [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
+    _ilb_version.text=[NSString stringWithFormat:@"Version %@",ITLEO_VERSION];
 }
 /**
  *  判断用户是否登录，如果已经登录，则设置语言环境

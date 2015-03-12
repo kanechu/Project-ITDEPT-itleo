@@ -11,6 +11,7 @@
 #define APP_CODE  @"MOB_ITLEO" // 客户服务器那边用@"ITLEO"，因为没改成"MOB_ITLEO"
 //获取itleo 设置的版本
 #define VERSION [[[NSBundle mainBundle]infoDictionary]valueForKey:@"CFBundleShortVersionString"]!=nil ? [[[NSBundle mainBundle]infoDictionary]valueForKey:@"CFBundleShortVersionString"] : @"1.0"
+#define ITLEO_VERSION [[[NSBundle mainBundle]infoDictionary]valueForKey:@"CFBundleVersion"]!=nil ? [[[NSBundle mainBundle]infoDictionary]valueForKey:@"CFBundleVersion"] : @"1.0"
 #define IS_ENCRYPTED @"0"
 
 #define SYSTEM_VERSION_GREATER_THAN_IOS8 ([[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending )
