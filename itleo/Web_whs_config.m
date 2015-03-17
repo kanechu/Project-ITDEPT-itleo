@@ -22,8 +22,6 @@
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     
     AuthContract *auth=[db_login fn_get_RequestAuth];
-#warning neet to modify
-    auth.system=@"ITNEW";
     req_form.Auth=auth;
     Web_base *web_obj=[[Web_base alloc]init];
     web_obj.il_url=STR_WHS_CONFIG_URL;
