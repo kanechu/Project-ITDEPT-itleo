@@ -77,8 +77,7 @@
         if ([module_code isEqualToString:@"EPOD"] && [f_exec isEqualToString:@"1"]) {
             [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_epod", nil) image:@"delivery" segue:@"segue_epod"]];
         }
-#warning -neet fix
-        if ([module_code isEqualToString:@"Chart"] && [f_exec isEqualToString:@"1"]) {
+        if ([module_code isEqualToString:@"WHS_SUMMARY"] && [f_exec isEqualToString:@"1"]) {
             [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
             [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
         }
