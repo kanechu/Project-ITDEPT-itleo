@@ -57,6 +57,9 @@
           // back on the main thread, check for errors, if no errors start the parsing
         if (error) {
             NSLog(@"出现异常%@",error);
+            if (callBack) {
+                callBack(nil);
+            }
         }else{
             NSHTTPURLResponse *httpResponse=(NSHTTPURLResponse*)response;
             if (httpResponse.statusCode==200) {

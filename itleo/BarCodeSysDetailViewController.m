@@ -249,6 +249,9 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
                 if ([str_msg length]==0) {
                     str_msg=@"";
                 }
+                if ([str_status length]==0) {
+                    str_status=@"";
+                }
                 [idic_textfield_value setObject:str_msg forKey:@"result_message"];
                 [idic_textfield_value setObject:str_status forKey:@"result_status"];
                 [db_whs fn_save_warehouse_log:[NSMutableDictionary dictionaryWithDictionary:idic_textfield_value]];
