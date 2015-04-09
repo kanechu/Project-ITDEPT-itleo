@@ -20,14 +20,14 @@
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "CheckNetWork.h"
-#define FIXSPACE 15
+#define FIXSPACE 1.5
 #define TEXTFIELD_TAG 100
 typedef NSDictionary* (^passValue)(NSInteger tag);
 
 @interface BarCodeSysDetailViewController ()<SKSTableViewDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet SKSTableView *skstableView;
-@property (weak, nonatomic) IBOutlet UIButton *ibtn_scan_log;
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_save;
 
 @property (strong, nonatomic) Custom_textField *checkText;
 //存储组标题信息
@@ -88,8 +88,8 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     [_ibtn_whs_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     _logo_title=nil;
     
-    _ibtn_scan_log.layer.cornerRadius=5;
-    [_ibtn_scan_log setTitle:MY_LocalizedString(@"lbl_scan_log", nil) forState:UIControlStateNormal];
+    _ibtn_save.layer.cornerRadius=5;
+    [_ibtn_save setTitle:MY_LocalizedString(@"ibtn_save", nil) forState:UIControlStateNormal];
     
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
     NSString *unique_id=[_idic_maintform valueForKey:@"unique_id"];
@@ -155,18 +155,18 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     return filed_name;
 }
 -(void)fn_add_right_items{
-    UIBarButtonItem *ibtn_save=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"ibtn_save", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_save_whs_data)];
+    UIBarButtonItem *ibtn_scan_log=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_scan_log", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_scan_log:)];
     UIBarButtonItem *ibtn_space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     ibtn_space.width=FIXSPACE;
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0,1.5,20)];
     view.backgroundColor=[UIColor lightGrayColor];
     UIBarButtonItem *ibtn_space1=[[UIBarButtonItem alloc]initWithCustomView:view];
-    ibtn_space1.width=1.5;
+    ibtn_space1.width=FIXSPACE;
     view=nil;
     UIBarButtonItem *ibtn_space2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     ibtn_space2.width=FIXSPACE;
     UIBarButtonItem *ibtn_cancel=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_cancel_operation)];
-    NSArray *array=@[ibtn_save,ibtn_space,ibtn_space1,ibtn_space2,ibtn_cancel];
+    NSArray *array=@[ibtn_scan_log,ibtn_space,ibtn_space1,ibtn_space2,ibtn_cancel];
     self.navigationItem.rightBarButtonItems=array;
     array=nil;
 }
@@ -186,14 +186,14 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     return idic_options;
 }
 #pragma mark -event action
-- (void)fn_save_whs_data{
+- (IBAction)fn_save_whs_data:(id)sender {
     //用于标识刚输入的内容，是否已经保存过
     NSInteger flag_isSaved=1;
     if ([idic_textfield_value isEqual:_idic_value_copy]) {
         flag_isSaved=0;
     }
     //用于标识必填项，是否不为空
-     NSInteger flag_can_saved=1;
+    NSInteger flag_can_saved=1;
     //用于存储必填项名
     NSString *str_mandatory=@"";
     for (NSString *str_key in [_idic_is_mandatory allKeys]) {
@@ -217,7 +217,7 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
         }
         str_value=nil;
     }
-   
+    
     if (flag_isSaved==1 && flag_can_saved==1) {
         
         Web_whs_config *web_obj=[[Web_whs_config alloc]init];
@@ -321,7 +321,7 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
     [idic_textfield_value setObject:selected_value  forKey:col_field];
 }
 
-- (IBAction)fn_scan_log:(id)sender {
+- (void)fn_scan_log:(id)sender {
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
     NSString *unique_id=[_idic_maintform valueForKey:@"unique_id"];
     NSMutableArray *arr_upload_cols=[db_whs fn_get_upload_col_data:unique_id];

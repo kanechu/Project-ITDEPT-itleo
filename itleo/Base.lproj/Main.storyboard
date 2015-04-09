@@ -1378,12 +1378,12 @@
                                 <rect key="frame" x="0.0" y="533" width="320" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.25490196079999999" green="0.37135036500000002" blue="0.92777714420000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Scan Log">
+                                <state key="normal" title="Save">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="fn_scan_log:" destination="A21-yM-Qi1" eventType="touchUpInside" id="BdL-B0-BKW"/>
+                                    <action selector="fn_save_whs_data:" destination="A21-yM-Qi1" eventType="touchUpInside" id="SrF-3X-eQM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1391,9 +1391,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="VDc-ua-7O2">
                         <barButtonItem key="leftBarButtonItem" id="1yn-RK-cIf">
-                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="waN-Dy-32E" customClass="Custom_BtnGraphicMixed">
+                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="waN-Dy-32E" customClass="Custom_BtnGraphicMixed">
                                 <rect key="frame" x="16" y="5" width="150" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1402,7 +1403,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="ibtn_scan_log" destination="e7f-cD-AdK" id="9kn-BQ-0G4"/>
+                        <outlet property="ibtn_save" destination="e7f-cD-AdK" id="ZQF-pu-i7m"/>
                         <outlet property="ibtn_whs_logo" destination="waN-Dy-32E" id="idz-mg-uI9"/>
                         <outlet property="skstableView" destination="vrC-q0-42j" id="oXJ-Zh-cp7"/>
                     </connections>
