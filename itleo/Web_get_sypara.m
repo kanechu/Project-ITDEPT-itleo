@@ -51,4 +51,18 @@
     db_sypara=nil;
     return flag;
 }
+-(BOOL)fn_isShow_order_list_AndVertify{
+    BOOL flag_show=NO;
+    DB_sypara *db_sypara=[[DB_sypara alloc]init];
+    NSMutableArray *alist_sypara=[db_sypara fn_get_sypara_data];
+    for (NSMutableDictionary *dic in alist_sypara) {
+        NSString *para_code=[Conversion_helper fn_cut_whitespace:[dic valueForKey:@"para_code"]];
+        NSString *data1=[dic valueForKey:@"data1"];
+        if ([para_code isEqualToString:@"MOB_EPOD_DL_ORD"] && [data1 isEqualToString:@"1"]) {
+            flag_show=YES;
+        }
+    }
+    db_sypara=nil;
+    return flag_show;
+}
 @end

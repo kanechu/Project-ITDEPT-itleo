@@ -40,6 +40,7 @@
 "ibtn_sign_photo"="签收及拍照";
 "ibtn_check_record"="查看记录";
 "ibtn_settings"="设置";
+"ibtn_order_list"="订单列表";
 "no_history_data"="没有您输入的车牌号记录!";
 "vehicle_empty"="抱歉，车牌号不能为空!";
 "show_unUpload_msg"="你未上传成功的记录有";
@@ -136,6 +137,10 @@
 "lbl_10minutes"="10 分钟";
 "lbl_30minutes"="30 分钟";
 "lbl_hour"="1 小时";
+//order list
+"lbl_list_order_no"="订单号:";
+"lbl_order_detail"="订单详情";
+
 //summary charts
 "lbl_refresh"="刷新";
 "lbl_set"="设置";

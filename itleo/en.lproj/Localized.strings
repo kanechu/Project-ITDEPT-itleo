@@ -41,6 +41,7 @@
 "ibtn_sign_photo"="Sign and Photograph";
 "ibtn_check_record"="Check the record";
 "ibtn_settings"="Settings";
+"ibtn_order_list"="Order List";
 "no_history_data"="No Historical Vehicle_no Data!";
 "vehicle_empty"="Sorry,Vehicle Number can not be empty!";
 "show_unUpload_msg"="You did not upload successfully records";
@@ -137,6 +138,11 @@
 "lbl_10minutes"="10 Minute";
 "lbl_30minutes"="30 Minute";
 "lbl_hour"="1 Hour";
+
+//order list
+"lbl_list_order_no"="Order NO.:";
+"lbl_order_detail"="Order Detail";
+
 //summary charts
 "lbl_refresh"="Refresh";
 "lbl_set"="Setting";

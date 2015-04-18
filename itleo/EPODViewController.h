@@ -17,11 +17,13 @@
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_receive;
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_checkRecord;
 @property (weak, nonatomic) IBOutlet Custom_Button *ibtn_settings;
+@property (weak, nonatomic) IBOutlet Custom_Button *ibtn_orderList;
 
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_showMsg;
 
 - (IBAction)fn_fignature_photograph:(id)sender;
 - (IBAction)fn_check_record:(id)sender;
 - (IBAction)fn_manually_settings:(id)sender;
+- (IBAction)fn_check_order_list:(id)sender;
 
 @end

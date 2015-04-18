@@ -14,4 +14,6 @@
 
 -(NSInteger)fn_isShow_GPS_function;
 
+-(BOOL)fn_isShow_order_list_AndVertify;
+
 @end
