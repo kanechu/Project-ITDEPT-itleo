@@ -32,6 +32,8 @@ NSString* const STR_UPD_EXCFSDIM_URL=@"api/ct/upd_excfsdim";
 
 NSString* const STR_WHS_CONFIG_URL=@"api/Search/whs_config";
 
+NSString* const STR_ORDER_LIST_URL=@"api/epod/epod_get_order_list";
+
 #else
 
 NSString* const STR_BASE_URL = @"http://demo.itdept.com.hk/itcrm_web_api/";
@@ -57,4 +59,5 @@ NSString* const STR_UPD_EXCFSDIM_URL=@"api/ct/upd_excfsdim";
 
 NSString* const STR_WHS_CONFIG_URL=@"api/Search/whs_config";
 
+NSString* const STR_ORDER_LIST_URL=@"api/epod/epod_get_order_list";
 #endif

@@ -34,5 +34,5 @@ extern NSString* const STR_GET_CHART_URL;
 extern NSString* const STR_EXSO_URL;
 extern NSString* const STR_UPD_EXCFSDIM_URL;
 extern NSString* const STR_WHS_CONFIG_URL;
-
+extern NSString* const STR_ORDER_LIST_URL;
 @end

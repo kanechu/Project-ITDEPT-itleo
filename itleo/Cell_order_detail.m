@@ -32,15 +32,16 @@
 
 @implementation Cell_order_detail
 
-- (void)setOrder_obj:(Resp_order_list *)order_obj{
+- (void)setDic_order:(NSDictionary *)dic_order{
+    
     _lbl_origin.text=@"Pick Up Loc:";
     
     CGFloat ilb_originX=CGRectGetMinX(_ilb_origin_addr.frame);
     CGFloat ilb_originY=CGRectGetMinY(_ilb_origin_addr.frame);
     CGFloat ilb_originWidth=CGRectGetWidth(_ilb_origin_addr.frame);
-    CGSize ilb_originSize=[order_obj.ilb_origin_addr boundingRectWithSize:CGSizeMake(ilb_originWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_origin_addr.font} context:nil].size;
+    CGSize ilb_originSize=[dic_order[@"pick_addr"] boundingRectWithSize:CGSizeMake(ilb_originWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_origin_addr.font} context:nil].size;
     CGRect ilb_originRect= CGRectMake(ilb_originX, ilb_originY, ilb_originSize.width, ilb_originSize.height);
-    _ilb_origin_addr.text=order_obj.ilb_origin_addr;
+    _ilb_origin_addr.text=dic_order[@"pick_addr"];
     _ilb_origin_addr.frame=ilb_originRect;
     
     CGFloat lbl_desX=CGRectGetMinX(_lbl_destination.frame);
@@ -52,9 +53,9 @@
     CGFloat ilb_des_addrX=CGRectGetMinX(_ilb_destination_addr.frame);
     CGFloat ilb_des_addrY=CGRectGetMaxY(_ilb_origin_addr.frame)+kTableViewCellControlSpacing;
     CGFloat ilb_des_addrWidth=CGRectGetWidth(_ilb_destination_addr.frame);
-    CGSize ilb_des_addrSize=[order_obj.ilb_destination_addr boundingRectWithSize:CGSizeMake(ilb_des_addrWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_destination_addr.font} context:nil].size;
+    CGSize ilb_des_addrSize=[dic_order[@"dely_addr"] boundingRectWithSize:CGSizeMake(ilb_des_addrWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_destination_addr.font} context:nil].size;
     CGRect ilb_des_addrRect= CGRectMake(ilb_des_addrX,ilb_des_addrY, ilb_des_addrWidth, ilb_des_addrSize.height);
-    _ilb_destination_addr.text=order_obj.ilb_destination_addr;
+    _ilb_destination_addr.text=dic_order[@"dely_addr"];
     _ilb_destination_addr.frame=ilb_des_addrRect;
     
     CGFloat lbl_statusX=CGRectGetMinX(_lbl_status.frame);
@@ -66,9 +67,9 @@
     CGFloat ilb_status_contentX=CGRectGetMinX(_ilb_status_value.frame);
     CGFloat ilb_status_contentY=CGRectGetMaxY(_ilb_destination_addr.frame)+kTableViewCellControlSpacing;
     CGFloat ilb_status_contentWidth=CGRectGetWidth(_ilb_status_value.frame);
-    CGSize ilb_status_contentSize=[order_obj.ilb_order_status boundingRectWithSize:CGSizeMake(ilb_status_contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_status_value.font} context:nil].size;
+    CGSize ilb_status_contentSize=[dic_order[@"status"] boundingRectWithSize:CGSizeMake(ilb_status_contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_status_value.font} context:nil].size;
     CGRect ilb_status_contentRect= CGRectMake(ilb_status_contentX,ilb_status_contentY, ilb_status_contentSize.width, ilb_status_contentSize.height);
-    _ilb_status_value.text=order_obj.ilb_order_status;
+    _ilb_status_value.text=dic_order[@"status"];
     _ilb_status_value.frame=ilb_status_contentRect;
     
     CGFloat lbl_remarkX=CGRectGetMinX(_lbl_remark.frame);
@@ -80,9 +81,9 @@
     CGFloat ilb_remark_contentX=CGRectGetMinX(_ilb_remark_value.frame);
     CGFloat ilb_remark_contentY=CGRectGetMaxY(_ilb_status_value.frame)+kTableViewCellControlSpacing;
     CGFloat ilb_remark_contentWidth=CGRectGetWidth(_ilb_remark_value.frame);
-    CGSize ilb_remark_contentSize=[order_obj.ilb_remark boundingRectWithSize:CGSizeMake(ilb_remark_contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_remark_value.font} context:nil].size;
+    CGSize ilb_remark_contentSize=[dic_order[@"remark"] boundingRectWithSize:CGSizeMake(ilb_remark_contentWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_remark_value.font} context:nil].size;
     CGRect ilb_remark_contentRect= CGRectMake(ilb_remark_contentX,ilb_remark_contentY, ilb_remark_contentWidth, ilb_remark_contentSize.height);
-    _ilb_remark_value.text=order_obj.ilb_remark;
+    _ilb_remark_value.text=dic_order[@"remark"];
     _ilb_remark_value.frame=ilb_remark_contentRect;
     
     CGFloat lbl_dynamic1X=CGRectGetMinX(_lbl_dynamic1.frame);
@@ -126,10 +127,11 @@
     CGRect dynamic3_contentRect= CGRectMake(dynamic3_contentX,dynamic3_contentY, dynamic3_contentWidth, dynamic3_contentSize.height);
     _ilb_dynamic3_value.text=@"Dynamic Values";
     _ilb_dynamic3_value.frame=dynamic3_contentRect;
-
+    
     _height=CGRectGetMaxY(_ilb_dynamic3_value.frame)+kTableViewCellControlSpacing*2;
     
 }
+
 
 - (void)awakeFromNib {
     // Initialization code

@@ -24,6 +24,8 @@
 
 #import "Resp_UPLOAD_COL.h"
 #import "Resp_language_type.h"
+
+#import "Resp_order_dtl_list.h"
 @implementation Web_base
 
 @synthesize il_url;
@@ -229,6 +231,57 @@
                                                                                        statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
     
+}
+- (void) fn_get_order_list_data:(RequestContract *)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{
+    
+    //Auth
+    RKObjectMapping *lo_authMapping = [RKObjectMapping requestMapping];
+    NSArray *arr_auth=[NSArray arrayWithPropertiesOfObject:auth];
+    [lo_authMapping addAttributeMappingsFromArray:arr_auth];
+    //upload form
+    RKObjectMapping *lo_updateMapping = [RKObjectMapping requestMapping];
+    NSMutableArray *arr_updateform=[[NSArray arrayWithPropertiesOfObject:[UpdateForm_orderList class]]mutableCopy];
+    [arr_updateform removeLastObject];
+    [lo_updateMapping addAttributeMappingsFromArray:arr_updateform];
+    
+    RKRelationshipMapping *searchRelationship = [RKRelationshipMapping
+                                                 relationshipMappingFromKeyPath:@"UpdateForm"
+                                                 toKeyPath:@"UpdateForm"
+                                                 withMapping:lo_updateMapping];
+    
+    
+    RKRelationshipMapping *authRelationship = [RKRelationshipMapping
+                                               relationshipMappingFromKeyPath:@"Auth"
+                                               toKeyPath:@"Auth"
+                                               withMapping:lo_authMapping];
+    RKObjectMapping *lo_reqMapping = [RKObjectMapping requestMapping];
+    [lo_reqMapping addPropertyMapping:authRelationship];
+    [lo_reqMapping addPropertyMapping:searchRelationship];
+    
+    RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:lo_reqMapping
+                                                                                   objectClass:[RequestContract class]
+                                                                                   rootKeyPath:nil method:RKRequestMethodPOST];
+    
+    RKObjectMapping* lo_response_mapping = [RKObjectMapping mappingForClass:[iresp_class class]];
+    [lo_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping];
+    
+    RKObjectMapping* lo_order_response_mapping=[RKObjectMapping mappingForClass:[iresp_class1 class]];
+    [lo_order_response_mapping addAttributeMappingsFromArray:ilist_resp_mapping1];
+    
+    [lo_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"ls_order_list" toKeyPath:@"ls_order_list" withMapping:lo_order_response_mapping]];
+    
+    RKObjectMapping* lo_order_dtl_response_mapping=[RKObjectMapping mappingForClass:[Resp_order_dtl_list class]];
+    [lo_order_dtl_response_mapping addAttributeMappingsFromArray:[NSArray arrayWithPropertiesOfObject:[Resp_order_dtl_list class]]];
+    
+    [lo_order_response_mapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"ls_order_dtl_list" toKeyPath:@"ls_order_dtl_list" withMapping:lo_order_dtl_response_mapping]];
+    
+    RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lo_response_mapping
+                                                                                            method:RKRequestMethodPOST
+                                                                                       pathPattern:nil
+                                                                                           keyPath:nil
+                                                                                       statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self fn_RK_ObjectManager:requestDescriptor :responseDescriptor ao_form:ao_form base_url:base_url];
+
 }
 #pragma mark -upload data
 - (void) fn_uploaded_data:(UploadContract*)ao_form Auth:(AuthContract*)auth base_url:(NSString*)base_url{

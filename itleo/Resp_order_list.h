@@ -10,24 +10,24 @@
 
 @interface Resp_order_list : NSObject
 
-@property (nonatomic ,copy) NSString * ilb_phone_num;//手机号码
+@property (nonatomic, copy) NSString *order_uid;
 
-@property (nonatomic ,copy) NSString * ilb_update_time;//同步时间
+@property (nonatomic, copy) NSString *order_no;
 
-@property (nonatomic ,copy) NSString * ilb_origin_addr;//起始地点
+@property (nonatomic, copy) NSString *status;
 
-@property (nonatomic ,copy) NSString * ilb_order_status;//订单状态
+@property (nonatomic, copy) NSString *remark;
 
-@property (nonatomic ,copy) NSString * ilb_destination_addr;//目的地点
+@property (nonatomic, copy) NSString *pick_addr;
 
-@property (nonatomic ,copy) NSString * ilb_remark;//备注
+@property (nonatomic, copy) NSString *dely_addr;
 
-#pragma mark - 方法
-#pragma mark 根据字典初始化订单对象
-- (Resp_order_list * )initWithDictionary:(NSDictionary *)dic;
+@property (nonatomic, copy) NSString *sign_path;
 
-#pragma mark 初始化订单对象（静态方法）
-+ (Resp_order_list *)fn_statusWithDictionary:(NSDictionary *)dic;
+@property (nonatomic, copy) NSString *sign_path_base64;
 
+@property (nonatomic, copy) NSString *voided;
+
+@property (nonatomic, copy) NSArray *ls_order_dtl_list;
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Resp_order_list;
+
 @interface Cell_order_detail_list : UITableViewCell
 
-@property (nonatomic, strong) Resp_order_list *order_obj;
+@property (nonatomic, strong) NSDictionary *dic_order_dtl;
+
 @property (nonatomic, assign) CGFloat height;
 
 @end

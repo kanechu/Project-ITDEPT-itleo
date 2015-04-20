@@ -14,4 +14,6 @@
 
 @synthesize Auth;
 
+@synthesize UpdateForm;
+
 @end

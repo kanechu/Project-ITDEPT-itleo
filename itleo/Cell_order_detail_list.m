@@ -7,7 +7,7 @@
 //
 
 #import "Cell_order_detail_list.h"
-#import "Resp_order_list.h"
+#import "Resp_order_dtl_list.h"
 #define kTableViewCellControlSpacing 5//控件间距
 
 @interface Cell_order_detail_list()
@@ -20,15 +20,16 @@
 @end
 @implementation Cell_order_detail_list
 
-- (void)setOrder_obj:(Resp_order_list *)order_obj{
+- (void)setDic_order_dtl:(NSDictionary *)dic_order_dtl{
     _lbl_item_desc.text=@"Item Descp:";
-    _imgView_detail.image=[UIImage imageNamed:@"delivery"];
+    NSString *str_image=dic_order_dtl[@"item_pic_path_base64"];
+    _imgView_detail.image=[Conversion_helper fn_base64Str_convert_image:str_image];
     CGFloat item_desc_valueX=CGRectGetMinX(_ilb_item_desc_value.frame);
     CGFloat item_desc_valueY=CGRectGetMinY(_ilb_item_desc_value.frame);
     CGFloat item_desc_valueWidth=CGRectGetWidth(_ilb_item_desc_value.frame);
-    CGSize item_desc_valueSize=[order_obj.ilb_remark boundingRectWithSize:CGSizeMake(item_desc_valueWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_item_desc_value.font} context:nil].size;
+    CGSize item_desc_valueSize=[dic_order_dtl[@"descp"] boundingRectWithSize:CGSizeMake(item_desc_valueWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_item_desc_value.font} context:nil].size;
     CGRect item_desc_valueRect=CGRectMake(item_desc_valueX, item_desc_valueY, item_desc_valueWidth, item_desc_valueSize.height);
-    _ilb_item_desc_value.text=order_obj.ilb_remark;
+    _ilb_item_desc_value.text=dic_order_dtl[@"descp"];
     _ilb_item_desc_value.frame=item_desc_valueRect;
     
     CGFloat lbl_pkgX=CGRectGetMinX(_lbl_pkg.frame);
@@ -41,10 +42,12 @@
     CGFloat lbl_pkg_valueY=CGRectGetMaxY(_ilb_item_desc_value.frame)+kTableViewCellControlSpacing;
     CGFloat lbl_pkg_valueWidth=CGRectGetWidth(_ilb_pkg_value.frame),lbl_pkg_valueHeight=CGRectGetHeight(_ilb_pkg_value.frame);
     _ilb_pkg_value.frame=CGRectMake(lbl_pkg_valueX, lbl_pkg_valueY, lbl_pkg_valueWidth, lbl_pkg_valueHeight);
-    _ilb_pkg_value.text=@"3";
+    _ilb_pkg_value.text=dic_order_dtl[@"pkg"];
     
     _height=CGRectGetMaxY(_ilb_pkg_value.frame)+kTableViewCellControlSpacing*2;
-
+    if (_height<CGRectGetMaxY(_imgView_detail.frame)) {
+        _height=CGRectGetMaxY(_imgView_detail.frame)+kTableViewCellControlSpacing;
+    }
 }
 
 - (void)awakeFromNib {

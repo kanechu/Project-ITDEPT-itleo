@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Resp_order_list;
 
 @interface Cell_order_list : UITableViewCell
-#pragma mark 订单对象
-@property (nonatomic ,strong) Resp_order_list * order_obj;
+
+@property (nonatomic, strong) NSDictionary *dic_order;
 
 #pragma mark 单元格高度
 @property (nonatomic ,assign) CGFloat height;
