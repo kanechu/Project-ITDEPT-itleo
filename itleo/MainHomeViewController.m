@@ -21,6 +21,7 @@
 #import "DB_sypara.h"
 #import "DB_Chart.h"
 #import "DB_whs_config.h"
+#import "DB_order.h"
 @interface MainHomeViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *ilb_version;
 @property(strong,nonatomic)NSMutableArray *alist_menu;
@@ -135,17 +136,9 @@
 }
 
 - (IBAction)fn_logout_itleo:(id)sender {
-    DB_ePod *db_epod=[[DB_ePod alloc]init];
-    DB_Location *db_location=[[DB_Location alloc]init];
-    NSInteger epod_count=[[db_epod fn_select_all_ePod_data] count];
-    NSInteger location_count=[[db_location fn_get_location_data:@"0"] count];
-    if (epod_count!=0 || location_count!=0) {
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
-        [alert show];
-    }else{
-        [self fn_clear_the_cache];
-    }
     
+    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
+    [alert show];
     
 }
 
@@ -189,6 +182,10 @@
     DB_whs_config *db_whs=[[DB_whs_config alloc]init];
     [db_whs fn_delete_all_wharehouse_log];
     db_whs=nil;
+    //清楚order数据
+    DB_order *db_order=[[DB_order alloc]init];
+    [db_order fn_delete_all_order_list];
+    db_order=nil;
     [self fn_present_loginView];
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
     [userDefaults setInteger:0 forKey:@"isLogin"];

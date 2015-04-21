@@ -12,6 +12,7 @@
 #import "Cell_order_detail.h"
 #import "Cell_order_detail_list.h"
 #import "Resp_order_list.h"
+#import "DB_order.h"
 #define SECTION_NUM 2
 @interface OrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *order_detail_logo;
@@ -52,12 +53,11 @@
     Cell_order_detail *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifer];
     [_alist_orderCells addObject:cell];
     
+    NSString *order_uid=[_dic_order valueForKey:@"order_uid"];
+    DB_order *db_order_obj=[[DB_order alloc]init];
     _alist_orderListCells=[NSMutableArray array];
-    _alist_orderObjs=[NSMutableArray array];
-    NSString *path=[[NSBundle mainBundle]pathForResource:@"orderList" ofType:@"plist"];
-    NSArray *array=[[NSArray alloc]initWithContentsOfFile:path];
-    [array enumerateObjectsUsingBlock:^(id obj,NSUInteger idx,BOOL *stop){
-        [_alist_orderObjs addObject:[Resp_order_list fn_statusWithDictionary:obj]];
+    _alist_orderObjs=[db_order_obj fn_get_order_dtl_list_data:order_uid];
+    [_alist_orderObjs enumerateObjectsUsingBlock:^(id obj,NSUInteger idx,BOOL *stop){
         static NSString *cellIdentifer=@"Cell_order_detail_list";
         Cell_order_detail_list *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifer];
         [_alist_orderListCells addObject:cell];
@@ -83,7 +83,7 @@
     if (indexPath.section==0) {
         static NSString *cellIdentifer=@"Cell_order_detail";
         Cell_order_detail *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifer];
-        cell.order_obj=_orderObj;
+        cell.dic_order=_dic_order;
         return cell;
     }
     static NSString *cellIdentifer=@"Cell_order_detail_list";
@@ -93,7 +93,7 @@
     }else{
         cell.backgroundColor=COLOR_LIGHT_BLUE;
     }
-    cell.order_obj=[_alist_orderObjs objectAtIndex:indexPath.row];
+    cell.dic_order_dtl=[_alist_orderObjs objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -101,11 +101,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section==0) {
         Cell_order_detail * cell = _alist_orderCells[indexPath.row];
-        cell.order_obj =_orderObj;
+        cell.dic_order =_dic_order;
         return cell.height;
     }else{
         Cell_order_detail_list *cell=_alist_orderListCells[indexPath.row];
-        cell.order_obj=_alist_orderObjs[indexPath.row];
+        cell.dic_order_dtl=_alist_orderObjs[indexPath.row];
         return cell.height;
     }
 }
@@ -118,11 +118,11 @@
     if (section==0) {
         cell.imgView_order.image=[UIImage imageNamed:@"ic_order"];
         cell.lbl_order_type.text=@"Order";
-        cell.ilb_orderNo.text=@"153726411";
+        cell.ilb_orderNo.text=_dic_order[@"order_no"];
     }else{
         cell.imgView_order.image=[UIImage imageNamed:@"ic_order"];
         cell.lbl_order_type.text=@"Order Detail";
-        cell.ilb_orderNo.text=@"(3)";
+        cell.ilb_orderNo.text=[NSString stringWithFormat:@"(%@)",@(_alist_orderObjs.count)];
     }
     
     return cell;

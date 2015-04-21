@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class Resp_order_list;
 @interface OrderDetailViewController : UIViewController
 
-@property (nonatomic,strong) Resp_order_list *orderObj;
+@property (nonatomic,strong) NSDictionary *dic_order;
 
 @end

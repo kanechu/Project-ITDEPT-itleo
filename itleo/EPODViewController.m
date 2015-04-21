@@ -17,6 +17,7 @@
 #import "PopViewManager.h"
 #import "LocationManager.h"
 #import "IsAuto_upload_data.h"
+#import "Web_order_list.h"
 
 @interface EPODViewController ()
 
@@ -45,6 +46,9 @@
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
     [self fn_isStart_open_thread];
+    Web_order_list *web_obj=[[Web_order_list alloc]init];
+    NSArray *arr_uid=@[@"",@"",@""];
+    [web_obj fn_handle_order_list_data:nil uid_list:arr_uid type:kGet_order_list];
    	// Do any additional setup after loading the view.
 }
 

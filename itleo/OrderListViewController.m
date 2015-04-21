@@ -12,7 +12,8 @@
 #import "Custom_textField.h"
 #import "Resp_order_list.h"
 #import "Cell_order_list.h"
-@interface OrderListViewController ()<UITableViewDataSource,UITableViewDelegate>
+#import "DB_order.h"
+@interface OrderListViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_orderList_logo;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_cancel;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_orderNo;
@@ -31,6 +32,7 @@
     [super viewDidLoad];
     [self fn_set_controls_property];
     [self fn_initData];
+  
     // Do any additional setup after loading the view.
 }
 
@@ -44,6 +46,8 @@
     [_ibtn_orderList_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     [_ibtn_cancel setTitle:MY_LocalizedString(@"lbl_cancel", nil) forState:UIControlStateNormal];
     _ilb_orderNo.text=MY_LocalizedString(@"lbl_list_order_no", nil);
+    _itf_order_num.returnKeyType=UIReturnKeySearch;
+    _itf_order_num.delegate=self;
 }
 
 #pragma mark -event action
@@ -53,16 +57,25 @@
 
 #pragma mark -加载数据
 - (void)fn_initData{
-    NSString *path=[[NSBundle mainBundle]pathForResource:@"orderList" ofType:@"plist"];
-    NSArray *array=[[NSArray alloc]initWithContentsOfFile:path];
-    _alist_orderObj=[[NSMutableArray alloc]init];
+    DB_order *db_order_obj=[[DB_order alloc]init];
+    
+    _alist_orderObj=[db_order_obj fn_get_order_list_data];
     _alist_orderCells=[NSMutableArray array];
-    [array enumerateObjectsUsingBlock:^(id obj,NSUInteger idx,BOOL *stop){
-        [_alist_orderObj addObject:[Resp_order_list fn_statusWithDictionary:obj]];
+    [_alist_orderObj enumerateObjectsUsingBlock:^(id obj,NSUInteger idx,BOOL *stop){
+       // [_alist_orderObj addObject:[Resp_order_list fn_statusWithDictionary:obj]];
         static NSString *cellIdentifer=@"Cell_order_list";
         Cell_order_list *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifer];
         [_alist_orderCells addObject:cell];
     }];
+}
+#pragma mark -UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    DB_order *db_order_obj=[[DB_order alloc]init];
+    _alist_orderObj=[db_order_obj fn_filter_order_list:textField.text];
+    [self.tableview reloadData];
+    [_itf_order_num resignFirstResponder];
+    return YES;
 }
 
 #pragma mark -UITableViewDataSource
@@ -77,15 +90,15 @@
     }else{
         cell.backgroundColor=COLOR_LIGHT_BLUE;
     }
-    Resp_order_list *order_obj=_alist_orderObj[indexPath.row];
-    cell.order_obj=order_obj;
+    NSMutableDictionary *dic_order_obj=_alist_orderObj[indexPath.row];
+    cell.dic_order=dic_order_obj;
     return cell;
 }
 #pragma mark -UITableViewDelegate
 //重新设置行高
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     Cell_order_list * cell = _alist_orderCells[indexPath.row];
-    cell.order_obj = _alist_orderObj[indexPath.row];
+    cell.dic_order = _alist_orderObj[indexPath.row];
     return cell.height;
 }
 
@@ -101,7 +114,7 @@
     if ([[segue identifier] isEqualToString:@"segue_order_detail"]) {
         OrderDetailViewController *orderDetailVC=[segue destinationViewController];
         NSIndexPath *indexPath=[self.tableview indexPathForSelectedRow];
-        orderDetailVC.orderObj=[_alist_orderObj objectAtIndex:indexPath.row];
+        orderDetailVC.dic_order=[_alist_orderObj objectAtIndex:indexPath.row];
     }
 }
 

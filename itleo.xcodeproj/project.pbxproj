@@ -167,6 +167,11 @@
 		B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2B5C12F19E3D6420040F585 /* Localized.strings */; };
 		B2B8678B1A1D7A69002E2F48 /* Cell_summary_chart.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B8678A1A1D7A69002E2F48 /* Cell_summary_chart.m */; };
 		B2BDD57119D8ED4C00FEEA08 /* Truck_order_image_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDD57019D8ED4C00FEEA08 /* Truck_order_image_data.m */; };
+		B2BF439A1AE1FAFE00829428 /* Resp_order_dtl_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF43991AE1FAFE00829428 /* Resp_order_dtl_list.m */; };
+		B2BF43A01AE1FB2800829428 /* Resp_epod_order_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF439F1AE1FB2800829428 /* Resp_epod_order_list.m */; };
+		B2BF43A41AE212FD00829428 /* UpdateForm_orderList.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF43A31AE212FD00829428 /* UpdateForm_orderList.m */; };
+		B2BF43A71AE22B2500829428 /* Web_order_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF43A61AE22B2500829428 /* Web_order_list.m */; };
+		B2BF43AA1AE242CE00829428 /* DB_order.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF43A91AE242CE00829428 /* DB_order.m */; };
 		B2BF88DE1A4A4F8500E70852 /* Resp_whs_config.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88DD1A4A4F8500E70852 /* Resp_whs_config.m */; };
 		B2BF88E41A4A504600E70852 /* Resp_MaintForm.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88E31A4A504600E70852 /* Resp_MaintForm.m */; };
 		B2BF88E71A4A50FD00E70852 /* Resp_UPLOAD_COL.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BF88E61A4A50FD00E70852 /* Resp_UPLOAD_COL.m */; };
@@ -550,6 +555,16 @@
 		B2B8678A1A1D7A69002E2F48 /* Cell_summary_chart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_summary_chart.m; sourceTree = "<group>"; };
 		B2BDD56F19D8ED4C00FEEA08 /* Truck_order_image_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Truck_order_image_data.h; sourceTree = "<group>"; };
 		B2BDD57019D8ED4C00FEEA08 /* Truck_order_image_data.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Truck_order_image_data.m; sourceTree = "<group>"; };
+		B2BF43981AE1FAFE00829428 /* Resp_order_dtl_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_order_dtl_list.h; sourceTree = "<group>"; };
+		B2BF43991AE1FAFE00829428 /* Resp_order_dtl_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_order_dtl_list.m; sourceTree = "<group>"; };
+		B2BF439E1AE1FB2800829428 /* Resp_epod_order_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_epod_order_list.h; sourceTree = "<group>"; };
+		B2BF439F1AE1FB2800829428 /* Resp_epod_order_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_epod_order_list.m; sourceTree = "<group>"; };
+		B2BF43A21AE212FD00829428 /* UpdateForm_orderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateForm_orderList.h; sourceTree = "<group>"; };
+		B2BF43A31AE212FD00829428 /* UpdateForm_orderList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateForm_orderList.m; sourceTree = "<group>"; };
+		B2BF43A51AE22B2500829428 /* Web_order_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_order_list.h; sourceTree = "<group>"; };
+		B2BF43A61AE22B2500829428 /* Web_order_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_order_list.m; sourceTree = "<group>"; };
+		B2BF43A81AE242CE00829428 /* DB_order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_order.h; sourceTree = "<group>"; };
+		B2BF43A91AE242CE00829428 /* DB_order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_order.m; sourceTree = "<group>"; };
 		B2BF88DC1A4A4F8500E70852 /* Resp_whs_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_whs_config.h; sourceTree = "<group>"; };
 		B2BF88DD1A4A4F8500E70852 /* Resp_whs_config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_whs_config.m; sourceTree = "<group>"; };
 		B2BF88E21A4A504600E70852 /* Resp_MaintForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_MaintForm.h; sourceTree = "<group>"; };
@@ -1007,6 +1022,8 @@
 				B294DFFD1A1202D600483212 /* DB_Chart.m */,
 				B2BF88EB1A4A649300E70852 /* DB_whs_config.h */,
 				B2BF88EC1A4A649300E70852 /* DB_whs_config.m */,
+				B2BF43A81AE242CE00829428 /* DB_order.h */,
+				B2BF43A91AE242CE00829428 /* DB_order.m */,
 			);
 			name = DataAccess;
 			sourceTree = "<group>";
@@ -1041,6 +1058,8 @@
 				B2A3403A19DA3B1E0051F78B /* UpdateFormContract.m */,
 				B2A3403C19DA3CD50051F78B /* Epod_upd_milestone_image_contract.h */,
 				B2A3403D19DA3CD50051F78B /* Epod_upd_milestone_image_contract.m */,
+				B2BF43A21AE212FD00829428 /* UpdateForm_orderList.h */,
+				B2BF43A31AE212FD00829428 /* UpdateForm_orderList.m */,
 				B276C0FE1995DB5F00075515 /* RespAppConfig.h */,
 				B276C0FF1995DB5F00075515 /* RespAppConfig.m */,
 				B2281A9F1995F4D5001A73B0 /* RespLogin.h */,
@@ -1057,8 +1076,12 @@
 				B2D8207119DFA3A50005253C /* Resp_order_info.m */,
 				B28222A719FF39F00000FC2B /* Resp_upd_GPS.h */,
 				B28222A819FF39F00000FC2B /* Resp_upd_GPS.m */,
+				B2BF439E1AE1FB2800829428 /* Resp_epod_order_list.h */,
+				B2BF439F1AE1FB2800829428 /* Resp_epod_order_list.m */,
 				B27582AA1ADF4BE800956A60 /* Resp_order_list.h */,
 				B27582AB1ADF4BE800956A60 /* Resp_order_list.m */,
+				B2BF43981AE1FAFE00829428 /* Resp_order_dtl_list.h */,
+				B2BF43991AE1FAFE00829428 /* Resp_order_dtl_list.m */,
 				B2B136B01A032779001317C8 /* Resp_sypara.h */,
 				B2B136B11A032779001317C8 /* Resp_sypara.m */,
 				B2CF148E1A0768B00042DD64 /* Resp_permit.h */,
@@ -1184,6 +1207,8 @@
 				B294431A1A353A5B00F5AD2A /* Web_get_exso.m */,
 				B2BF88E81A4A55B300E70852 /* Web_whs_config.h */,
 				B2BF88E91A4A55B300E70852 /* Web_whs_config.m */,
+				B2BF43A51AE22B2500829428 /* Web_order_list.h */,
+				B2BF43A61AE22B2500829428 /* Web_order_list.m */,
 			);
 			name = WebRequest;
 			sourceTree = "<group>";
@@ -1453,6 +1478,7 @@
 				B2281A981995EF94001A73B0 /* RespAejob_browse.m in Sources */,
 				B28A9CB219D125C800F5C9A7 /* Cell_ShowRecords.m in Sources */,
 				B2DE9AB81A10B5E700259EB5 /* Web_get_chart_data.m in Sources */,
+				B2BF43A01AE1FB2800829428 /* Resp_epod_order_list.m in Sources */,
 				B2A7C5731AA94C41009248C5 /* EnlargeImageViewController.m in Sources */,
 				B272EA6A19AEDDA400256276 /* MZFormSheetSegue.m in Sources */,
 				B2A3404819DA4CA30051F78B /* RespEpod_updmilestone.m in Sources */,
@@ -1503,6 +1529,7 @@
 				B27AB2A91A4BA5B8007A3814 /* Resp_language_type.m in Sources */,
 				B21B71161A0B1D1A007DB5E3 /* LineChart.m in Sources */,
 				B272EA6619AEDDA400256276 /* MZAppearance.m in Sources */,
+				B2BF43A41AE212FD00829428 /* UpdateForm_orderList.m in Sources */,
 				B276C0E41995CA3A00075515 /* AuthContract.m in Sources */,
 				B29E579119E28A9E00E2CAE9 /* DatabaseQueue.m in Sources */,
 				B293A2FD1A2F0AFE00DEC6C0 /* Cell_S_O_general.m in Sources */,
@@ -1528,7 +1555,9 @@
 				B2BF88DE1A4A4F8500E70852 /* Resp_whs_config.m in Sources */,
 				B276BBB71995B66800075515 /* AppDelegate.m in Sources */,
 				B2A21CED1A514B2E00958278 /* BarCodeSysHomeViewController.m in Sources */,
+				B2BF439A1AE1FAFE00829428 /* Resp_order_dtl_list.m in Sources */,
 				B2C28EAB199C8F3E00F4D0BF /* Cal_lineHeight.m in Sources */,
+				B2BF43A71AE22B2500829428 /* Web_order_list.m in Sources */,
 				B27582B81ADFBD5100956A60 /* Cell_order_detail.m in Sources */,
 				B2A328D919D5653A00DB8F9B /* Truck_order_data.m in Sources */,
 				B21B711D1A0B1D1A007DB5E3 /* PieChart.m in Sources */,
@@ -1559,6 +1588,7 @@
 				B2281AC01996106B001A73B0 /* DB_RespAejob_browse.m in Sources */,
 				B28222A019FF282C0000FC2B /* UploadGPSContract.m in Sources */,
 				B2AE8D9D19C6B9C400B5B2E6 /* image_magnify_shrink.m in Sources */,
+				B2BF43AA1AE242CE00829428 /* DB_order.m in Sources */,
 				B2829A3919D2B6840054205E /* LocationManager.m in Sources */,
 				B270C625199A02C70089664C /* Aejob_dtl_BrowseViewController.m in Sources */,
 				B293A3031A2F0FE000DEC6C0 /* Cell_load_plan.m in Sources */,
