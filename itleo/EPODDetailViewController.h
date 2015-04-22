@@ -13,6 +13,9 @@
 @interface EPODDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,QRadioButtonDelegate,UITextFieldDelegate,UIAlertViewDelegate>
 
 @property (copy, nonatomic) NSString *vehicle_no;
+//标识是否存在order list
+@property (assign, nonatomic) NSInteger flag_isHave_order_list;
+@property (strong, nonatomic) NSDictionary *dic_order;
 
 @property (weak, nonatomic) IBOutlet UILabel *ilb_order_no;
 @property (weak, nonatomic) IBOutlet UITextField *itf_order_no;

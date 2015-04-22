@@ -42,7 +42,7 @@
     CGFloat ilb_originY=CGRectGetMinY(_ilb_origin_addr.frame);
     CGFloat ilb_originWidth=CGRectGetWidth(_ilb_origin_addr.frame);
     CGSize ilb_originSize=[dic_order[@"pick_addr"] boundingRectWithSize:CGSizeMake(ilb_originWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_origin_addr.font} context:nil].size;
-    CGRect ilb_originRect= CGRectMake(ilb_originX, ilb_originY, ilb_originSize.width, ilb_originSize.height);
+    CGRect ilb_originRect= CGRectMake(ilb_originX, ilb_originY, ilb_originWidth, ilb_originSize.height);
     _ilb_origin_addr.text=dic_order[@"pick_addr"];
     _ilb_origin_addr.frame=ilb_originRect;
     
@@ -84,7 +84,7 @@
     }
     CGFloat ilb_remarkWidth=CGRectGetWidth(_ilb_remark.frame);
     CGSize ilb_remarkSize=[dic_order[@"remark"] boundingRectWithSize:CGSizeMake(ilb_remarkWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_ilb_remark.font} context:nil].size;
-    CGRect ilb_remarkRect= CGRectMake(ilb_remarkX,ilb_remarkY, ilb_remarkSize.width, ilb_remarkSize.height);
+    CGRect ilb_remarkRect= CGRectMake(ilb_remarkX,ilb_remarkY, ilb_remarkWidth, ilb_remarkSize.height);
     _ilb_remark.text=dic_order[@"remark"];
     _ilb_remark.frame=ilb_remarkRect;
     _height=CGRectGetMaxY(_ilb_remark.frame)+kTableViewCellControlSpacing*2;

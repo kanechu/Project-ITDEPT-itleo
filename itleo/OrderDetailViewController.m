@@ -7,6 +7,7 @@
 //
 
 #import "OrderDetailViewController.h"
+#import "EPODDetailViewController.h"
 #import "Custom_BtnGraphicMixed.h"
 #import "Cell_order_detail_header.h"
 #import "Cell_order_detail.h"
@@ -17,6 +18,7 @@
 @interface OrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *order_detail_logo;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_cancel;
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_manage_order;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @property (nonatomic,strong) NSMutableArray *alist_orderCells;
@@ -66,6 +68,10 @@
 #pragma mark -event aciton
 - (IBAction)fn_goBack_previous_page:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+- (IBAction)fn_manage_order:(id)sender {
+   
+    [self performSegueWithIdentifier:@"segue_order_manager" sender:self];
 }
 
 #pragma mark -UITableViewDataSource
@@ -117,24 +123,31 @@
     Cell_order_detail_header *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifer];
     if (section==0) {
         cell.imgView_order.image=[UIImage imageNamed:@"ic_order"];
-        cell.lbl_order_type.text=@"Order";
+        cell.lbl_order_type.text=MY_LocalizedString(@"lbl_order", nil);
+        
         cell.ilb_orderNo.text=_dic_order[@"order_no"];
     }else{
         cell.imgView_order.image=[UIImage imageNamed:@"ic_order"];
-        cell.lbl_order_type.text=@"Order Detail";
+        cell.lbl_order_type.text=MY_LocalizedString(@"lbl_order_detail", nil);
+        
         cell.ilb_orderNo.text=[NSString stringWithFormat:@"(%@)",@(_alist_orderObjs.count)];
     }
     
     return cell;
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"segue_order_manager"]) {
+        EPODDetailViewController *epodDtlVC=(EPODDetailViewController*)[segue destinationViewController];
+        epodDtlVC.flag_isHave_order_list=1;
+        epodDtlVC.dic_order=_dic_order;
+    }
 }
-*/
+
 
 @end

@@ -12,6 +12,7 @@
 #import "DB_ePod.h"
 #import "DB_single_field.h"
 #import "DB_Location.h"
+#import "DB_RespAppConfig.h"
 #import "Timer_bg_upload_data.h"
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
@@ -46,9 +47,11 @@
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
     [self fn_isStart_open_thread];
+    DB_RespAppConfig *db_appConfig=[[DB_RespAppConfig alloc]init];
+    NSString *str_base_url=[db_appConfig fn_get_field_content:kWeb_addr];
     Web_order_list *web_obj=[[Web_order_list alloc]init];
     NSArray *arr_uid=@[@"",@"",@""];
-    [web_obj fn_handle_order_list_data:nil uid_list:arr_uid type:kGet_order_list];
+    [web_obj fn_handle_order_list_data:str_base_url uid_list:arr_uid type:kGet_order_list];
    	// Do any additional setup after loading the view.
 }
 

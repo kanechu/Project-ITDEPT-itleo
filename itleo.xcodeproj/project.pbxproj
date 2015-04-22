@@ -203,6 +203,7 @@
 		B2DE9AB81A10B5E700259EB5 /* Web_get_chart_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DE9AB71A10B5E700259EB5 /* Web_get_chart_data.m */; };
 		B2E391CA19C8137A00612FDD /* EPODRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E391C919C8137A00612FDD /* EPODRecordViewController.m */; };
 		B2E391D019C81AEB00612FDD /* Cell_epod_record.m in Sources */ = {isa = PBXBuildFile; fileRef = B2E391CF19C81AEB00612FDD /* Cell_epod_record.m */; };
+		B2EAF7A01AE635790062702C /* Cell_order_info.m in Sources */ = {isa = PBXBuildFile; fileRef = B2EAF79F1AE635790062702C /* Cell_order_info.m */; };
 		B2ECE5D21A427B97003AECFF /* Resp_DataRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ECE5D11A427B97003AECFF /* Resp_DataRefresh.m */; };
 /* End PBXBuildFile section */
 
@@ -627,6 +628,8 @@
 		B2E391C919C8137A00612FDD /* EPODRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPODRecordViewController.m; sourceTree = "<group>"; };
 		B2E391CE19C81AEB00612FDD /* Cell_epod_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_epod_record.h; sourceTree = "<group>"; };
 		B2E391CF19C81AEB00612FDD /* Cell_epod_record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_epod_record.m; sourceTree = "<group>"; };
+		B2EAF79E1AE635790062702C /* Cell_order_info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_order_info.h; sourceTree = "<group>"; };
+		B2EAF79F1AE635790062702C /* Cell_order_info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_order_info.m; sourceTree = "<group>"; };
 		B2ECE5D01A427B97003AECFF /* Resp_DataRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_DataRefresh.h; sourceTree = "<group>"; };
 		B2ECE5D11A427B97003AECFF /* Resp_DataRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_DataRefresh.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1174,6 +1177,8 @@
 				B27582BA1ADFBD9400956A60 /* Cell_order_detail_list.m */,
 				B27582BC1ADFBDAB00956A60 /* Cell_order_detail_header.h */,
 				B27582BD1ADFBDAB00956A60 /* Cell_order_detail_header.m */,
+				B2EAF79E1AE635790062702C /* Cell_order_info.h */,
+				B2EAF79F1AE635790062702C /* Cell_order_info.m */,
 				B293A2FB1A2F0AFE00DEC6C0 /* Cell_S_O_general.h */,
 				B293A2FC1A2F0AFE00DEC6C0 /* Cell_S_O_general.m */,
 				B293A2FE1A2F0EBC00DEC6C0 /* Cell_show_totals.h */,
@@ -1470,6 +1475,7 @@
 				B28F677519F4F36C0045963B /* CreateFootView.m in Sources */,
 				B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */,
 				B2BF88EA1A4A55B300E70852 /* Web_whs_config.m in Sources */,
+				B2EAF7A01AE635790062702C /* Cell_order_info.m in Sources */,
 				B29204C31A15E83000D133A9 /* ChartView_frame.m in Sources */,
 				B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */,
 				B255BA0D19B01441004BBF0F /* Custom_textField.m in Sources */,

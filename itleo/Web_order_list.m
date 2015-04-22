@@ -25,8 +25,6 @@
     RequestContract *req_form=[[RequestContract alloc]init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_login fn_get_RequestAuth];
-#warning -neet modify
-    auth.system=@"MOB_ITLEO";
     req_form.Auth=auth;
     
     UpdateForm_orderList *updateForm_obj=[[UpdateForm_orderList alloc]init];
@@ -64,14 +62,13 @@
             BOOL isSaved=[db_order_obj fn_save_epod_order_data:arr_resp_result];
             if (isSaved) {
                 NSArray *arr_uid=[db_order_obj fn_get_all_order_uid];
-                [self fn_handle_order_list_data:nil uid_list:arr_uid type:kConfirm_order_list];
+                //[self fn_handle_order_list_data:nil uid_list:arr_uid type:kConfirm_order_list];
                 arr_uid=nil;
             }
         }
     };
    arr_epod_order=nil;
-#warning -neet monify
-    [web_obj fn_get_order_list_data:req_form Auth:auth base_url:@"http://192.168.2.125:90/"];
+    [web_obj fn_get_order_list_data:req_form Auth:auth base_url:base_url];
     req_form=nil;
     auth=nil;
     db_login=nil;

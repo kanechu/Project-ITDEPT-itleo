@@ -21,9 +21,13 @@
 @implementation Cell_order_detail_list
 
 - (void)setDic_order_dtl:(NSDictionary *)dic_order_dtl{
-    _lbl_item_desc.text=@"Item Descp:";
+    _lbl_item_desc.text=MY_LocalizedString(@"lbl_item_descp", nil);
     NSString *str_image=dic_order_dtl[@"item_pic_path_base64"];
     _imgView_detail.image=[Conversion_helper fn_base64Str_convert_image:str_image];
+    _imgView_detail.layer.borderWidth=1.5;
+    _imgView_detail.layer.borderColor=[UIColor lightGrayColor].CGColor;
+    _imgView_detail.layer.cornerRadius=2;
+    
     CGFloat item_desc_valueX=CGRectGetMinX(_ilb_item_desc_value.frame);
     CGFloat item_desc_valueY=CGRectGetMinY(_ilb_item_desc_value.frame);
     CGFloat item_desc_valueWidth=CGRectGetWidth(_ilb_item_desc_value.frame);
@@ -36,7 +40,7 @@
     CGFloat lbl_pkgY=CGRectGetMaxY(_ilb_item_desc_value.frame)+kTableViewCellControlSpacing;
     CGFloat lbl_pkgWidth=CGRectGetWidth(_lbl_pkg.frame),lbl_pkgHeight=CGRectGetHeight(_lbl_pkg.frame);
     _lbl_pkg.frame=CGRectMake(lbl_pkgX, lbl_pkgY, lbl_pkgWidth, lbl_pkgHeight);
-    _lbl_pkg.text=@"PKG:";
+    _lbl_pkg.text=MY_LocalizedString(@"lbl_order_pkg", nil);
     
     CGFloat lbl_pkg_valueX=CGRectGetMinX(_ilb_pkg_value.frame);
     CGFloat lbl_pkg_valueY=CGRectGetMaxY(_ilb_item_desc_value.frame)+kTableViewCellControlSpacing;

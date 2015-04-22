@@ -140,6 +140,14 @@
 //order list
 "lbl_list_order_no"="订单号:";
 "lbl_order_detail"="订单详情";
+"lbl_order_info"="订单信息";
+"lbl_order"="订单";
+"lbl_pick_address"="取货地址：";
+"lbl_dely_address"="目的地：";
+"lbl_order_status"="状态：";
+"lbl_order_remark"="备注：";
+"lbl_item_descp"="项目描述：";
+"lbl_order_pkg"="件数：";
 
 //summary charts
 "lbl_refresh"="刷新";

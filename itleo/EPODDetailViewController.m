@@ -12,6 +12,7 @@
 #import "Order_InfoViewController.h"
 #import "Web_update_epod.h"
 #import "Cell_status_list.h"
+#import "Cell_order_info.h"
 #import "DB_ePod.h"
 #import "CheckNetWork.h"
 #import "Truck_order_data.h"
@@ -20,6 +21,10 @@
 #import "RespEpod_updmilestone.h"
 #import "Epod_upd_milestone_image_contract.h"
 #import "Custom_BtnGraphicMixed.h"
+
+#define TABLE_SECTION_NUM _flag_isHave_order_list==1? 2: 1
+#define LINE_SPACE 1
+#define HEADER_HEIGH 24
 
 @interface EPODDetailViewController ()
 
@@ -86,14 +91,22 @@
 }
 
 - (void)fn_set_control_pro{
+    if (_flag_isHave_order_list==1) {
+        [_ibtn_title_logo setTitle:MY_LocalizedString(@"lbl_order_detail", nil) forState:UIControlStateNormal];
+        _itf_order_no.text=_dic_order[@"order_no"];
+    }else{
+        [_ibtn_title_logo setTitle:MY_LocalizedString(@"ibtn_sign_photo", nil) forState:UIControlStateNormal];
+    }
     
-    [_ibtn_title_logo setTitle:MY_LocalizedString(@"ibtn_sign_photo", nil) forState:UIControlStateNormal];
     [_ibtn_title_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     
     [_ibtn_back setTitle:MY_LocalizedString(@"lbl_back", nil) forState:UIControlStateNormal];
     
     _ilb_order_no.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_order_no", nil)];
-    [_itf_order_no becomeFirstResponder];
+    if (_flag_isHave_order_list!=1) {
+        [_itf_order_no becomeFirstResponder];
+    }
+    
     _itf_order_no.layer.cornerRadius=4;
     _itf_order_no.layer.borderColor=[UIColor lightGrayColor].CGColor;
     _itf_order_no.layer.borderWidth=1;
@@ -112,7 +125,7 @@
     [self fn_set_style:_ibtn_manage];
     [self fn_set_style:_ibtn_uploading];
     
-    self.tableview.layer.cornerRadius=8;
+    self.tableview.layer.cornerRadius=2;
     self.tableview.layer.borderColor=COLOR_light_BLUE.CGColor;
     self.tableview.layer.borderWidth=1.5;
     self.tableview.delegate=self;
@@ -193,11 +206,29 @@
 }
 
 #pragma mark -UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return TABLE_SECTION_NUM;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (_flag_isHave_order_list==1) {
+        if (section==0) {
+            return 1;
+        }
+    }
     return [_arr_status count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_flag_isHave_order_list==1) {
+        if (indexPath.section==0) {
+            static NSString *cellIdentifier=@"Cell_order_info";
+            Cell_order_info *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.dic_order=_dic_order;
+            return cell;
+        }
+    }
+    
     NSString *dic_status=[_arr_status objectAtIndex:indexPath.row];
     NSString *is_status_flag=[dic_status valueForKey:@"status_code"];
     if ([is_status_flag isEqualToString:MY_LocalizedString(@"lbl_other", nil)]) {
@@ -226,16 +257,10 @@
         if (!cell) {
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifier];
         }
-        UILabel *il_status_prompt=(UILabel*)[cell.contentView viewWithTag:100];
         QRadioButton *ibtn=(QRadioButton*)[cell.contentView viewWithTag:200];
         NSString *str_status=[dic_status valueForKey:[self fn_get_lang_code_type]];
         [ibtn setTitle:str_status  forState:UIControlStateNormal];
         ibtn.delegate=self;
-        if (indexPath.row==0) {
-            il_status_prompt.text=MY_LocalizedString(@"lbl_status", nil);
-        }else{
-            il_status_prompt.text=@"";
-        }
         NSString *is_status_flag=[dic_status valueForKey:@"status_code"];
         if ([is_status_flag isEqualToString:flag_status]) {
             ibtn.checked=YES;
@@ -245,6 +270,14 @@
 }
 #pragma mark -UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_flag_isHave_order_list==1) {
+        if (indexPath.section==0) {
+            static NSString *cellIdentifier=@"Cell_order_info";
+            Cell_order_info *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifier];
+            cell.dic_order =_dic_order;
+            return cell.height;
+        }
+    }
     NSMutableDictionary *dic_status=[_arr_status objectAtIndex:indexPath.row];
     NSString *is_status=[dic_status valueForKey:@"status_code"];
     if ([is_status isEqualToString:MY_LocalizedString(@"lbl_other", nil)]){
@@ -252,6 +285,43 @@
     }else{
         return 28;
     }
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (_flag_isHave_order_list==1) {
+        if (section==1) {
+            return LINE_SPACE+HEADER_HEIGH;
+        }
+    }
+    return HEADER_HEIGH;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *headerView=[[UIView alloc]init];
+    headerView.frame=CGRectMake(0, 0, self.tableview.frame.size.width, LINE_SPACE+HEADER_HEIGH);
+    headerView.backgroundColor=[UIColor whiteColor];
+    
+    UIView *lineView=[[UIView alloc]init];
+    lineView.frame=CGRectMake(0, 0, self.tableview.frame.size.width, LINE_SPACE);
+    lineView.backgroundColor=COLOR_light_BLUE;
+    [headerView addSubview:lineView];
+    
+    UILabel *lbl_header=[[UILabel alloc]init];
+    lbl_header.frame=CGRectMake(10, LINE_SPACE,headerView.frame.size.width, HEADER_HEIGH);
+    lbl_header.backgroundColor=[UIColor whiteColor];
+    lbl_header.font=[UIFont systemFontOfSize:17.0];
+    
+    [headerView addSubview:lbl_header];
+    if (_flag_isHave_order_list==1) {
+        if (section==1) {
+            lbl_header.text=MY_LocalizedString(@"lbl_status", nil);
+            
+        }else{
+            lineView.hidden=YES;
+            lbl_header.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_order_info", nil)];
+        }
+        return headerView;
+    }
+    lbl_header.text=MY_LocalizedString(@"lbl_status", nil);
+    return headerView;
 }
 #pragma mark -QRadioButtonDelegate
 - (void)didSelectedRadioButton:(QRadioButton *)radio groupId:(NSString *)groupId{
