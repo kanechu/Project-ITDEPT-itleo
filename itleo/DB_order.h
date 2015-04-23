@@ -23,6 +23,10 @@
 
 -(NSMutableArray*)fn_get_order_dtl_list_data:(NSString*)order_uid;
 
+-(BOOL)fn_update_order_isRead:(NSString*)is_read read_date:(NSDate*)read_date order_uid:(NSString*)order_uid;
+
+-(BOOL)fn_update_order_isSync_read:(NSString*)isSync_read order_uid:(NSString*)order_uid;
+
 -(BOOL)fn_delete_inexistence_order:(NSString*)order_uid;
 
 -(BOOL)fn_delete_all_order_list;

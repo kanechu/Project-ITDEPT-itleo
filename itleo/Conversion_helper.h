@@ -35,6 +35,16 @@
  *  @return 日期字符串
  */
 +(NSString*)fn_DateToStringDate:(NSDate*)date;
+
+/**
+ *  日期类型 date 转换成日期时间字符串
+ *
+ *  @param date 日期类型
+ *
+ *  @return 日期时间字符串
+ */
++(NSString*)fn_Date_ToStringDateTime:(NSDate*)date;
+
 /**
  *  一个Label显示不同颜色
  *

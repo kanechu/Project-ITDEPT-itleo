@@ -241,7 +241,6 @@
     //upload form
     RKObjectMapping *lo_updateMapping = [RKObjectMapping requestMapping];
     NSMutableArray *arr_updateform=[[NSArray arrayWithPropertiesOfObject:[UpdateForm_orderList class]]mutableCopy];
-    [arr_updateform removeLastObject];
     [lo_updateMapping addAttributeMappingsFromArray:arr_updateform];
     
     RKRelationshipMapping *searchRelationship = [RKRelationshipMapping

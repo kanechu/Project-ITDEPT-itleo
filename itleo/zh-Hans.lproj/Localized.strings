@@ -148,6 +148,7 @@
 "lbl_order_remark"="备注：";
 "lbl_item_descp"="项目描述：";
 "lbl_order_pkg"="件数：";
+"lbl_order_placeholder"="输入订单号来过滤";
 
 //summary charts
 "lbl_refresh"="刷新";

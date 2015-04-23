@@ -73,6 +73,9 @@
 }
 #pragma mark -event aciton
 - (IBAction)fn_goBack_previous_page:(id)sender {
+    if (_callback) {
+        _callback();
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)fn_manage_order:(id)sender {

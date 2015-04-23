@@ -111,6 +111,14 @@
     dateFormatter=nil;
     return str;
 }
++(NSString*)fn_Date_ToStringDateTime:(NSDate*)date{
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *str=[dateFormatter stringFromDate:date];
+    dateFormatter=nil;
+    return str;
+}
+
 #pragma mark 同一个Label显示不同颜色的文字方法
 +(NSMutableAttributedString*)fn_different_fontcolor:(NSString*)_str range:(NSRange)_range{
     NSMutableAttributedString *str=[[NSMutableAttributedString alloc]initWithString:_str];

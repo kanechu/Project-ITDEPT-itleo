@@ -13,6 +13,7 @@
 #import "Resp_order_list.h"
 #import "Cell_order_list.h"
 #import "DB_order.h"
+#import "Web_order_list.h"
 @interface OrderListViewController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_orderList_logo;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_cancel;
@@ -22,7 +23,7 @@
 
 @property (strong, nonatomic) NSMutableArray *alist_orderObj;
 @property (strong, nonatomic) NSMutableArray *alist_orderCells;//存储cell，用于计算高度
-
+@property (strong, nonatomic) DB_order *db_order_obj;
 
 @end
 
@@ -46,6 +47,7 @@
     [_ibtn_orderList_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     [_ibtn_cancel setTitle:MY_LocalizedString(@"lbl_cancel", nil) forState:UIControlStateNormal];
     _ilb_orderNo.text=MY_LocalizedString(@"lbl_list_order_no", nil);
+    _itf_order_num.placeholder=MY_LocalizedString(@"lbl_order_placeholder", nil);
     _itf_order_num.returnKeyType=UIReturnKeySearch;
     _itf_order_num.delegate=self;
 }
@@ -57,12 +59,10 @@
 
 #pragma mark -加载数据
 - (void)fn_initData{
-    DB_order *db_order_obj=[[DB_order alloc]init];
-    
-    _alist_orderObj=[db_order_obj fn_get_order_list_data];
+    self.db_order_obj=[[DB_order alloc]init];
+    _alist_orderObj=[self.db_order_obj fn_get_order_list_data];
     _alist_orderCells=[NSMutableArray array];
     [_alist_orderObj enumerateObjectsUsingBlock:^(id obj,NSUInteger idx,BOOL *stop){
-       // [_alist_orderObj addObject:[Resp_order_list fn_statusWithDictionary:obj]];
         static NSString *cellIdentifer=@"Cell_order_list";
         Cell_order_list *cell=[self.tableview dequeueReusableCellWithIdentifier:cellIdentifer];
         [_alist_orderCells addObject:cell];
@@ -71,8 +71,7 @@
 #pragma mark -UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    DB_order *db_order_obj=[[DB_order alloc]init];
-    _alist_orderObj=[db_order_obj fn_filter_order_list:textField.text];
+    _alist_orderObj=[self.db_order_obj fn_filter_order_list:textField.text];
     [self.tableview reloadData];
     [_itf_order_num resignFirstResponder];
     return YES;
@@ -104,6 +103,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"segue_order_detail" sender:self];
+    NSDictionary *dic_order=_alist_orderObj[indexPath.row];
+    NSString *str_order_uid=dic_order[@"order_uid"];
+    NSString *isRead=dic_order[@"is_read"];
+    if ([isRead integerValue]==0) {
+        Web_order_list *order_obj=[[Web_order_list alloc]init];
+        [order_obj fn_handle_order_list_data:[NSSet setWithObject:str_order_uid] type:kCheck_order_list];
+        order_obj=nil;
+        [self.db_order_obj fn_update_order_isRead:@"1" read_date:[NSDate date] order_uid:str_order_uid];
+    }
+    str_order_uid=nil;
+    isRead=nil;
 }
 #pragma mark - Navigation
 
@@ -115,6 +125,9 @@
         OrderDetailViewController *orderDetailVC=[segue destinationViewController];
         NSIndexPath *indexPath=[self.tableview indexPathForSelectedRow];
         orderDetailVC.dic_order=[_alist_orderObj objectAtIndex:indexPath.row];
+        orderDetailVC.callback=^(){
+            _alist_orderObj=[self.db_order_obj fn_get_order_list_data];
+        };
     }
 }
 

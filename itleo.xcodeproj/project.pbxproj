@@ -64,7 +64,6 @@
 		B2750D74199B203C008ADCA1 /* KeyboardNoticeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2750D73199B203C008ADCA1 /* KeyboardNoticeManager.m */; };
 		B27518CD19FE1C99000A4630 /* RangeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B27518CC19FE1C99000A4630 /* RangeSelectViewController.m */; };
 		B27582AC1ADF4BE800956A60 /* Resp_order_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B27582AB1ADF4BE800956A60 /* Resp_order_list.m */; };
-		B27582B11ADF619400956A60 /* orderList.plist in Resources */ = {isa = PBXBuildFile; fileRef = B27582B01ADF619400956A60 /* orderList.plist */; };
 		B27582B51ADFAA6900956A60 /* OrderDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B27582B41ADFAA6900956A60 /* OrderDetailViewController.m */; };
 		B27582B81ADFBD5100956A60 /* Cell_order_detail.m in Sources */ = {isa = PBXBuildFile; fileRef = B27582B71ADFBD5100956A60 /* Cell_order_detail.m */; };
 		B27582BB1ADFBD9400956A60 /* Cell_order_detail_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B27582BA1ADFBD9400956A60 /* Cell_order_detail_list.m */; };
@@ -366,7 +365,6 @@
 		B27518CC19FE1C99000A4630 /* RangeSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RangeSelectViewController.m; sourceTree = "<group>"; };
 		B27582AA1ADF4BE800956A60 /* Resp_order_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_order_list.h; sourceTree = "<group>"; };
 		B27582AB1ADF4BE800956A60 /* Resp_order_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_order_list.m; sourceTree = "<group>"; };
-		B27582B01ADF619400956A60 /* orderList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = orderList.plist; sourceTree = "<group>"; };
 		B27582B31ADFAA6900956A60 /* OrderDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailViewController.h; sourceTree = "<group>"; };
 		B27582B41ADFAA6900956A60 /* OrderDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailViewController.m; sourceTree = "<group>"; };
 		B27582B61ADFBD5100956A60 /* Cell_order_detail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_order_detail.h; sourceTree = "<group>"; };
@@ -900,7 +898,6 @@
 				B276BBB21995B66800075515 /* main.m */,
 				B276BBB41995B66800075515 /* itleo-Prefix.pch */,
 				B2B5C12F19E3D6420040F585 /* Localized.strings */,
-				B27582B01ADF619400956A60 /* orderList.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1426,7 +1423,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24FD1201A665EEF001DDD9F /* SVProgressHUD.bundle in Resources */,
-				B27582B11ADF619400956A60 /* orderList.plist in Resources */,
 				B29204C51A15E9F000D133A9 /* LegendItem_view.xib in Resources */,
 				B2B5C12D19E3D6420040F585 /* Localized.strings in Resources */,
 				B2A9A0C11998517B00737D08 /* Images.xcassets in Resources */,

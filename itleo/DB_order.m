@@ -33,11 +33,15 @@
                     NSArray *alist_order_dtl_list=order_list_obj.ls_order_dtl_list;
                     NSString *order_uid=order_list_obj.order_uid;
                     NSMutableDictionary *dic_order_list=[[NSDictionary dictionaryWithPropertiesOfObject:order_list_obj]mutableCopy];
-                    [dic_order_list setObject:@"2015-04-20" forKey:@"update_time"];
+                    NSString *str_current_date=[Conversion_helper fn_Date_ToStringDateTime:[NSDate date]];
+                    [dic_order_list setObject:str_current_date forKey:@"update_time"];
+                    [dic_order_list setObject:@"" forKey:@"read_date"];
+                    [dic_order_list setObject:@"0" forKey:@"is_read"];
+                    [dic_order_list setObject:@"0" forKey:@"is_sync_read"];
                     [dic_order_list removeObjectForKey:@"ls_order_dtl_list"];
                     [db executeUpdate:@"delete from order_list where order_uid like ?",order_uid];
                     [db executeUpdate:@"delete from order_dtl_list where order_uid like ?",order_uid];
-                    isSuccess=[db executeUpdate:@"insert into order_list(order_uid,order_no,status,remark,pick_addr,dely_addr,sign_path,sign_path_base64,voided,update_time)values(:order_uid,:order_no,:status,:remark,:pick_addr,:dely_addr,:sign_path,:sign_path_base64,:voided,:update_time)" withParameterDictionary:dic_order_list];
+                    isSuccess=[db executeUpdate:@"insert into order_list(order_uid,order_no,status,remark,pick_addr,dely_addr,sign_path,sign_path_base64,voided,update_time,read_date,is_read,is_sync_read)values(:order_uid,:order_no,:status,:remark,:pick_addr,:dely_addr,:sign_path,:sign_path_base64,:voided,:update_time,:read_date,:is_read,:is_sync_read)" withParameterDictionary:dic_order_list];
                     for (Resp_order_dtl_list *order_dtl_obj in alist_order_dtl_list) {
                         NSMutableDictionary *dic_order_dtl=[[NSDictionary dictionaryWithPropertiesOfObject:order_dtl_obj]mutableCopy];
                         [dic_order_dtl setObject:order_uid forKey:@"order_uid"];
@@ -81,8 +85,10 @@
         NSString *str_order_uid=[dic valueForKey:@"order_uid"];
         [alist_uids addObject:str_order_uid];
     }
-    NSSet *set_uids=[NSSet setWithArray:alist_uids];
-    return set_uids;
+    NSSet *set_uid_list=[NSSet setWithArray:alist_uids];
+    alist_uids=nil;
+    alist_result=nil;
+    return set_uid_list;
 }
 
 -(NSMutableArray*)fn_filter_order_list:(NSString*)order_no{
@@ -113,7 +119,27 @@
     }];
     return alist_result;
 }
-
+-(BOOL)fn_update_order_isRead:(NSString*)is_read read_date:(NSDate*)read_date order_uid:(NSString*)order_uid{
+    __block BOOL ib_updated=NO;
+    NSString *str_read_date=[Conversion_helper fn_Date_ToStringDateTime:read_date];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_updated=[db executeUpdate:@"update order_list set is_read=?,read_date=? where order_uid=? ",is_read,str_read_date,order_uid];
+            [db close];
+        }
+    }];
+    return ib_updated;
+}
+-(BOOL)fn_update_order_isSync_read:(NSString*)isSync_read order_uid:(NSString*)order_uid{
+    __block BOOL ib_updated=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_updated=[db executeUpdate:@"update order_list set is_sync_read=? where order_uid=?",isSync_read,order_uid];
+            [db close];
+        }
+    }];
+    return ib_updated;
+}
 -(BOOL)fn_delete_inexistence_order:(NSString*)order_uid{
     __block BOOL ib_deleted=NO;
     [queue inDataBase:^(FMDatabase *db){

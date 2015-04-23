@@ -151,6 +151,7 @@
 "lbl_order_remark"="備註：";
 "lbl_item_descp"="項目描述：";
 "lbl_order_pkg"="件數：";
+"lbl_order_placeholder"="輸入訂單號來過濾";
 
 //summary charts
 "lbl_refresh"="刷新";

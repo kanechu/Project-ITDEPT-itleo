@@ -150,6 +150,7 @@
 "lbl_order_remark"="Remark:";
 "lbl_item_descp"="Item Descp:";
 "lbl_order_pkg"="PKG:";
+"lbl_order_placeholder"="input order number to filter";
 
 //summary charts
 "lbl_refresh"="Refresh";
