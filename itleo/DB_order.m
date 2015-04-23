@@ -35,6 +35,8 @@
                     NSMutableDictionary *dic_order_list=[[NSDictionary dictionaryWithPropertiesOfObject:order_list_obj]mutableCopy];
                     [dic_order_list setObject:@"2015-04-20" forKey:@"update_time"];
                     [dic_order_list removeObjectForKey:@"ls_order_dtl_list"];
+                    [db executeUpdate:@"delete from order_list where order_uid like ?",order_uid];
+                    [db executeUpdate:@"delete from order_dtl_list where order_uid like ?",order_uid];
                     isSuccess=[db executeUpdate:@"insert into order_list(order_uid,order_no,status,remark,pick_addr,dely_addr,sign_path,sign_path_base64,voided,update_time)values(:order_uid,:order_no,:status,:remark,:pick_addr,:dely_addr,:sign_path,:sign_path_base64,:voided,:update_time)" withParameterDictionary:dic_order_list];
                     for (Resp_order_dtl_list *order_dtl_obj in alist_order_dtl_list) {
                         NSMutableDictionary *dic_order_dtl=[[NSDictionary dictionaryWithPropertiesOfObject:order_dtl_obj]mutableCopy];
@@ -63,7 +65,7 @@
     }];
     return alist_result;
 }
--(NSMutableArray*)fn_get_all_order_uid{
+-(NSSet*)fn_get_all_order_uid{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
@@ -74,7 +76,13 @@
             [db close];
         }
     }];
-    return alist_result;
+    NSMutableArray *alist_uids=[NSMutableArray array];
+    for (NSDictionary *dic in alist_result) {
+        NSString *str_order_uid=[dic valueForKey:@"order_uid"];
+        [alist_uids addObject:str_order_uid];
+    }
+    NSSet *set_uids=[NSSet setWithArray:alist_uids];
+    return set_uids;
 }
 
 -(NSMutableArray*)fn_filter_order_list:(NSString*)order_no{

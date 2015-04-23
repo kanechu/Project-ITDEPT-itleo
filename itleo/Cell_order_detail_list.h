@@ -10,6 +10,8 @@
 
 @interface Cell_order_detail_list : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imgView_detail;
+
 @property (nonatomic, strong) NSDictionary *dic_order_dtl;
 
 @property (nonatomic, assign) CGFloat height;

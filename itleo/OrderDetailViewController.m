@@ -14,8 +14,14 @@
 #import "Cell_order_detail_list.h"
 #import "Resp_order_list.h"
 #import "DB_order.h"
+#import "image_magnify_shrink.h"
+
 #define SECTION_NUM 2
-@interface OrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
+#define IMG_TAG 100
+
+@interface OrderDetailViewController ()<UITableViewDataSource,UITableViewDelegate>{
+    UIView *background;
+}
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *order_detail_logo;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_cancel;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_manage_order;
@@ -100,7 +106,24 @@
         cell.backgroundColor=COLOR_LIGHT_BLUE;
     }
     cell.dic_order_dtl=[_alist_orderObjs objectAtIndex:indexPath.row];
+    
+    UITapGestureRecognizer *tapGesture=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(fn_image_magnify:)];
+    cell.imgView_detail.tag=IMG_TAG+indexPath.row;
+    [cell.imgView_detail addGestureRecognizer:tapGesture];
+    tapGesture=nil;
+    
     return cell;
+}
+#pragma mark -图片放大 or 缩小
+- (void)fn_image_magnify:(UITapGestureRecognizer*)tap{
+    UIImageView *imgView=(UIImageView*)[tap view];
+    image_magnify_shrink *image_ctrl=[[image_magnify_shrink alloc]init];
+    NSDictionary *dic=[_alist_orderObjs objectAtIndex:(imgView.tag-IMG_TAG)];
+    UIImage *image=[Conversion_helper fn_base64Str_convert_image:dic[@"item_pic_path_base64"]];
+    background=[image_ctrl fn_image_magnify:self image:image];
+}
+- (void)fn_image_shrink{
+    [background removeFromSuperview];
 }
 
 #pragma mark -UITableViewDelegate

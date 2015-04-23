@@ -17,7 +17,7 @@
 
 -(NSMutableArray*)fn_get_order_list_data;
 
--(NSMutableArray*)fn_get_all_order_uid;
+-(NSSet*)fn_get_all_order_uid;
 
 -(NSMutableArray*)fn_filter_order_list:(NSString*)order_no;
 

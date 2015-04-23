@@ -50,7 +50,7 @@
     DB_RespAppConfig *db_appConfig=[[DB_RespAppConfig alloc]init];
     NSString *str_base_url=[db_appConfig fn_get_field_content:kWeb_addr];
     Web_order_list *web_obj=[[Web_order_list alloc]init];
-    NSArray *arr_uid=@[@"",@"",@""];
+    NSSet *arr_uid=[NSSet setWithObject:@""];
     [web_obj fn_handle_order_list_data:str_base_url uid_list:arr_uid type:kGet_order_list];
    	// Do any additional setup after loading the view.
 }

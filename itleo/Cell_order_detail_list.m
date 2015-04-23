@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *ilb_item_desc_value;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_pkg;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_pkg_value;
-@property (weak, nonatomic) IBOutlet UIImageView *imgView_detail;
 
 @end
 @implementation Cell_order_detail_list
