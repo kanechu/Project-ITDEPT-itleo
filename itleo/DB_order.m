@@ -38,10 +38,11 @@
                     [dic_order_list setObject:@"" forKey:@"read_date"];
                     [dic_order_list setObject:@"0" forKey:@"is_read"];
                     [dic_order_list setObject:@"0" forKey:@"is_sync_read"];
+                    [dic_order_list setObject:@"0" forKey:@"is_confirm"];
                     [dic_order_list removeObjectForKey:@"ls_order_dtl_list"];
                     [db executeUpdate:@"delete from order_list where order_uid like ?",order_uid];
                     [db executeUpdate:@"delete from order_dtl_list where order_uid like ?",order_uid];
-                    isSuccess=[db executeUpdate:@"insert into order_list(order_uid,order_no,status,remark,pick_addr,dely_addr,sign_path,sign_path_base64,voided,update_time,read_date,is_read,is_sync_read)values(:order_uid,:order_no,:status,:remark,:pick_addr,:dely_addr,:sign_path,:sign_path_base64,:voided,:update_time,:read_date,:is_read,:is_sync_read)" withParameterDictionary:dic_order_list];
+                    isSuccess=[db executeUpdate:@"insert into order_list(order_uid,order_no,status,remark,pick_addr,dely_addr,sign_path,sign_path_base64,voided,update_time,is_confirm,read_date,is_read,is_sync_read)values(:order_uid,:order_no,:status,:remark,:pick_addr,:dely_addr,:sign_path,:sign_path_base64,:voided,:update_time,:is_confirm,:read_date,:is_read,:is_sync_read)" withParameterDictionary:dic_order_list];
                     for (Resp_order_dtl_list *order_dtl_obj in alist_order_dtl_list) {
                         NSMutableDictionary *dic_order_dtl=[[NSDictionary dictionaryWithPropertiesOfObject:order_dtl_obj]mutableCopy];
                         [dic_order_dtl setObject:order_uid forKey:@"order_uid"];
@@ -139,6 +140,18 @@
         }
     }];
     return ib_updated;
+}
+-(BOOL)fn_update_order_isConfirm:(NSString*)is_confirm order_uid:(NSString*)order_uid{
+    __block BOOL ib_updated=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            ib_updated=[db executeUpdate:@"update order_list set is_confirm = ? where order_uid = ?",is_confirm,order_uid];
+            [db close];
+        }
+        
+    }];
+    return ib_updated;
+    
 }
 -(BOOL)fn_delete_inexistence_order:(NSString*)order_uid{
     __block BOOL ib_deleted=NO;

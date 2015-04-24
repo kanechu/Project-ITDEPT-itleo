@@ -69,6 +69,9 @@
         if (action_type==kCheck_order_list) {
             [self fn_set_order_isSync_read:arr_resp_result];
         }
+        if (action_type==kConfirm_order_list) {
+            [self fn_confirm_order_isSync:arr_resp_result];
+        }
     };
    arr_epod_order=nil;
     DB_RespAppConfig *db_appConfig=[[DB_RespAppConfig alloc]init];
@@ -81,15 +84,45 @@
     web_obj=nil;
 }
 - (void)fn_set_order_isSycn_download:(NSMutableArray*)alist_result{
+    
     DB_order *db_order_obj=[[DB_order alloc]init];
     BOOL isSaved=[db_order_obj fn_save_epod_order_data:alist_result];
+    //遍历服务器返回的数据，如果order list的voided为-1，则把该order删除，不存于手机本地中
+    for (Resp_epod_order_list *epod_orderList_obj in alist_result) {
+        NSArray *alist_order_list=epod_orderList_obj.ls_order_list;
+        for (Resp_order_list *orderList_obj in alist_order_list) {
+            NSString *str_voided=orderList_obj.voided;
+            NSString *str_order_uid=orderList_obj.order_uid;
+            if ([str_voided isEqualToString:@"-1"]) {
+                [db_order_obj fn_delete_inexistence_order:str_order_uid];
+            }
+            str_voided=nil;
+            str_order_uid=nil;
+        }
+        alist_order_list=nil;
+    }
+    
     if (isSaved) {
         NSSet *arr_uid=[db_order_obj fn_get_all_order_uid];
         [self fn_handle_order_list_data:arr_uid type:kConfirm_order_list];
         arr_uid=nil;
     }
-    
 }
+- (void)fn_confirm_order_isSync:(NSMutableArray*)alist_result{
+    DB_order *db_order_obj=[[DB_order alloc]init];
+    for (Resp_epod_order_list *epod_orderList_obj in alist_result) {
+        NSArray *alist_order_list=epod_orderList_obj.ls_order_list;
+        for (Resp_order_list *orderList_obj in alist_order_list) {
+            NSString *str_order_uid=orderList_obj.order_uid;
+            if ([str_order_uid length]!=0) {
+                [db_order_obj fn_update_order_isConfirm:@"1" order_uid:str_order_uid];
+            }
+            str_order_uid=nil;
+        }
+        alist_order_list=nil;
+    }
+}
+
 - (void)fn_set_order_isSync_read:(NSMutableArray*)alist_result{
      DB_order *db_order_obj=[[DB_order alloc]init];
     for (Resp_epod_order_list *epod_orderList_obj in alist_result) {
