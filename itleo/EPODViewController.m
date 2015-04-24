@@ -18,6 +18,7 @@
 #import "LocationManager.h"
 #import "IsAuto_upload_data.h"
 #import "Web_order_list.h"
+#import "DB_sypara.h"
 
 @interface EPODViewController ()
 
@@ -74,13 +75,20 @@
     _ibtn_settings.left_icon=[UIImage imageNamed:@"ic_settings"];
     [_ibtn_settings setTitle:MY_LocalizedString(@"ibtn_settings", nil) forState:UIControlStateNormal];
     
-    _ibtn_orderList.left_icon=[UIImage imageNamed:@""];
+    _ibtn_orderList.left_icon=[UIImage imageNamed:@"ibtn_add"];
     [_ibtn_orderList setTitle:MY_LocalizedString(@"ibtn_order_list", nil) forState:UIControlStateNormal];
     
     _itf_bus_no.layer.borderColor=[UIColor lightGrayColor].CGColor;
     _itf_bus_no.layer.borderWidth=1;
     _itf_bus_no.layer.cornerRadius=4;
     _itf_bus_no.delegate=self;
+    
+    DB_sypara *db_syparaObj=[[DB_sypara alloc]init];
+    if ([db_syparaObj fn_isExist_sypara_data:PARA_CODE_ORDERLIST data1:PARA_DATA1]) {
+        _ibtn_receive.hidden=YES;
+    }else{
+        _ibtn_orderList.hidden=YES;
+    }
 }
 -(void)fn_isStart_open_thread{
    
@@ -176,6 +184,12 @@
 }
 
 - (IBAction)fn_check_order_list:(id)sender {
+    if ([_itf_bus_no.text length]!=0) {
+        [self performSegueWithIdentifier:@"segue_order_list" sender:self];
+        [self fn_save_vehicle_no];
+    }else{
+        [self fn_Pop_up_alertView:MY_LocalizedString(@"vehicle_empty", nil)];
+    }
 }
 
 -(void)fn_Pop_up_alertView:(NSString*)str_prompt{

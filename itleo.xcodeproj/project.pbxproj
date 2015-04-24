@@ -155,7 +155,6 @@
 		B2AFFA8619C2FC7100BC26BB /* DB_ePod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AFFA8519C2FC7100BC26BB /* DB_ePod.m */; };
 		B2B136B21A032779001317C8 /* Resp_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136B11A032779001317C8 /* Resp_sypara.m */; };
 		B2B136B91A032A2E001317C8 /* DB_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136B81A032A2E001317C8 /* DB_sypara.m */; };
-		B2B136BC1A032AA3001317C8 /* Web_get_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */; };
 		B2B2429B1A3ECBDA00C9047C /* BarCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B2429A1A3ECBDA00C9047C /* BarCodeViewController.m */; };
 		B2B242A01A3ECE3300C9047C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B2429F1A3ECE3200C9047C /* AVFoundation.framework */; };
 		B2B242A41A3ECE5500C9047C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B242A31A3ECE5500C9047C /* CoreMedia.framework */; };
@@ -187,7 +186,7 @@
 		B2CD8010199DFEDA00E6DCB7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CD800E199DFEDA00E6DCB7 /* SVProgressHUD.m */; };
 		B2CDE4BD1A130A210091B523 /* DtlChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CDE4BC1A130A210091B523 /* DtlChartViewController.m */; };
 		B2CF14901A0768B00042DD64 /* Resp_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF148F1A0768B00042DD64 /* Resp_permit.m */; };
-		B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14951A076BC20042DD64 /* Web_get_permit.m */; };
+		B2CF14961A076BC20042DD64 /* Web_app_config.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14951A076BC20042DD64 /* Web_app_config.m */; };
 		B2CF14991A077D880042DD64 /* DB_permit.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF14981A077D880042DD64 /* DB_permit.m */; };
 		B2D462431ADE4ACF006AABD1 /* OrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D462421ADE4ACF006AABD1 /* OrderListViewController.m */; };
 		B2D462491ADE64B3006AABD1 /* Cell_order_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B2D462481ADE64B3006AABD1 /* Cell_order_list.m */; };
@@ -529,8 +528,6 @@
 		B2B136B11A032779001317C8 /* Resp_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_sypara.m; sourceTree = "<group>"; };
 		B2B136B71A032A2E001317C8 /* DB_sypara.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_sypara.h; sourceTree = "<group>"; };
 		B2B136B81A032A2E001317C8 /* DB_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_sypara.m; sourceTree = "<group>"; };
-		B2B136BA1A032AA3001317C8 /* Web_get_sypara.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_sypara.h; sourceTree = "<group>"; };
-		B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_get_sypara.m; sourceTree = "<group>"; };
 		B2B242991A3ECBDA00C9047C /* BarCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarCodeViewController.h; sourceTree = "<group>"; };
 		B2B2429A1A3ECBDA00C9047C /* BarCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCodeViewController.m; sourceTree = "<group>"; };
 		B2B2429F1A3ECE3200C9047C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -596,8 +593,8 @@
 		B2CDE4BC1A130A210091B523 /* DtlChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DtlChartViewController.m; sourceTree = "<group>"; };
 		B2CF148E1A0768B00042DD64 /* Resp_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resp_permit.h; sourceTree = "<group>"; };
 		B2CF148F1A0768B00042DD64 /* Resp_permit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_permit.m; sourceTree = "<group>"; };
-		B2CF14941A076BC20042DD64 /* Web_get_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_get_permit.h; sourceTree = "<group>"; };
-		B2CF14951A076BC20042DD64 /* Web_get_permit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_get_permit.m; sourceTree = "<group>"; };
+		B2CF14941A076BC20042DD64 /* Web_app_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Web_app_config.h; sourceTree = "<group>"; };
+		B2CF14951A076BC20042DD64 /* Web_app_config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Web_app_config.m; sourceTree = "<group>"; };
 		B2CF14971A077D880042DD64 /* DB_permit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_permit.h; sourceTree = "<group>"; };
 		B2CF14981A077D880042DD64 /* DB_permit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DB_permit.m; sourceTree = "<group>"; };
 		B2D462411ADE4ACF006AABD1 /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
@@ -1199,10 +1196,8 @@
 			children = (
 				B276C0E81995CC1800075515 /* Web_base.h */,
 				B276C0E91995CC1800075515 /* Web_base.m */,
-				B2B136BA1A032AA3001317C8 /* Web_get_sypara.h */,
-				B2B136BB1A032AA3001317C8 /* Web_get_sypara.m */,
-				B2CF14941A076BC20042DD64 /* Web_get_permit.h */,
-				B2CF14951A076BC20042DD64 /* Web_get_permit.m */,
+				B2CF14941A076BC20042DD64 /* Web_app_config.h */,
+				B2CF14951A076BC20042DD64 /* Web_app_config.m */,
 				B2DE9AB61A10B5E700259EB5 /* Web_get_chart_data.h */,
 				B2DE9AB71A10B5E700259EB5 /* Web_get_chart_data.m */,
 				B29443191A353A5B00F5AD2A /* Web_get_exso.h */,
@@ -1473,7 +1468,7 @@
 				B2BF88EA1A4A55B300E70852 /* Web_whs_config.m in Sources */,
 				B2EAF7A01AE635790062702C /* Cell_order_info.m in Sources */,
 				B29204C31A15E83000D133A9 /* ChartView_frame.m in Sources */,
-				B2CF14961A076BC20042DD64 /* Web_get_permit.m in Sources */,
+				B2CF14961A076BC20042DD64 /* Web_app_config.m in Sources */,
 				B255BA0D19B01441004BBF0F /* Custom_textField.m in Sources */,
 				B2281ABA19960B78001A73B0 /* DB_LoginInfo.m in Sources */,
 				B272EA6E19AEDDA400256276 /* UIViewController+TargetViewController.m in Sources */,
@@ -1494,7 +1489,6 @@
 				B21B71171A0B1D1A007DB5E3 /* LineChartExp.m in Sources */,
 				B2A328CE19D4F91800DB8F9B /* AddRemarkViewController.m in Sources */,
 				B2D8207219DFA3A50005253C /* Resp_order_info.m in Sources */,
-				B2B136BC1A032AA3001317C8 /* Web_get_sypara.m in Sources */,
 				B27091B11A3A96C100E28B4E /* WarehouseSearchViewController.m in Sources */,
 				B2750D6C199B18B3008ADCA1 /* Cell_advance_search.m in Sources */,
 				B2B5C12319E3D2430040F585 /* MY_LocalizedString.m in Sources */,

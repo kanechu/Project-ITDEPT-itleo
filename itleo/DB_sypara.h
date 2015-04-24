@@ -16,6 +16,8 @@
 
 - (NSMutableArray*)fn_get_sypara_data;
 
+- (BOOL)fn_isExist_sypara_data:(NSString*)para_code data1:(NSString*)str_data1;
+
 - (BOOL)fn_delete_all_sypara_data;
 
 

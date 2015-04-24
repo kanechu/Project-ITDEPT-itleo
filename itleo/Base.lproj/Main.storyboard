@@ -1005,20 +1005,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="车牌号码：" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cVw-xq-zWG">
-                                <rect key="frame" x="20" y="160" width="85" height="50"/>
+                                <rect key="frame" x="20" y="165" width="85" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" clearButtonMode="whileEditing" id="tmp-TY-XiT">
-                                <rect key="frame" x="105" y="170" width="142" height="30"/>
+                                <rect key="frame" x="105" y="175" width="142" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fPM-DI-7BJ" customClass="Custom_Button">
-                                <rect key="frame" x="20" y="220" width="280" height="35"/>
+                                <rect key="frame" x="20" y="240" width="280" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="簽收及拍照">
@@ -1030,7 +1030,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4dS-mB-Vab" customClass="Custom_Button">
-                                <rect key="frame" x="20" y="280" width="280" height="35"/>
+                                <rect key="frame" x="20" y="310" width="280" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="查看記錄">
@@ -1053,14 +1053,14 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="6uI-mK-VnC">
-                                <rect key="frame" x="244" y="169" width="72" height="30"/>
+                                <rect key="frame" x="244" y="174" width="72" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="LookUp">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zlY-Nt-f1w" customClass="Custom_Button">
-                                <rect key="frame" x="20" y="400" width="280" height="35"/>
+                                <rect key="frame" x="20" y="240" width="280" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="订单">
@@ -1069,11 +1069,10 @@
                                 </state>
                                 <connections>
                                     <action selector="fn_check_order_list:" destination="34c-tO-ye6" eventType="touchUpInside" id="0vU-ay-c3C"/>
-                                    <segue destination="JIn-Xh-XLb" kind="push" identifier="segue_order_list" id="axX-4L-r7O"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mOw-0h-1mc" customClass="Custom_Button">
-                                <rect key="frame" x="20" y="340" width="280" height="35"/>
+                                <rect key="frame" x="20" y="380" width="280" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="设置">
@@ -1100,6 +1099,7 @@
                         <outlet property="ilb_vehicle_no" destination="cVw-xq-zWG" id="GE8-lj-Fdk"/>
                         <outlet property="itf_bus_no" destination="tmp-TY-XiT" id="ueF-Je-fNQ"/>
                         <segue destination="gAk-bn-aL5" kind="push" identifier="segue_detail_epod" id="VK5-gA-tVE"/>
+                        <segue destination="JIn-Xh-XLb" kind="push" identifier="segue_order_list" id="oa5-jg-E9a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lgW-i9-bzm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3417,6 +3417,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="12Y-0N-25G"/>
+        <segue reference="VK5-gA-tVE"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,7 +8,7 @@
 
 #import "EPODSettingsViewController.h"
 #import "RangeSelectViewController.h"
-#import "Web_get_sypara.h"
+#import "DB_sypara.h"
 @interface EPODSettingsViewController ()
 @property (strong,nonatomic)NSMutableArray *alist_variate;
 
@@ -108,9 +108,8 @@
     
 }
 -(void)fn_isUsed_GPS_function{
-    Web_get_sypara *web_obj=[[Web_get_sypara alloc]init];
-    NSInteger flag_GPS=[web_obj fn_isShow_GPS_function];
-    if (flag_GPS==0) {
+    DB_sypara *db_syparaObj=[[DB_sypara alloc]init];
+    if ([db_syparaObj fn_isExist_sypara_data:PARA_CODE_GPS data1:PARA_DATA1]) {
         _is_switch1.enabled=NO;
         _is_switch2.enabled=NO;
     }

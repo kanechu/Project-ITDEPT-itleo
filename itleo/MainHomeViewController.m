@@ -10,7 +10,7 @@
 #import "LEOLoginViewController.h"
 #import "Menu_home.h"
 #import "Cell_menu_item.h"
-#import "Web_get_permit.h"
+#import "Web_app_config.h"
 #import "Web_get_chart_data.h"
 #import "Timer_bg_upload_data.h"
 #import "DB_LoginInfo.h"
@@ -66,7 +66,7 @@
     [self fn_set_nav_item];
     alist_menu=nil;
     alist_menu=[[NSMutableArray alloc]init];
-    Web_get_permit *web_obj=[[Web_get_permit alloc]init];
+    Web_app_config *web_obj=[[Web_app_config alloc]init];
     NSMutableArray *alist_fuction=[web_obj fn_get_function_module];
     for (NSMutableDictionary *dic in alist_fuction) {
         NSString *module_code=[dic valueForKey:@"module_code"];

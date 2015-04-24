@@ -16,6 +16,9 @@
 
 #define SYSTEM_VERSION_GREATER_THAN_IOS8 ([[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending )
 
+#define PARA_CODE_ORDERLIST @"MOB_EPOD_DL_ORD"
+#define PARA_CODE_GPS @"ANDRDRECGPS"
+#define PARA_DATA1 @"1"
 
 @interface AppConstants : NSObject
 

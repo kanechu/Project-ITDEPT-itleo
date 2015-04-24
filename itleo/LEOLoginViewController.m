@@ -17,8 +17,7 @@
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "CheckNetWork.h"
-#import "Web_get_sypara.h"
-#import "Web_get_permit.h"
+#import "Web_app_config.h"
 #import "Web_get_chart_data.h"
 #import "Web_whs_config.h"
 
@@ -261,16 +260,17 @@ static NSString  *is_language=@"";//标识语言类型
                 [db fn_save_LoginInfo_data:_itf_usercode.text password:_itf_password.text system:sys_name user_logo:user_logo lang_code:lang_code];
                 DB_single_field *db_sys=[[DB_single_field alloc]init];
                 [db_sys fn_save_data:@"com_sys_code" table_field:@"sys_code" field_value:_itf_system.text];
+                
+                Web_app_config *web_configObj=[[Web_app_config alloc]init];
                 /**
                  *  登录成功后，请求sypara
                  */
-                Web_get_sypara *web_obj=[[Web_get_sypara alloc]init];
-                [web_obj fn_get_sypara_data:web_addr];
+                [web_configObj fn_get_sypara_data:web_addr];
+                
                 /**
                  *  登录成功后，请求permit
                  */
-                Web_get_permit *web_permit_obj=[[Web_get_permit alloc]init];
-                [web_permit_obj fn_get_permit_data:web_addr callBack:^(BOOL isScuccee){
+                [web_configObj fn_get_permit_data:web_addr callBack:^(BOOL isScuccee){
                     if (isScuccee==YES) {
                         if (_refresh) {
                             _refresh();
@@ -279,7 +279,7 @@ static NSString  *is_language=@"";//标识语言类型
                         [SVProgressHUD dismiss];
                     }
                 }];
-                [web_permit_obj fn_get_epod_status_data:web_addr];
+                [web_configObj fn_get_epod_status_data:web_addr];
                 Web_whs_config *web_whs=[[Web_whs_config alloc]init];
                 [web_whs fn_get_whs_config_data:web_addr];
                 web_whs=nil;

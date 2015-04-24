@@ -35,6 +35,7 @@ static NSMutableArray *colors;
     UIButton *widthBtn;//高度
     UIButton *okBtn;//确定并截图返回
     UIButton *cancelBtn;//取消
+    UIButton *verifyBtn;//验证
 
     UISlider *penBoldSlider;
 
@@ -114,6 +115,15 @@ static NSMutableArray *colors;
     okBtn.frame = CGRectMake(btn_x, btn_y, btn_w, btn_h);
     [self addSubview:okBtn];
     [okBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //verifyBtn
+    verifyBtn = [[UIButton alloc]init];
+    [self renderBtn:verifyBtn];
+    [verifyBtn setTitle:@"验证" forState:UIControlStateNormal];
+    verifyBtn.frame = CGRectMake(btn_x, btn_y, btn_w, btn_h);
+    [self addSubview:verifyBtn];
+    [verifyBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     //cancelBtn
     cancelBtn = [[UIButton alloc]init];
 
@@ -131,6 +141,7 @@ static NSMutableArray *colors;
     [btnLArr addObject:undoBtn];
     [btnLArr addObject:clearBtn];
     [btnRArr addObject:okBtn];
+    [btnRArr addObject:verifyBtn];
     [btnRArr addObject:cancelBtn];
 
 
@@ -172,7 +183,8 @@ static NSMutableArray *colors;
     i = 0;
     for (UIButton *btn in btnRArr) {
         //btn.frame = CGRectMake(910, btn_y+ i * (btn_h+btn_mid), btn_w, btn_h);
-        btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5)*2,penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);
+        // btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5)*2,penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);        
+        btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5),penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);
         i++;
     }
     
@@ -287,6 +299,8 @@ static NSMutableArray *colors;
         [ self.drawView refrom];
     }else if(sender == clearBtn){
         [self.drawView clear];
+    }else if(sender == verifyBtn){
+        
     }
 }
 

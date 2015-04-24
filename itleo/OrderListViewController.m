@@ -50,6 +50,7 @@
     _itf_order_num.placeholder=MY_LocalizedString(@"lbl_order_placeholder", nil);
     _itf_order_num.returnKeyType=UIReturnKeySearch;
     _itf_order_num.delegate=self;
+    self.tableview.backgroundColor=COLOR_LIGHT_GRAY;
 }
 
 #pragma mark -event action
@@ -114,6 +115,9 @@
     }
     str_order_uid=nil;
     isRead=nil;
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [_itf_order_num resignFirstResponder];
 }
 #pragma mark - Navigation
 
