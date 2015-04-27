@@ -47,9 +47,6 @@
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
     [self fn_isStart_open_thread];
-    Web_order_list *web_obj=[[Web_order_list alloc]init];
-    NSSet *arr_uid=[NSSet setWithObject:@""];
-    [web_obj fn_handle_order_list_data:arr_uid type:kGet_order_list];
    	// Do any additional setup after loading the view.
 }
 
@@ -185,8 +182,16 @@
 
 - (IBAction)fn_check_order_list:(id)sender {
     if ([_itf_bus_no.text length]!=0) {
-        [self performSegueWithIdentifier:@"segue_order_list" sender:self];
-        [self fn_save_vehicle_no];
+        [SVProgressHUD showWithStatus:MY_LocalizedString(@"load_order_alert", nil)];
+        Web_order_list *web_obj=[[Web_order_list alloc]init];
+        NSSet *arr_uid=[NSSet setWithObject:@""];
+        [web_obj fn_handle_order_list_data:arr_uid type:kGet_order_list];
+        web_obj.callback=^(NSMutableArray* alist_result){
+            [self performSegueWithIdentifier:@"segue_order_list" sender:self];
+            [self fn_save_vehicle_no];
+            [SVProgressHUD dismiss];
+        };
+    
     }else{
         [self fn_Pop_up_alertView:MY_LocalizedString(@"vehicle_empty", nil)];
     }

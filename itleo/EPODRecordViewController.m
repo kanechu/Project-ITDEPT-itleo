@@ -243,7 +243,7 @@
         detail_result=MY_LocalizedString(@"lbl_Vehicle_error", nil);
     }
     if ([result isEqualToString:@"isuccess"]) {
-        detail_result=MY_LocalizedString(@"lbl_success", nil);
+        detail_result=MY_LocalizedString(@"upload_success", nil);
     }
     if ([result isEqualToString:@"ianomaly"]) {
         detail_result=MY_LocalizedString(@"lbl_Network_error", nil);

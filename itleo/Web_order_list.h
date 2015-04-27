@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class Web_base;
+#import "Web_base.h"
 
 //触发的事件类型
 typedef NS_ENUM(NSUInteger, kAction_type) {
@@ -17,6 +17,8 @@ typedef NS_ENUM(NSUInteger, kAction_type) {
     kCheck_order_list,
 };
 @interface Web_order_list : NSObject
+
+@property (nonatomic,strong) callBack_resp_result callback;
 
 -(void)fn_handle_order_list_data:(NSSet*)set_uid_list type:(kAction_type)action_type;
 

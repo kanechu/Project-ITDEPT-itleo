@@ -7,7 +7,6 @@
 //
 
 #import "Web_order_list.h"
-#import "Web_base.h"
 #import "Resp_order_dtl_list.h"
 #import "Resp_epod_order_list.h"
 #import "Resp_order_list.h"
@@ -65,6 +64,9 @@
     web_obj.callBack=^(NSMutableArray* arr_resp_result){
         if (action_type==kGet_order_list) {
             [self fn_set_order_isSycn_download:arr_resp_result];
+            if (_callback) {
+                _callback(arr_resp_result);
+            }
         }
         if (action_type==kCheck_order_list) {
             [self fn_set_order_isSync_read:arr_resp_result];

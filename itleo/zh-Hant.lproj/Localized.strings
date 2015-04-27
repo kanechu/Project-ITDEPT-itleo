@@ -109,7 +109,6 @@
 //result
 "lbl_order_error"="配載單號無效";
 "lbl_Vehicle_error"="車牌號無效";
-"lbl_success"="上傳成功";
 "lbl_Network_error"="網絡異常";
 "msg_network_fail"="無法連接網絡，您必須連接Wi-Fi網路或行動數據網路才能取用ITLEO！";
 "upload_prompt"="上傳中，請稍等！";

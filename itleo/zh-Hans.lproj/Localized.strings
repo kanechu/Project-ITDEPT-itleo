@@ -107,7 +107,6 @@
 //result
 "lbl_order_error"="配载单号无效";
 "lbl_Vehicle_error"="车牌号无效";
-"lbl_success"="上传成功";
 "lbl_Network_error"="网络异常";
 "msg_network_fail"="无法连接网络，您必须连接Wi-Fi网路或行动数据网路才能取用ITLEO！";
 "upload_prompt"="上传中，请稍等！";

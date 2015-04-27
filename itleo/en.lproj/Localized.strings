@@ -108,7 +108,6 @@
 //result
 "lbl_order_error"="Order Number Error";
 "lbl_Vehicle_error"="Vehicle Number Error";
-"lbl_success"="Uploaded successfully";
 "lbl_Network_error"="Network Anomaly";
 "msg_network_fail"="Unable to connect to the network, you must connect Wi-Fi network or mobile data network to access ITLEO.";
 "upload_prompt"="Uploading,please wait!";
