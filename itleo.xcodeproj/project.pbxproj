@@ -151,6 +151,8 @@
 		B2AE75871A3BEF3D00F3F732 /* Warehouse_receive_data.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE75861A3BEF3D00F3F732 /* Warehouse_receive_data.m */; };
 		B2AE758E1A3C438E00F3F732 /* Resp_upd_excfsdim.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE758D1A3C438E00F3F732 /* Resp_upd_excfsdim.m */; };
 		B2AE8D9D19C6B9C400B5B2E6 /* image_magnify_shrink.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AE8D9C19C6B9C400B5B2E6 /* image_magnify_shrink.m */; };
+		B2AED4121AEDE04800476BEF /* Identifi_bridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AED4111AEDE04800476BEF /* Identifi_bridgeViewController.m */; };
+		B2AED4181AEDE13E00476BEF /* Signature_contrastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AED4171AEDE13E00476BEF /* Signature_contrastViewController.m */; };
 		B2AFFA3919C2945700BC26BB /* Cell_status_list.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AFFA3819C2945700BC26BB /* Cell_status_list.m */; };
 		B2AFFA8619C2FC7100BC26BB /* DB_ePod.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AFFA8519C2FC7100BC26BB /* DB_ePod.m */; };
 		B2B136B21A032779001317C8 /* Resp_sypara.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B136B11A032779001317C8 /* Resp_sypara.m */; };
@@ -520,6 +522,10 @@
 		B2AE758D1A3C438E00F3F732 /* Resp_upd_excfsdim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Resp_upd_excfsdim.m; sourceTree = "<group>"; };
 		B2AE8D9B19C6B9C400B5B2E6 /* image_magnify_shrink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image_magnify_shrink.h; sourceTree = "<group>"; };
 		B2AE8D9C19C6B9C400B5B2E6 /* image_magnify_shrink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = image_magnify_shrink.m; sourceTree = "<group>"; };
+		B2AED4101AEDE04800476BEF /* Identifi_bridgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Identifi_bridgeViewController.h; sourceTree = "<group>"; };
+		B2AED4111AEDE04800476BEF /* Identifi_bridgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Identifi_bridgeViewController.m; sourceTree = "<group>"; };
+		B2AED4161AEDE13E00476BEF /* Signature_contrastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Signature_contrastViewController.h; sourceTree = "<group>"; };
+		B2AED4171AEDE13E00476BEF /* Signature_contrastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Signature_contrastViewController.m; sourceTree = "<group>"; };
 		B2AFFA3719C2945700BC26BB /* Cell_status_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_status_list.h; sourceTree = "<group>"; };
 		B2AFFA3819C2945700BC26BB /* Cell_status_list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_status_list.m; sourceTree = "<group>"; };
 		B2AFFA8419C2FC7100BC26BB /* DB_ePod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DB_ePod.h; sourceTree = "<group>"; };
@@ -952,6 +958,10 @@
 				B2E391C919C8137A00612FDD /* EPODRecordViewController.m */,
 				B2A328CC19D4F91800DB8F9B /* AddRemarkViewController.h */,
 				B2A328CD19D4F91800DB8F9B /* AddRemarkViewController.m */,
+				B2AED4101AEDE04800476BEF /* Identifi_bridgeViewController.h */,
+				B2AED4111AEDE04800476BEF /* Identifi_bridgeViewController.m */,
+				B2AED4161AEDE13E00476BEF /* Signature_contrastViewController.h */,
+				B2AED4171AEDE13E00476BEF /* Signature_contrastViewController.m */,
 				B2C4722819FA65B70099199D /* EPODSettingsViewController.h */,
 				B2C4722919FA65B70099199D /* EPODSettingsViewController.m */,
 				B27518CB19FE1C99000A4630 /* RangeSelectViewController.h */,
@@ -1499,6 +1509,7 @@
 				B27B5F4319C924F0000736B3 /* Conversion_helper.m in Sources */,
 				B272EA7119AEDF4400256276 /* SelectHistoryDataViewController.m in Sources */,
 				B270C6141999B3990089664C /* Cell_aejob_browse.m in Sources */,
+				B2AED4181AEDE13E00476BEF /* Signature_contrastViewController.m in Sources */,
 				B276C0FD1995D8D800075515 /* AppConstants.m in Sources */,
 				B2BF88E71A4A50FD00E70852 /* Resp_UPLOAD_COL.m in Sources */,
 				B272EA6819AEDDA400256276 /* MZFormSheetBackgroundWindowViewController.m in Sources */,
@@ -1508,6 +1519,7 @@
 				B2C3BAE819BAE215008B9A83 /* EPODViewController.m in Sources */,
 				B2C28E9F199C47B100F4D0BF /* DetailView.m in Sources */,
 				B27582BB1ADFBD9400956A60 /* Cell_order_detail_list.m in Sources */,
+				B2AED4121AEDE04800476BEF /* Identifi_bridgeViewController.m in Sources */,
 				B28222A919FF39F00000FC2B /* Resp_upd_GPS.m in Sources */,
 				B276BBDD1995B6A500075515 /* MainHomeViewController.m in Sources */,
 				B2BF88ED1A4A649300E70852 /* DB_whs_config.m in Sources */,

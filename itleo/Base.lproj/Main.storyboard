@@ -655,6 +655,169 @@
             </objects>
             <point key="canvasLocation" x="851" y="1173"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rvr-mW-hDZ">
+            <objects>
+                <navigationController storyboardIdentifier="navigation" id="oqZ-sY-chq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nUh-sr-8GQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Cau-Jd-3fl" kind="relationship" relationship="rootViewController" id="qOT-ZF-Gb5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PfW-ae-KA7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1185" y="928"/>
+        </scene>
+        <!--Identifi bridge View Controller-->
+        <scene sceneID="lGG-5v-oeq">
+            <objects>
+                <viewController storyboardIdentifier="Identifi_bridgeViewController" id="Cau-Jd-3fl" customClass="Identifi_bridgeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lSX-hq-O19">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please press the Next button to Proceed signature venfication" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4eW-HU-aq2">
+                                <rect key="frame" x="20" y="123" width="280" height="84"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T2B-k8-bzq">
+                                <rect key="frame" x="130" y="269" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fn_go_next_page:" destination="Cau-Jd-3fl" eventType="touchUpInside" id="b1p-Uc-9s4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3Ck-FK-Mbv">
+                        <barButtonItem key="leftBarButtonItem" id="qRm-TE-7CR">
+                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JgH-zL-v2p" customClass="Custom_BtnGraphicMixed">
+                                <rect key="frame" x="16" y="7" width="180" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="342-kv-1av">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SOp-n7-5fB">
+                                <rect key="frame" x="-23" y="-15" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fn_hiden_identifi_bridgeVC:" destination="Cau-Jd-3fl" eventType="touchUpInside" id="Hz6-KN-nTK"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ibtn_cancel" destination="SOp-n7-5fB" id="lvj-Po-NKZ"/>
+                        <outlet property="ibtn_next" destination="T2B-k8-bzq" id="1du-1D-cXf"/>
+                        <outlet property="lbl_isProceed_alert" destination="4eW-HU-aq2" id="R44-jb-6d9"/>
+                        <outlet property="signature_bridgeLogo" destination="JgH-zL-v2p" id="xqx-al-Nrs"/>
+                        <segue destination="EKl-tu-dcp" kind="push" identifier="segue_signatureContrast" id="NoO-V5-nXc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MWo-4m-DML" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1582" y="928"/>
+        </scene>
+        <!--Signature contrast View Controller-->
+        <scene sceneID="waL-6b-1qr">
+            <objects>
+                <viewController storyboardIdentifier="Signature_contrastViewController" automaticallyAdjustsScrollViewInsets="NO" id="EKl-tu-dcp" customClass="Signature_contrastViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="heU-OF-27P">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="152" sectionHeaderHeight="22" sectionFooterHeight="22" id="50O-b2-vgZ">
+                                <rect key="frame" x="10" y="69" width="300" height="454"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_signature_confirm" rowHeight="152" id="uSi-hK-qfk">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uSi-hK-qfk" id="Fdf-h8-Mbc">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="hcX-6g-HPy">
+                                                    <rect key="frame" x="25" y="0.0" width="250" height="151"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="EKl-tu-dcp" id="moI-ou-agJ"/>
+                                    <outlet property="delegate" destination="EKl-tu-dcp" id="hX0-Mc-E1v"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="F6g-uA-MKg">
+                                <rect key="frame" x="175" y="528" width="135" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.25490196079999999" green="0.37135036500000002" blue="0.92777714420000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Reject">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fn_reject_confirm_signature:" destination="EKl-tu-dcp" eventType="touchUpInside" id="Yao-KY-fpb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qk1-u6-0SW">
+                                <rect key="frame" x="10" y="528" width="135" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.25490196079999999" green="0.37135036500000002" blue="0.92777714420000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Confirm">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fn_confirm_signature:" destination="EKl-tu-dcp" eventType="touchUpInside" id="Ou5-k0-Irk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="19J-Z3-BLp">
+                        <barButtonItem key="leftBarButtonItem" id="M8L-PE-HdM">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" restorationIdentifier="Custom_BtnGraphicMixed" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rDZ-SX-Czd" customClass="Custom_BtnGraphicMixed">
+                                <rect key="frame" x="16" y="7" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="ibtn_confirm" destination="qk1-u6-0SW" id="Y6K-nW-qcO"/>
+                        <outlet property="ibtn_reject" destination="F6g-uA-MKg" id="0fU-q9-6rw"/>
+                        <outlet property="signature_contrastLogo" destination="rDZ-SX-Czd" id="Ad5-VB-CgP"/>
+                        <outlet property="tableview" destination="50O-b2-vgZ" id="uui-kp-Nf8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lfd-jO-gki" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1996" y="928"/>
+        </scene>
         <!--Manage Image View Controller-->
         <scene sceneID="g3I-a8-CKT">
             <objects>

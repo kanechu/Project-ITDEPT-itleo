@@ -15,6 +15,7 @@
 #import "PopViewManager.h"
 #import "Truck_order_image_data.h"
 #import "Custom_BtnGraphicMixed.h"
+#import "Identifi_bridgeViewController.h"
 
 @interface ManageImageViewController (){
     UIView *background;
@@ -113,7 +114,15 @@
         [PopSignUtil closePop];
         [alist_image_ms addObject:[self fn_set_upload_image_ms:image]];
         [self.conllectionview reloadData];
-    } withCancel:^{
+    } withVerify:^(UIImage *verifyImage){
+
+        UINavigationController *nav_vc=[self.storyboard instantiateViewControllerWithIdentifier:@"navigation"];
+        NSArray *root=[nav_vc viewControllers];
+        Identifi_bridgeViewController *identifiVC=[root firstObject];
+        identifiVC.client_image=verifyImage;
+        identifiVC.dic_order=_dic_order;
+        [self presentViewController:nav_vc animated:YES completion:nil];
+    }withCancel:^{
         
         [PopSignUtil closePop];
     }];
@@ -233,6 +242,8 @@
                 [PopSignUtil closePop];
                 upload_image_ms.image=[Conversion_helper fn_image_convert_base64Str:image];
                 [self.conllectionview reloadData];
+            } withVerify:^(UIImage *image){
+                
             } withCancel:^{
                 
                 [PopSignUtil closePop];
@@ -287,13 +298,16 @@
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    HistoryCaptureViewController *historyCaptureVC=(HistoryCaptureViewController*)[segue destinationViewController];
-    historyCaptureVC.alist_image_ms=_alist_historyImage_ms;
-    historyCaptureVC.callBack=^(NSMutableArray *alist_images){
-        if (alist_images!=nil) {
-            [alist_image_ms addObjectsFromArray:alist_images];
-            [self.conllectionview reloadData];
-        }
-    };
+    
+    if ([[segue identifier]isEqualToString:@"segue_history_capture"]) {
+        HistoryCaptureViewController *historyCaptureVC=(HistoryCaptureViewController*)[segue destinationViewController];
+        historyCaptureVC.alist_image_ms=_alist_historyImage_ms;
+        historyCaptureVC.callBack=^(NSMutableArray *alist_images){
+            if (alist_images!=nil) {
+                [alist_image_ms addObjectsFromArray:alist_images];
+                [self.conllectionview reloadData];
+            }
+        };
+    }
 }
 @end

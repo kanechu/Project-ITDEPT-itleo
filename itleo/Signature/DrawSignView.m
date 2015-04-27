@@ -11,6 +11,7 @@
  */
 
 #import "DrawSignView.h"
+#import "DB_sypara.h"
 
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 #define SYSTEMFONT(x) [UIFont systemFontOfSize:(x)]
@@ -43,7 +44,7 @@ static NSMutableArray *colors;
 
 }
 
-@synthesize signCallBackBlock,cancelBlock;
+@synthesize signCallBackBlock,cancelBlock,verifyCallBackBlock;
 
 
 - (void)dealloc {
@@ -136,12 +137,16 @@ static NSMutableArray *colors;
 
     NSMutableArray *btnLArr = [[NSMutableArray alloc]init];
     NSMutableArray *btnRArr = [[NSMutableArray alloc]init];
+    DB_sypara *db_syparaObj=[[DB_sypara alloc]init];
+    BOOL isShow_verifyBtn=[db_syparaObj fn_isExist_sypara_data:PARA_CODE_ORDERLIST data1:PARA_DATA1];
     //统一设坐标
     [btnLArr addObject:redoBtn];
     [btnLArr addObject:undoBtn];
     [btnLArr addObject:clearBtn];
     [btnRArr addObject:okBtn];
-    [btnRArr addObject:verifyBtn];
+    if (isShow_verifyBtn) {
+        [btnRArr addObject:verifyBtn];
+    }
     [btnRArr addObject:cancelBtn];
 
 
@@ -183,8 +188,12 @@ static NSMutableArray *colors;
     i = 0;
     for (UIButton *btn in btnRArr) {
         //btn.frame = CGRectMake(910, btn_y+ i * (btn_h+btn_mid), btn_w, btn_h);
-        // btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5)*2,penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);        
-        btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5),penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);
+        if (isShow_verifyBtn) {
+            btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5),penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);
+        }else{
+            btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5)*2,penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);
+        }
+        
         i++;
     }
     
@@ -300,7 +309,7 @@ static NSMutableArray *colors;
     }else if(sender == clearBtn){
         [self.drawView clear];
     }else if(sender == verifyBtn){
-        
+        verifyCallBackBlock([self saveScreen]);
     }
 }
 

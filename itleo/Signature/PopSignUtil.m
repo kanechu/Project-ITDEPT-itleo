@@ -42,15 +42,18 @@ static PopSignUtil *popSignUtil = nil;
 }
 
 //定制弹出框。模态对话框。
-+(void)getSignWithVC:(UIViewController *)VC bgImage:(UIImage*)bgImage withOk:(SignCallBackBlock)signCallBackBlock
-         withCancel:(CallBackBlock)callBackBlock{
++(void)getSignWithVC:(UIViewController *)VC
+             bgImage:(UIImage*)bgImage
+              withOk:(SignCallBackBlock)signCallBackBlock
+          withVerify:(SignCallBackBlock)verifyCallBackBlock
+          withCancel:(CallBackBlock)callBackBlock{
     PopSignUtil *p = [PopSignUtil shareRestance];
-    [p setPopWithVC:VC bgImage:bgImage withOk:signCallBackBlock withCancel:callBackBlock];
+    [p setPopWithVC:VC bgImage:bgImage withOk:signCallBackBlock withVerify:verifyCallBackBlock withCancel:callBackBlock];
 }
 
 
 /** 设定 */
--(void)setPopWithVC:(UIViewController *)VC bgImage:(UIImage*)bgImage withOk:(SignCallBackBlock)signCallBackBlock
+-(void)setPopWithVC:(UIViewController *)VC bgImage:(UIImage*)bgImage withOk:(SignCallBackBlock)signCallBackBlock withVerify:(SignCallBackBlock)verifyCallBackBlock
          withCancel:(CallBackBlock)cancelBlock{
 
     if (!shadeView) {
@@ -69,6 +72,8 @@ static PopSignUtil *popSignUtil = nil;
     [cancelBlock release];
     conformView.signCallBackBlock  = signCallBackBlock;
     [signCallBackBlock release];
+    conformView.verifyCallBackBlock=verifyCallBackBlock;
+    [verifyCallBackBlock release];
 
    // CGFloat v_x = (screenSize.width-conformView.frame.size.width)/2.0;
    // CGFloat v_y = (screenSize.height-conformView.frame.size.height)/2.0;

@@ -151,6 +151,14 @@
 "lbl_item_descp"="項目描述：";
 "lbl_order_pkg"="件數：";
 "lbl_order_placeholder"="輸入訂單號來過濾";
+"lbl_isProceed_logo"="用戶鑑定";
+"lbl_isProceed_alert"="請點擊“下一步”，繼續簽名驗證";
+"ibtn_next"="下一步";
+"lbl_signature_logo"="簽名";
+"lbl_original_signature"="原始簽名";
+"lbl_Client_signature"="客戶簽名";
+"ibtn_confirm"="確認";
+"ibtn_reject"="拒絕";
 
 //summary charts
 "lbl_refresh"="刷新";

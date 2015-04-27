@@ -386,6 +386,7 @@
     VC.alist_historyImage_ms=alist_historyImage_msg;
     VC.alist_image_ms=alist_image_ms;
     VC.is_order_no=_itf_order_no.text;
+    VC.dic_order=_dic_order;
     VC.callBack=^(NSMutableArray *alist_image){
         alist_image_ms=alist_image;
         _ilb_show_picture_nums.text=[NSString stringWithFormat:@"%@:%@",MY_LocalizedString(@"lbl_image_num", nil),@(alist_image.count)];

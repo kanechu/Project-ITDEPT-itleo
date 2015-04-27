@@ -148,6 +148,14 @@
 "lbl_item_descp"="项目描述：";
 "lbl_order_pkg"="件数：";
 "lbl_order_placeholder"="输入订单号来过滤";
+"lbl_isProceed_logo"="用户鉴定";
+"lbl_isProceed_alert"="请点击“下一步”，继续签名验证。";
+"ibtn_next"="下一步";
+"lbl_signature_logo"="签名";
+"lbl_original_signature"="原始签名";
+"lbl_Client_signature"="客户签名";
+"ibtn_confirm"="确认";
+"ibtn_reject"="拒绝";
 
 //summary charts
 "lbl_refresh"="刷新";

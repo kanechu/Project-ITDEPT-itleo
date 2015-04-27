@@ -15,7 +15,9 @@ typedef void(^CallBackBlock) ();
 @interface DrawSignView : UIView
 
 @property(nonatomic,copy)SignCallBackBlock signCallBackBlock;
+@property(nonatomic,copy) SignCallBackBlock verifyCallBackBlock;
 @property(nonatomic,copy)CallBackBlock cancelBlock;
+
 
 -(void)fn_set_bgImage:(UIImage*)image;
 
