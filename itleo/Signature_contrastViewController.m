@@ -47,6 +47,8 @@
 
 - (IBAction)fn_confirm_signature:(id)sender {
     
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"confirm_signature" object:_verifyImage userInfo:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)fn_reject_confirm_signature:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

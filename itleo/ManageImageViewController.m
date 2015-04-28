@@ -116,6 +116,8 @@
         [self.conllectionview reloadData];
     } withVerify:^(UIImage *verifyImage){
 
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"confirm_signature" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_confirm_signature:) name:@"confirm_signature" object:nil];
         UINavigationController *nav_vc=[self.storyboard instantiateViewControllerWithIdentifier:@"navigation"];
         NSArray *root=[nav_vc viewControllers];
         Identifi_bridgeViewController *identifiVC=[root firstObject];
@@ -127,6 +129,16 @@
         [PopSignUtil closePop];
     }];
 }
+#pragma mark -nofication
+- (void)fn_confirm_signature:(NSNotification*)notification{
+    
+    UIImage *verifyImage=(UIImage*)[notification object];
+    [PopSignUtil closePop];
+    [alist_image_ms addObject:[self fn_set_upload_image_ms:verifyImage]];
+    [self.conllectionview reloadData];
+    
+}
+
 //选取
 -(void)fn_select_picture:(id)sender{
     UIImagePickerControllerSourceType sourceType=UIImagePickerControllerSourceTypePhotoLibrary;
