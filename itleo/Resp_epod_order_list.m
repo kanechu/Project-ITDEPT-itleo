@@ -16,6 +16,8 @@
 
 @synthesize ls_msg;
 
+@synthesize ls_uid_list_all;
+
 @synthesize ls_order_list;
 
 @end

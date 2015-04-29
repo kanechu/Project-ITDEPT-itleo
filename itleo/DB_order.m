@@ -32,6 +32,7 @@
                 for (Resp_order_list *order_list_obj in alist_order_list) {
                     NSArray *alist_order_dtl_list=order_list_obj.ls_order_dtl_list;
                     NSString *order_uid=order_list_obj.order_uid;
+                   // order_uid=[Conversion_helper  fn_cut_whitespace:order_uid];
                     NSMutableDictionary *dic_order_list=[[NSDictionary dictionaryWithPropertiesOfObject:order_list_obj]mutableCopy];
                     NSString *str_current_date=[Conversion_helper fn_Date_ToStringDateTime:[NSDate date]];
                     [dic_order_list setObject:str_current_date forKey:@"update_time"];
@@ -153,12 +154,18 @@
     return ib_updated;
     
 }
--(BOOL)fn_delete_inexistence_order:(NSString*)order_uid{
+-(BOOL)fn_delete_inexistence_order:(NSString*)str_order_uids{
     __block BOOL ib_deleted=NO;
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            ib_deleted=[db executeUpdate:@"delete from order_dtl_list where order_uid= ?",order_uid];
-            ib_deleted=[db executeUpdate:@"delete from order_list where order_uid= ?",order_uid];
+            NSString *sql_delete_dtl_order=[NSString stringWithFormat:@"delete from order_dtl_list where order_uid not in (%@)",str_order_uids];
+            ib_deleted=[db executeUpdate:sql_delete_dtl_order];
+            sql_delete_dtl_order=nil;
+            
+            NSString *sql_delete_order=[NSString stringWithFormat:@"delete from order_list where order_uid not in (%@)",str_order_uids];
+            ib_deleted=[db executeUpdate:sql_delete_order];
+            sql_delete_order=nil;
+            
             [db close];
         }
     }];

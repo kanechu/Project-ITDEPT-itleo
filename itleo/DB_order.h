@@ -29,7 +29,7 @@
 
 -(BOOL)fn_update_order_isConfirm:(NSString*)is_confirm order_uid:(NSString*)order_uid;
 
--(BOOL)fn_delete_inexistence_order:(NSString*)order_uid;
+-(BOOL)fn_delete_inexistence_order:(NSString*)str_order_uids;
 
 -(BOOL)fn_delete_all_order_list;
 

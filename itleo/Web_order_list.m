@@ -89,19 +89,18 @@
     
     DB_order *db_order_obj=[[DB_order alloc]init];
     BOOL isSaved=[db_order_obj fn_save_epod_order_data:alist_result];
-    //遍历服务器返回的数据，如果order list的voided为-1，则把该order删除，不存于手机本地中
+    //遍历服务器返回的数据，如果删除不存在uid list中的order
     for (Resp_epod_order_list *epod_orderList_obj in alist_result) {
-        NSArray *alist_order_list=epod_orderList_obj.ls_order_list;
-        for (Resp_order_list *orderList_obj in alist_order_list) {
-            NSString *str_voided=orderList_obj.voided;
-            NSString *str_order_uid=orderList_obj.order_uid;
-            if ([str_voided isEqualToString:@"-1"]) {
-                [db_order_obj fn_delete_inexistence_order:str_order_uid];
-            }
-            str_voided=nil;
+        NSSet *set_uid_list=epod_orderList_obj.ls_uid_list_all;
+        NSMutableArray *alist_uids=[NSMutableArray array];
+        for (NSString *str_uid in set_uid_list) {
+            NSString *str_order_uid=[NSString stringWithFormat:@"'%@'",str_uid];
+            [alist_uids addObject:str_order_uid];
             str_order_uid=nil;
         }
-        alist_order_list=nil;
+        NSString *str_uid_list=[alist_uids componentsJoinedByString:@","];
+        [db_order_obj fn_delete_inexistence_order:str_uid_list];
+        alist_uids=nil;
     }
     
     if (isSaved) {

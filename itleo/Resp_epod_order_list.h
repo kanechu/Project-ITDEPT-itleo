@@ -16,6 +16,8 @@
 
 @property (nonatomic, copy) NSString *ls_msg;
 
+@property (nonatomic, strong) NSSet *ls_uid_list_all;
+
 @property (nonatomic, strong) NSArray *ls_order_list;
 
 @end
