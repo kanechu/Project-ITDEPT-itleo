@@ -105,15 +105,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"segue_order_detail" sender:self];
     NSDictionary *dic_order=_alist_orderObj[indexPath.row];
-    NSString *str_order_uid=dic_order[@"order_uid"];
     NSString *isRead=dic_order[@"is_read"];
+    
     if ([isRead integerValue]==0) {
+        NSString *str_order_uid=dic_order[@"order_uid"];
+        NSString *str_read_date=[Conversion_helper fn_Date_ToStringDateTime:[NSDate date]];
+        NSString *str_join_uid=[NSString stringWithFormat:@"%@,%@",str_order_uid,str_read_date];
+        
         Web_order_list *order_obj=[[Web_order_list alloc]init];
-        [order_obj fn_handle_order_list_data:[NSSet setWithObject:str_order_uid] type:kCheck_order_list];
+        [order_obj fn_handle_order_list_data:[NSSet setWithObject:str_join_uid] type:kCheck_order_list];
         order_obj=nil;
-        [self.db_order_obj fn_update_order_isRead:@"1" read_date:[NSDate date] order_uid:str_order_uid];
+        
+        [self.db_order_obj fn_update_order_isRead:@"1" read_date:str_read_date order_uid:str_order_uid];
+        
+        str_order_uid=nil;
     }
-    str_order_uid=nil;
+    
     isRead=nil;
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{

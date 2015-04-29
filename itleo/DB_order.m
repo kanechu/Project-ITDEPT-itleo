@@ -121,16 +121,19 @@
     }];
     return alist_result;
 }
--(BOOL)fn_update_order_isRead:(NSString*)is_read read_date:(NSDate*)read_date order_uid:(NSString*)order_uid{
+-(BOOL)fn_update_order_isRead:(NSString*)is_read
+                    read_date:(NSString*)read_date
+                    order_uid:(NSString*)order_uid{
+    
     __block BOOL ib_updated=NO;
-    NSString *str_read_date=[Conversion_helper fn_Date_ToStringDateTime:read_date];
     [queue inDataBase:^(FMDatabase *db){
         if ([db open]) {
-            ib_updated=[db executeUpdate:@"update order_list set is_read=?,read_date=? where order_uid=? ",is_read,str_read_date,order_uid];
+            ib_updated=[db executeUpdate:@"update order_list set is_read=?,read_date=? where order_uid=? ",is_read,read_date,order_uid];
             [db close];
         }
     }];
     return ib_updated;
+    
 }
 -(BOOL)fn_update_order_isSync_read:(NSString*)isSync_read order_uid:(NSString*)order_uid{
     __block BOOL ib_updated=NO;
