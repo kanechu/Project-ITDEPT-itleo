@@ -51,8 +51,14 @@
     _itf_order_num.returnKeyType=UIReturnKeySearch;
     _itf_order_num.delegate=self;
     self.tableview.backgroundColor=COLOR_LIGHT_GRAY;
+    
+    [self fn_hiden_cell_extra_line];
 }
-
+- (void)fn_hiden_cell_extra_line{
+    UIView *view=[[UIView alloc]init];
+    view.backgroundColor=[UIColor clearColor];
+    [self.tableview setTableFooterView:view];
+}
 #pragma mark -event action
 - (IBAction)fn_goBack_previous_page:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

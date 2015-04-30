@@ -53,6 +53,12 @@
     
     self.tableview.layer.borderWidth=1;
     self.tableview.layer.borderColor=[UIColor blueColor].CGColor;
+    [self fn_hiden_cell_extra_line];
+}
+- (void)fn_hiden_cell_extra_line{
+    UIView *view=[[UIView alloc]init];
+    view.backgroundColor=[UIColor clearColor];
+    [self.tableview setTableFooterView:view];
 }
 #pragma mark -加载数据
 - (void)fn_initData{

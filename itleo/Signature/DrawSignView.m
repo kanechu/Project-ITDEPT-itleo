@@ -310,6 +310,7 @@ static NSMutableArray *colors;
         [self.drawView clear];
     }else if(sender == verifyBtn){
         verifyCallBackBlock([self saveScreen]);
+        [self.drawView clear];
     }
 }
 
