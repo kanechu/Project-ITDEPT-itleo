@@ -11,7 +11,8 @@
 
 //触发的事件类型
 typedef NS_ENUM(NSUInteger, kAction_type) {
-    kGet_all_order,
+    kGet_order_list_all,
+    kConfirm_all_order_list,
     kGet_order_list,
     kConfirm_order_list,
     kCheck_order_list,

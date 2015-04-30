@@ -19,6 +19,7 @@
 #define ACTIONTYPE_GET @"get_order_list"
 #define ACTIONTYPE_CONFIRM @"get_order_list_confirm"
 #define ACTIONTYPE_SEE @"isee"
+#define ACTIONTYPE_CONFIRM_ALL @"get_order_list_all_confirm"
 
 @implementation Web_order_list
 
@@ -42,8 +43,11 @@
     if (action_type==kCheck_order_list) {
         updateForm_obj.ls_action=ACTIONTYPE_SEE;
     }
-    if (action_type==kGet_all_order) {
+    if (action_type==kGet_order_list_all) {
         updateForm_obj.ls_action=ACTIONTYPE_GET_ALL;
+    }
+    if (action_type==kConfirm_all_order_list) {
+        updateForm_obj.ls_action=ACTIONTYPE_CONFIRM_ALL;
     }
     req_form.UpdateForm=updateForm_obj;
     
@@ -68,10 +72,14 @@
                 _callback(arr_resp_result);
             }
         }
+        if (action_type==kGet_order_list_all) {
+            [self fn_set_all_order_isSycn_download:arr_resp_result];
+        }
+        
         if (action_type==kCheck_order_list) {
             [self fn_set_order_isSync_read:arr_resp_result];
         }
-        if (action_type==kConfirm_order_list) {
+        if (action_type==kConfirm_order_list || action_type==kConfirm_all_order_list) {
             [self fn_confirm_order_isSync:arr_resp_result];
         }
     };
@@ -109,6 +117,17 @@
         arr_uid=nil;
     }
 }
+- (void)fn_set_all_order_isSycn_download:(NSMutableArray*)alist_result{
+    
+    DB_order *db_order_obj=[[DB_order alloc]init];
+    BOOL isSaved=[db_order_obj fn_save_epod_order_data:alist_result];
+    if (isSaved) {
+        NSSet *arr_uid=[db_order_obj fn_get_all_order_uid];
+        [self fn_handle_order_list_data:arr_uid type:kConfirm_all_order_list];
+        arr_uid=nil;
+    }
+}
+
 - (void)fn_confirm_order_isSync:(NSMutableArray*)alist_result{
     DB_order *db_order_obj=[[DB_order alloc]init];
     for (Resp_epod_order_list *epod_orderList_obj in alist_result) {

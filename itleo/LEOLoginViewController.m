@@ -20,7 +20,7 @@
 #import "Web_app_config.h"
 #import "Web_get_chart_data.h"
 #import "Web_whs_config.h"
-
+#import "Web_order_list.h"
 static NSInteger flag_first=1;//启动
 static NSString  *is_language=@"";//标识语言类型
 #define DEFAULT_USER_NAME @"anonymous"
@@ -288,6 +288,9 @@ static NSString  *is_language=@"";//标识语言类型
                 web_chart.callBack=^(){
                      [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
                 };
+                Web_order_list *web_obj=[[Web_order_list alloc]init];
+                NSSet *arr_uid=[NSSet setWithObject:@""];
+                [web_obj fn_handle_order_list_data:arr_uid type:kGet_order_list_all];
                               
             }else{
                 [self fn_popUp_alert:MY_LocalizedString(@"login_failed_prompt", nil)];
