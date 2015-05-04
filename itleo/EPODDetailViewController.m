@@ -94,6 +94,9 @@
     if (_flag_isHave_order_list==1) {
         [_ibtn_title_logo setTitle:MY_LocalizedString(@"lbl_order_detail", nil) forState:UIControlStateNormal];
         _itf_order_no.text=_dic_order[@"order_no"];
+        _ibtn_barCode.hidden=YES;
+        CGFloat width=CGRectGetMaxX(_ibtn_barCode.frame)-CGRectGetMaxX(_itf_order_no.frame)+CGRectGetWidth(_itf_order_no.frame);
+        _itf_order_no.frame=CGRectMake(_itf_order_no.frame.origin.x, _itf_order_no.frame.origin.y, width, _itf_order_no.frame.size.height);
     }else{
         [_ibtn_title_logo setTitle:MY_LocalizedString(@"ibtn_sign_photo", nil) forState:UIControlStateNormal];
     }
