@@ -115,7 +115,7 @@
     
     if ([isRead integerValue]==0) {
         NSString *str_order_uid=dic_order[@"order_uid"];
-        NSString *str_read_date=[Conversion_helper fn_Date_ToStringDateTime:[NSDate date]];
+        NSString *str_read_date=[Conversion_helper fn_millisecondFromDate:[NSDate date]];
         NSString *str_join_uid=[NSString stringWithFormat:@"%@,%@",str_order_uid,str_read_date];
         
         Web_order_list *order_obj=[[Web_order_list alloc]init];
