@@ -10,7 +10,6 @@
 		B2033462199897FE007FCE63 /* Cell_menu_item.m in Sources */ = {isa = PBXBuildFile; fileRef = B2033461199897FE007FCE63 /* Cell_menu_item.m */; };
 		B2033468199898B1007FCE63 /* Menu_home.m in Sources */ = {isa = PBXBuildFile; fileRef = B2033467199898B1007FCE63 /* Menu_home.m */; };
 		B203346B19989F31007FCE63 /* Aejob_BrowseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B203346A19989F31007FCE63 /* Aejob_BrowseViewController.m */; };
-		B20334721998B7AC007FCE63 /* Custom_Color.m in Sources */ = {isa = PBXBuildFile; fileRef = B20334711998B7AC007FCE63 /* Custom_Color.m */; };
 		B21B71121A0B1D1A007DB5E3 /* BarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70F21A0B1D1A007DB5E3 /* BarChart.m */; };
 		B21B71131A0B1D1A007DB5E3 /* BarChartB.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70F41A0B1D1A007DB5E3 /* BarChartB.m */; };
 		B21B71141A0B1D1A007DB5E3 /* BarsSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = B21B70F61A0B1D1A007DB5E3 /* BarsSegment.m */; };
@@ -259,8 +258,6 @@
 		B2033467199898B1007FCE63 /* Menu_home.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu_home.m; sourceTree = "<group>"; };
 		B203346919989F31007FCE63 /* Aejob_BrowseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aejob_BrowseViewController.h; sourceTree = "<group>"; };
 		B203346A19989F31007FCE63 /* Aejob_BrowseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aejob_BrowseViewController.m; sourceTree = "<group>"; };
-		B20334701998B7AC007FCE63 /* Custom_Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Custom_Color.h; sourceTree = "<group>"; };
-		B20334711998B7AC007FCE63 /* Custom_Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Custom_Color.m; sourceTree = "<group>"; };
 		B21B70F11A0B1D1A007DB5E3 /* BarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarChart.h; sourceTree = "<group>"; };
 		B21B70F21A0B1D1A007DB5E3 /* BarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarChart.m; sourceTree = "<group>"; };
 		B21B70F31A0B1D1A007DB5E3 /* BarChartB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarChartB.h; sourceTree = "<group>"; };
@@ -992,8 +989,6 @@
 		B276BBE31995B7AA00075515 /* GlobalConst */ = {
 			isa = PBXGroup;
 			children = (
-				B20334701998B7AC007FCE63 /* Custom_Color.h */,
-				B20334711998B7AC007FCE63 /* Custom_Color.m */,
 				B276C0FB1995D8D800075515 /* AppConstants.h */,
 				B276C0FC1995D8D800075515 /* AppConstants.m */,
 				B29873B41AF85AA000F79AD8 /* MacroDefinition.h */,
@@ -1583,7 +1578,6 @@
 				B272EA6C19AEDDA400256276 /* NSInvocation+Copy.m in Sources */,
 				B2DE9AB51A10B03C00259EB5 /* Resp_data.m in Sources */,
 				B27D467319D02EC300B998BC /* PopViewManager.m in Sources */,
-				B20334721998B7AC007FCE63 /* Custom_Color.m in Sources */,
 				B276C0DC1995C9DD00075515 /* NSDictionary.m in Sources */,
 				B2281AB119960311001A73B0 /* FMResultSet.m in Sources */,
 				B2B8678B1A1D7A69002E2F48 /* Cell_summary_chart.m in Sources */,

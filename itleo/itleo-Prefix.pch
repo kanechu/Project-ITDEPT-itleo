@@ -24,7 +24,6 @@
     #import "SearchFormContract.h"
     #import "UpdateFormContract.h"
     #import "SVProgressHUD.h"
-    #import "Custom_Color.h"
     #import "KeyboardNoticeManager.h"
     #import "MY_LocalizedString.h"
     #import "AllDefines.h"
