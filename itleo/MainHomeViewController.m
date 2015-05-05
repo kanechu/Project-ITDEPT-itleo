@@ -78,14 +78,6 @@
     }
     if ([db_permit_obj fn_isExist_module:MODULE_EPOD f_exec:MODULE_F_EXEC]) {
         [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_epod", nil) image:@"delivery" segue:@"segue_epod"]];
-        DB_sypara *db_syparaObj=[[DB_sypara alloc]init];
-        if ([db_syparaObj fn_isExist_sypara_data:PARA_CODE_ORDERLIST data1:PARA_DATA1]) {
-            Web_order_list *web_obj=[[Web_order_list alloc]init];
-            NSSet *arr_uid=[NSSet setWithObject:@""];
-            [web_obj fn_handle_order_list_data:arr_uid type:kGet_order_list_all];
-            web_obj=nil;
-        }
-        db_syparaObj=nil;
     }
     if ([db_permit_obj fn_isExist_module:MODULE_WHS_SUMMARY f_exec:MODULE_F_EXEC]) {
         [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
@@ -136,6 +128,7 @@
     }
     VC.refresh=^(){
         [self fn_create_menu];
+        [self fn_isRequest_all_order_list];
         [self.icollectionView reloadData];
         if (_flag_launch_isLogin==1){
             [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_GPS];
@@ -144,7 +137,20 @@
         _flag_launch_isLogin=1;
     };
 }
+- (void)fn_isRequest_all_order_list{
+    DB_sypara *db_sypara_obj=[[DB_sypara alloc]init];
+    DB_permit *db_permit_obj=[[DB_permit alloc]init];
+    if ( [db_permit_obj fn_isExist_module:MODULE_EPOD f_exec:MODULE_F_EXEC] && [db_sypara_obj fn_isExist_sypara_data:PARA_CODE_ORDERLIST data1:PARA_DATA1] ) {
+        Web_order_list *web_obj=[[Web_order_list alloc]init];
+        NSSet *arr_uid=[NSSet setWithObject:@""];
+        [web_obj fn_handle_order_list_data:arr_uid type:kGet_order_list_all];
+        web_obj=nil;
+    }
+    db_permit_obj=nil;
+    db_sypara_obj=nil;
+}
 
+#pragma mark -event action
 - (IBAction)fn_logout_itleo:(id)sender {
     
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
