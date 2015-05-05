@@ -12,6 +12,7 @@
 #import "Cell_menu_item.h"
 #import "Web_app_config.h"
 #import "Web_get_chart_data.h"
+#import "Web_order_list.h"
 #import "Timer_bg_upload_data.h"
 #import "DB_LoginInfo.h"
 #import "DB_single_field.h"
@@ -22,11 +23,15 @@
 #import "DB_Chart.h"
 #import "DB_whs_config.h"
 #import "DB_order.h"
+#import "DB_permit.h"
+
 @interface MainHomeViewController ()
+
 @property (weak, nonatomic) IBOutlet UILabel *ilb_version;
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
 @property(assign,nonatomic)NSInteger flag_launch_isLogin;
+
 @end
 
 @implementation MainHomeViewController
@@ -66,29 +71,34 @@
     [self fn_set_nav_item];
     alist_menu=nil;
     alist_menu=[[NSMutableArray alloc]init];
-    Web_app_config *web_obj=[[Web_app_config alloc]init];
-    NSMutableArray *alist_fuction=[web_obj fn_get_function_module];
-    for (NSMutableDictionary *dic in alist_fuction) {
-        NSString *module_code=[dic valueForKey:@"module_code"];
-        NSString *f_exec=[dic valueForKey:@"f_exec"];
-        if ([module_code isEqualToString:@"AIR_LOAD_PLAN"]&& [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_air_Load_Plan", nil) image:@"ic_airloadplan" segue:@"segue_aejob_browse"]];
-        }
-        
-        if ([module_code isEqualToString:@"EPOD"] && [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_epod", nil) image:@"delivery" segue:@"segue_epod"]];
-        }
-        if ([module_code isEqualToString:@"WHS_SUMMARY"] && [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
-            [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
-        }
-        if ([module_code isEqualToString:@"CFSRECV"] && [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_cfsrecv", nil) image:@"ic_cfsrecv" segue:@"segue_cfsrecv"]];
-        }
-        if ([module_code isEqualToString:@"WAREHOUSE"] && [f_exec isEqualToString:@"1"]) {
-            [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_warehouse" segue:@"segue_warehouse"]];
-        }
+    
+    DB_permit *db_permit_obj=[[DB_permit alloc]init];
+    if ([db_permit_obj fn_isExist_module:MODULE_AIR_LOAD_PLAN f_exec:MODULE_F_EXEC]) {
+        [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_air_Load_Plan", nil) image:@"ic_airloadplan" segue:@"segue_aejob_browse"]];
     }
+    if ([db_permit_obj fn_isExist_module:MODULE_EPOD f_exec:MODULE_F_EXEC]) {
+        [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_epod", nil) image:@"delivery" segue:@"segue_epod"]];
+        DB_sypara *db_syparaObj=[[DB_sypara alloc]init];
+        if ([db_syparaObj fn_isExist_sypara_data:PARA_CODE_ORDERLIST data1:PARA_DATA1]) {
+            Web_order_list *web_obj=[[Web_order_list alloc]init];
+            NSSet *arr_uid=[NSSet setWithObject:@""];
+            [web_obj fn_handle_order_list_data:arr_uid type:kGet_order_list_all];
+            web_obj=nil;
+        }
+        db_syparaObj=nil;
+    }
+    if ([db_permit_obj fn_isExist_module:MODULE_WHS_SUMMARY f_exec:MODULE_F_EXEC]) {
+        [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
+        [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
+    }
+    if ([db_permit_obj fn_isExist_module:MODULE_CFSRECV f_exec:MODULE_F_EXEC]) {
+        [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_cfsrecv", nil) image:@"ic_cfsrecv" segue:@"segue_cfsrecv"]];
+    }
+    if ([db_permit_obj fn_isExist_module:MODULE_WAREHOUSE f_exec:MODULE_F_EXEC]) {
+        [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_warehouse", nil) image:@"ic_warehouse" segue:@"segue_warehouse"]];
+    }
+    db_permit_obj=nil;
+    
     self.icollectionView.delegate=self;
     self.icollectionView.dataSource=self;
     [self.icollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell_menu"];

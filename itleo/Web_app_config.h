@@ -14,7 +14,6 @@ typedef void (^call_isGetPermit)(BOOL);
 
 -(void)fn_get_sypara_data:(NSString*)base_url;
 
--(NSMutableArray*)fn_get_function_module;
 //GET EPOD STATUS
 -(void)fn_get_epod_status_data:(NSString*)base_url;
 @end

@@ -15,6 +15,8 @@
 
 - (NSMutableArray*)fn_get_permit_data;
 
+- (BOOL)fn_isExist_module:(NSString*)module_code f_exec:(NSString*)f_exec;
+
 - (BOOL)fn_delete_all_permit_data;
 
 @end

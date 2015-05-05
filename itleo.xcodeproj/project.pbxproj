@@ -475,6 +475,7 @@
 		B29690BA19C18CCC00976E7E /* ManageImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageImageViewController.m; sourceTree = "<group>"; };
 		B29690C019C1A52900976E7E /* Cell_show_picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_show_picture.h; sourceTree = "<group>"; };
 		B29690C119C1A52900976E7E /* Cell_show_picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_show_picture.m; sourceTree = "<group>"; };
+		B29873B41AF85AA000F79AD8 /* MacroDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefinition.h; sourceTree = "<group>"; };
 		B29BF0FC1A19CB46005E6A75 /* ChartData_handler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartData_handler.h; sourceTree = "<group>"; };
 		B29BF0FD1A19CB46005E6A75 /* ChartData_handler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartData_handler.m; sourceTree = "<group>"; };
 		B29C35D319CC0741004C5387 /* Checkbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Checkbox.h; sourceTree = "<group>"; };
@@ -995,6 +996,7 @@
 				B20334711998B7AC007FCE63 /* Custom_Color.m */,
 				B276C0FB1995D8D800075515 /* AppConstants.h */,
 				B276C0FC1995D8D800075515 /* AppConstants.m */,
+				B29873B41AF85AA000F79AD8 /* MacroDefinition.h */,
 			);
 			name = GlobalConst;
 			sourceTree = "<group>";

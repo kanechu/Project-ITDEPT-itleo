@@ -16,8 +16,6 @@
 #import "DB_permit.h"
 #import "DB_ePod.h"
 
-
-
 @implementation Web_app_config
 
 -(void)fn_get_permit_data:(NSString*)base_url callBack:(call_isGetPermit)call_back{
@@ -74,24 +72,6 @@
     web_base=nil;
 }
 
--(NSMutableArray*)fn_get_function_module{
-    DB_permit *db_permit=[[DB_permit alloc]init];
-    NSMutableArray *alist_result=[db_permit fn_get_permit_data];
-    NSMutableArray *alist_function=[[NSMutableArray alloc]initWithCapacity:1];
-    for (NSMutableDictionary *dic in alist_result) {
-        NSMutableDictionary *idic_result=[[NSMutableDictionary alloc]initWithCapacity:1];
-        NSString *module_unique_i=[Conversion_helper fn_cut_whitespace:[dic valueForKey:@"module_unique_id"]] ;
-        NSString *module_code=[Conversion_helper fn_cut_whitespace:[dic valueForKey:@"module_code"]];
-        if ([module_unique_i isEqualToString:@"SYS"]==NO) {
-            NSString *f_exec=[dic valueForKey:@"f_exec"];
-            [idic_result setObject:module_code forKey:@"module_code"];
-            [idic_result setObject:f_exec forKey:@"f_exec"];
-            [alist_function addObject:idic_result];
-        }
-        idic_result=nil;
-    }
-    return alist_function;
-}
 //GET EPOD STATUS
 -(void)fn_get_epod_status_data:(NSString*)base_url{
     RequestContract *ao_form=[[RequestContract alloc]init];
