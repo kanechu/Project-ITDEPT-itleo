@@ -11,7 +11,6 @@
 #import "FMDatabaseAdditions.h"
 #import "Truck_order_data.h"
 #import "Truck_order_image_data.h"
-#import "NSDictionary.h"
 #import "DB_LoginInfo.h"
 #import "Resp_upd_image_result.h"
 #import "Resp_get_status.h"

@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AuthContract.h"
 #import "UpdateForm_orderList.h"
 @interface RequestContract : NSObject
 

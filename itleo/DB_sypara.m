@@ -10,7 +10,6 @@
 #import "FMDatabaseAdditions.h"
 #import "FMResultSet.h"
 #import "DatabaseQueue.h"
-#import "NSDictionary.h"
 #import "Resp_sypara.h"
 
 @implementation DB_sypara

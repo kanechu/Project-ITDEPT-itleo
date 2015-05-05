@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AuthContract.h"
+
 @interface UploadGPSContract : NSObject
 
 @property (nonatomic,strong)AuthContract *Auth;

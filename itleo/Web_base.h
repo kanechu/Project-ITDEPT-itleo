@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RequestContract.h"
 #import "UploadContract.h"
 #import "UploadGPSContract.h"
 typedef void (^callBack_resp_result)(NSMutableArray* arr);

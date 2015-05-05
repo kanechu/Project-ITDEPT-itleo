@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UpdateFormContract.h"
-#import "AuthContract.h"
+
 @interface UploadContract : NSObject
 
 @property(nonatomic, strong) AuthContract *Auth;

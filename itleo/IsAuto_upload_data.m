@@ -11,7 +11,6 @@
 #import "DB_Location.h"
 #import "DB_LoginInfo.h"
 #import "Web_update_epod.h"
-#import "UpdateFormContract.h"
 #import "Epod_upd_milestone_image_contract.h"
 #import "Resp_upd_image_result.h"
 #import "RespEpod_updmilestone.h"

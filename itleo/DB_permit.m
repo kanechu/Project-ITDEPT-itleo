@@ -10,7 +10,6 @@
 #import "FMDatabaseAdditions.h"
 #import "FMResultSet.h"
 #import "DatabaseQueue.h"
-#import "NSDictionary.h"
 #import "Resp_permit.h"
 @implementation DB_permit
 @synthesize queue;

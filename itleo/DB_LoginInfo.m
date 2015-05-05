@@ -10,7 +10,6 @@
 #import "DatabaseQueue.h"
 #import "FMDatabaseAdditions.h"
 #import "FMDatabase.h"
-#import "AuthContract.h"
 #import "DB_RespAppConfig.h"
 @implementation DB_LoginInfo
 @synthesize queue;
