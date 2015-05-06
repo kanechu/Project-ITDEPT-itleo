@@ -30,7 +30,7 @@
 
 //------sypara , 用于控制是否有该功能------
 #define PARA_CODE_ORDERLIST @"MOB_EPOD_DL_ORD"
-#define PARA_CODE_GPS @"ANDRDRECGPS"
+#define PARA_CODE_GPS @"MOB_REC_GPS"
 #define PARA_DATA1 @"1"
 
 //------permit , 控制用户拥有的权限------
