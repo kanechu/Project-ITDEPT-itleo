@@ -13,5 +13,9 @@ typedef void(^callBack_handleOrder)(void);
 
 @property (nonatomic,strong) callBack_handleOrder callback;
 @property (nonatomic,strong) NSDictionary *dic_order;
+/**
+ *  车牌号
+ */
+@property (copy, nonatomic) NSString *vehicle_no;
 
 @end

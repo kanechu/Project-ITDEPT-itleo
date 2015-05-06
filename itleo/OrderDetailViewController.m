@@ -178,6 +178,7 @@
         EPODDetailViewController *epodDtlVC=(EPODDetailViewController*)[segue destinationViewController];
         epodDtlVC.flag_isHave_order_list=1;
         epodDtlVC.dic_order=_dic_order;
+        epodDtlVC.vehicle_no=_vehicle_no;
     }
 }
 

@@ -10,4 +10,6 @@
 
 @interface OrderListViewController : UIViewController
 
+@property (copy, nonatomic) NSString *vehicle_no;
+
 @end

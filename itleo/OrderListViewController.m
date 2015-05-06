@@ -142,6 +142,7 @@
         OrderDetailViewController *orderDetailVC=[segue destinationViewController];
         NSIndexPath *indexPath=[self.tableview indexPathForSelectedRow];
         orderDetailVC.dic_order=[_alist_orderObj objectAtIndex:indexPath.row];
+        orderDetailVC.vehicle_no=_vehicle_no;
         orderDetailVC.callback=^(){
             _alist_orderObj=[self.db_order_obj fn_get_order_list_data];
         };

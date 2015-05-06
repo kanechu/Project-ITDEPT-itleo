@@ -9,11 +9,12 @@
 #import "EPODViewController.h"
 #import "EPODDetailViewController.h"
 #import "EPODRecordViewController.h"
+#import "SelectHistoryDataViewController.h"
+#import "OrderListViewController.h"
 #import "DB_ePod.h"
 #import "DB_single_field.h"
 #import "DB_Location.h"
 #import "Timer_bg_upload_data.h"
-#import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "LocationManager.h"
 #import "IsAuto_upload_data.h"
@@ -120,6 +121,10 @@
     if ([[segue identifier]isEqualToString:@"segue_detail_epod"]) {
         EPODDetailViewController *VC=(EPODDetailViewController*)[segue destinationViewController];
         VC.vehicle_no=_itf_bus_no.text;
+    }
+    if ( [[segue identifier]isEqualToString:@"segue_order_list"] ) {
+        OrderListViewController *orderlistVC=(OrderListViewController*)[segue destinationViewController];
+        orderlistVC.vehicle_no=_itf_bus_no.text;
     }
     
 }
