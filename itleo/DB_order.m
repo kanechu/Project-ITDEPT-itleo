@@ -107,6 +107,19 @@
     return alist_result;
 
 }
+- (NSMutableArray*)fn_isExist_order:(NSString*)order_no{
+    __block NSMutableArray *alist_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            FMResultSet *lfmdb_result=[db executeQuery:@"select * from order_list where order_no like ? ",order_no];
+            while ([lfmdb_result next]) {
+                [alist_result addObject:[lfmdb_result resultDictionary]];
+            }
+            [db close];
+        }
+    }];
+    return alist_result;
+}
 -(NSMutableArray*)fn_get_order_dtl_list_data:(NSString*)order_uid{
     __block NSMutableArray *alist_result=[NSMutableArray array];
     [queue inDataBase:^(FMDatabase *db){

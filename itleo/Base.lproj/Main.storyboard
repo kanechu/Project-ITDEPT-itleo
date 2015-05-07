@@ -1450,14 +1450,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order No." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FMd-nh-0rC">
-                                <rect key="frame" x="5" y="84" width="85" height="21"/>
+                                <rect key="frame" x="5" y="84" width="80" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="input order number to filter" minimumFontSize="17" id="V6H-Xx-B5P" customClass="Custom_textField">
-                                <rect key="frame" x="95" y="74" width="220.00000025419627" height="30"/>
+                                <rect key="frame" x="85" y="74" width="180" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -1557,6 +1557,16 @@
                                     <outlet property="delegate" destination="JIn-Xh-XLb" id="prE-M2-hez"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="tUN-NI-Eps">
+                                <rect key="frame" x="275" y="74" width="35" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="barcode">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="fn_scan_order_no:" destination="JIn-Xh-XLb" eventType="touchUpInside" id="4PM-6X-Tyx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1587,6 +1597,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="ibtn_barcode" destination="tUN-NI-Eps" id="6f9-dr-s7A"/>
                         <outlet property="ibtn_cancel" destination="zNo-PZ-EMJ" id="56l-3F-9EV"/>
                         <outlet property="ibtn_orderList_logo" destination="0B5-iD-mAs" id="Ndy-NC-xJC"/>
                         <outlet property="ilb_orderNo" destination="FMd-nh-0rC" id="088-6S-UZR"/>

@@ -21,6 +21,8 @@
 
 -(NSMutableArray*)fn_filter_order_list:(NSString*)order_no;
 
+- (NSMutableArray*)fn_isExist_order:(NSString*)order_no;
+
 -(NSMutableArray*)fn_get_order_dtl_list_data:(NSString*)order_uid;
 
 -(BOOL)fn_update_order_isRead:(NSString*)is_read read_date:(NSString*)read_date order_uid:(NSString*)order_uid;

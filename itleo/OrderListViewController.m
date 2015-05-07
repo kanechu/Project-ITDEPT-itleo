@@ -8,6 +8,7 @@
 
 #import "OrderListViewController.h"
 #import "OrderDetailViewController.h"
+#import "BarCodeViewController.h"
 #import "Custom_BtnGraphicMixed.h"
 #import "Custom_textField.h"
 #import "Resp_order_list.h"
@@ -19,11 +20,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_cancel;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_orderNo;
 @property (weak, nonatomic) IBOutlet Custom_textField *itf_order_num;
+@property (weak, nonatomic) IBOutlet UIButton *ibtn_barcode;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
 @property (strong, nonatomic) NSMutableArray *alist_orderObj;
 @property (strong, nonatomic) NSMutableArray *alist_orderCells;//存储cell，用于计算高度
 @property (strong, nonatomic) DB_order *db_order_obj;
+@property (assign, nonatomic) NSInteger flag_exist_order;
 
 @end
 
@@ -64,6 +67,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)fn_scan_order_no:(id)sender {
+    BarCodeViewController *barCodeVC=(BarCodeViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"BarCodeViewController"];
+    barCodeVC.callback=^(NSString *str_result){
+       
+          _alist_orderObj=[self.db_order_obj fn_isExist_order:str_result];
+        if ([_alist_orderObj count]!=0) {
+            [self performSegueWithIdentifier:@"segue_order_detail" sender:self];
+            _flag_exist_order=1;
+        }else{
+            _itf_order_num.text=str_result;
+            _alist_orderObj=[self.db_order_obj fn_filter_order_list:str_result];
+            [self.tableview reloadData];
+        }
+    };
+    [self presentViewController:barCodeVC animated:YES completion:nil];
+}
 #pragma mark -加载数据
 - (void)fn_initData{
     self.db_order_obj=[[DB_order alloc]init];
@@ -140,8 +159,12 @@
     // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"segue_order_detail"]) {
         OrderDetailViewController *orderDetailVC=[segue destinationViewController];
-        NSIndexPath *indexPath=[self.tableview indexPathForSelectedRow];
-        orderDetailVC.dic_order=[_alist_orderObj objectAtIndex:indexPath.row];
+        if (_flag_exist_order==1) {
+            orderDetailVC.dic_order=[_alist_orderObj firstObject];
+        }else{
+            NSIndexPath *indexPath=[self.tableview indexPathForSelectedRow];
+            orderDetailVC.dic_order=[_alist_orderObj objectAtIndex:indexPath.row];
+        }
         orderDetailVC.vehicle_no=_vehicle_no;
         orderDetailVC.callback=^(){
             _alist_orderObj=[self.db_order_obj fn_get_order_list_data];
