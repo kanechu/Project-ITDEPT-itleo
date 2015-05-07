@@ -44,6 +44,9 @@
 "no_history_data"="没有您输入的车牌号记录!";
 "vehicle_empty"="抱歉，车牌号不能为空!";
 "show_unUpload_msg"="你未上传成功的记录有";
+"open_gps_alert_title"="定位服务\n设置>隐私>定位服务";
+"open_gps_alert_content"="打开\"定位服务\"来允许\"ITLEO\"确定您的位置，若不允许，您将无法使用epod功能。";
+
 //epod detail
 "lbl_order_no"="配载单号";
 "lbl_check_order"="查看配载单讯息";

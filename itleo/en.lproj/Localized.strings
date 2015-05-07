@@ -45,6 +45,9 @@
 "no_history_data"="No Historical Vehicle_no Data!";
 "vehicle_empty"="Sorry,Vehicle Number can not be empty!";
 "show_unUpload_msg"="You did not upload successfully records";
+"open_gps_alert_title"="Location Services\nSettings>Privacy>Location Services";
+"open_gps_alert_content"="Open \"Location Services \" to allow \"ITLEO \" to determine your location, if not possible, you can not use epod function.";
+
 //epod detail
 "lbl_order_no"="Order Number";
 "lbl_check_order"="View Order Info";

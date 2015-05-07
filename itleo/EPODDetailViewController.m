@@ -418,7 +418,7 @@
 }
 #pragma mark -UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex==alertView.cancelButtonIndex) {
+    if (buttonIndex==alertView.firstOtherButtonIndex) {
         [self fn_uploading_epod:nil];
     }
 }
@@ -470,7 +470,7 @@
             Web_update_epod *upload_obj=[[Web_update_epod alloc]init];
             [upload_obj fn_upload_epod_data:updateform Auth:auth back_result:^(NSMutableArray* arr_result){
                 if (arr_result==nil) {
-                    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"timeOut_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"ibtn_retry", nil) otherButtonTitles:MY_LocalizedString(@"lbl_cancel", nil), nil];
+                    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"timeOut_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"ibtn_retry", nil), nil];
                     [alertview show];
                 }
                 

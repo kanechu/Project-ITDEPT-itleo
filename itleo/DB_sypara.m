@@ -68,6 +68,23 @@
         return NO;
     }
 }
+- (BOOL)fn_isMust_open_the_GPS:(NSString*)para_code data2:(NSString*)str_data2{
+    __block  NSMutableArray *arr_result=[NSMutableArray array];
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            FMResultSet *lfmdb_result=[db executeQuery:@"select * from sypara where para_code like ? and data2 like ? and data1='1' ",para_code,str_data2];
+            while ([lfmdb_result next]) {
+                [arr_result addObject:[lfmdb_result resultDictionary]];
+            }
+            [db close];
+        }
+    }];
+    if ([arr_result count]!=0) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
 
 - (BOOL)fn_delete_all_sypara_data{
     __block BOOL ib_deleted=NO;

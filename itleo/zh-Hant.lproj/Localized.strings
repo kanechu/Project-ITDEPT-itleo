@@ -45,6 +45,8 @@
 "no_history_data"="沒有您輸入的車牌號記錄!";
 "vehicle_empty"="抱歉，車牌號不能為空!";
 "show_unUpload_msg"="你未上傳成功的記錄有";
+"open_gps_alert_title"="定位服務\n設置>隱私>定位服務";
+"open_gps_alert_content"="打開\"定位服務\"來允許\"ITLEO\"確定您的位置，若不允許，您將無法使用epod功能。";
 //epod detail
 "lbl_order_no"="配載單號";
 "lbl_check_order"="查看配載單訊息";

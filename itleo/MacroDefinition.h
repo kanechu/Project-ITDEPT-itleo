@@ -32,6 +32,7 @@
 #define PARA_CODE_ORDERLIST @"MOB_EPOD_DL_ORD"
 #define PARA_CODE_GPS @"MOB_REC_GPS"
 #define PARA_DATA1 @"1"
+#define PARA_DATA2 @"1"
 
 //------permit , 控制用户拥有的权限------
 #define MODULE_AIR_LOAD_PLAN @"AIR_LOAD_PLAN"

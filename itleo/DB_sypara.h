@@ -18,6 +18,8 @@
 
 - (BOOL)fn_isExist_sypara_data:(NSString*)para_code data1:(NSString*)str_data1;
 
+- (BOOL)fn_isMust_open_the_GPS:(NSString*)para_code data2:(NSString*)str_data2;
+
 - (BOOL)fn_delete_all_sypara_data;
 
 

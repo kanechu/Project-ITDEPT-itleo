@@ -21,7 +21,7 @@
 #import "Web_order_list.h"
 #import "DB_sypara.h"
 
-@interface EPODViewController ()
+@interface EPODViewController ()<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *ilb_epod_tilte;
 @property (nonatomic,assign)NSInteger flag_opened_record_thread;
@@ -44,6 +44,7 @@
 {
     [super viewDidLoad];
     [self fn_set_control_pro];
+    [self fn_isOpen_GPS];
     [self fn_custom_gesture];
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
@@ -88,6 +89,30 @@
         _ibtn_orderList.hidden=YES;
     }
 }
+/**
+ *  <#Description#>
+ */
+- (void)fn_isOpen_GPS{
+    DB_sypara *db_sypara_obj=[[DB_sypara alloc]init];
+    if ([db_sypara_obj fn_isMust_open_the_GPS:PARA_CODE_GPS data2:PARA_DATA2]) {
+        LocationManager *location_obj=[LocationManager fn_shareManager];
+        if (![location_obj fn_isLocationServiceOn] ||   ![location_obj fn_isCurrentAppLocatonServiceOn]) {
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"open_gps_alert_title", nil) message:MY_LocalizedString(@"open_gps_alert_content", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel",nil) otherButtonTitles:MY_LocalizedString(@"", nil), nil];
+            [alertView show];
+        }
+        
+    }
+}
+#pragma mark -UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if ( buttonIndex==[alertView cancelButtonIndex] ) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else if( buttonIndex==[alertView firstOtherButtonIndex]){
+
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 -(void)fn_isStart_open_thread{
    
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
