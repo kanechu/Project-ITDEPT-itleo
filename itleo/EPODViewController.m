@@ -97,7 +97,7 @@
     if ([db_sypara_obj fn_isMust_open_the_GPS:PARA_CODE_GPS data2:PARA_DATA2]) {
         LocationManager *location_obj=[LocationManager fn_shareManager];
         if (![location_obj fn_isLocationServiceOn] ||   ![location_obj fn_isCurrentAppLocatonServiceOn]) {
-            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"open_gps_alert_title", nil) message:MY_LocalizedString(@"open_gps_alert_content", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel",nil) otherButtonTitles:MY_LocalizedString(@"", nil), nil];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"open_gps_alert_title", nil) message:MY_LocalizedString(@"open_gps_alert_content", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok",nil) otherButtonTitles:nil, nil];
             [alertView show];
         }
         
@@ -106,9 +106,6 @@
 #pragma mark -UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if ( buttonIndex==[alertView cancelButtonIndex] ) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }else if( buttonIndex==[alertView firstOtherButtonIndex]){
-
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -228,7 +225,7 @@
 }
 
 -(void)fn_Pop_up_alertView:(NSString*)str_prompt{
-    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:str_prompt delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
+    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:str_prompt delegate:nil cancelButtonTitle:MY_LocalizedString(@"lbl_ok", nil) otherButtonTitles:nil, nil];
     [alertview show];
 }
 #pragma mark -popup vehicle_no list
