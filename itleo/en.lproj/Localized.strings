@@ -142,7 +142,7 @@
 "lbl_hour"="1 Hour";
 
 //order list
-"lbl_list_order_no"="Order NO.:";
+"lbl_list_order_no"="Order NO.";
 "lbl_order_detail"="Order Detail";
 "lbl_order_info"="Order Information";
 "lbl_order"="Order";
