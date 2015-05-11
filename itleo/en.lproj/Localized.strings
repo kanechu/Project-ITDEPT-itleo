@@ -97,6 +97,7 @@
 "lbl_recover"="Recover";
 "lbl_empty"="Empty";
 "lbl_brush"="Brush:";
+"lbl_verify"="Verify";
 
 //record UI
 "lbl_record"="Records";

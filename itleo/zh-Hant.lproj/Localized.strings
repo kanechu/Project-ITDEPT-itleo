@@ -97,6 +97,7 @@
 "lbl_recover"="恢復";
 "lbl_empty"="清空";
 "lbl_brush"="筆觸粗細";
+"lbl_verify"="驗證";
 
 //record UI
 "lbl_record"="記錄";

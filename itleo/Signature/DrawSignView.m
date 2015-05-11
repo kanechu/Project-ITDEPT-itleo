@@ -120,7 +120,7 @@ static NSMutableArray *colors;
     //verifyBtn
     verifyBtn = [[UIButton alloc]init];
     [self renderBtn:verifyBtn];
-    [verifyBtn setTitle:@"验证" forState:UIControlStateNormal];
+    [verifyBtn setTitle:MY_LocalizedString(@"lbl_verify", nil) forState:UIControlStateNormal];
     verifyBtn.frame = CGRectMake(btn_x, btn_y, btn_w, btn_h);
     [self addSubview:verifyBtn];
     [verifyBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];

@@ -96,6 +96,7 @@
 "lbl_recover"="恢复";
 "lbl_empty"="清空";
 "lbl_brush"="笔触粗细";
+"lbl_verify"="验证";
 
 //record UI
 "lbl_record"="记录";
