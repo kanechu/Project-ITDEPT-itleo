@@ -57,8 +57,11 @@
 "ibtn_image_mang"="管理圖片";
 "ibtn_upload"="上傳";
 "order_empty_prompt"="抱歉，配載單號不能為空!";
-"timeOut_alert"="網絡請求超時，上傳數據失敗！是否重試？";
+"timeOut_alert_title"="連接超時";
+"timeOut_alert"="對不起，服務器暫時無法訪問。";
+"ibtn_upload_later"="留待有網絡上傳";
 "ibtn_retry"="重試";
+
 //order info
 "lbl_info_title"="配載單資訊";
 "lbl_cus"="客              戶:";

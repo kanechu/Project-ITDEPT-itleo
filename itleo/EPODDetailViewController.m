@@ -381,7 +381,7 @@
     
 }
 -(void)fn_Pop_up_alertView:(NSString*)str_alert{
-    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:self cancelButtonTitle:nil otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
+    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:str_alert delegate:nil cancelButtonTitle:nil otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
     [alertview show];
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -430,14 +430,14 @@
     if ([_itf_order_no.text length]!=0) {
         Truck_order_data *upload_ms=[self fn_set_upload_data];
         
-        DB_ePod *db=[[DB_ePod alloc]init];
-        [db fn_save_ePod_data:upload_ms image_ms:alist_image_ms];
+        DB_ePod *db_ePod_obj=[[DB_ePod alloc]init];
+        [db_ePod_obj fn_save_ePod_data:upload_ms image_ms:alist_image_ms];
         if ([self fn_check_network]) {
             [SVProgressHUD showWithStatus:MY_LocalizedString(@"upload_prompt", nil)];
             UpdateFormContract *updateform=[[UpdateFormContract alloc]init];
             
             if ([alist_image_ms count]==0) {
-                NSMutableArray *arr_result=[db fn_select_ePod_data_no_image:_itf_order_no.text vehicle_no:_vehicle_no];
+                NSMutableArray *arr_result=[db_ePod_obj fn_select_ePod_data_no_image:_itf_order_no.text vehicle_no:_vehicle_no];
                 for (NSMutableDictionary *idic in arr_result) {
                     updateform.unique_id=[idic valueForKey:@"unique_id"];
                     updateform.order_no=[idic valueForKey:@"order_no"];
@@ -445,7 +445,7 @@
                     updateform.vehicle_no=[idic valueForKey:@"vehicle_no"];
                 }
             }else{
-                NSMutableArray *arr_result=[db fn_select_ePod_data:_itf_order_no.text vehicle_no:_vehicle_no];
+                NSMutableArray *arr_result=[db_ePod_obj fn_select_ePod_data:_itf_order_no.text vehicle_no:_vehicle_no];
                 NSMutableArray *arr_image=[NSMutableArray array];
                 for (NSMutableDictionary *idic in arr_result) {
                     updateform.unique_id=[idic valueForKey:@"unique_id"];
@@ -467,10 +467,12 @@
             
             DB_LoginInfo *db_loginInfo=[[DB_LoginInfo alloc]init];
             AuthContract *auth=[db_loginInfo fn_get_RequestAuth];
+            db_loginInfo=nil;
+            
             Web_update_epod *upload_obj=[[Web_update_epod alloc]init];
             [upload_obj fn_upload_epod_data:updateform Auth:auth back_result:^(NSMutableArray* arr_result){
                 if (arr_result==nil) {
-                    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"timeOut_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"ibtn_retry", nil), nil];
+                    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"timeOut_alert_title", nil) message:MY_LocalizedString(@"timeOut_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"ibtn_upload_later", nil) otherButtonTitles:MY_LocalizedString(@"ibtn_retry", nil), nil];
                     [alertview show];
                 }
                 
@@ -483,12 +485,12 @@
                     NSString *error_reason=respEpod.error_reason;
                     NSString *error_date=respEpod.error_date;
                     if ([is_upload_sucess isEqualToString:@"true"]) {
-                        [db fn_update_epod_after_uploaded:unique_id is_uploaded:@"1" date:upload_date result:@"isuccess" user_code:auth.user_code system:auth.system  images:resp_upd_images];
+                        [db_ePod_obj fn_update_epod_after_uploaded:unique_id is_uploaded:@"1" date:upload_date result:@"isuccess" user_code:auth.user_code system:auth.system  images:resp_upd_images];
                         
                         [SVProgressHUD dismiss];
                         [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_success", nil)];
                     }else{
-                        [db fn_update_epod_after_uploaded:unique_id is_uploaded:@"2" date:error_date result:error_reason user_code:auth.user_code system:auth.system  images:resp_upd_images];
+                        [db_ePod_obj fn_update_epod_after_uploaded:unique_id is_uploaded:@"2" date:error_date result:error_reason user_code:auth.user_code system:auth.system  images:resp_upd_images];
                         
                         [SVProgressHUD dismiss];
                         [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_fail", nil) ];
@@ -496,7 +498,10 @@
                     }
                 }
             }];
+            upload_obj=nil;
         }
+        db_ePod_obj=nil;
+        
     }else{
         
         [self fn_Pop_up_alertView:MY_LocalizedString(@"order_empty_prompt", nil)];
@@ -518,6 +523,7 @@
     }else{
         upload_data.status=_status_explain;
     }
+    db_loginInfo=nil;
     return upload_data;
 }
 -(NSString*)fn_get_current_date{

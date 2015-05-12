@@ -57,7 +57,9 @@
 "ibtn_image_mang"="管理图片";
 "ibtn_upload"="上传";
 "order_empty_prompt"="抱歉，配载单号不能为空!";
-"timeOut_alert"="网络请求超时，上传数据失败！是否重试？";
+"timeOut_alert_title"="连接超时";
+"timeOut_alert"="对不起，服务器暂时无法访问。";
+"ibtn_upload_later"="留待有网络上传";
 "ibtn_retry"="重试";
 //order info
 "lbl_info_title"="配载单资讯";

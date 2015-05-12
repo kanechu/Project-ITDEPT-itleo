@@ -58,7 +58,9 @@
 "ibtn_image_mang"="Manage";
 "ibtn_upload"="Upload";
 "order_empty_prompt"="Sorry,Order Number can not be empty!";
-"timeOut_alert"="Network request timed out,upload the data failed! Retry?";
+"timeOut_alert_title"="Connection Timeout";
+"timeOut_alert"="Sorry that the server is unreachable temporary.";
+"ibtn_upload_later"="Save & Upload later";
 "ibtn_retry"="Retry";
 //order info
 "lbl_info_title"="Order Information";
