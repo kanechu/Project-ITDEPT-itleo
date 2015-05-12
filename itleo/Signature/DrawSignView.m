@@ -146,6 +146,8 @@ static NSMutableArray *colors;
     [btnRArr addObject:okBtn];
     if (isShow_verifyBtn) {
         [btnRArr addObject:verifyBtn];
+    }else{
+        verifyBtn.hidden=YES;
     }
     [btnRArr addObject:cancelBtn];
 
