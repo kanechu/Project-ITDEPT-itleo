@@ -16,7 +16,7 @@
 #import "DB_Chart.h"
 #import "DB_LoginInfo.h"
 #import "Web_get_chart_data.h"
-#define FIXSPACE 15
+
 typedef NS_ENUM(NSUInteger, AlertType) {
     kRefresh_ALL,
     kRefresh_one,
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSUInteger, AlertType) {
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0,1.5,20)];
     view.backgroundColor=[UIColor lightGrayColor];
     UIBarButtonItem *ibtn_space1=[[UIBarButtonItem alloc]initWithCustomView:view];
-    ibtn_space1.width=1.5;
+    ibtn_space1.width=ITEM_LINE_WIDTH;
     UIBarButtonItem *ibtn_space2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
     ibtn_space2.width=FIXSPACE;
     UIBarButtonItem *ibtn_refresh=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_refresh", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_refresh_chartView)];

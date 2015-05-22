@@ -116,7 +116,7 @@
 }
 #pragma mark -event action
 -(void)fn_back_previous_page:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)fn_isAuto_transfer_data{
     NSString *flag_result;

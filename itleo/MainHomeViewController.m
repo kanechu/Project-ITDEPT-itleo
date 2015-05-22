@@ -28,6 +28,8 @@
 @interface MainHomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *ilb_version;
+@property (strong, nonatomic) UIBarButtonItem *ibtn_logout;
+@property (strong, nonatomic) UIBarButtonItem *ibtn_settings;
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
 @property(assign,nonatomic)NSInteger flag_launch_isLogin;
@@ -50,6 +52,7 @@
 {
     [super viewDidLoad];
     [self fn_users_isLogin];
+    [self fn_add_right_items];
     [self fn_create_menu];
     // Do any additional setup after loading the view.
 }
@@ -67,6 +70,21 @@
 }
 
 #pragma mark creat menu item
+-(void)fn_add_right_items{
+    self.ibtn_logout=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_logout", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_logout_itleo:)];
+    UIBarButtonItem *ibtn_space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    ibtn_space.width=FIXSPACE;
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0,1.5,20)];
+    view.backgroundColor=[UIColor lightGrayColor];
+    UIBarButtonItem *ibtn_space1=[[UIBarButtonItem alloc]initWithCustomView:view];
+    ibtn_space1.width=ITEM_LINE_WIDTH;
+    UIBarButtonItem *ibtn_space2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    ibtn_space2.width=FIXSPACE;
+    self.ibtn_settings=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"ibtn_settings", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_manually_settings:)];
+    NSArray *array=@[self.ibtn_logout,ibtn_space,ibtn_space1,ibtn_space2,self.ibtn_settings];
+    self.navigationItem.rightBarButtonItems=array;
+}
+
 -(void) fn_create_menu{
     [self fn_set_nav_item];
     alist_menu=nil;
@@ -105,7 +123,7 @@
     [_ibtn_home_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
 
     [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
-    [_ibtn_logout setTintColor:[UIColor darkGrayColor]];
+    [_ibtn_settings setTitle:MY_LocalizedString(@"ibtn_settings", nil)];
     _ilb_version.text=[NSString stringWithFormat:@"Version %@",ITLEO_VERSION];
 }
 /**
@@ -151,7 +169,10 @@
 }
 
 #pragma mark -event action
-- (IBAction)fn_logout_itleo:(id)sender {
+- (void)fn_manually_settings:(id)sender {
+    [self performSegueWithIdentifier:@"segue_setting" sender:nil];
+}
+- (void)fn_logout_itleo:(id)sender {
     
     UIAlertView *alert=[[UIAlertView alloc]initWithTitle:nil message:MY_LocalizedString(@"logout_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"lbl_ok", nil), nil];
     [alert show];

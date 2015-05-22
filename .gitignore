@@ -36,3 +36,5 @@ DerivedData
 # Bundler binstubs
 .bundle
 bin
+
+itleo/Launch Screen.xib

@@ -20,7 +20,7 @@
 #import "SelectHistoryDataViewController.h"
 #import "PopViewManager.h"
 #import "CheckNetWork.h"
-#define FIXSPACE 1.5
+
 #define TEXTFIELD_TAG 100
 typedef NSDictionary* (^passValue)(NSInteger tag);
 
@@ -157,14 +157,14 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
 -(void)fn_add_right_items{
     UIBarButtonItem *ibtn_scan_log=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_scan_log", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_scan_log:)];
     UIBarButtonItem *ibtn_space=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    ibtn_space.width=FIXSPACE;
+    ibtn_space.width=ITEM_LINE_WIDTH;
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0,1.5,20)];
     view.backgroundColor=[UIColor lightGrayColor];
     UIBarButtonItem *ibtn_space1=[[UIBarButtonItem alloc]initWithCustomView:view];
-    ibtn_space1.width=FIXSPACE;
+    ibtn_space1.width=ITEM_LINE_WIDTH;
     view=nil;
     UIBarButtonItem *ibtn_space2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    ibtn_space2.width=FIXSPACE;
+    ibtn_space2.width=ITEM_LINE_WIDTH;
     UIBarButtonItem *ibtn_cancel=[[UIBarButtonItem alloc]initWithTitle:MY_LocalizedString(@"lbl_cancel", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(fn_cancel_operation)];
     NSArray *array=@[ibtn_scan_log,ibtn_space,ibtn_space1,ibtn_space2,ibtn_cancel];
     self.navigationItem.rightBarButtonItems=array;

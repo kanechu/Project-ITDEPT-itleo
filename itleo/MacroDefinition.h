@@ -42,6 +42,10 @@
 #define MODULE_WAREHOUSE @"WAREHOUSE"
 #define MODULE_F_EXEC @"1"
 
+//右上角item间距
+#define FIXSPACE 15
+#define ITEM_LINE_WIDTH 1.5
+
 //--------自定义的颜色--------
 #define COLOR_EERIE_BLACK [UIColor colorWithRed:27.0/255.0 green:27.0/255.0 blue:27.0/255.0 alpha:1]
 
