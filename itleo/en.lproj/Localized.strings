@@ -121,10 +121,10 @@
 "upload_fail"="Upload failed, please check whether you want to upload the data correctly";
 //settings
 "lbl_date_range"="Search Date Range";
-"lbl_interval"="Auto Sync Interval";
-"lbl_transfer_records"="Auto transmission Record";
-"lbl_transfer_GPS"="Auto transmission GPS";
-"lbl_record_GPS"="Record GPS coordinates";
+"lbl_interval"="Sync Order Interval";
+"lbl_transfer_records"="Auto Upload Record";
+"lbl_record_andUpload_GPS"="Auto record and upload GPS";
+"lbl_upload_warehouse_interval"="Sync warehouse interval";
 "lbl_dateRange_title"="Date Range";
 "lbl_interval_title"="Interval";
 //day range

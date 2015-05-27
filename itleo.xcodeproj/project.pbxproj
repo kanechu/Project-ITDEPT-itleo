@@ -114,6 +114,7 @@
 		B28358061A3820E300D62F26 /* Resp_CTexcfsdimResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B28358051A3820E300D62F26 /* Resp_CTexcfsdimResult.m */; };
 		B286C24C1A47FDEC0045C238 /* BarCodeSysDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B286C24B1A47FDEC0045C238 /* BarCodeSysDetailViewController.m */; };
 		B28A9CB219D125C800F5C9A7 /* Cell_ShowRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = B28A9CB119D125C800F5C9A7 /* Cell_ShowRecords.m */; };
+		B28DC23A1B0F03E9005CE95A /* settings_dataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B28DC2391B0F03E9005CE95A /* settings_dataModel.m */; };
 		B28F676F19F4B7180045963B /* CheckNetWork.m in Sources */ = {isa = PBXBuildFile; fileRef = B28F676E19F4B7180045963B /* CheckNetWork.m */; };
 		B28F677519F4F36C0045963B /* CreateFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = B28F677419F4F36C0045963B /* CreateFootView.m */; };
 		B29204C01A15E82100D133A9 /* ChartView_frame.xib in Resources */ = {isa = PBXBuildFile; fileRef = B29204BF1A15E82100D133A9 /* ChartView_frame.xib */; };
@@ -448,6 +449,8 @@
 		B286C24B1A47FDEC0045C238 /* BarCodeSysDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCodeSysDetailViewController.m; sourceTree = "<group>"; };
 		B28A9CB019D125C800F5C9A7 /* Cell_ShowRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell_ShowRecords.h; sourceTree = "<group>"; };
 		B28A9CB119D125C800F5C9A7 /* Cell_ShowRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell_ShowRecords.m; sourceTree = "<group>"; };
+		B28DC2381B0F03E9005CE95A /* settings_dataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings_dataModel.h; sourceTree = "<group>"; };
+		B28DC2391B0F03E9005CE95A /* settings_dataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = settings_dataModel.m; sourceTree = "<group>"; };
 		B28F676D19F4B7180045963B /* CheckNetWork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckNetWork.h; sourceTree = "<group>"; };
 		B28F676E19F4B7180045963B /* CheckNetWork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckNetWork.m; sourceTree = "<group>"; };
 		B28F677319F4F36C0045963B /* CreateFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateFootView.h; sourceTree = "<group>"; };
@@ -1248,6 +1251,8 @@
 				B2AE75861A3BEF3D00F3F732 /* Warehouse_receive_data.m */,
 				B2C6061C1A53A8C90012AA04 /* Warehouse_log.h */,
 				B2C6061D1A53A8C90012AA04 /* Warehouse_log.m */,
+				B28DC2381B0F03E9005CE95A /* settings_dataModel.h */,
+				B28DC2391B0F03E9005CE95A /* settings_dataModel.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -1483,6 +1488,7 @@
 				B28A9CB219D125C800F5C9A7 /* Cell_ShowRecords.m in Sources */,
 				B2DE9AB81A10B5E700259EB5 /* Web_get_chart_data.m in Sources */,
 				B2BF43A01AE1FB2800829428 /* Resp_epod_order_list.m in Sources */,
+				B28DC23A1B0F03E9005CE95A /* settings_dataModel.m in Sources */,
 				B2A7C5731AA94C41009248C5 /* EnlargeImageViewController.m in Sources */,
 				B272EA6A19AEDDA400256276 /* MZFormSheetSegue.m in Sources */,
 				B2A3404819DA4CA30051F78B /* RespEpod_updmilestone.m in Sources */,

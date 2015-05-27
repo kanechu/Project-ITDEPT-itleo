@@ -42,10 +42,10 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)fn_init_alist_range_data{
-    if (_flag_range_type==0) {
+    if (_range_type==kDate_range) {
         alist_range_data=[[NSMutableArray alloc]initWithObjects:@"lbl_day",@"lbl_2days",@"lbl_3days",@"lbl_7days",@"lbl_15days",@"lbl_30days",@"lbl_all",nil];
         self.title=MY_LocalizedString(@"lbl_dateRange_title", nil);
-    }else if(_flag_range_type==1){
+    }else if(_range_type==kOrder_interval_range || _range_type==kWhs_interval_range){
         alist_range_data=[[NSMutableArray alloc]initWithObjects:@"lbl_minute",@"lbl_2minutes",@"lbl_3minutes",@"lbl_5minutes",@"lbl_10minutes",@"lbl_30minutes",@"lbl_hour",nil];
         self.title=MY_LocalizedString(@"lbl_interval_title", nil);
     }

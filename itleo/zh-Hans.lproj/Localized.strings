@@ -120,10 +120,10 @@
 "upload_fail"="上传失败, 请检查您要上传的数据是否正确！";
 //settings
 "lbl_date_range"="记录搜索日期范围";
-"lbl_interval"="自动传输数据间隔";
-"lbl_transfer_records"="自动传输记录";
-"lbl_transfer_GPS"="自动传输GPS";
-"lbl_record_GPS"="记录GPS坐标";
+"lbl_interval"="同步订单数据间隔";
+"lbl_transfer_records"="自动上传记录";
+"lbl_record_andUpload_GPS"="自动记录和上传GPS";
+"lbl_upload_warehouse_interval"="上传仓库数据间隔";
 "lbl_dateRange_title"="日期范围";
 "lbl_interval_title"="时间间隔";
 //day range

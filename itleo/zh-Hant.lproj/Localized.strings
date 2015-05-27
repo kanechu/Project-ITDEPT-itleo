@@ -122,10 +122,10 @@
 "upload_fail"="上傳失敗,請檢查您要上傳的數據是否正確！";
 //settings
 "lbl_date_range"="記錄搜索日期範圍";
-"lbl_interval"="自動傳輸數據間隔";
+"lbl_interval"="同步订单数据间隔";
 "lbl_transfer_records"="自動傳輸記錄";
-"lbl_transfer_GPS"="自動傳輸GPS";
-"lbl_record_GPS"="記錄GPS座標";
+"lbl_record_andUpload_GPS"="自動記錄和上傳GPS";
+"lbl_upload_warehouse_interval"="上傳倉庫數據間隔";
 "lbl_dateRange_title"="日期範圍";
 "lbl_interval_title"="時間間隔";
 

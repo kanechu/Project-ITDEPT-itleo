@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef NS_ENUM(NSUInteger, kRange_type) {
+    kDate_range,
+    kOrder_interval_range,
+    kWhs_interval_range,
+};
 @interface RangeSelectViewController : UITableViewController
 
 //标识已选取的日期范围 或 时间间隔 key
 @property (nonatomic,copy)NSString *str_range;
 
 //用于标记，是选取搜索日期范围还是传输数据间隔
-@property (nonatomic,assign)NSInteger flag_range_type;
+@property (nonatomic,assign)kRange_type range_type;
 
 @end
