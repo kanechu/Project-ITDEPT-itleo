@@ -60,7 +60,7 @@
     flag_isAll=0;
     DB_ePod *db=[[DB_ePod alloc]init];
     NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
-    NSString *date_key=[userDefaults objectForKey:@"date_range"];
+    NSString *date_key=[userDefaults objectForKey:SETTINGS_DATE_RANGE];
     if ([date_key length]==0) {
         date_key=@"lbl_day";
     }

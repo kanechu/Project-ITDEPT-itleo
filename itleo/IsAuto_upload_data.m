@@ -150,7 +150,7 @@ static NSDate *flag_GPS_date=nil;
 #pragma mark -get upload time interval
 -(CGFloat)fn_get_timeInterval{
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSString *key=[userDefault objectForKey:@"interval_range"];
+    NSString *key=[userDefault objectForKey:SETTINGS_ORDER_INTERVAL];
     CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
     return timeInerval;
 }

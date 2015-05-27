@@ -130,7 +130,7 @@
 -(void)fn_add_notificaiton{
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_success" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_fail" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:@"transfer_record" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:SETTINGS_AUTO_UPLOAD_RECORD object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transmission_GPS) name:@"transfer_GPS" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isRecord_GPS_coordinates) name:@"record_GPS" object:nil];
 }
@@ -240,7 +240,7 @@
 #pragma mark -open a thread
 -(void)fn_isAuto_transfer_record{
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSInteger _flag_transfer_record= [userDefault integerForKey:@"transfer_record"];
+    NSInteger _flag_transfer_record= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_RECORD];
     if (_flag_transfer_record==1) {
         //自动上传记录
         [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_records];

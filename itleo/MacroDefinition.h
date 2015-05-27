@@ -46,6 +46,13 @@
 #define FIXSPACE 15
 #define ITEM_LINE_WIDTH 1.5
 
+//settings userDefault key
+#define SETTINGS_DATE_RANGE @"date_range"
+#define SETTINGS_ORDER_INTERVAL @"interval_range"
+#define SETTINGS_WHS_INTERVAL @"whs_interval_range"
+#define SETTINGS_AUTO_UPLOAD_RECORD @"auto_transfer_record"
+#define SETTINGS_AUTO_UPLOAD_GPS @"auto_transfer_GPS"
+
 //--------自定义的颜色--------
 #define COLOR_EERIE_BLACK [UIColor colorWithRed:27.0/255.0 green:27.0/255.0 blue:27.0/255.0 alpha:1]
 
