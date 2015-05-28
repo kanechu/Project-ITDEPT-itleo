@@ -121,6 +121,7 @@
 //settings
 "lbl_date_range"="记录搜索日期范围";
 "lbl_interval"="同步订单数据间隔";
+"lbl_gps_interval"="同步GPS数据间隔";
 "lbl_transfer_records"="自动上传记录";
 "lbl_record_andUpload_GPS"="自动记录和上传GPS";
 "lbl_upload_warehouse_interval"="上传仓库数据间隔";

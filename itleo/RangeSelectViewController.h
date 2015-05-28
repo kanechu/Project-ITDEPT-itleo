@@ -10,6 +10,7 @@
 typedef NS_ENUM(NSUInteger, kRange_type) {
     kDate_range,
     kOrder_interval_range,
+    kGPS_interval_range,
     kWhs_interval_range,
 };
 @interface RangeSelectViewController : UITableViewController

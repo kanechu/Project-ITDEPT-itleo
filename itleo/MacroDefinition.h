@@ -49,6 +49,7 @@
 //settings userDefault key
 #define SETTINGS_DATE_RANGE @"date_range"
 #define SETTINGS_ORDER_INTERVAL @"interval_range"
+#define SETTINGS_GPS_INTERVAL @"GPS_interval_range"
 #define SETTINGS_WHS_INTERVAL @"whs_interval_range"
 #define SETTINGS_AUTO_UPLOAD_RECORD @"auto_transfer_record"
 #define SETTINGS_AUTO_UPLOAD_GPS @"auto_transfer_GPS"

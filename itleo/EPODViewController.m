@@ -48,7 +48,6 @@
     [self fn_custom_gesture];
     [self fn_add_notificaiton];
     [self fn_show_unUpload_Msg_nums];
-    [self fn_isStart_open_thread];
    	// Do any additional setup after loading the view.
 }
 
@@ -87,7 +86,7 @@
     }
 }
 /**
- *  <#Description#>
+ *  sypara 的para_code如果為MOB_REC_GPS gps必須是打開狀態
  */
 - (void)fn_isOpen_GPS{
     DB_sypara *db_sypara_obj=[[DB_sypara alloc]init];
@@ -96,8 +95,22 @@
         if (![location_obj fn_isLocationServiceOn] ||   ![location_obj fn_isCurrentAppLocatonServiceOn]) {
             UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"open_gps_alert_title", nil) message:MY_LocalizedString(@"open_gps_alert_content", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_ok",nil) otherButtonTitles:nil, nil];
             [alertView show];
+        }else{
+            [self fn_isRecord_GPS_coordinates];
         }
-        
+    }
+}
+-(void)fn_isRecord_GPS_coordinates{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_record_GPS= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_GPS];
+    if (_flag_record_GPS==1) {
+        //gps开始记录坐标
+        LocationManager *location_obj=[LocationManager fn_shareManager];
+        [location_obj fn_startUpdating];
+        location_obj.call_value=^(NSString *longitude,NSString *latitude){
+            DB_Location *db=[[DB_Location alloc]init];
+            [db fn_save_loaction_data:longitude latitude:latitude car_no:_itf_bus_no.text];
+        };
     }
 }
 #pragma mark -UIAlertViewDelegate
@@ -107,32 +120,10 @@
     }
 }
 
--(void)fn_isStart_open_thread{
-   
-    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSInteger _flag_transfer_record= [userDefault integerForKey:@"transfer_record"];
-    if (_flag_transfer_record==1) {
-        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_records_thread];
-        _flag_opened_record_thread=1;//标记已经打开上传输入记录的线程
-    }
-    
-     NSInteger _flag_transfer_GPS= [userDefault integerForKey:@"transfer_GPS"];
-    if (_flag_transfer_GPS==1) {
-        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_GPS_thread];
-        _flag_opened_gps_thread=1;//标识已经打开上传gps记录的线程
-    }
-    NSInteger _flag_record_GPS=[userDefault integerForKey:@"record_GPS"];
-    if (_flag_record_GPS==1) {
-        [self fn_isRecord_GPS_coordinates];
-    }
-}
 #pragma mark -addObserver notificaiton
 -(void)fn_add_notificaiton{
      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_success" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_show_unUpload_Msg_nums) name:@"upload_fail" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:SETTINGS_AUTO_UPLOAD_RECORD object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transmission_GPS) name:@"transfer_GPS" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isRecord_GPS_coordinates) name:@"record_GPS" object:nil];
 }
 
 #pragma mark -Jump will execute method
@@ -237,53 +228,4 @@
     DB_single_field *db=[[DB_single_field alloc]init];
     [db fn_save_data:@"vehicle_no" table_field:@"vehicle_no" field_value:_itf_bus_no.text];
 }
-#pragma mark -open a thread
--(void)fn_isAuto_transfer_record{
-    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSInteger _flag_transfer_record= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_RECORD];
-    if (_flag_transfer_record==1) {
-        //自动上传记录
-        [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_records];
-        if (_flag_opened_record_thread!=1) {
-            [[Timer_bg_upload_data fn_shareInstance]fn_open_upload_records_thread];
-        }
-    }else{
-        //关闭自动上传记录
-        [[Timer_bg_upload_data fn_shareInstance]fn_stop_upload_records];
-    }
-
-}
-
--(void)fn_isAuto_transmission_GPS{
-    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSInteger _flag_transfer_GPS= [userDefault integerForKey:@"transfer_GPS"];
-    if (_flag_transfer_GPS==1) {
-        //开启自动上传GPS的功能
-        [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_GPS];
-        if (_flag_opened_gps_thread!=1) {
-            [[Timer_bg_upload_data fn_shareInstance]fn_open_upload_GPS_thread];
-        }
-    }else{
-        //关闭自动上传GPS的功能
-        [[Timer_bg_upload_data fn_shareInstance]fn_stop_upload_GPS];
-    }
-}
-
--(void)fn_isRecord_GPS_coordinates{
-    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSInteger _flag_record_GPS= [userDefault integerForKey:@"record_GPS"];
-    if (_flag_record_GPS==1) {
-        //gps开始记录坐标
-        LocationManager *location_obj=[LocationManager fn_shareManager];
-        [location_obj fn_startUpdating];
-        location_obj.call_value=^(NSString *longitude,NSString *latitude){
-            DB_Location *db=[[DB_Location alloc]init];
-            [db fn_save_loaction_data:longitude latitude:latitude car_no:_itf_bus_no.text];
-        };
-    }else{
-        //gps停止记录坐标
-        [[LocationManager fn_shareManager]fn_stopUpdating];
-    }
-}
-
 @end

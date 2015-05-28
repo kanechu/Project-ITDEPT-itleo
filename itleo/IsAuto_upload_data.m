@@ -27,7 +27,7 @@ static NSDate *flag_GPS_date=nil;
     }else{
         NSTimeInterval time_interval=[current_day timeIntervalSinceDate:flag_record_date];
         time_interval=(NSInteger)time_interval+1;
-        if (time_interval<[self fn_get_timeInterval]) {
+        if (time_interval<[self fn_get_timeInterval:SETTINGS_ORDER_INTERVAL]) {
             /**
              *  用于计算是否已经相隔用户设置的时间，如果不是返回
              */
@@ -107,7 +107,7 @@ static NSDate *flag_GPS_date=nil;
     }else{
         NSTimeInterval time_interval=[current_day timeIntervalSinceDate:flag_GPS_date];
         time_interval=(NSInteger)time_interval+1;
-        if (time_interval<[self fn_get_timeInterval]) {
+        if (time_interval<[self fn_get_timeInterval:SETTINGS_GPS_INTERVAL]) {
             /**
              *  用于计算是否已经相隔用户设置的时间，如果不是返回
              */
@@ -148,9 +148,9 @@ static NSDate *flag_GPS_date=nil;
 
 }
 #pragma mark -get upload time interval
--(CGFloat)fn_get_timeInterval{
+-(CGFloat)fn_get_timeInterval:(NSString*)interval_key{
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
-    NSString *key=[userDefault objectForKey:SETTINGS_ORDER_INTERVAL];
+    NSString *key=[userDefault objectForKey:interval_key];
     CGFloat timeInerval=[self fn_Auto_Sync_timeInterval:key];
     return timeInerval;
 }

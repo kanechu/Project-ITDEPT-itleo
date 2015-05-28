@@ -24,6 +24,7 @@
 #import "DB_whs_config.h"
 #import "DB_order.h"
 #import "DB_permit.h"
+#import "LocationManager.h"
 
 @interface MainHomeViewController ()
 
@@ -33,6 +34,9 @@
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
 @property(assign,nonatomic)NSInteger flag_launch_isLogin;
+
+@property (nonatomic,assign)NSInteger flag_opened_record_thread;
+@property (nonatomic,assign)NSInteger flag_opened_gps_thread;
 
 @end
 
@@ -54,6 +58,7 @@
     [self fn_users_isLogin];
     [self fn_add_right_items];
     [self fn_create_menu];
+    [self fn_isStart_open_thread];
     // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -96,6 +101,7 @@
     }
     if ([db_permit_obj fn_isExist_module:MODULE_EPOD f_exec:MODULE_F_EXEC]) {
         [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_epod", nil) image:@"delivery" segue:@"segue_epod"]];
+        [self fn_add_notificaiton];
     }
     if ([db_permit_obj fn_isExist_module:MODULE_WHS_SUMMARY f_exec:MODULE_F_EXEC]) {
         [alist_menu addObject:[Menu_home fn_create_item:MY_LocalizedString(@"module_charts", nil) image:@"ic_summary" segue:@"segue_chart"]];
@@ -166,6 +172,63 @@
     }
     db_permit_obj=nil;
     db_sypara_obj=nil;
+}
+#pragma mark -addObserver notificaiton
+-(void)fn_add_notificaiton{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SETTINGS_AUTO_UPLOAD_RECORD object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:SETTINGS_AUTO_UPLOAD_RECORD object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SETTINGS_AUTO_UPLOAD_GPS object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transmission_GPS) name:SETTINGS_AUTO_UPLOAD_GPS object:nil];
+}
+-(void)fn_isStart_open_thread{
+    
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_transfer_record= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_RECORD];
+    if (_flag_transfer_record==1) {
+        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_records_thread];
+        _flag_opened_record_thread=1;//标记已经打开上传输入记录的线程
+    }
+    
+    NSInteger _flag_transfer_GPS= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_GPS];
+    if (_flag_transfer_GPS==1) {
+        [[Timer_bg_upload_data fn_shareInstance] fn_open_upload_GPS_thread];
+        _flag_opened_gps_thread=1;//标识已经打开上传gps记录的线程
+    }
+}
+#pragma mark -open a thread
+-(void)fn_isAuto_transfer_record{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_transfer_record= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_RECORD];
+    if (_flag_transfer_record==1) {
+        //自动上传记录
+        [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_records];
+        if (_flag_opened_record_thread!=1) {
+            [[Timer_bg_upload_data fn_shareInstance]fn_open_upload_records_thread];
+        }
+    }else{
+        //关闭自动上传记录
+        [[Timer_bg_upload_data fn_shareInstance]fn_stop_upload_records];
+    }
+    
+}
+
+-(void)fn_isAuto_transmission_GPS{
+    NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
+    NSInteger _flag_transfer_GPS= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_GPS];
+    if (_flag_transfer_GPS==1) {
+        //开启自动上传GPS的功能
+        [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_GPS];
+        if (_flag_opened_gps_thread!=1) {
+            [[Timer_bg_upload_data fn_shareInstance]fn_open_upload_GPS_thread];
+        }
+    }else{
+        
+        //gps停止记录坐标
+        [[LocationManager fn_shareManager]fn_stopUpdating];
+        //关闭自动上传GPS的功能
+        [[Timer_bg_upload_data fn_shareInstance]fn_stop_upload_GPS];
+        
+    }
 }
 
 #pragma mark -event action

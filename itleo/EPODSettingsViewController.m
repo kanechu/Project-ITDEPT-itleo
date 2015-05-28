@@ -92,14 +92,22 @@
     [alist_epod_settings addObject:[settings_dataModel fn_get_settings_dataModel:MY_LocalizedString(@"lbl_interval", nil) interval:MY_LocalizedString(interval_key, nil) type:SELECT_INTERVAL switch_isOn:NO]];
     interval_key=nil;
     
-    NSInteger _flag_transfer_record= [userDefaults integerForKey:@"transfer_record"];
+    NSString *gps_interval_key=[userDefaults objectForKey:SETTINGS_GPS_INTERVAL];
+    if ([gps_interval_key length]==0) {
+        gps_interval_key=@"lbl_minute";
+        [userDefaults setObject:gps_interval_key forKey:SETTINGS_GPS_INTERVAL];
+    }
+    [alist_epod_settings addObject:[settings_dataModel fn_get_settings_dataModel:MY_LocalizedString(@"lbl_gps_interval", nil) interval:MY_LocalizedString(gps_interval_key, nil) type:SELECT_INTERVAL switch_isOn:NO]];
+    gps_interval_key=nil;
+    
+    NSInteger _flag_transfer_record= [userDefaults integerForKey:SETTINGS_AUTO_UPLOAD_RECORD];
     BOOL switch_isOn=YES;
     if (_flag_transfer_record==0) {
         switch_isOn=NO;
     }
     [alist_epod_settings addObject:[settings_dataModel fn_get_settings_dataModel:MY_LocalizedString(@"lbl_transfer_records", nil) interval:nil type:SWITCH_FUNCTION switch_isOn:switch_isOn]];
     
-    NSInteger _flag_transfer_GPS=[userDefaults integerForKey:@"transfer_GPS"];
+    NSInteger _flag_transfer_GPS=[userDefaults integerForKey:SETTINGS_AUTO_UPLOAD_GPS];
     BOOL gps_switch_isOn=YES;
     if (_flag_transfer_GPS==0) {
         gps_switch_isOn=NO;
@@ -122,7 +130,9 @@
 
 #pragma mark -event action
 
-- (IBAction)fn_back_previous_page:(id)sender { [self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)fn_back_previous_page:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)fn_isAuto_transfer_data:(id)sender{
@@ -135,12 +145,12 @@
         flag_result=@"0";
     }
     if (switch_tag==2) {
-        [self fn_define_userDefaults:flag_result key:@"transfer_record"];
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"transfer_record" object:flag_result];
+        [self fn_define_userDefaults:flag_result key:SETTINGS_AUTO_UPLOAD_RECORD];
+        [[NSNotificationCenter defaultCenter]postNotificationName:SETTINGS_AUTO_UPLOAD_RECORD object:flag_result];
     }
     if (switch_tag==3) {
-        [self fn_define_userDefaults:flag_result key:@"transfer_GPS"];
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"transfer_GPS" object:flag_result];
+        [self fn_define_userDefaults:flag_result key:SETTINGS_AUTO_UPLOAD_GPS];
+        [[NSNotificationCenter defaultCenter]postNotificationName:SETTINGS_AUTO_UPLOAD_GPS object:flag_result];
     }
 }
 -(void)fn_define_userDefaults:(NSString*)result key:(NSString*)key{
@@ -220,6 +230,10 @@
             _range_type=kOrder_interval_range;
             _str_select_range=[userDefaults objectForKey:SETTINGS_ORDER_INTERVAL];
         }
+        if ([dataModel_obj.promptStr isEqualToString:MY_LocalizedString(@"lbl_gps_interval", nil)]) {
+            _range_type=kGPS_interval_range;
+            _str_select_range=[userDefaults objectForKey:SETTINGS_GPS_INTERVAL];
+        }
         if ([dataModel_obj.promptStr isEqualToString:MY_LocalizedString(@"lbl_upload_warehouse_interval", nil)]) {
             _range_type=kWhs_interval_range;
             _str_select_range=[userDefaults objectForKey:SETTINGS_WHS_INTERVAL];
@@ -244,6 +258,9 @@
         
         [self fn_define_userDefaults:key_obj key:SETTINGS_ORDER_INTERVAL];
         
+    }else if (_range_type==kGPS_interval_range){
+        
+        [self fn_define_userDefaults:key_obj key:SETTINGS_GPS_INTERVAL];
     }else if(_range_type==kWhs_interval_range){
         
         [self fn_define_userDefaults:key_obj key:SETTINGS_WHS_INTERVAL];

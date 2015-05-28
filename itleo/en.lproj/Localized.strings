@@ -122,6 +122,7 @@
 //settings
 "lbl_date_range"="Search Date Range";
 "lbl_interval"="Sync Order Interval";
+"lbl_gps_interval"="Sync GPS Interval";
 "lbl_transfer_records"="Auto Upload Record";
 "lbl_record_andUpload_GPS"="Auto record and upload GPS";
 "lbl_upload_warehouse_interval"="Sync warehouse interval";
