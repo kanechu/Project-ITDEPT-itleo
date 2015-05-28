@@ -124,6 +124,14 @@
     }
     [alist_warehouse_settings addObject:[settings_dataModel fn_get_settings_dataModel:MY_LocalizedString(@"lbl_upload_warehouse_interval", nil) interval:MY_LocalizedString(whs_interval_key, nil) type:SELECT_INTERVAL switch_isOn:NO]];
     whs_interval_key=nil;
+    
+    NSInteger _flag_transfer_whs=[userDefaults integerForKey:SETTINGS_AUTO_UPLOAD_WHS];
+    BOOL whs_switch_isOn=YES;
+    if (_flag_transfer_whs==0) {
+        whs_switch_isOn=NO;
+    }
+    [alist_warehouse_settings addObject:[settings_dataModel fn_get_settings_dataModel:MY_LocalizedString(@"lbl_upload_warehouse", nil) interval:nil type:SWITCH_FUNCTION switch_isOn:whs_switch_isOn]];
+    
     [self.alist_settings addObject:alist_warehouse_settings];
     
 }
@@ -137,20 +145,25 @@
 
 -(void)fn_isAuto_transfer_data:(id)sender{
     UISwitch *switchObj=(UISwitch*)sender;
-    NSInteger switch_tag=switchObj.tag-DEFAULT_TAG;
+    NSInteger _flag_select_section=switchObj.tag/DEFAULT_TAG;
+    NSInteger switch_tag=switchObj.tag-DEFAULT_TAG*_flag_select_section;
     NSString *flag_result;
     if (switchObj.on) {
         flag_result=@"1";
     }else{
         flag_result=@"0";
     }
-    if (switch_tag==2) {
+    if (_flag_select_section==0 && switch_tag==3) {
         [self fn_define_userDefaults:flag_result key:SETTINGS_AUTO_UPLOAD_RECORD];
         [[NSNotificationCenter defaultCenter]postNotificationName:SETTINGS_AUTO_UPLOAD_RECORD object:flag_result];
     }
-    if (switch_tag==3) {
+    if (_flag_select_section==0 && switch_tag==4) {
         [self fn_define_userDefaults:flag_result key:SETTINGS_AUTO_UPLOAD_GPS];
         [[NSNotificationCenter defaultCenter]postNotificationName:SETTINGS_AUTO_UPLOAD_GPS object:flag_result];
+    }
+    if (_flag_select_section==1 && switch_tag==1) {
+        [self fn_define_userDefaults:flag_result key:SETTINGS_AUTO_UPLOAD_WHS];
+        [[NSNotificationCenter defaultCenter]postNotificationName:SETTINGS_AUTO_UPLOAD_WHS object:flag_result];
     }
 }
 -(void)fn_define_userDefaults:(NSString*)result key:(NSString*)key{
@@ -196,7 +209,7 @@
         UISwitch *switchObj=[[UISwitch alloc]init];
         [switchObj addTarget:self action:@selector(fn_isAuto_transfer_data:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView=switchObj;
-        switchObj.tag=DEFAULT_TAG+indexPath.row;
+        switchObj.tag=DEFAULT_TAG*indexPath.section+indexPath.row;
         switchObj.on=obj.switch_isOn;
     }
     

@@ -126,6 +126,7 @@
 "lbl_transfer_records"="Auto Upload Record";
 "lbl_record_andUpload_GPS"="Auto record and upload GPS";
 "lbl_upload_warehouse_interval"="Sync warehouse interval";
+"lbl_upload_warehouse"="Auto Upload warehouse";
 "lbl_dateRange_title"="Date Range";
 "lbl_interval_title"="Interval";
 //day range

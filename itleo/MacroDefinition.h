@@ -53,6 +53,7 @@
 #define SETTINGS_WHS_INTERVAL @"whs_interval_range"
 #define SETTINGS_AUTO_UPLOAD_RECORD @"auto_transfer_record"
 #define SETTINGS_AUTO_UPLOAD_GPS @"auto_transfer_GPS"
+#define SETTINGS_AUTO_UPLOAD_WHS @"auto_upload_whs"
 
 //--------自定义的颜色--------
 #define COLOR_EERIE_BLACK [UIColor colorWithRed:27.0/255.0 green:27.0/255.0 blue:27.0/255.0 alpha:1]

@@ -127,6 +127,7 @@
 "lbl_transfer_records"="自動傳輸記錄";
 "lbl_record_andUpload_GPS"="自動記錄和上傳GPS";
 "lbl_upload_warehouse_interval"="上傳倉庫數據間隔";
+"lbl_upload_warehouse"="自動上傳倉庫數據";
 "lbl_dateRange_title"="日期範圍";
 "lbl_interval_title"="時間間隔";
 

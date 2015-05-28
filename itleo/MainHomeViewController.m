@@ -179,6 +179,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transfer_record) name:SETTINGS_AUTO_UPLOAD_RECORD object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SETTINGS_AUTO_UPLOAD_GPS object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_transmission_GPS) name:SETTINGS_AUTO_UPLOAD_GPS object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SETTINGS_AUTO_UPLOAD_WHS object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_isAuto_upload_whs) name:SETTINGS_AUTO_UPLOAD_WHS object:nil];
 }
 -(void)fn_isStart_open_thread{
     
@@ -216,6 +218,7 @@
     NSUserDefaults *userDefault=[NSUserDefaults standardUserDefaults];
     NSInteger _flag_transfer_GPS= [userDefault integerForKey:SETTINGS_AUTO_UPLOAD_GPS];
     if (_flag_transfer_GPS==1) {
+        
         //开启自动上传GPS的功能
         [[Timer_bg_upload_data fn_shareInstance]fn_start_upload_GPS];
         if (_flag_opened_gps_thread!=1) {
@@ -229,6 +232,9 @@
         [[Timer_bg_upload_data fn_shareInstance]fn_stop_upload_GPS];
         
     }
+}
+- (void)fn_isAuto_upload_whs{
+    
 }
 
 #pragma mark -event action

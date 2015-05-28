@@ -125,6 +125,7 @@
 "lbl_transfer_records"="自动上传记录";
 "lbl_record_andUpload_GPS"="自动记录和上传GPS";
 "lbl_upload_warehouse_interval"="上传仓库数据间隔";
+"lbl_upload_warehouse"="自动上传仓库数据";
 "lbl_dateRange_title"="日期范围";
 "lbl_interval_title"="时间间隔";
 //day range
