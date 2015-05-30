@@ -116,6 +116,9 @@ typedef NSString* (^passValue)(NSInteger tag);
         if ([os_value_key length]!=0) {
             os_value_key=[self dateFromUnixTimestamp:os_value_key];
         }
+    }else{
+        cell.itf_inputdata.inputView=nil;
+        cell.itf_inputdata.inputAccessoryView=nil;
     }
     cell.itf_inputdata.text=os_value_key;
     return cell;
