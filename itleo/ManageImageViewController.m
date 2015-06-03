@@ -110,6 +110,16 @@
 //签收
 -(void)fn_signature:(id)sender{
 
+    NSString *str_image_base64=[_dic_order valueForKey:@"sign_path_base64"];
+    UIImage *sign_image=[Conversion_helper fn_base64Str_convert_image:str_image_base64];
+    BOOL isShow_verifyBtn;
+    if (sign_image == nil) {
+        isShow_verifyBtn=NO;
+    }else{
+        isShow_verifyBtn=YES;
+    }
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:isShow_verifyBtn forKey:@"flag_isVerify"];
     [PopSignUtil getSignWithVC:self bgImage:nil withOk:^(UIImage *image) {
         [PopSignUtil closePop];
         [alist_image_ms addObject:[self fn_set_upload_image_ms:image]];

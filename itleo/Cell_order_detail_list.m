@@ -22,7 +22,13 @@
 - (void)setDic_order_dtl:(NSDictionary *)dic_order_dtl{
     _lbl_item_desc.text=MY_LocalizedString(@"lbl_item_descp", nil);
     NSString *str_image=dic_order_dtl[@"item_pic_path_base64"];
-    _imgView_detail.image=[Conversion_helper fn_base64Str_convert_image:str_image];
+    UIImage *sign_image=[Conversion_helper fn_base64Str_convert_image:str_image];
+    if (sign_image == nil) {
+        _imgView_detail.hidden=YES;
+    }else{
+        _imgView_detail.hidden=NO;
+    }
+    _imgView_detail.image=sign_image;
     _imgView_detail.layer.borderWidth=1.5;
     _imgView_detail.layer.borderColor=[UIColor lightGrayColor].CGColor;
     _imgView_detail.layer.cornerRadius=2;

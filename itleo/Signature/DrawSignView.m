@@ -139,12 +139,17 @@ static NSMutableArray *colors;
     NSMutableArray *btnRArr = [[NSMutableArray alloc]init];
     DB_sypara *db_syparaObj=[[DB_sypara alloc]init];
     BOOL isShow_verifyBtn=[db_syparaObj fn_isExist_sypara_data:PARA_CODE_ORDERLIST data1:PARA_DATA1];
+    db_syparaObj=nil;
+    NSUserDefaults *userDefaults=[NSUserDefaults standardUserDefaults];
+    BOOL isHas_signImage=[userDefaults boolForKey:@"flag_isVerify"];
+    userDefaults=nil;
+    
     //统一设坐标
     [btnLArr addObject:redoBtn];
     [btnLArr addObject:undoBtn];
     [btnLArr addObject:clearBtn];
     [btnRArr addObject:okBtn];
-    if (isShow_verifyBtn) {
+    if (isShow_verifyBtn && isHas_signImage) {
         [btnRArr addObject:verifyBtn];
     }else{
         verifyBtn.hidden=YES;
@@ -190,7 +195,7 @@ static NSMutableArray *colors;
     i = 0;
     for (UIButton *btn in btnRArr) {
         //btn.frame = CGRectMake(910, btn_y+ i * (btn_h+btn_mid), btn_w, btn_h);
-        if (isShow_verifyBtn) {
+        if (isShow_verifyBtn && isHas_signImage) {
             btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5),penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);
         }else{
             btn.frame = CGRectMake(btn_y+ i * (btn_w+btn_mid+5)*2,penBoldSlider.frame.origin.y+penBoldSlider.frame.size.height+20,btn_w, btn_h);
