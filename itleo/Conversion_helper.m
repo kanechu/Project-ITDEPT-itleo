@@ -16,6 +16,9 @@
     return [data base64EncodedStringWithOptions:0];
 }
 + (UIImage*)fn_base64Str_convert_image:(NSString*)base64Str{
+    if (base64Str==nil) {
+        return nil;
+    }
     NSData *data=[[NSData alloc]initWithBase64EncodedString:base64Str options:0];
     return [UIImage imageWithData:data];
 }

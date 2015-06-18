@@ -10,6 +10,8 @@
 
 @interface NSArray(ArrayWithObject)
 
-+(NSArray *) arrayWithPropertiesOfObject:(id) obj;
-+(NSArray *) arrayWithPropertiesValueOfObject:(id) obj;
++ (NSArray *)arrayWithPropertiesOfObject:(id) obj;
++ (NSArray *)arrayWithPropertiesValueOfObject:(id) obj;
++ (NSArray *)arrayWithPropertiesOfObject_withoutNil:(id) obj;
+
 @end

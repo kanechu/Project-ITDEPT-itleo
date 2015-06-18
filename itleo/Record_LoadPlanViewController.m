@@ -283,8 +283,9 @@ typedef NSString* (^passValue)(NSInteger tag);
     
     DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
     NSString *str_base_url=[db_obj fn_get_field_content:kWeb_addr];
-    [web_obj fn_uploaded_warehouse_receive_data:upload Auth:auth base_url:str_base_url];
+    [web_obj fn_uploaded_warehouse_receive_data:upload base_url:str_base_url];
     db_obj=nil;
+    web_obj=nil;
 }
 
 @end

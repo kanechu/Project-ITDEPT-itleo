@@ -21,6 +21,8 @@
 
 //IOS8以上
 #define SYSTEM_VERSION_GREATER_THAN_IOS8 ([[[UIDevice currentDevice] systemVersion] compare:@"8.0"] != NSOrderedAscending )
+#define ISIOS7  ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending )
+
 //--------检查系统版本--------
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
