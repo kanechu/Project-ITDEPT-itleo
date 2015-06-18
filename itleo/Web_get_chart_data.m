@@ -29,6 +29,7 @@ static NSMutableDictionary *idic_ChartImages=nil;
     DB_LoginInfo *login_obj=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[login_obj fn_get_RequestAuth];
     request_form.Auth=auth;
+    auth=nil;
     if (requestType==kRequestAll) {
         SearchFormContract *searchform=[[SearchFormContract alloc]init];
         searchform.os_column=@"type";
@@ -64,7 +65,7 @@ static NSMutableDictionary *idic_ChartImages=nil;
         }
         
     };
-    [web_obj fn_get_chart_data:request_form Auth:auth base_url:base_url];
+    [web_obj fn_get_chart_data:request_form base_url:base_url];
     request_form=nil;
     login_obj=nil;
     web_obj=nil;

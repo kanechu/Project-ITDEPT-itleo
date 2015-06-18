@@ -36,7 +36,7 @@
     DB_RespAppConfig *db_obj=[[DB_RespAppConfig alloc]init];
     NSString *str_base_url=[db_obj fn_get_field_content:kWeb_addr];
     db_obj=nil;
-    [web_obj fn_get_exso_data:req_form Auth:auth base_url:str_base_url];
+    [web_obj fn_get_exso_data:req_form base_url:str_base_url];
     str_base_url=nil;
     auth=nil;
     req_form=nil;

@@ -86,7 +86,7 @@
    arr_epod_order=nil;
     DB_RespAppConfig *db_appConfig=[[DB_RespAppConfig alloc]init];
     NSString *str_base_url=[db_appConfig fn_get_field_content:kWeb_addr];
-    [web_obj fn_get_order_list_data:req_form Auth:auth base_url:str_base_url];
+    [web_obj fn_get_order_list_data:req_form base_url:str_base_url];
     db_appConfig=nil;
     str_base_url=nil;
     req_form=nil;

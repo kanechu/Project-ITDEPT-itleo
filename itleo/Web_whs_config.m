@@ -20,9 +20,10 @@
 -(void)fn_get_whs_config_data:(NSString*)base_url{
     RequestContract *req_form=[[RequestContract alloc]init];
     DB_LoginInfo *db_login=[[DB_LoginInfo alloc]init];
-    
     AuthContract *auth=[db_login fn_get_RequestAuth];
     req_form.Auth=auth;
+    auth=nil;
+    db_login=nil;
     Web_base *web_obj=[[Web_base alloc]init];
     web_obj.il_url=STR_WHS_CONFIG_URL;
     web_obj.iresp_class=[Resp_whs_config class];
@@ -40,11 +41,9 @@
         }
         db_whs=nil;
     };
+    [web_obj fn_get_whs_config_data:req_form base_url:base_url];
     arr_maintform=nil;
-    [web_obj fn_get_whs_config_data:req_form Auth:auth base_url:base_url];
     req_form=nil;
-    auth=nil;
-    db_login=nil;
     web_obj=nil;
 }
 

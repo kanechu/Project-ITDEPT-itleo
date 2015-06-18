@@ -44,8 +44,8 @@
     web_base.callBack=^(NSMutableArray *arr_resp_result){
         call_back(arr_resp_result);
     };
-    
-    [web_base fn_uploaded_data:upload_form Auth:auth base_url:base_url];
+    [web_base fn_uploaded_data:upload_form base_url:base_url];
+    web_base=nil;
 }
 //获取配置单的信息
 - (void)fn_get_order_info:(NSMutableArray*)arr_searchforms back_result:(callBack_result)call_back{
@@ -78,6 +78,7 @@
             call_back(arr_resp_result);
         }
     };
-    [web_obj fn_uploaded_GPS:upload Auth:auth base_url:base_url];
+    [web_obj fn_uploaded_GPS:upload base_url:base_url];
+    web_obj=nil;
 }
 @end
