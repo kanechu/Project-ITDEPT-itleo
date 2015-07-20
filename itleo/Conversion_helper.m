@@ -123,11 +123,12 @@
 }
 
 #pragma mark 同一个Label显示不同颜色的文字方法
-+(NSMutableAttributedString*)fn_different_fontcolor:(NSString*)_str range:(NSRange)_range{
-    NSMutableAttributedString *str=[[NSMutableAttributedString alloc]initWithString:_str];
-    if (_range.length>0) {
-        [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:_range];
-    }
-    return str;
++ (NSMutableAttributedString*)fn_get_different_color_inLabel:(NSString*)parentString colorString:(NSString*)subString color:(UIColor*)color{
+    NSMutableAttributedString *_parentString=[[NSMutableAttributedString alloc]initWithString:parentString];
+    NSRange subStr_range=[parentString rangeOfString:subString];
+    NSMutableDictionary *idic_strProperty=[NSMutableDictionary dictionary];
+    [idic_strProperty setObject:color forKey:NSForegroundColorAttributeName];
+    [_parentString setAttributes:idic_strProperty range:subStr_range];
+    return _parentString;
 }
 @end

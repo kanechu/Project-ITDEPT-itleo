@@ -183,20 +183,16 @@
     }else{
         ilb_result.textColor=COLOR_DARK_RED;
     }
-    NSString *subStr_result=MY_LocalizedString(@"lbl_result", nil);
+    NSString *subStr_result=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_result", nil)];
     NSString *result_message=[dic valueForKey:@"result_message"];
     if ([str_status isEqualToString:@"2"]) {
         result_message=MY_LocalizedString(@"lbl_Network_error", nil);
     }
-    NSString *str_result=[NSString stringWithFormat:@"%@:  %@",subStr_result,result_message];
+    NSString *str_result=[NSString stringWithFormat:@"%@  %@",subStr_result,result_message];
     result_message=nil;
-    NSRange range;
-    range.location=0;
-    range.length=[subStr_result length]+1;
-    ilb_result.attributedText=[Conversion_helper fn_different_fontcolor:str_result range:range];
+    ilb_result.attributedText=[Conversion_helper fn_get_different_color_inLabel:str_result colorString:subStr_result color:[UIColor blackColor]];
     str_result=nil;
     subStr_result=nil;
-    
     
     UILabel *ilb_date=(UILabel*)[cell.contentView viewWithTag:75];
     NSString *str_date=[dic valueForKey:@"excu_datetime"];

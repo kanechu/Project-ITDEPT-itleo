@@ -191,6 +191,7 @@ static NSString  *is_language=@"";//标识语言类型
     _itf_usercode.placeholder=MY_LocalizedString(@"lbl_username", nil);
     _itf_password.placeholder=MY_LocalizedString(@"lbl_pwd", nil);
     _itf_system.placeholder=MY_LocalizedString(@"lbl_system", nil);
+    _ibtn_login.titleLabel.text=MY_LocalizedString(@"lbl_login", nil);
     [_ibtn_login setTitle:MY_LocalizedString(@"lbl_login", nil) forState:UIControlStateNormal];
     [_ibtn_history setTitle:MY_LocalizedString(@"lbl_history", nil) forState:UIControlStateNormal];
     _ilb_showPass.text=MY_LocalizedString(@"lbl_show_pwd", nil);

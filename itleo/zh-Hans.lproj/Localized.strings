@@ -155,6 +155,7 @@
 "lbl_order_remark"="备注：";
 "lbl_item_descp"="项目描述：";
 "lbl_order_pkg"="件数：";
+"lbl_manage_order"="管理订单";
 "lbl_order_placeholder"="输入订单号来过滤";
 "lbl_isProceed_logo"="用户鉴定";
 "lbl_isProceed_alert"="请点击“下一步”，继续签名验证。";

@@ -157,6 +157,7 @@
 "lbl_order_remark"="Remark:";
 "lbl_item_descp"="Item Descp:";
 "lbl_order_pkg"="PKG:";
+"lbl_manage_order"="Manage Order";
 "lbl_order_placeholder"="input order number to filter";
 "lbl_isProceed_logo"="User Identification";
 "lbl_isProceed_alert"="Please press the Next button to proceed signature verification.";

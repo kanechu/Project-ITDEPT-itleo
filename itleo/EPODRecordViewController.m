@@ -207,12 +207,9 @@
     if ([str_date length]!=0) {
         cell.ilb_date.text=[NSString stringWithFormat:@"%@  %@",MY_LocalizedString(@"lbl_date", nil),[self fn_get_date_from_millisecond:str_date]] ;
     }
-    NSString *subresult=MY_LocalizedString(@"lbl_result", nil);
-    NSString *result=[NSString stringWithFormat:@"%@:  %@",subresult,[self fn_get_detail_declare:[dic valueForKey:@"result"]]];
-    NSRange range;
-    range.location=0;
-    range.length=[subresult length]+1;
-    cell.ilb_result.attributedText=[Conversion_helper fn_different_fontcolor:result range:range];
+    NSString *subresult=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_result", nil)];
+    NSString *result=[NSString stringWithFormat:@"%@  %@",subresult,[self fn_get_detail_declare:[dic valueForKey:@"result"]]];
+    cell.ilb_result.attributedText=[Conversion_helper fn_get_different_color_inLabel:result colorString:subresult color:[UIColor blackColor]];
     cell.ilb_delete.text=[NSString stringWithFormat:@"%@:",MY_LocalizedString(@"lbl_delete", nil)];
     [cell.ibox_Delete addTarget:self action:@selector(fn_checkBoxTapped:forEvent:) forControlEvents:UIControlEventValueChanged];
     if (flag_isAll==1) {

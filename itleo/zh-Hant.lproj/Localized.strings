@@ -158,6 +158,7 @@
 "lbl_order_remark"="備註：";
 "lbl_item_descp"="項目描述：";
 "lbl_order_pkg"="件數：";
+"lbl_manage_order"="管理訂單";
 "lbl_order_placeholder"="輸入訂單號來過濾";
 "lbl_isProceed_logo"="用戶鑑定";
 "lbl_isProceed_alert"="請點擊“下一步”，繼續簽名驗證";

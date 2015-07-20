@@ -50,7 +50,7 @@
     [_order_detail_logo setTitle:MY_LocalizedString(@"lbl_order_detail", nil) forState:UIControlStateNormal];
     [_order_detail_logo setImage:[UIImage imageNamed:@"itdept_itleo"] forState:UIControlStateNormal];
     [_ibtn_cancel setTitle:MY_LocalizedString(@"lbl_cancel", nil) forState:UIControlStateNormal];
-    
+    [_ibtn_manage_order setTitle:MY_LocalizedString(@"lbl_manage_order", nil) forState:UIControlStateNormal];
     self.tableview.layer.borderWidth=1;
     self.tableview.layer.borderColor=[UIColor blueColor].CGColor;
     [self fn_hiden_cell_extra_line];

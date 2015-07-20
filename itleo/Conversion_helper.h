@@ -46,12 +46,13 @@
 +(NSString*)fn_Date_ToStringDateTime:(NSDate*)date;
 
 /**
- *  一个Label显示不同颜色
+ *  给一个label显示两种不同颜色
  *
- *  @param _str   需要变换颜色的字符串
- *  @param _range 变换颜色字符串的范围
+ *  @param parentString    父字符串
+ *  @param subString 需要改变颜色的子字符串
+ *  @param color     颜色
  *
- *  @return 结果
+ *  @return 处理后带属性的字符串
  */
-+(NSMutableAttributedString*)fn_different_fontcolor:(NSString*)_str range:(NSRange)_range;
++ (NSMutableAttributedString*)fn_get_different_color_inLabel:(NSString*)parentString colorString:(NSString*)subString color:(UIColor*)color;
 @end

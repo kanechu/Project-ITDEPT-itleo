@@ -465,10 +465,10 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
         cell.il_prompt.text=[NSString stringWithFormat:@"%@:",[dic valueForKey:language_type]];
         
     }else{
-        NSString *str_prompt=[dic valueForKey:language_type];
-        cell.il_prompt.text=[NSString stringWithFormat:@"%@:*",str_prompt];
-        if (str_prompt!=nil) {
-            [_idic_is_mandatory setObject:str_prompt forKey:col_field];
+        NSString *str_prompt=[NSString stringWithFormat:@"%@ :*",[dic valueForKey:language_type]];
+        cell.il_prompt.attributedText=[Conversion_helper fn_get_different_color_inLabel:str_prompt colorString:@"*" color:[UIColor redColor]];
+        if ([dic valueForKey:language_type]!=nil) {
+            [_idic_is_mandatory setObject:[dic valueForKey:language_type] forKey:col_field];
         }
     }
     
