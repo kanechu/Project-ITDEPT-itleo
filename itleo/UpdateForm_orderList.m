@@ -12,6 +12,7 @@
 
 @synthesize ls_action;
 @synthesize ls_driver_code;
+@synthesize vehicle_no;
 @synthesize ls_uid_list;
 
 @end

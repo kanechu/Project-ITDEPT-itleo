@@ -34,6 +34,7 @@
     UpdateForm_orderList *updateForm_obj=[[UpdateForm_orderList alloc]init];
     updateForm_obj.ls_driver_code=auth.user_code;
     updateForm_obj.ls_uid_list=set_uid_list;
+    updateForm_obj.vehicle_no=self.vehicle_no;
     if (action_type==kGet_order_list) {
         updateForm_obj.ls_action=ACTIONTYPE_GET;
     }

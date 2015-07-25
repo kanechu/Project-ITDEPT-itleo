@@ -50,6 +50,15 @@
     [self fn_show_unUpload_Msg_nums];
    	// Do any additional setup after loading the view.
 }
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_textfield_textDidChange) name:UITextFieldTextDidChangeNotification object:nil];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -139,6 +148,7 @@
     
 }
 #pragma mark -UITextFieldDelegate
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     [self fn_show_unUpload_Msg_nums];
 }
@@ -146,6 +156,21 @@
     [_itf_bus_no resignFirstResponder];
     return YES;
 }
+/**
+ *  填车牌的时候，即使trim掉所有空白格，把所有英文字母变大写
+ */
+- (void)fn_textfield_textDidChange{
+    NSString *original_str=_itf_bus_no.text;
+    if ([original_str length]!=0) {
+        //把英文字母变大写
+        original_str=[original_str uppercaseString];
+        _itf_bus_no.text=[original_str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    }
+    original_str=nil;
+}
+/**
+ *  底部显示没有上次的order数量
+ */
 -(void)fn_show_unUpload_Msg_nums{
     DB_ePod *db=[[DB_ePod alloc]init];
     NSMutableArray *arr_epod=[db fn_select_unUpload_truck_order_data:@"0" isUploade2:@"2"];
@@ -196,6 +221,7 @@
         [SVProgressHUD showWithStatus:MY_LocalizedString(@"load_order_alert", nil)];
         Web_order_list *web_obj=[[Web_order_list alloc]init];
         NSSet *arr_uid=[NSSet setWithObject:@""];
+        web_obj.vehicle_no=_itf_bus_no.text;
         [web_obj fn_handle_order_list_data:arr_uid type:kGet_order_list];
         web_obj.callback=^(NSMutableArray* alist_result){
             [self performSegueWithIdentifier:@"segue_order_list" sender:self];

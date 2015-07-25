@@ -14,6 +14,8 @@
 
 @property (nonatomic, copy) NSString *ls_driver_code;
 
+@property (nonatomic, copy) NSString *vehicle_no;
+
 @property (nonatomic, strong) NSSet *ls_uid_list;
 
 @end
