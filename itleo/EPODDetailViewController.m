@@ -35,8 +35,10 @@
 @property(nonatomic,strong) NSMutableArray *arr_status;
 //“其他”状态的说明
 @property(nonatomic,copy) NSString *status_explain;
-//客户选择的配载单状态
+//客户选择的配载单状态code
 @property(nonatomic,copy) NSString *flag_status;
+//客户选择的配置单状态display
+@property(nonatomic,copy) NSString *flag_display_status;
 //用于标记，说明输入框，是否可用
 @property(nonatomic,assign)NSInteger flag_enable;
 //配置单信息
@@ -329,6 +331,7 @@
 #pragma mark -QRadioButtonDelegate
 - (void)didSelectedRadioButton:(QRadioButton *)radio groupId:(NSString *)groupId{
     flag_status=radio.titleLabel.text;
+    self.flag_display_status=radio.titleLabel.text;
     if ([flag_status isEqualToString:MY_LocalizedString(@"lbl_other", nil)]) {
         flag_enable=1;
     }else{
@@ -419,95 +422,121 @@
 #pragma mark -UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex==alertView.firstOtherButtonIndex) {
-        [self fn_uploading_epod:nil];
+        if (alertView.tag==100) {
+            [self fn_upload_epod_data];
+        }else{
+            [self fn_uploading_epod:nil];
+        }
     }
 }
 
 #pragma mark -uploading data
-
+//点击上传，触发的事件
 - (IBAction)fn_uploading_epod:(id)sender {
     
     if ([_itf_order_no.text length]!=0) {
-        Truck_order_data *upload_ms=[self fn_set_upload_data];
         
         DB_ePod *db_ePod_obj=[[DB_ePod alloc]init];
-        [db_ePod_obj fn_save_ePod_data:upload_ms image_ms:alist_image_ms];
-        if ([self fn_check_network]) {
-            [SVProgressHUD showWithStatus:MY_LocalizedString(@"upload_prompt", nil)];
-            UpdateFormContract *updateform=[[UpdateFormContract alloc]init];
-            
-            if ([alist_image_ms count]==0) {
-                NSMutableArray *arr_result=[db_ePod_obj fn_select_ePod_data_no_image:_itf_order_no.text vehicle_no:_vehicle_no];
-                for (NSMutableDictionary *idic in arr_result) {
-                    updateform.unique_id=[idic valueForKey:@"unique_id"];
-                    updateform.order_no=[idic valueForKey:@"order_no"];
-                    updateform.ms_status=[idic valueForKey:@"status"];
-                    updateform.vehicle_no=[idic valueForKey:@"vehicle_no"];
-                }
-            }else{
-                NSMutableArray *arr_result=[db_ePod_obj fn_select_ePod_data:_itf_order_no.text vehicle_no:_vehicle_no];
-                NSMutableArray *arr_image=[NSMutableArray array];
-                for (NSMutableDictionary *idic in arr_result) {
-                    updateform.unique_id=[idic valueForKey:@"unique_id"];
-                    updateform.order_no=[idic valueForKey:@"order_no"];
-                    updateform.ms_status=[idic valueForKey:@"status"];
-                    updateform.vehicle_no=[idic valueForKey:@"vehicle_no"];
-                    Epod_upd_milestone_image_contract *upd_imageForm=[[Epod_upd_milestone_image_contract alloc]init];
-                    upd_imageForm.unique_id=[idic valueForKey:@"img_unique_id"];
-                    upd_imageForm.ms_upload_queue_id=[idic valueForKey:@"correlation_id"];
-                    upd_imageForm.ms_imgBase64=[idic valueForKey:@"image"];
-                    NSString *image_remark=[idic valueForKey:@"image_remark"];
-                    if ([image_remark length]!=0) {
-                        upd_imageForm.img_remark=image_remark;
-                    }
-                    [arr_image addObject:upd_imageForm];
-                }
-                updateform.Epod_upd_milestone_image=[NSSet setWithArray:arr_image];
-            }
-            
-            DB_LoginInfo *db_loginInfo=[[DB_LoginInfo alloc]init];
-            AuthContract *auth=[db_loginInfo fn_get_RequestAuth];
-            db_loginInfo=nil;
-            
-            Web_update_epod *upload_obj=[[Web_update_epod alloc]init];
-            [upload_obj fn_upload_epod_data:updateform Auth:auth back_result:^(NSMutableArray* arr_result){
-                if (arr_result==nil) {
-                    UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"timeOut_alert_title", nil) message:MY_LocalizedString(@"timeOut_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"ibtn_upload_later", nil) otherButtonTitles:MY_LocalizedString(@"ibtn_retry", nil), nil];
-                    [alertview show];
-                }
-                
-                if ([arr_result count]!=0) {
-                    RespEpod_updmilestone *respEpod=[arr_result objectAtIndex:0];
-                    NSSet *resp_upd_images=respEpod.Epod_upd_milestone_image_Result;
-                    NSString *unique_id=respEpod.unique_id;
-                    NSString *is_upload_sucess=respEpod.is_upload_sucess;
-                    NSString *upload_date=respEpod.upload_date;
-                    NSString *error_reason=respEpod.error_reason;
-                    NSString *error_date=respEpod.error_date;
-                    if ([is_upload_sucess isEqualToString:@"true"]) {
-                        [db_ePod_obj fn_update_epod_after_uploaded:unique_id is_uploaded:@"1" date:upload_date result:@"isuccess" user_code:auth.user_code system:auth.system  images:resp_upd_images];
-                        
-                        [SVProgressHUD dismiss];
-                        [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_success", nil)];
-                    }else{
-                        [db_ePod_obj fn_update_epod_after_uploaded:unique_id is_uploaded:@"2" date:error_date result:error_reason user_code:auth.user_code system:auth.system  images:resp_upd_images];
-                        
-                        [SVProgressHUD dismiss];
-                        [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_fail", nil) ];
-                        [self fn_post_notification];
-                    }
-                }
-            }];
-            upload_obj=nil;
+        //如果flag_enable==0说明状态不是“其他”
+        NSString *str_status;
+        NSString *str_display_status;
+        if (flag_enable==0) {
+            str_status=flag_status;
+            str_display_status=self.flag_display_status;
+        }else{
+            str_status=_status_explain;
+            str_display_status=_status_explain;
         }
-        db_ePod_obj=nil;
+        if ([db_ePod_obj fn_isRepeat_upload_epod_data:_itf_order_no.text status:str_status]) {
+            NSString *str_msg=[NSString stringWithFormat:@"%@\"%@\"。\r\n%@",MY_LocalizedString(@"lbl_repeat_prefix", nil),str_display_status,MY_LocalizedString(@"lbl_repeat_suffix", nil)];
+            UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:str_msg delegate:self cancelButtonTitle:MY_LocalizedString(@"lbl_cancel", nil) otherButtonTitles:MY_LocalizedString(@"ibtn_confirm", nil), nil];
+            alertView.tag=100;
+            [alertView show];
+        }else{
+            [self fn_upload_epod_data];
+        }
         
     }else{
         
         [self fn_Pop_up_alertView:MY_LocalizedString(@"order_empty_prompt", nil)];
     }
-    
 }
+//上传epod 数据
+- (void)fn_upload_epod_data{
+    DB_ePod *db_ePod_obj=[[DB_ePod alloc]init];
+    Truck_order_data *upload_ms=[self fn_set_upload_data];
+    [db_ePod_obj fn_save_ePod_data:upload_ms image_ms:alist_image_ms];
+    if ([self fn_check_network]) {
+        [SVProgressHUD showWithStatus:MY_LocalizedString(@"upload_prompt", nil)];
+        UpdateFormContract *updateform=[[UpdateFormContract alloc]init];
+        
+        if ([alist_image_ms count]==0) {
+            NSMutableArray *arr_result=[db_ePod_obj fn_select_ePod_data_no_image:_itf_order_no.text vehicle_no:_vehicle_no];
+            for (NSMutableDictionary *idic in arr_result) {
+                updateform.unique_id=[idic valueForKey:@"unique_id"];
+                updateform.order_no=[idic valueForKey:@"order_no"];
+                updateform.ms_status=[idic valueForKey:@"status"];
+                updateform.vehicle_no=[idic valueForKey:@"vehicle_no"];
+            }
+        }else{
+            NSMutableArray *arr_result=[db_ePod_obj fn_select_ePod_data:_itf_order_no.text vehicle_no:_vehicle_no];
+            NSMutableArray *arr_image=[NSMutableArray array];
+            for (NSMutableDictionary *idic in arr_result) {
+                updateform.unique_id=[idic valueForKey:@"unique_id"];
+                updateform.order_no=[idic valueForKey:@"order_no"];
+                updateform.ms_status=[idic valueForKey:@"status"];
+                updateform.vehicle_no=[idic valueForKey:@"vehicle_no"];
+                Epod_upd_milestone_image_contract *upd_imageForm=[[Epod_upd_milestone_image_contract alloc]init];
+                upd_imageForm.unique_id=[idic valueForKey:@"img_unique_id"];
+                upd_imageForm.ms_upload_queue_id=[idic valueForKey:@"correlation_id"];
+                upd_imageForm.ms_imgBase64=[idic valueForKey:@"image"];
+                NSString *image_remark=[idic valueForKey:@"image_remark"];
+                if ([image_remark length]!=0) {
+                    upd_imageForm.img_remark=image_remark;
+                }
+                [arr_image addObject:upd_imageForm];
+            }
+            updateform.Epod_upd_milestone_image=[NSSet setWithArray:arr_image];
+        }
+        
+        DB_LoginInfo *db_loginInfo=[[DB_LoginInfo alloc]init];
+        AuthContract *auth=[db_loginInfo fn_get_RequestAuth];
+        db_loginInfo=nil;
+        
+        Web_update_epod *upload_obj=[[Web_update_epod alloc]init];
+        [upload_obj fn_upload_epod_data:updateform Auth:auth back_result:^(NSMutableArray* arr_result){
+            if (arr_result==nil) {
+                UIAlertView *alertview=[[UIAlertView alloc]initWithTitle:MY_LocalizedString(@"timeOut_alert_title", nil) message:MY_LocalizedString(@"timeOut_alert", nil) delegate:self cancelButtonTitle:MY_LocalizedString(@"ibtn_upload_later", nil) otherButtonTitles:MY_LocalizedString(@"ibtn_retry", nil), nil];
+                [alertview show];
+            }
+            
+            if ([arr_result count]!=0) {
+                RespEpod_updmilestone *respEpod=[arr_result objectAtIndex:0];
+                NSSet *resp_upd_images=respEpod.Epod_upd_milestone_image_Result;
+                NSString *unique_id=respEpod.unique_id;
+                NSString *is_upload_sucess=respEpod.is_upload_sucess;
+                NSString *upload_date=respEpod.upload_date;
+                NSString *error_reason=respEpod.error_reason;
+                NSString *error_date=respEpod.error_date;
+                if ([is_upload_sucess isEqualToString:@"true"]) {
+                    [db_ePod_obj fn_update_epod_after_uploaded:unique_id is_uploaded:@"1" date:upload_date result:@"isuccess" user_code:auth.user_code system:auth.system  images:resp_upd_images];
+                    
+                    [SVProgressHUD dismiss];
+                    [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_success", nil)];
+                }else{
+                    [db_ePod_obj fn_update_epod_after_uploaded:unique_id is_uploaded:@"2" date:error_date result:error_reason user_code:auth.user_code system:auth.system  images:resp_upd_images];
+                    
+                    [SVProgressHUD dismiss];
+                    [self fn_Pop_up_alertView:MY_LocalizedString(@"upload_fail", nil) ];
+                    [self fn_post_notification];
+                }
+            }
+        }];
+        upload_obj=nil;
+    }
+    db_ePod_obj=nil;
+}
+
 -(Truck_order_data*)fn_set_upload_data{
     DB_LoginInfo *db_loginInfo=[[DB_LoginInfo alloc]init];
     AuthContract *auth=[db_loginInfo fn_get_RequestAuth];
@@ -518,6 +547,7 @@
     upload_data.version=auth.version;
     upload_data.vehicle_no=_vehicle_no;
     upload_data.order_no=_itf_order_no.text;
+    //如果flag_enable==0说明状态不是“其他”
     if (flag_enable==0) {
         upload_data.status=flag_status;
     }else{

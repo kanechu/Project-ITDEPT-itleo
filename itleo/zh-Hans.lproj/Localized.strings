@@ -118,6 +118,8 @@
 "upload_prompt"="上传中，请稍等！";
 "upload_success"="上传成功！";
 "upload_fail"="上传失败, 请检查您要上传的数据是否正确！";
+"lbl_repeat_prefix"="此配载单状态已曾被设成";
+"lbl_repeat_suffix"="请问是否确定重覆再次上传?";
 //settings
 "lbl_date_range"="记录搜索日期范围";
 "lbl_interval"="同步订单数据间隔";

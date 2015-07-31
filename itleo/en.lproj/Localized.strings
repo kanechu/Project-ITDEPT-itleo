@@ -119,6 +119,8 @@
 "upload_prompt"="Uploading,please wait!";
 "upload_success"="Uploaded successfully!";
 "upload_fail"="Upload failed, please check whether you want to upload the data correctly";
+"lbl_repeat_prefix"="This order has been set to";
+"lbl_repeat_suffix"="Are you confirm to upload again?";
 //settings
 "lbl_date_range"="Search Date Range";
 "lbl_interval"="Sync Order Interval";

@@ -205,6 +205,25 @@
     return ib_updated;
 }
 
+- (BOOL)fn_isRepeat_upload_epod_data:(NSString*)order_no status:(NSString*)status{
+    __block BOOL isExist=NO;
+    [queue inDataBase:^(FMDatabase *db){
+        if ([db open]) {
+            NSMutableArray *alist_result=[NSMutableArray array];
+            FMResultSet *lfmdb_result=[db executeQuery:@"select * from truck_order where is_uploaded='1' and order_no=? and status=?",order_no,status];
+            while ([lfmdb_result next]) {
+                [alist_result addObject:[lfmdb_result resultDictionary]];
+            }
+            if ([alist_result count]!=0) {
+                isExist=YES;
+            }
+            
+            [db close];
+        }
+    }];
+    return isExist;
+}
+
 
 -(BOOL)fn_delete_epod_data:(int)unique_id{
     __block BOOL isDeleted=NO;

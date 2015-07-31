@@ -120,6 +120,8 @@
 "upload_prompt"="上傳中，請稍等！";
 "upload_success"="上傳成功！";
 "upload_fail"="上傳失敗,請檢查您要上傳的數據是否正確！";
+"lbl_repeat_prefix"="此配載單狀態已曾被設成";
+"lbl_repeat_suffix"="請問是否確定重覆再次上傳?";
 //settings
 "lbl_date_range"="記錄搜索日期範圍";
 "lbl_interval"="同步订单数据间隔";
