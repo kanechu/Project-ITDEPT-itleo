@@ -86,10 +86,10 @@
             flag_row=1;
         }
         if (i==0&&flag_row==0) {
-            legendView.frame=CGRectMake(LEGEND_SPACE, self.iv_chart.frame.size.height+self.iv_chart.frame.origin.y,LEGEND_BIG_WIDTH, real_height);
+            legendView.frame=CGRectMake(LEGEND_SPACE,0,LEGEND_BIG_WIDTH, real_height);
             
         }else if(i==0){
-            legendView.frame=CGRectMake(10, self.iv_chart.frame.size.height+self.iv_chart.frame.origin.y,LEGEND_WIDTH, real_height);
+            legendView.frame=CGRectMake(10,0,LEGEND_WIDTH, real_height);
         }
         
         
@@ -112,9 +112,10 @@
             }
         }
         lastRect=legendView.frame;
-        [self addSubview:legendView];
+        [self.iv_legend addSubview:legendView];
         
     }
+    [self.iv_legend setContentSize:CGSizeMake(CGRectGetWidth(self.iv_legend.frame), CGRectGetMaxY(lastRect))];
 }
 #pragma mark -create chart
 -(void)fn_create_pieChart{
@@ -155,11 +156,16 @@
 -(void)fn_create_GRID_Chart{
     [self.iv_chart.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     UITableView *gridChart=[[UITableView alloc]init];
+    //隐藏额外的空白行
+    UIView *view=[[UIView alloc]initWithFrame:CGRectZero];
+    view.backgroundColor=[UIColor clearColor];
+    [gridChart setTableFooterView:view];
     gridChart.backgroundColor=[UIColor clearColor];
     gridChart.delegate=self;
     gridChart.dataSource=self;
-    gridChart.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.iv_chart.frame.size.height);
+    gridChart.frame=CGRectMake(0, 0, self.iv_chart.frame.size.width, self.frame.size.height);
     [self.iv_chart addSubview:gridChart];
+    [self.iv_chart setFrame:CGRectMake(self.iv_chart.frame.origin.x, self.iv_chart.frame.origin.y, self.iv_chart.frame.size.width, CGRectGetHeight(self.frame))];
 }
 #pragma mark -UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

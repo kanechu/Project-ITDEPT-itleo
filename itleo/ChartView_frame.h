@@ -19,6 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *ilb_chartTitle;//图表标题
 @property (weak, nonatomic) IBOutlet UIView *iv_chart;//装载图表
+@property (weak, nonatomic) IBOutlet UIScrollView *iv_legend;
 
 +(ChartView_frame*)fn_shareInstance;
 
