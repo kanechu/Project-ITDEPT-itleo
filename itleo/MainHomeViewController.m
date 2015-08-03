@@ -28,12 +28,12 @@
 
 @interface MainHomeViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *ilb_version;
 @property (strong, nonatomic) UIBarButtonItem *ibtn_logout;
 @property (strong, nonatomic) UIBarButtonItem *ibtn_settings;
 @property(strong,nonatomic)NSMutableArray *alist_menu;
 @property(strong,nonatomic)Menu_home *menu_item;
-@property(assign,nonatomic)NSInteger flag_launch_isLogin;
+
+@property(assign,nonatomic)NSInteger flag_launch_isLogin;//APP启动的时候，判断是否已经有用户登录，1->登录 0->未登录
 
 @property (nonatomic,assign)NSInteger flag_opened_record_thread;
 @property (nonatomic,assign)NSInteger flag_opened_gps_thread;
@@ -67,6 +67,9 @@
         [self fn_present_loginView];
     }
 }
+- (void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"get_chartImages" object:nil];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -89,7 +92,7 @@
     NSArray *array=@[self.ibtn_logout,ibtn_space,ibtn_space1,ibtn_space2,self.ibtn_settings];
     self.navigationItem.rightBarButtonItems=array;
 }
-
+//创建功能菜单
 -(void) fn_create_menu{
     [self fn_set_nav_item];
     alist_menu=nil;
@@ -130,7 +133,6 @@
 
     [_ibtn_logout setTitle:MY_LocalizedString(@"lbl_logout", nil)];
     [_ibtn_settings setTitle:MY_LocalizedString(@"ibtn_settings", nil)];
-    _ilb_version.text=[NSString stringWithFormat:@"Version %@",ITLEO_VERSION];
 }
 /**
  *  判断用户是否登录，如果已经登录，则设置语言环境
@@ -143,6 +145,7 @@
         [[MY_LocalizedString getshareInstance]fn_setLanguage_type:lang];
     }
 }
+//如果用户未登录 或者用户退出登录则弹出登录页面
 - (void)fn_present_loginView{
     LEOLoginViewController *VC=(LEOLoginViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"LEOLoginViewController"];
     if (_flag_launch_isLogin==0) {
@@ -161,6 +164,7 @@
         _flag_launch_isLogin=1;
     };
 }
+//当登录成功后，判断用户是否拥有epod的权限和epod中是否有查看order list的功能，如果有则把所有的order list请求下来
 - (void)fn_isRequest_all_order_list{
     DB_sypara *db_sypara_obj=[[DB_sypara alloc]init];
     DB_permit *db_permit_obj=[[DB_permit alloc]init];
@@ -251,7 +255,23 @@
 - (IBAction)fn_click_menu:(id)sender {
     UIButton *ibtn=(UIButton*)sender;
     menu_item=[alist_menu objectAtIndex:ibtn.tag];
-    [self performSegueWithIdentifier:menu_item.is_segue sender:self];
+    if ([menu_item.is_segue isEqualToString:@"segue_chart"]) {
+        NSMutableDictionary *idic_chartImages=[[Web_get_chart_data fn_shareInstance]fn_get_ChartImages];
+        if ([idic_chartImages count]==0) {
+            [SVProgressHUD showWithStatus:MY_LocalizedString(@"load_order_alert", nil)];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(fn_complete_load_chartImages) name:@"get_chartImages" object:nil];
+        }else{
+            [self performSegueWithIdentifier:menu_item.is_segue sender:self];
+        }
+        
+    }else{
+        [self performSegueWithIdentifier:menu_item.is_segue sender:self];
+    }
+}
+//完成绘图表时，触发的方法
+- (void)fn_complete_load_chartImages{
+    [self performSegueWithIdentifier:@"segue_chart" sender:self];
+    [SVProgressHUD dismiss];
 }
 #pragma mark -UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

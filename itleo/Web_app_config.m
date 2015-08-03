@@ -8,6 +8,7 @@
 
 #import "Web_app_config.h"
 #import "Web_base.h"
+#import "Web_get_chart_data.h"
 #import "Resp_permit.h"
 #import "Resp_get_status.h"
 #import "Resp_sypara.h"
@@ -37,6 +38,14 @@
             //清除旧permit，存新的permit
             [db_permit fn_delete_all_permit_data];
             [db_permit fn_save_permit_data:alist_arr];
+        }
+        //如果存在chart功能，则请求chart数据
+        if ([db_permit fn_isExist_module:MODULE_WHS_SUMMARY f_exec:MODULE_F_EXEC]) {
+            Web_get_chart_data *web_chart=[Web_get_chart_data fn_shareInstance];
+            [web_chart fn_get_chart_data:base_url uid:nil type:kRequestAll];
+            web_chart.callBack=^(){
+                [[Web_get_chart_data fn_shareInstance]fn_asyn_get_all_charts];
+            };
         }
         if (call_back) {
             call_back(YES);

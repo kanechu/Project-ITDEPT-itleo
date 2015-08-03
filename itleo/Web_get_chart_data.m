@@ -78,9 +78,8 @@ static NSMutableDictionary *idic_ChartImages=nil;
     dispatch_async(my_Queue, ^{
         [self fn_ChartView_convert_chartImage];
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"get_chartImages" object:nil userInfo:nil];
         });
-        
     });
 }
 - (void)fn_ChartView_convert_chartImage{
@@ -123,6 +122,7 @@ static NSMutableDictionary *idic_ChartImages=nil;
     DB_Chart *db_chart=[[DB_Chart alloc]init];
     NSMutableArray *alist_DtlResult=[db_chart fn_get_DashboardDtlResult:unique_id];
     alist_DtlResult=[Conversion_helper fn_sort_the_array:alist_DtlResult key:@"unique_id"];
+    db_chart=nil;
     return alist_DtlResult;
 }
 #pragma mark -创建该组的图表视图
