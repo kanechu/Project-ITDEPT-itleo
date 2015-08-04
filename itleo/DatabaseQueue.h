@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "FMDatabaseQueue.h"
 @interface DatabaseQueue : NSObject
-+(DatabaseQueue*)fn_sharedInstance;
--(void)inDataBase:(void(^)(FMDatabase*))block;
++ (DatabaseQueue*)fn_sharedInstance;
+- (void)inDataBase:(void(^)(FMDatabase*))block;
 @end

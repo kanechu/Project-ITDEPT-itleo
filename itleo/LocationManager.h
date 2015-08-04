@@ -13,7 +13,7 @@ typedef void (^callBack)(NSString *longitude,NSString *latitude);
 
 @property(nonatomic,strong)callBack call_value;
 
-+(LocationManager*)fn_shareManager;
++ (LocationManager*)fn_shareManager;
 - (BOOL)fn_isLocationServiceOn;
 - (BOOL)fn_isCurrentAppLocatonServiceOn;
 - (BOOL)fn_isLocationServiceDetermined;

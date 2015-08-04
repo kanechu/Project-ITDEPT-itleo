@@ -10,8 +10,7 @@
 
 @interface Signature_contrastViewController : UIViewController
 
-@property (nonatomic,strong) UIImage *verifyImage;
-
-@property (strong, nonatomic) NSDictionary *dic_order;
+@property (nonatomic, strong) UIImage *verifyImage;
+@property (nonatomic, strong) NSDictionary *dic_order;
 
 @end

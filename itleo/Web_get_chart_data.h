@@ -18,7 +18,7 @@ typedef enum : NSUInteger {
 
 @property(nonatomic,strong)call_back callBack;
 
-+(Web_get_chart_data*)fn_shareInstance;
++ (Web_get_chart_data*)fn_shareInstance;
 
 - (void) fn_get_chart_data:(NSString*)base_url uid:(NSString*)unique_id type:(RequestType)requestType;
 

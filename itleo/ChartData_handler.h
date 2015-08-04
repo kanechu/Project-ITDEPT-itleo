@@ -25,6 +25,6 @@ typedef enum {
  *
  *  @return 相关值存储与数组中并返回
  */
-+(NSMutableArray*)fn_gets_the_chart_Data:(NSString *)unique_id arr_type:(KChartDataType)arr_type chart_type:(NSString*)chart_type;
++ (NSMutableArray*)fn_gets_the_chart_Data:(NSString *)unique_id arr_type:(KChartDataType)arr_type chart_type:(NSString*)chart_type;
 
 @end

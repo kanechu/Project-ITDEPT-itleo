@@ -21,9 +21,9 @@
     UIView *background;
 }
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_title_logo;
-@property(nonatomic,assign)NSInteger flag_item;
+@property(nonatomic, assign) NSInteger flag_item;
 //标识弹出的警告
-@property(nonatomic,assign)NSInteger flag_alert;
+@property(nonatomic, assign) NSInteger flag_alert;
 
 @end
 

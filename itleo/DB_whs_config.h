@@ -11,7 +11,7 @@
 
 @interface DB_whs_config : NSObject
 
-@property (nonatomic,strong) DatabaseQueue *queue;
+@property (nonatomic, strong) DatabaseQueue *queue;
 
 - (BOOL)fn_save_whs_config_data:(NSMutableArray*)alist_result;
 

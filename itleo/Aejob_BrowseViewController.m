@@ -22,12 +22,13 @@
 static NSMutableArray *alist_groupAndnum;
 static NSMutableArray *alist_filtered_data;
 @interface Aejob_BrowseViewController ()
-//从服务器请求回来的数据
-@property (nonatomic,strong)NSMutableArray *alist_aejob_browse;
-@property (nonatomic,strong)UIDatePicker *idp_datePicker;
-@property (nonatomic,copy)NSString *millisecond;
 
-@property (nonatomic,strong)Aejob_dtl_BrowseViewController *aejobVC;
+//从服务器请求回来的数据
+@property (nonatomic, strong) NSMutableArray *alist_aejob_browse;
+@property (nonatomic, strong) UIDatePicker *idp_datePicker;
+@property (nonatomic, copy) NSString *millisecond;
+
+@property (nonatomic, strong) Aejob_dtl_BrowseViewController *aejobVC;
 
 @end
 

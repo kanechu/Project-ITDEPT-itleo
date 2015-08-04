@@ -12,8 +12,8 @@
 @interface SelectHistoryDataViewController ()
 
 //用于标识上次选中的行的索引路径
-@property (nonatomic,strong)NSIndexPath *lastIndexPath;
-@property (copy,nonatomic) NSString *select_summary_type;
+@property (nonatomic, strong) NSIndexPath *lastIndexPath;
+@property (nonatomic, copy) NSString *select_summary_type;
 
 @end
 

@@ -13,7 +13,7 @@
 #import "CheckNetWork.h"
 @interface WarehouseSearchViewController ()
 
-@property (nonatomic,strong) NSMutableArray *alist_resp_exso;
+@property (nonatomic, strong) NSMutableArray *alist_resp_exso;
 
 @end
 

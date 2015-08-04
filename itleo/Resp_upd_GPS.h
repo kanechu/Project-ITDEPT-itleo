@@ -10,9 +10,9 @@
 
 @interface Resp_upd_GPS : NSObject
 
-@property (nonatomic,copy) NSString *unique_id;
-@property (nonatomic,copy) NSString *status;
-@property (nonatomic,copy) NSString *message;
-@property (nonatomic,copy) NSString *refkey;
+@property (nonatomic, copy) NSString *unique_id;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *message;
+@property (nonatomic, copy) NSString *refkey;
 
 @end

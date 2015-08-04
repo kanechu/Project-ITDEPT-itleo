@@ -19,12 +19,12 @@ typedef NSString* (^passValue)(NSInteger tag);
 
 @interface Record_LoadPlanViewController ()
 //存储输入内容的提示
-@property (nonatomic,strong) NSArray *alist_prompts;
-@property (nonatomic,strong) NSArray *alist_columns;
-@property (nonatomic,strong) NSMutableDictionary *idic_load_value;
+@property (nonatomic, strong) NSArray *alist_prompts;
+@property (nonatomic, strong) NSArray *alist_columns;
+@property (nonatomic, strong) NSMutableDictionary *idic_load_value;
 
-@property (nonatomic,strong) Custom_textField *checkText;
-@property (nonatomic,strong) passValue pass_Value;
+@property (nonatomic, strong) Custom_textField *checkText;
+@property (nonatomic, strong) passValue pass_Value;
 
 @end
 

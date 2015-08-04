@@ -10,8 +10,8 @@
 typedef void (^callBack_remark)(NSString *remark);
 @interface AddRemarkViewController : UIViewController
 
-@property (strong,nonatomic)callBack_remark callback;
-@property (copy,nonatomic) NSString *remarked;
+@property (strong, nonatomic) callBack_remark callback;
+@property (copy, nonatomic) NSString *remarked;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_title;
 @property (weak, nonatomic) IBOutlet UITextView *itv_input_remark;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_OK;

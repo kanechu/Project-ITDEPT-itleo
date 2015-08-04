@@ -14,6 +14,7 @@
 #import "CheckNetWork.h"
 #import "CreateFootView.h"
 @interface Order_InfoViewController ()
+
 @property (nonatomic, strong)NSMutableArray *arr_order_info;
 @property (nonatomic, strong)NSMutableArray *arr_prompt;
 @property (nonatomic, strong)Cal_lineHeight *cal_obj;

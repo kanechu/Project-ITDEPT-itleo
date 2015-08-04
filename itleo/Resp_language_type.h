@@ -10,8 +10,8 @@
 
 @interface Resp_language_type : NSObject
 
-@property (nonatomic,copy) NSString *EN;
-@property (nonatomic,copy) NSString *CN;
-@property (nonatomic,copy) NSString *TCN;
+@property (nonatomic, copy) NSString *EN;
+@property (nonatomic, copy) NSString *CN;
+@property (nonatomic, copy) NSString *TCN;
 
 @end

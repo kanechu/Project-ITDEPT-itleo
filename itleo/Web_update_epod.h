@@ -10,7 +10,7 @@
 #import "UpdateFormContract_GPS.h"
 typedef void (^callBack_result)(NSMutableArray*);
 @interface Web_update_epod : NSObject
-@property(nonatomic, copy) NSString *base_url;
+@property (nonatomic, copy) NSString *base_url;
 
 - (void)fn_upload_epod_data:(UpdateFormContract*)updateform Auth:(AuthContract*)auth back_result:(callBack_result)call_back;
 - (void)fn_get_order_info:(NSMutableArray*)arr_searchforms   back_result:(callBack_result)call_back;

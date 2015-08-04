@@ -10,6 +10,6 @@
 
 @interface CreateFootView : NSObject
 
-+(UIView*)fn_create_footView:(NSString*)str_alert;
++ (UIView*)fn_create_footView:(NSString*)str_alert;
 
 @end

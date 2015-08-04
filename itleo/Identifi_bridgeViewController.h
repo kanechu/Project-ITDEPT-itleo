@@ -11,7 +11,6 @@
 @interface Identifi_bridgeViewController : UIViewController
 
 @property (nonatomic,strong) UIImage *client_image;
-
 @property (strong, nonatomic) NSDictionary *dic_order;
 
 @end

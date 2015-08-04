@@ -10,6 +10,6 @@
 
 @interface Resp_DataRefresh : NSObject
 
-@property (nonatomic,strong) NSSet *exso;
+@property (nonatomic, strong) NSSet *exso;
 
 @end

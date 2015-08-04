@@ -10,8 +10,8 @@
 
 @interface Resp_get_chart : NSObject
 
-@property(nonatomic, strong) NSSet *DashboardGrpDResult;
+@property (nonatomic, strong) NSSet *DashboardGrpDResult;
 
-@property(nonatomic, strong) NSSet *DashboardDtlResult;
+@property (nonatomic, strong) NSSet *DashboardDtlResult;
 
 @end

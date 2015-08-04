@@ -21,8 +21,8 @@
 #import "Resp_uploadTran.h"
 @interface WarehouseHomeViewController ()
 
-@property (nonatomic,strong) NSMutableArray *alist_groupAndnum;
-@property (nonatomic,strong) Cal_lineHeight *cal_obj;
+@property (nonatomic, strong) NSMutableArray *alist_groupAndnum;
+@property (nonatomic, strong) Cal_lineHeight *cal_obj;
 @property (nonatomic, strong) NSMutableArray *alist_exsoBrowse;
 @property (nonatomic, strong) NSMutableArray *alist_cfsdimBrowse;
 @end

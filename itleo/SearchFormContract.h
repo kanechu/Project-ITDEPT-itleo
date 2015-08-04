@@ -10,10 +10,10 @@
 
 @interface SearchFormContract : NSObject
 
-@property(nonatomic, copy) NSString *os_column;
+@property (nonatomic, copy) NSString *os_column;
 
-@property(nonatomic, copy) NSString *os_value;
+@property (nonatomic, copy) NSString *os_value;
 
-@property(nonatomic, copy) NSString *os_dyn_1;
+@property (nonatomic, copy) NSString *os_dyn_1;
 
 @end

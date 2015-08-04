@@ -11,8 +11,8 @@
 typedef void(^callBack_handleOrder)(void);
 @interface OrderDetailViewController : UIViewController
 
-@property (nonatomic,strong) callBack_handleOrder callback;
-@property (nonatomic,strong) NSDictionary *dic_order;
+@property (nonatomic, strong) callBack_handleOrder callback;
+@property (nonatomic, strong) NSDictionary *dic_order;
 /**
  *  车牌号
  */

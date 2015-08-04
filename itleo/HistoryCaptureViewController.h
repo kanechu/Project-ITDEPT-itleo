@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 typedef void (^callBack_images)(NSMutableArray *);
 @interface HistoryCaptureViewController : UIViewController
-@property (nonatomic,strong) NSMutableArray *alist_image_ms;
-@property (nonatomic,strong) callBack_images callBack;
+
+@property (nonatomic, strong) NSMutableArray *alist_image_ms;
+@property (nonatomic, strong) callBack_images callBack;
 @end

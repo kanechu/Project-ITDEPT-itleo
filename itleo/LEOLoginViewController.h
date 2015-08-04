@@ -10,6 +10,7 @@
 #import "QRadioButton.h"
 typedef void (^callBack_refresh)(void);
 @interface LEOLoginViewController : UIViewController<UITextFieldDelegate,QRadioButtonDelegate>
+
 @property (strong, nonatomic) callBack_refresh refresh;
 @property (weak, nonatomic) IBOutlet UITextView *itv_title;
 

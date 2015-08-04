@@ -18,8 +18,8 @@
 #import "CheckNetWork.h"
 @interface Aejob_dtl_BrowseViewController ()
 
-@property(nonatomic,strong)NSMutableArray *alist_aejob_dtl;
-@property(nonatomic,strong)Cal_lineHeight *calculate;
+@property (nonatomic, strong) NSMutableArray *alist_aejob_dtl;
+@property (nonatomic, strong) Cal_lineHeight *calculate;
 
 @end
 

@@ -27,9 +27,11 @@ static NSString  *is_language=@"";//标识语言类型
 #define DEFAULT_SYSTEM @"ITNEW"
 
 @interface LEOLoginViewController ()
-@property(nonatomic,strong)UITextField *checkText;
-@property(nonatomic,copy)NSString *lang_code;
-@property(nonatomic, assign) CGRect keyboardRect;
+
+@property (nonatomic, strong) UITextField *checkText;
+@property (nonatomic, copy) NSString *lang_code;
+@property (nonatomic, assign) CGRect keyboardRect;
+
 @end
 
 @implementation LEOLoginViewController

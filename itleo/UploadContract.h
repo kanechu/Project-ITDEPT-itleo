@@ -10,8 +10,8 @@
 
 @interface UploadContract : NSObject
 
-@property(nonatomic, strong) AuthContract *Auth;
+@property (nonatomic, strong) AuthContract *Auth;
 
-@property(nonatomic, strong) UpdateFormContract *UpdateForm;
+@property (nonatomic, strong) UpdateFormContract *UpdateForm;
 
 @end

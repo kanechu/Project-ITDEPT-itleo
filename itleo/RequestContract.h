@@ -10,10 +10,10 @@
 #import "UpdateForm_orderList.h"
 @interface RequestContract : NSObject
 
-@property(nonatomic, strong) NSSet *SearchForm;
+@property (nonatomic, strong) NSSet *SearchForm;
 
-@property(nonatomic, strong) AuthContract *Auth;
+@property (nonatomic, strong) AuthContract *Auth;
 
-@property(nonatomic, strong) UpdateForm_orderList *UpdateForm;
+@property (nonatomic, strong) UpdateForm_orderList *UpdateForm;
 
 @end

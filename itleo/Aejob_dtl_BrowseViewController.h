@@ -11,8 +11,7 @@
 
 @interface Aejob_dtl_BrowseViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 
-@property (strong,nonatomic) NSMutableDictionary *idic_aejob_browse;
-
+@property (strong, nonatomic) NSMutableDictionary *idic_aejob_browse;
 @property (weak, nonatomic) IBOutlet DetailView *iv_detailView;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 

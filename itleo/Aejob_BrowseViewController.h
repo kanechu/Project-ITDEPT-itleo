@@ -12,7 +12,6 @@
 @interface Aejob_BrowseViewController : UIViewController<SKSTableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_search;
-
 @property (weak, nonatomic) IBOutlet Custom_textField *itf_textfield;
 @property (weak, nonatomic) IBOutlet SKSTableView *skstableView;
 

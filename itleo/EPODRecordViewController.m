@@ -13,14 +13,16 @@
 #import "EPODDetailViewController.h"
 #import "CreateFootView.h"
 @interface EPODRecordViewController ()
+
 //存储全部记录数据
-@property(nonatomic,strong)NSMutableArray *alist_epod;
+@property (nonatomic, strong) NSMutableArray *alist_epod;
 //存储将要删除的数据
-@property(nonatomic,strong)NSMutableDictionary *idic_delete;
+@property (nonatomic, strong) NSMutableDictionary *idic_delete;
 //存储全部删除的数据
-@property(nonatomic,strong)NSMutableArray *alist_delete;
+@property (nonatomic, strong) NSMutableArray *alist_delete;
 //标识是否全选
-@property(nonatomic,assign)NSInteger flag_isAll;
+@property (nonatomic, assign) NSInteger flag_isAll;
+
 @end
 
 @implementation EPODRecordViewController

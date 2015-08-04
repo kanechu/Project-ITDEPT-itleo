@@ -41,11 +41,11 @@ typedef NSDictionary* (^passValue)(NSInteger tag);
 @property (strong, nonatomic) NSMutableDictionary *idic_is_mandatory;
 @property (strong, nonatomic) NSMutableDictionary *idic_datas;
 //存储选项
-@property (strong, nonatomic)   NSMutableDictionary *dic_options;
-@property (nonatomic,strong) passValue pass_Value;
-@property (strong,nonatomic)UIDatePicker *idp_picker;
+@property (strong, nonatomic) NSMutableDictionary *dic_options;
+@property (strong, nonatomic) passValue pass_Value;
+@property (strong, nonatomic) UIDatePicker *idp_picker;
 //id_startdate用来记录日期拾取器获取的日期
-@property (copy,nonatomic)NSDate *id_startdate;
+@property (copy, nonatomic) NSDate *id_startdate;
 
 @end
 

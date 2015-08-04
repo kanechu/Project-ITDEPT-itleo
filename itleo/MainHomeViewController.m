@@ -30,13 +30,11 @@
 
 @property (strong, nonatomic) UIBarButtonItem *ibtn_logout;
 @property (strong, nonatomic) UIBarButtonItem *ibtn_settings;
-@property(strong,nonatomic)NSMutableArray *alist_menu;
-@property(strong,nonatomic)Menu_home *menu_item;
-
-@property(assign,nonatomic)NSInteger flag_launch_isLogin;//APP启动的时候，判断是否已经有用户登录，1->登录 0->未登录
-
-@property (nonatomic,assign)NSInteger flag_opened_record_thread;
-@property (nonatomic,assign)NSInteger flag_opened_gps_thread;
+@property (strong, nonatomic) NSMutableArray *alist_menu;
+@property (strong, nonatomic) Menu_home *menu_item;
+@property (assign, nonatomic) NSInteger flag_launch_isLogin;//APP启动的时候，判断是否已经有用户登录，1->登录 0->未登录
+@property (nonatomic, assign) NSInteger flag_opened_record_thread;
+@property (nonatomic, assign) NSInteger flag_opened_gps_thread;
 
 @end
 

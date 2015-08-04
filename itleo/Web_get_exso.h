@@ -12,6 +12,6 @@
 
 @property (nonatomic,strong)callBack_resp_result callBack_exso;
 
--(void)fn_get_exso_data:(NSString*)so_no;
+- (void)fn_get_exso_data:(NSString*)so_no;
 
 @end

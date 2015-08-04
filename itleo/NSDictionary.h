@@ -2,6 +2,6 @@
 
 @interface NSDictionary(dictionaryWithObject)
 
-+(NSDictionary *) dictionaryWithPropertiesOfObject:(id) obj;
++ (NSDictionary *) dictionaryWithPropertiesOfObject:(id) obj;
 
 @end

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface Cal_lineHeight : NSObject
--(CGFloat)fn_heightWithString:(NSString *)string font:(UIFont *)font constrainedToWidth:(CGFloat)width;
+- (CGFloat)fn_heightWithString:(NSString *)string font:(UIFont *)font constrainedToWidth:(CGFloat)width;
 @end

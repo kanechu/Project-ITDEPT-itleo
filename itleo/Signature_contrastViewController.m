@@ -12,8 +12,8 @@
 #define SECTION_NUM 2
 
 @interface Signature_contrastViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *signature_contrastLogo;
 
+@property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *signature_contrastLogo;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_confirm;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_reject;

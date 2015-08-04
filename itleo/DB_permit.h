@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 @class DatabaseQueue;
 @interface DB_permit : NSObject
-@property(nonatomic,strong)DatabaseQueue *queue;
+
+@property (nonatomic, strong) DatabaseQueue *queue;
 
 - (BOOL)fn_save_permit_data:(NSMutableArray*)arr_permit;
 

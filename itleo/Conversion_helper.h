@@ -12,14 +12,14 @@
 
 + (NSString*)fn_image_convert_base64Str:(UIImage*)image;
 + (UIImage*)fn_base64Str_convert_image:(NSString*)base64Str;
-+(NSDate*)fn_dateFromUnixTimestamp:(NSString*)millisecond;
-+(NSString*)fn_millisecondFromDate:(NSDate*)date;
-+(NSString*)fn_millisecondFrom_days_ago:(NSInteger)num;
-+(NSString*)fn_cut_whitespace:(NSString*)str;
-+(NSString*)fn_cut_pre_string:(NSString*)str;
-+(NSMutableArray*)fn_sort_the_array:(NSMutableArray*)alist_source  key:(NSString*)sortBy_name;
-+(NSArray*)fn_filtered_criteriaData:(NSString*)value arr:(NSMutableArray*)alist_will_filter;
-+(UIImage*)fn_imageWithView:(UIView*)view;
++ (NSDate*)fn_dateFromUnixTimestamp:(NSString*)millisecond;
++ (NSString*)fn_millisecondFromDate:(NSDate*)date;
++ (NSString*)fn_millisecondFrom_days_ago:(NSInteger)num;
++ (NSString*)fn_cut_whitespace:(NSString*)str;
++ (NSString*)fn_cut_pre_string:(NSString*)str;
++ (NSMutableArray*)fn_sort_the_array:(NSMutableArray*)alist_source  key:(NSString*)sortBy_name;
++ (NSArray*)fn_filtered_criteriaData:(NSString*)value arr:(NSMutableArray*)alist_will_filter;
++ (UIImage*)fn_imageWithView:(UIView*)view;
 
 /**
  *  获取登录时候，选择的语言

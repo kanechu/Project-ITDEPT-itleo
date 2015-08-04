@@ -11,7 +11,7 @@
 [[MY_LocalizedString getshareInstance] get:(key) alter:(comment)]
 @interface MY_LocalizedString : NSObject
 
-+(MY_LocalizedString*)getshareInstance;
++ (MY_LocalizedString*)getshareInstance;
 - (void)fn_setLanguage_type:(NSString *)language;
 - (NSString*)getCurrentLanguage;
 - (NSString *)get:(NSString *)key alter:(NSString *)alternate;

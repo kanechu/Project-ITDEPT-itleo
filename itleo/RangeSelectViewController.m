@@ -10,9 +10,9 @@
 
 @interface RangeSelectViewController ()
 //用于标识上次选中的行的索引路径
-@property (nonatomic,strong)NSIndexPath *lastIndexPath;
+@property (nonatomic, strong) NSIndexPath *lastIndexPath;
 //数据源
-@property (nonatomic,strong)NSMutableArray *alist_range_data;
+@property (nonatomic, strong) NSMutableArray *alist_range_data;
 
 @end
 

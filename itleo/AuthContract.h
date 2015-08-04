@@ -10,22 +10,22 @@
 
 @interface AuthContract : NSObject
 
-@property(nonatomic, strong) NSString *user_code;
+@property (nonatomic, strong) NSString *user_code;
 
-@property(nonatomic, copy) NSString *password;
+@property (nonatomic, copy) NSString *password;
 
-@property(nonatomic, copy) NSString *system;
+@property (nonatomic, copy) NSString *system;
 
-@property(nonatomic, copy) NSString *version;
+@property (nonatomic, copy) NSString *version;
 
-@property(nonatomic, copy) NSString *encrypted;
+@property (nonatomic, copy) NSString *encrypted;
 
-@property(nonatomic, copy) NSString *com_sys_code;
+@property (nonatomic, copy) NSString *com_sys_code;
 
-@property(nonatomic, copy) NSString *app_code;
+@property (nonatomic, copy) NSString *app_code;
 
-@property(nonatomic, copy) NSString *lang_code;
+@property (nonatomic, copy) NSString *lang_code;
 
-@property(nonatomic, copy) NSString *company_code;
+@property (nonatomic, copy) NSString *company_code;
 
 @end

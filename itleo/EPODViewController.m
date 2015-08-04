@@ -24,8 +24,8 @@
 @interface EPODViewController ()<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *ilb_epod_tilte;
-@property (nonatomic,assign)NSInteger flag_opened_record_thread;
-@property (nonatomic,assign)NSInteger flag_opened_gps_thread;
+@property (nonatomic, assign) NSInteger flag_opened_record_thread;
+@property (nonatomic, assign) NSInteger flag_opened_gps_thread;
 
 @end
 

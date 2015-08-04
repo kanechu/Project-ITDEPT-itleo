@@ -10,10 +10,10 @@
 
 @interface UpdateFormContract_GPS : NSObject
 
-@property (nonatomic,copy)NSString *unique_id;
-@property (nonatomic,copy)NSString *car_no;
-@property (nonatomic,assign)CGFloat latitude;
-@property (nonatomic,assign)CGFloat longitude;
-@property (nonatomic,copy)NSString *log_date;
+@property (nonatomic, copy) NSString *unique_id;
+@property (nonatomic, copy) NSString *car_no;
+@property (nonatomic, assign) CGFloat latitude;
+@property (nonatomic, assign) CGFloat longitude;
+@property (nonatomic, copy) NSString *log_date;
 
 @end

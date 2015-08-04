@@ -10,8 +10,8 @@
 
 @interface Resp_data : NSObject
 
-@property(nonatomic, copy) NSString *serie;
-@property(nonatomic, copy) NSString *x;
-@property(nonatomic, copy) NSString *y;
+@property (nonatomic, copy) NSString *serie;
+@property (nonatomic, copy) NSString *x;
+@property (nonatomic, copy) NSString *y;
 
 @end

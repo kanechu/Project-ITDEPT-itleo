@@ -12,14 +12,16 @@
 #define TEXTFIELD_TAG 100
 typedef NSString* (^passValue)(NSInteger tag);
 @interface Aejob_AdvanceSearchViewController ()
-@property(nonatomic,strong)NSArray *alist_prompt;
-@property(nonatomic,strong)NSArray *alist_os_column;
-@property(nonatomic,strong)NSMutableArray *alist_searchForm;
-@property(nonatomic,strong)Custom_textField *checkText;
-@property(nonatomic,strong)NSMutableDictionary *idic_searchform;
-@property(nonatomic,strong)passValue pass_Value;
-@property(nonatomic,strong)NSString *millisecond;
-@property(nonatomic,strong)UIDatePicker *idp_datepicker;
+
+@property (nonatomic, strong) NSArray *alist_prompt;
+@property (nonatomic, strong) NSArray *alist_os_column;
+@property (nonatomic, strong) NSMutableArray *alist_searchForm;
+@property (nonatomic, strong) Custom_textField *checkText;
+@property (nonatomic, strong) NSMutableDictionary *idic_searchform;
+@property (nonatomic, strong) passValue pass_Value;
+@property (nonatomic, strong) NSString *millisecond;
+@property (nonatomic, strong) UIDatePicker *idp_datepicker;
+
 @end
 
 @implementation Aejob_AdvanceSearchViewController

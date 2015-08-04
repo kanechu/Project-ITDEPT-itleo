@@ -32,23 +32,23 @@
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_back;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_barCode;
 //存储显示的配置单状态
-@property(nonatomic,strong) NSMutableArray *arr_status;
+@property (nonatomic, strong) NSMutableArray *arr_status;
 //“其他”状态的说明
-@property(nonatomic,copy) NSString *status_explain;
+@property (nonatomic, copy) NSString *status_explain;
 //客户选择的配载单状态code
-@property(nonatomic,copy) NSString *flag_status;
+@property (nonatomic, copy) NSString *flag_status;
 //客户选择的配置单状态display
-@property(nonatomic,copy) NSString *flag_display_status;
+@property (nonatomic, copy) NSString *flag_display_status;
 //用于标记，说明输入框，是否可用
-@property(nonatomic,assign)NSInteger flag_enable;
+@property (nonatomic, assign) NSInteger flag_enable;
 //配置单信息
-@property(nonatomic,strong)Truck_order_data *truck_order_data;
+@property (nonatomic, strong) Truck_order_data *truck_order_data;
 //存储新添加图片的信息
-@property(nonatomic,strong)NSMutableArray *alist_image_ms;
+@property (nonatomic, strong) NSMutableArray *alist_image_ms;
 //存储历史采集图片的信息
-@property(nonatomic,strong)NSMutableArray *alist_historyImage_msg;
+@property (nonatomic, strong) NSMutableArray *alist_historyImage_msg;
 //区分不同的文本框
-@property(nonatomic,assign)NSInteger flag_textfield;
+@property (nonatomic, assign) NSInteger flag_textfield;
 
 @end
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EnlargeImageViewController : UIViewController
+
 @property (nonatomic, strong) NSMutableArray *alist_image_ms;
 @property (nonatomic, assign) NSInteger flag_item;
 

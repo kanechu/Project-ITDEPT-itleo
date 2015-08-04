@@ -27,9 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_manage_order;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 
-@property (nonatomic,strong) NSMutableArray *alist_orderCells;
-@property (nonatomic,strong) NSMutableArray *alist_orderListCells;
-@property (nonatomic,strong) NSMutableArray *alist_orderObjs;
+@property (nonatomic, strong) NSMutableArray *alist_orderCells;
+@property (nonatomic, strong) NSMutableArray *alist_orderListCells;
+@property (nonatomic, strong) NSMutableArray *alist_orderObjs;
 
 @end
 

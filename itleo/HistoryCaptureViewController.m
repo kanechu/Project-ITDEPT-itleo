@@ -12,12 +12,13 @@
 #import "Custom_BtnGraphicMixed.h"
 #import "EnlargeImageViewController.h"
 @interface HistoryCaptureViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
 @property (weak, nonatomic) IBOutlet Custom_BtnGraphicMixed *ibtn_history_logo;
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_select;
 //存储多选的图片信息
-@property (strong,nonatomic) NSMutableArray *alist_history_img;
-@property (assign,nonatomic) NSInteger flag_item;
+@property (strong, nonatomic) NSMutableArray *alist_history_img;
+@property (assign, nonatomic) NSInteger flag_item;
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_back_item;

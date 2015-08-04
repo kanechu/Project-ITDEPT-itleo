@@ -10,9 +10,9 @@
 
 @interface Menu_home : NSObject
 
-@property(nonatomic,copy) NSString *is_label;
-@property(nonatomic,copy) NSString *is_image;
-@property(nonatomic,copy) NSString *is_segue;
+@property (nonatomic, copy) NSString *is_label;
+@property (nonatomic, copy) NSString *is_image;
+@property (nonatomic, copy) NSString *is_segue;
 
 + (id)fn_create_item:(NSString*)as_label image:(NSString*)as_image segue:(NSString*)as_segue;
 

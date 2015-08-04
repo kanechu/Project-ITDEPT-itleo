@@ -10,8 +10,8 @@
 
 @interface UploadGPSContract : NSObject
 
-@property (nonatomic,strong)AuthContract *Auth;
+@property (nonatomic, strong) AuthContract *Auth;
 
-@property (nonatomic,strong)NSSet *UpdateForm;
+@property (nonatomic, strong) NSSet *UpdateForm;
 
 @end

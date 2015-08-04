@@ -10,6 +10,6 @@
 
 @interface KeyboardNoticeManager : NSObject
 
-+(id)sharedKeyboardNoticeManager;
++ (id)sharedKeyboardNoticeManager;
 
 @end

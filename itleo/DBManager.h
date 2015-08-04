@@ -16,15 +16,15 @@
     NSString *databasePath;
 }
 
-+(DBManager*)getSharedInstance;
--(FMDatabase*) fn_get_db;
--(BOOL) fn_create_db;
--(BOOL)fn_create_table;
--(NSString*)fn_get_databaseFilePath;
-- (int) fn_get_version;
++ (DBManager*)getSharedInstance;
+- (FMDatabase*)fn_get_db;
+- (BOOL)fn_create_db;
+- (BOOL)fn_create_table;
+- (NSString*)fn_get_databaseFilePath;
+- (int)fn_get_version;
 - (void)fn_set_version:(int)ai_version;
 - (BOOL)fn_chk_need_migration;
-- (void) fn_db_migrate;
+- (void)fn_db_migrate;
 
 
 @end

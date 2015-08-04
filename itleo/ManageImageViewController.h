@@ -11,14 +11,14 @@
 typedef void (^callBack_image)(NSMutableArray*);
 @interface ManageImageViewController : UIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
-@property(nonatomic,strong)callBack_image callBack;
-@property(nonatomic,copy)NSString *is_order_no;
+@property (nonatomic, strong)callBack_image callBack;
+@property (nonatomic, copy)NSString *is_order_no;
 //存储每张历史采集图片的信息（一条记录）
-@property(nonatomic,strong)NSMutableArray *alist_historyImage_ms;
+@property (nonatomic, strong)NSMutableArray *alist_historyImage_ms;
 //存储新添加图片的信息
-@property(nonatomic,strong)NSMutableArray *alist_image_ms;
+@property (nonatomic, strong)NSMutableArray *alist_image_ms;
 //存储订单信息
-@property (strong, nonatomic) NSDictionary *dic_order;
+@property (nonatomic, strong) NSDictionary *dic_order;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_backItem;
 @property (weak, nonatomic) IBOutlet UILabel *ilb_order_no;
 @property (weak, nonatomic) IBOutlet UITextField *itf_order_no;

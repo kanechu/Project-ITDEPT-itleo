@@ -10,10 +10,10 @@
 
 @interface UpdateFormContract : NSObject
 
-@property(nonatomic, copy) NSString *unique_id;//主表的主键
-@property(nonatomic, copy) NSString *order_no;//配载单号
-@property(nonatomic, copy) NSString *ms_status;//配载单状态
-@property(nonatomic, copy) NSString *vehicle_no;//车牌号
-@property(nonatomic, copy) NSSet *Epod_upd_milestone_image;
+@property (nonatomic, copy) NSString *unique_id;//主表的主键
+@property (nonatomic, copy) NSString *order_no;//配载单号
+@property (nonatomic, copy) NSString *ms_status;//配载单状态
+@property (nonatomic, copy) NSString *vehicle_no;//车牌号
+@property (nonatomic, copy) NSSet *Epod_upd_milestone_image;
 
 @end

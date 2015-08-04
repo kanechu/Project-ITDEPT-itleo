@@ -19,7 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *ibtn_back;
 
-@property (assign,nonatomic)kRange_type range_type;
+@property (assign, nonatomic) kRange_type range_type;
 
 @property (copy, nonatomic)NSString *str_select_range;
 

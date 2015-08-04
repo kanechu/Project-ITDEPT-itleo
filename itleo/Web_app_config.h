@@ -10,10 +10,10 @@
 typedef void (^call_isGetPermit)(BOOL);
 @interface Web_app_config : NSObject
 
--(void)fn_get_permit_data:(NSString*)base_url callBack:(call_isGetPermit)call_back;
+- (void)fn_get_permit_data:(NSString*)base_url callBack:(call_isGetPermit)call_back;
 
--(void)fn_get_sypara_data:(NSString*)base_url;
+- (void)fn_get_sypara_data:(NSString*)base_url;
 
 //GET EPOD STATUS
--(void)fn_get_epod_status_data:(NSString*)base_url;
+- (void)fn_get_epod_status_data:(NSString*)base_url;
 @end

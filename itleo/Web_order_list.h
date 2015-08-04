@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, kAction_type) {
 @property (nonatomic, strong) callBack_resp_result callback;
 @property (nonatomic, copy) NSString *vehicle_no;
 
--(void)fn_handle_order_list_data:(NSSet*)set_uid_list type:(kAction_type)action_type;
+- (void)fn_handle_order_list_data:(NSSet*)set_uid_list type:(kAction_type)action_type;
 
 
 @end

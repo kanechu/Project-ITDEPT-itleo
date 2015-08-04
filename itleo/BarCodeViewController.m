@@ -17,9 +17,9 @@
     NSTimer *timer;
 }
 
-@property (strong,nonatomic)AVCaptureSession *session;
+@property (strong, nonatomic) AVCaptureSession *session;
 
-@property (retain,nonatomic)UIImageView *lineImgView;
+@property (retain, nonatomic) UIImageView *lineImgView;
 
 @end
 

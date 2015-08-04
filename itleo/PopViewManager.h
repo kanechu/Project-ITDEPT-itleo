@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface PopViewManager : NSObject
--(void)fn_PopupView:(UIViewController*)VC Size:(CGSize) sheetSize uponView:(UIViewController*)VC1;
+- (void)fn_PopupView:(UIViewController*)VC Size:(CGSize) sheetSize uponView:(UIViewController*)VC1;
 @end

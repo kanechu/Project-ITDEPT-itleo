@@ -12,12 +12,10 @@
 @interface EnlargeImageViewController ()<UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_back_item;
-
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *ibtn_ok_item;
 
-@property (assign,nonatomic) NSInteger flag_image;
+@property (assign, nonatomic) NSInteger flag_image;
 
 @end
 

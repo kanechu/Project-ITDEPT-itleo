@@ -12,9 +12,8 @@
 @interface DashboardHomeViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionview;
-
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segment;
-- (IBAction)fn_segment_valueChange:(id)sender;
 
+- (IBAction)fn_segment_valueChange:(id)sender;
 
 @end

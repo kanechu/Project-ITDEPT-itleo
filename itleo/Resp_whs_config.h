@@ -10,6 +10,6 @@
 
 @interface Resp_whs_config : NSObject
 
-@property (strong,nonatomic) NSArray *MaintForm;
+@property (strong, nonatomic) NSArray *MaintForm;
 
 @end
